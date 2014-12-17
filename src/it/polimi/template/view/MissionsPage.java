@@ -1,6 +1,8 @@
 package it.polimi.template.view;
 
 import it.polimi.template.controller.AddMissionButtonListener;
+import it.polimi.template.controller.AddTripOnMapListener;
+import it.polimi.template.model.Mission;
 
 
 
@@ -82,19 +84,22 @@ public class MissionsPage extends JFrame {
 		delbtn = new JButton("Delete");
 		tpsbtn = new JButton("Set Trips");
 		okbtn = new JButton("Ok");
+		final AddMissionButtonListener ml = new AddMissionButtonListener();
 
-		AddMissionButtonListener ml = new AddMissionButtonListener();
-		addbtn.addActionListener(ml);
+
 		addbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 
 				String text = JOptionPane.showInputDialog("Add a new mission");
 				String item = null;
 
 				if (text != null) {
 					item = text.trim();
+					ml.createMissionWithName(item);
+				
 				} else {
 					return;
 				}
@@ -157,6 +162,7 @@ public class MissionsPage extends JFrame {
 		tpsbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				ListSelectionModel selmodel = list.getSelectionModel();
 				int index = selmodel.getMinSelectionIndex();
 				if (index == -1) {
@@ -164,9 +170,9 @@ public class MissionsPage extends JFrame {
 				}
 
 				Object item = model.getElementAt(index);
+				String ok = item.toString();
 				
-			
-				TripsPage tp = new TripsPage();
+				TripsPage tp = new TripsPage(ok, ml.getMissions());
 				tp.setVisible(true);
 			}
 		});

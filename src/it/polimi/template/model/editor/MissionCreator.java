@@ -12,9 +12,8 @@ public class MissionCreator implements Node {
 		return null;
 	}
 
-	public Mission run(ArrayList<Trip> trips) {
+	public Mission run(Mission m,ArrayList<Trip> trips) {
 
-		Mission m = new Mission();
 		m.setTrips(trips);
 		m.setStatus(1);
 

@@ -1,7 +1,11 @@
 package it.polimi.template.view;
 
+
+import it.polimi.template.controller.AddTripOnMapListener;
+import it.polimi.template.controller.StartMissionCreator;
+import it.polimi.template.model.*;
+
 import java.awt.BorderLayout;
-import java.awt.Cursor;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -10,7 +14,6 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragGestureRecognizer;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
@@ -19,10 +22,13 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -49,15 +55,24 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private static final long serialVersionUID = 1L;
 	private DefaultListModel model;
 	private JList list;
+	private String nameMission;
+	private ArrayList<Mission> missions;
+	private ArrayList<Trip> trips;
+
+	
 	DragSource ds;
 	StringSelection transferable;
+	
 
-	public TripsPage() {
 
+	public TripsPage(String name, ArrayList<Mission> m) {
+		this.nameMission=name;
+		this.missions=m;
 		initUI();
 	}
 
 	private void createList() {
+		
 
 		model = new DefaultListModel();
 		list = new JList(model);
@@ -91,7 +106,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	public final void initUI() {
-
+		
 		setLayout(new BorderLayout());
 
 		JLabel label = new JLabel();
@@ -107,9 +122,22 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		JPanel buttonsPane = new JPanel();
 		JButton ok = new JButton("Ok");
+	
+		ok.addActionListener(new ActionListener() {
+			StartMissionCreator sm = new StartMissionCreator();
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				sm.run(nameMission,missions,trips);
+				
+			}
+		});
 		JButton delete = new JButton("Delete");
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
+		
+		
 
 		new MyDropTargetListener(label);
 		MouseListener listener = new DragMouseAdapter();
@@ -124,16 +152,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		setLocationRelativeTo(null);
 	}
 
-	public static void main(String[] args) {
 
-		SwingUtilities.invokeLater(new Runnable() {
-
-			public void run() {
-				TripsPage tp = new TripsPage();
-				tp.setVisible(true);
-			}
-		});
-	}
 
 	private class DragMouseAdapter extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
@@ -168,8 +187,11 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		@Override
 		public void drop(DropTargetDropEvent event) {
-			try {
+			
+			
 
+			try {
+				AddTripOnMapListener tp = new AddTripOnMapListener();
 		          Transferable tr = event.getTransferable();
 		          String action = (String) tr.getTransferData(DataFlavor.stringFlavor);
 
@@ -177,6 +199,19 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		              event.acceptDrop(DnDConstants.ACTION_COPY);
 		              event.dropComplete(true);
+		              
+		              
+		              String text = JOptionPane.showInputDialog("Add a name for the trip");
+						String item = null;
+
+						if (text != null) {
+							item = text.trim();
+							trips=tp.createTripWithName(item, nameMission,missions);
+							
+						}
+		              
+		              
+		              
 		              return;
 		            }
 		          event.rejectDrop();
@@ -221,7 +256,15 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			System.out.println("Failed");
 		}
 	}
-	 class TransferableString implements Transferable {
+	 public String getNameMission() {
+		return nameMission;
+	}
+
+	public void setNameMission(String nameMission) {
+		this.nameMission = nameMission;
+	}
+
+	class TransferableString implements Transferable {
 		 
 		 
 	    protected  DataFlavor stringFlavor =

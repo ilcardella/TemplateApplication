@@ -8,6 +8,7 @@ public class Trip {
 	public static final int COMPLETED = 2;
 	public static final int FAILED = 3;
 
+	private String name;
 	private String sourceLocation;
 	private String targetLocation;
 	private int delay;
@@ -16,6 +17,7 @@ public class Trip {
 	private Drone drone;
 	private Item item;
 	private String startTime;
+	private Mission mission;
 		
 	public Trip() {
 		this.delay=0;
@@ -85,6 +87,22 @@ public class Trip {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Mission getMission() {
+		return mission;
+	}
+
+	public void setMission(Mission mission) {
+		this.mission = mission;
 	}
 
 

@@ -1,20 +1,27 @@
 package it.polimi.template.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 
 import it.polimi.template.model.*;
 
-public class AddMissionButtonListener implements ActionListener {
+public class AddMissionButtonListener {
 	
-	ArrayList<Mission> missions = new ArrayList<Mission>();
-	
+	ArrayList<Mission> missions=new ArrayList<Mission>();
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+
+	public void createMissionWithName(String name) {
 		Mission m = new Mission();
+		m.setName(name);
 		missions.add(m);
+	}
+
+	public ArrayList<Mission> getMissions() {
+		return missions;
+	}
+
+	public void setMissions(ArrayList<Mission> missions) {
+		this.missions = missions;
 	}
 
 }

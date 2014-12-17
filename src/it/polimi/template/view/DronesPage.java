@@ -62,16 +62,7 @@ public class DronesPage extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	public static void main(String[] args) {
 
-		SwingUtilities.invokeLater(new Runnable() {
-
-			public void run() {
-				DronesPage dp = new DronesPage();
-				dp.setVisible(true);
-			}
-		});
-	}
 }
 
 /*

@@ -15,11 +15,21 @@ public class Mission {
 	public static final int STANDBY = 5;
 
 	private int  id;
+	private String name;
 	private int status;
 	private List<Trip> trips;
 
 	public Mission() {
 
+		this.id= new Random().nextInt(Integer.MAX_VALUE) +1;
+		this.status= UNEXECUTED;
+		this.trips = new ArrayList<Trip>();
+
+	}
+	
+	public Mission(String name) {
+
+		this.name=name;
 		this.id= new Random().nextInt(Integer.MAX_VALUE) +1;
 		this.status= UNEXECUTED;
 		this.trips = new ArrayList<Trip>();
@@ -48,6 +58,14 @@ public class Mission {
 
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
