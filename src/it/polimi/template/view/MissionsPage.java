@@ -171,7 +171,6 @@ public class MissionsPage extends JFrame {
 
 				TripsPage tp = new TripsPage(mission, missions,trips);
 				tp.setVisible(true);
-				setVisible(false);
 			}
 		});
 		okbtn.addActionListener(new ActionListener() {
@@ -180,7 +179,7 @@ public class MissionsPage extends JFrame {
 
 				DronesPage dp = new DronesPage();
 				dp.setVisible(true);
-				setVisible(false);
+				
 			}
 		});
 
