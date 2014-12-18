@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class StartMissionCreator implements ActionListener{
+public class StartMissionCreator{
 	
 	MissionCreator mc = new MissionCreator();
 	
@@ -26,17 +26,13 @@ public class StartMissionCreator implements ActionListener{
 			if (t.getMission()==targetMission)
 				targetTrips.add(t);
 				
-		System.out.println(targetMission.getName()+targetTrips.get(0).getName());
 				
 				mc.run(targetMission, targetTrips);
 				
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-	}
+	
 	
 
 }

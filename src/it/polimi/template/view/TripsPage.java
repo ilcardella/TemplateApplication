@@ -65,9 +65,10 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	
 
 
-	public TripsPage(String name, ArrayList<Mission> m) {
+	public TripsPage(String name, ArrayList<Mission> m, ArrayList<Trip> t) {
 		this.nameMission=name;
 		this.missions=m;
+		this.trips=t;
 		initUI();
 	}
 
@@ -206,7 +207,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 						if (text != null) {
 							item = text.trim();
-							trips=tp.createTripWithName(item, nameMission,missions);
+							trips=tp.createTripWithName(item, nameMission,missions, trips);
 							
 						}
 		              

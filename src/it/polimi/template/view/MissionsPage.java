@@ -1,18 +1,17 @@
 package it.polimi.template.view;
 
 import it.polimi.template.controller.AddMissionButtonListener;
-import it.polimi.template.controller.AddTripOnMapListener;
 import it.polimi.template.model.Mission;
-
-
+import it.polimi.template.model.Trip;
 
 import javax.swing.JFrame;
 import java.awt.Container;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import static javax.swing.GroupLayout.Alignment.LEADING;
@@ -24,8 +23,10 @@ import javax.swing.ListSelectionModel;
 
 public class MissionsPage extends JFrame {
 
-	
 	private static final long serialVersionUID = 1L;
+	private ArrayList<Mission> missions=new ArrayList<Mission>();
+	private ArrayList<Trip> trips=new ArrayList<Trip>();
+
 	private DefaultListModel model;
 	private JList list;
 	private JButton remallbtn;
@@ -34,10 +35,10 @@ public class MissionsPage extends JFrame {
 	private JButton delbtn;
 	private JButton tpsbtn;
 	private JButton okbtn;
-	
 
-	public MissionsPage() {
-
+	public MissionsPage(ArrayList<Mission> missions, ArrayList<Trip> trips) {
+		this.trips=trips;
+		this.missions=missions;
 		initUI();
 	}
 
@@ -46,7 +47,6 @@ public class MissionsPage extends JFrame {
 		model = new DefaultListModel();
 		list = new JList(model);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
 
 		list.addMouseListener(new MouseAdapter() {
 
@@ -84,22 +84,20 @@ public class MissionsPage extends JFrame {
 		delbtn = new JButton("Delete");
 		tpsbtn = new JButton("Set Trips");
 		okbtn = new JButton("Ok");
-		final AddMissionButtonListener ml = new AddMissionButtonListener();
-
+		final AddMissionButtonListener ambl = new AddMissionButtonListener();
 
 		addbtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-
 				String text = JOptionPane.showInputDialog("Add a new mission");
 				String item = null;
 
 				if (text != null) {
 					item = text.trim();
-					ml.createMissionWithName(item);
-				
+					ambl.createMissionWithName(item, missions);
+
 				} else {
 					return;
 				}
@@ -157,7 +155,6 @@ public class MissionsPage extends JFrame {
 				model.clear();
 			}
 		});
-	
 
 		tpsbtn.addActionListener(new ActionListener() {
 			@Override
@@ -170,19 +167,20 @@ public class MissionsPage extends JFrame {
 				}
 
 				Object item = model.getElementAt(index);
-				String ok = item.toString();
-				
-				TripsPage tp = new TripsPage(ok, ml.getMissions());
+				String mission = item.toString();
+
+				TripsPage tp = new TripsPage(mission, missions,trips);
 				tp.setVisible(true);
+				setVisible(false);
 			}
 		});
 		okbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-			
+
 				DronesPage dp = new DronesPage();
 				dp.setVisible(true);
+				setVisible(false);
 			}
 		});
 
@@ -200,8 +198,6 @@ public class MissionsPage extends JFrame {
 		gl.setAutoCreateContainerGaps(true);
 		gl.setAutoCreateGaps(true);
 
-		
-		
 		gl.setHorizontalGroup(gl
 				.createSequentialGroup()
 				.addComponent(scrollpane)
@@ -234,29 +230,5 @@ public class MissionsPage extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				MissionsPage mp = new MissionsPage();
-				mp.setVisible(true);
-			}
-		});
-	}
-
-	/*
-	 * public void printMenu() { System.out.println("Choose an option:\n" + "\n"
-	 * + "1 new mission\n" + "2 delete mission\n" + "3 set trips\n" + "4 ok\n" +
-	 * "5 delete all\n" + "6 quit\n");
-	 * 
-	 * }
-	 * 
-	 * public void NameMission() {
-	 * System.out.println("Insert the name of the mission:\n"); } public void
-	 * deleteMission() {
-	 * System.out.println("Insert the name of the mission to delete:\n"); }
-	 */
 
 }
