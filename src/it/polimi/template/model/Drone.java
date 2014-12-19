@@ -1,5 +1,7 @@
 package it.polimi.template.model;
 
+import java.util.Random;
+
 public class Drone {
 
 	public static final int LONG = 1;
@@ -11,6 +13,12 @@ public class Drone {
 	private int status;
 	private int shapeCategory;
 	private int batteryLevel;
+	
+	Random number = new Random();
+	
+	public Drone(){
+		this.id=number.nextInt(1000);
+	}
 
 	public int getId() {
 		return id;

@@ -92,7 +92,6 @@ public class MissionsPage extends JFrame {
 		tpsbtn = new JButton("Set Trips");
 		okbtn = new JButton("Ok");
 		final AddMissionButtonListener ambl = new AddMissionButtonListener();
-		final MissionsPageOkButtonListener mpob= new MissionsPageOkButtonListener();
 
 		addbtn.addActionListener(new ActionListener() {
 
@@ -184,11 +183,8 @@ public class MissionsPage extends JFrame {
 		okbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for (Mission m: missions){
-				mpob.startDroneAllocator(m, drones);
-				}
-				//System.out.print(missions.get(1).getTrips().get(0).getDrone().getShapeCategory());
-				DronesPage dp = new DronesPage();
+				
+				DronesPage dp = new DronesPage(trips,missions,drones);
 				dp.setVisible(true);
 				
 			}
