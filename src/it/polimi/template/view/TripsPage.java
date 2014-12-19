@@ -1,6 +1,5 @@
 package it.polimi.template.view;
 
-
 import it.polimi.template.controller.AddTripOnMapListener;
 import it.polimi.template.controller.StartMissionCreator;
 import it.polimi.template.model.*;
@@ -58,17 +57,19 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private String nameMission;
 	private ArrayList<Mission> missions;
 	private ArrayList<Trip> trips;
+	private ArrayList<Drone> drones;
+	private ArrayList<Item> items;
 
-	
 	DragSource ds;
 	StringSelection transferable;
-	
 
+	public TripsPage(String name, ArrayList<Mission> m, ArrayList<Trip> t, ArrayList<Drone> d, ArrayList<Item> i) {
+		this.nameMission = name;
+		this.missions = m;
+		this.trips = t;
+		this.drones = d;
+		this.items = i;
 
-	public TripsPage(String name, ArrayList<Mission> m, ArrayList<Trip> t) {
-		this.nameMission=name;
-		this.missions=m;
-		this.trips=t;
 		initUI();
 	}
 
@@ -84,30 +85,23 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		model.addElement("Take a measure");
 		model.addElement("Take a picture");
 
-		list.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				if (e.getClickCount() == 2) {
-					int index = list.locationToIndex(e.getPoint());
-					Object item = model.getElementAt(index);
-					String text = JOptionPane.showInputDialog(
-							"Set the priority for this trip", item);
-					String newitem = null;
-					if (text != null) {
-						newitem = text.trim();
-					} else {
-						return;
-					}
-
-				}
-			}
-		});
+		/*
+		 * list.addMouseListener(new MouseAdapter() {
+		 * 
+		 * @Override public void mouseClicked(MouseEvent e) {
+		 * 
+		 * if (e.getClickCount() == 2) { int index =
+		 * list.locationToIndex(e.getPoint()); Object item =
+		 * model.getElementAt(index); String text = JOptionPane.showInputDialog(
+		 * "Set the priority for this trip", item); String newitem = null; if
+		 * (text != null) { newitem = text.trim(); } else { return; }
+		 * 
+		 * } } });
+		 */
 	}
 
 	public final void initUI() {
-		
+
 		setLayout(new BorderLayout());
 
 		JLabel label = new JLabel();
@@ -123,22 +117,20 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		JPanel buttonsPane = new JPanel();
 		JButton ok = new JButton("Ok");
-	
+
 		ok.addActionListener(new ActionListener() {
 			StartMissionCreator sm = new StartMissionCreator();
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				sm.run(nameMission,missions,trips);
-				
+				sm.run(nameMission, missions, trips);
+
 			}
 		});
 		JButton delete = new JButton("Delete");
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
-		
-		
 
 		new MyDropTargetListener(label);
 		MouseListener listener = new DragMouseAdapter();
@@ -153,8 +145,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		setLocationRelativeTo(null);
 	}
 
-
-
 	private class DragMouseAdapter extends MouseAdapter {
 		public void mousePressed(MouseEvent e) {
 			JComponent c = (JComponent) e.getSource();
@@ -165,15 +155,13 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	@Override
 	public void dragGestureRecognized(DragGestureEvent dge) {
-	     
 
-	     
 		System.out.println("Drag Gesture Recognized!");
 		transferable = new StringSelection(list.getSelectedValue().toString());
 		ds.startDrag(dge, DragSource.DefaultCopyDrop, transferable, this);
 
 	}
-	
+
 	private class MyDropTargetListener extends DropTargetAdapter {
 
 		private DropTarget dropTarget;
@@ -188,41 +176,50 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		@Override
 		public void drop(DropTargetDropEvent event) {
-			
-			
 
 			try {
 				AddTripOnMapListener tp = new AddTripOnMapListener();
-		          Transferable tr = event.getTransferable();
-		          String action = (String) tr.getTransferData(DataFlavor.stringFlavor);
+				Transferable tr = event.getTransferable();
+				String action = (String) tr
+						.getTransferData(DataFlavor.stringFlavor);
 
-		            if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 
-		              event.acceptDrop(DnDConstants.ACTION_COPY);
-		              event.dropComplete(true);
-		              
-		              
-		              String text = JOptionPane.showInputDialog("Add a name for the trip");
+					event.acceptDrop(DnDConstants.ACTION_COPY);
+					event.dropComplete(true);
+
+					String text = JOptionPane
+							.showInputDialog("Add a name for the trip");
+					String tripName = null;
+
+					if (text != null) {
+						 tripName= text.trim();
+						
+						String text1 = JOptionPane
+								.showInputDialog("Add the item to pick");
 						String item = null;
-
-						if (text != null) {
-							item = text.trim();
-							trips=tp.createTripWithName(item, nameMission,missions, trips);
+						if (text1 != null) {
+							item = text1.trim();
+						
+							trips = tp.createTripWithName(tripName, item, nameMission,
+									missions, trips,items);
+								
+								}
 							
 						}
-		              
-		              
-		              
-		              return;
-		            }
-		          event.rejectDrop();
-		        } catch (Exception e) {
-		          e.printStackTrace();
-		          event.rejectDrop();
-		        }
-		      }
+
+					
+				
+
+					return;
+				}
+				event.rejectDrop();
+			} catch (Exception e) {
+				e.printStackTrace();
+				event.rejectDrop();
+			}
 		}
-	
+	}
 
 	@Override
 	public void dragEnter(DragSourceDragEvent dsde) {
@@ -257,7 +254,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			System.out.println("Failed");
 		}
 	}
-	 public String getNameMission() {
+
+	public String getNameMission() {
 		return nameMission;
 	}
 
@@ -266,17 +264,16 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	class TransferableString implements Transferable {
-		 
-		 
-	    protected  DataFlavor stringFlavor =
-	        new DataFlavor(String.class, "A String Object");
-	    
-	    public TransferableString(String color) { this.action = color; }
 
-	    protected  DataFlavor[] supportedFlavors = {
-	        DataFlavor.stringFlavor,
-	    };
-		 String action;
+		protected DataFlavor stringFlavor = new DataFlavor(String.class,
+				"A String Object");
+
+		public TransferableString(String color) {
+			this.action = color;
+		}
+
+		protected DataFlavor[] supportedFlavors = { DataFlavor.stringFlavor, };
+		String action;
 
 		@Override
 		public DataFlavor[] getTransferDataFlavors() {
@@ -285,20 +282,20 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		@Override
 		public boolean isDataFlavorSupported(DataFlavor flavor) {
-			if (flavor.equals(DataFlavor.stringFlavor)) 
+			if (flavor.equals(DataFlavor.stringFlavor))
 				return true;
-			
-			    return false;			
+
+			return false;
 		}
 
 		@Override
 		public Object getTransferData(DataFlavor flavor)
 				throws UnsupportedFlavorException, IOException {
 			if (flavor.equals(DataFlavor.stringFlavor))
-		         return action;
-		    
-		     else 
-		         throw new UnsupportedFlavorException(flavor);			
+				return action;
+
+			else
+				throw new UnsupportedFlavorException(flavor);
 		}
 	}
 

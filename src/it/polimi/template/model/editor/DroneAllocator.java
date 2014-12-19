@@ -6,12 +6,11 @@ public class DroneAllocator implements Node {
 
 
 
-	@Override
-	public Mission run(Mission m) {
-		ArrayList<Drone> availableDrones = getAvailableDrones();
+	public Mission run(Mission m,ArrayList<Drone> drones) {
+		
 		// if there is at least a trip to perform in the mission
 		if (!m.getTrips().isEmpty()) {
-			for (Drone d : availableDrones) {
+			for (Drone d : drones) {
 				// if the drone shapeCategory suits the shapeCategory of the
 				// item associated to the first trip,
 				// assign that drone to the that trip
@@ -27,9 +26,12 @@ public class DroneAllocator implements Node {
 		return m;
 	}
 
-	public ArrayList<Drone> getAvailableDrones() {
-		// TODO
+	@Override
+	public Mission run(Mission m) {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

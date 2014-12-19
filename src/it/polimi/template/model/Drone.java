@@ -1,11 +1,16 @@
 package it.polimi.template.model;
 
 public class Drone {
+
+	public static final int LONG = 1;
+	public static final int SHORT = 2;
+	public static final int HEAVY = 3;
+	public static final int LIGHT = 4;
+
 	private int id;
 	private int status;
 	private int shapeCategory;
 	private int batteryLevel;
-	
 
 	public int getId() {
 		return id;
