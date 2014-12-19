@@ -43,7 +43,7 @@ public class DronesPage extends JFrame {
 
 		setLayout(new BorderLayout());
 
-		JTable table = new JTable(new MyTableModel());
+		final JTable table = new JTable(new MyTableModel());
 		final MissionsPageOkButtonListener mpob= new MissionsPageOkButtonListener();
 
 		JScrollPane tablePane = new JScrollPane(table);
@@ -64,6 +64,7 @@ public class DronesPage extends JFrame {
 				
 				for (Mission m: missions){
 					mpob.startDroneAllocator(m, drones);
+					table.setValueAt(trips.get(0).getDrone().getId(),0,0);
 					}
 				
 				
