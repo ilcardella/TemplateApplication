@@ -13,6 +13,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -24,18 +27,19 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 public class DronesPage extends JFrame {
-	
-	private ArrayList<Trip> trips=new ArrayList<Trip>();
-	private ArrayList<Mission> missions=new ArrayList<Mission>();
-	private ArrayList<Drone> drones=new ArrayList<Drone>();
 
+	private ArrayList<Trip> trips = new ArrayList<Trip>();
+	private ArrayList<Mission> missions = new ArrayList<Mission>();
+	private ArrayList<Drone> drones = new ArrayList<Drone>();
 
-	public DronesPage(ArrayList<Trip> trips, ArrayList<Mission> missions,ArrayList<Drone> drones) {
-		this.trips=trips;
-		this.missions=missions;
-		this.drones=drones;
+	public DronesPage(ArrayList<Trip> trips, ArrayList<Mission> missions,
+			ArrayList<Drone> drones) {
+		this.trips = trips;
+		this.missions = missions;
+		this.drones = drones;
 		initUI();
 	}
 
@@ -43,8 +47,12 @@ public class DronesPage extends JFrame {
 
 		setLayout(new BorderLayout());
 
-		final JTable table = new JTable(new MyTableModel());
-		final MissionsPageOkButtonListener mpob= new MissionsPageOkButtonListener();
+		DefaultTableModel model= new DefaultTableModel();
+		final JTable table = new JTable(model);
+		model.addColumn("ID");
+		model.addColumn("Trip");
+		model.addColumn("Status");
+		final MissionsPageOkButtonListener mpob = new MissionsPageOkButtonListener();
 
 		JScrollPane tablePane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
@@ -61,13 +69,18 @@ public class DronesPage extends JFrame {
 		start.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				for (Mission m: missions){
-					mpob.startDroneAllocator(m, drones);
-					table.setValueAt(trips.get(0).getDrone().getId(),0,0);
+
+				for (int i = 0; i < missions.size(); i++) {
+					mpob.startDroneAllocator(missions.get(i), drones);
+
+					for (Trip t : trips) {
+						DefaultTableModel model = (DefaultTableModel) table
+								.getModel();
+						model.addRow(new Object[] { t.getDrone().getId(),
+								t.getName(), "" });
 					}
-				
-				
+				}
+
 			}
 		});
 		JButton stop = new JButton("Stop");
@@ -83,41 +96,52 @@ public class DronesPage extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	class MyTableModel extends AbstractTableModel {
-		private String[] columnNames = { "ID", "Trip", "Status"};
-
-		private Object[][] data = { { "", trips.get(0).getName(), ""}
+	/* class MyTableModel extends AbstractTableModel {
 		
+		private static final long serialVersionUID = 1L;
 
-		};
-		
+		private List<String> columnNames = new ArrayList();
+
+		{
+			columnNames.add("ID");
+			columnNames.add("Trip");
+			columnNames.add("Status");
+
+		}
+
+		private List<List> data = new ArrayList();
 
 		public int getColumnCount() {
-			return columnNames.length;
+			return columnNames.size();
 		}
 
 		public int getRowCount() {
-			return data.length;
+			return data.size();
 		}
 
 		public String getColumnName(int col) {
-			return columnNames[col];
+			return columnNames.get(col);
 		}
 
 		public Object getValueAt(int row, int col) {
-			return data[row][col];
+			return data.get(row).get(col);
+		}
+
+		public boolean isCellEditable(int row, int col) {
+			return false;
 		}
 
 		public Class getColumnClass(int c) {
 			return getValueAt(0, c).getClass();
 		}
 
-		public void setValueAt(Object value, int row, int col) {
-			data[row][col] = value;
-			fireTableCellUpdated(row, col);
-		}
-		
+		public void addRow(List rowData) {
 
-	}
+			data.add(rowData);
+			fireTableRowsInserted(data.size() - 1, data.size() - 1);
+
+		}
+
+	};*/
 
 }
