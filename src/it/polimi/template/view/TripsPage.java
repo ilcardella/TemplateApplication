@@ -26,12 +26,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -44,6 +47,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
+
+import org.omg.CORBA.portable.InputStream;
+
+import com.sun.org.apache.bcel.internal.util.ClassLoader;
 
 public class TripsPage extends JFrame implements DragSourceListener,
 		DragGestureListener {
@@ -63,18 +70,23 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	DragSource ds;
 	StringSelection transferable;
 
-	public TripsPage(String name, ArrayList<Mission> m, ArrayList<Trip> t, ArrayList<Drone> d, ArrayList<Item> i) {
+	public TripsPage(String name, ArrayList<Mission> m, ArrayList<Trip> t,
+			ArrayList<Drone> d, ArrayList<Item> i) {
 		this.nameMission = name;
 		this.missions = m;
 		this.trips = t;
 		this.drones = d;
 		this.items = i;
 
-		initUI();
+		try {
+			initUI();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void createList() {
-		
 
 		model = new DefaultListModel();
 		list = new JList(model);
@@ -100,12 +112,13 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		 */
 	}
 
-	public final void initUI() {
+	public final void initUI() throws IOException {
 
 		setLayout(new BorderLayout());
 
-		JLabel label = new JLabel();
-		label.setIcon(new ImageIcon("/home/bitcraze/Desktop/casa.gif"));
+		ImageIcon icon = new ImageIcon("Map/casa.gif");
+
+		JLabel label = new JLabel(icon);
 		label.setTransferHandler(new TransferHandler("text"));
 
 		createList();
@@ -193,23 +206,20 @@ public class TripsPage extends JFrame implements DragSourceListener,
 					String tripName = null;
 
 					if (text != null) {
-						 tripName= text.trim();
-						
+						tripName = text.trim();
+
 						String text1 = JOptionPane
 								.showInputDialog("Add the item to pick");
 						String item = null;
 						if (text1 != null) {
 							item = text1.trim();
-						
-							trips = tp.createTripWithName(tripName, item, nameMission,
-									missions, trips,items);
-								
-								}
-							
+
+							trips = tp.createTripWithName(tripName, item,
+									nameMission, missions, trips, items);
+
 						}
 
-					
-				
+					}
 
 					return;
 				}
@@ -268,11 +278,11 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		protected DataFlavor stringFlavor = new DataFlavor(String.class,
 				"A String Object");
 
-		public TransferableString(String color) {
-			this.action = color;
+		public TransferableString(String string) {
+			this.action = string;
 		}
 
-		protected DataFlavor[] supportedFlavors = { DataFlavor.stringFlavor, };
+		protected DataFlavor[] supportedFlavors = { DataFlavor.stringFlavor };
 		String action;
 
 		@Override

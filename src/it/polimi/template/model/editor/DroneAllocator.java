@@ -21,6 +21,8 @@ public class DroneAllocator implements Node {
 					
 					break;
 				}
+			
+					
 				}
 			}
 
