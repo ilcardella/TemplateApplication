@@ -135,8 +135,10 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			}
 		});
 		JButton delete = new JButton("Delete");
+
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
+
 
 		new MyDropTargetListener(label);
 		MouseListener listener = new DragMouseAdapter();
@@ -200,29 +202,27 @@ public class TripsPage extends JFrame implements DragSourceListener,
 					String tripName = null;
 					String item = null;
 
-
 					if (text != null) {
 						tripName = text.trim();
 
-						if (action.equals("Pick item")||action.equals("Release item")) {
+						if (action.equals("Pick item")
+								|| action.equals("Release item")) {
 							String text1 = JOptionPane
 									.showInputDialog("Add the item to pick");
 							if (text1 != null) {
 								item = text1.trim();
 
-								
-
 							}
-						}
-						else{
-							item="no item";
+						} else {
+							item = "no item";
+							return;
 						}
 						trips = atmp.createTripWithName(tripName, item,
 								nameMission, missions, trips, items);
 					}
-					
-
+					else{
 					return;
+					}
 				}
 				event.rejectDrop();
 			} catch (Exception e) {

@@ -99,18 +99,18 @@ public class MissionsPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String text = JOptionPane.showInputDialog("Add a new mission");
-				String item = null;
+				String missionName = null;
 
 				if (text != null) {
-					item = text.trim();
-					ambl.createMissionWithName(item, missions);
+					missionName = text.trim();
+					ambl.createMissionWithName(missionName, missions);
 
 				} else {
 					return;
 				}
 
-				if (!item.isEmpty()) {
-					model.addElement(item);
+				if (!missionName.isEmpty()) {
+					model.addElement(missionName);
 				}
 			}
 		});
