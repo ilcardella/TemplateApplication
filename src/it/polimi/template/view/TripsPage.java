@@ -1,6 +1,7 @@
 package it.polimi.template.view;
 
 import it.polimi.template.controller.AddTripOnMapListener;
+
 import it.polimi.template.controller.StartMissionCreator;
 import it.polimi.template.model.*;
 
@@ -26,15 +27,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -45,12 +43,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
-
-import org.omg.CORBA.portable.InputStream;
-
-import com.sun.org.apache.bcel.internal.util.ClassLoader;
 
 public class TripsPage extends JFrame implements DragSourceListener,
 		DragGestureListener {
@@ -191,7 +184,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		public void drop(DropTargetDropEvent event) {
 
 			try {
-				AddTripOnMapListener tp = new AddTripOnMapListener();
+				AddTripOnMapListener atmp = new AddTripOnMapListener();
 				Transferable tr = event.getTransferable();
 				String action = (String) tr
 						.getTransferData(DataFlavor.stringFlavor);
@@ -199,27 +192,35 @@ public class TripsPage extends JFrame implements DragSourceListener,
 				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 
 					event.acceptDrop(DnDConstants.ACTION_COPY);
+
 					event.dropComplete(true);
 
 					String text = JOptionPane
 							.showInputDialog("Add a name for the trip");
 					String tripName = null;
+					String item = null;
+
 
 					if (text != null) {
 						tripName = text.trim();
 
-						String text1 = JOptionPane
-								.showInputDialog("Add the item to pick");
-						String item = null;
-						if (text1 != null) {
-							item = text1.trim();
+						if (action.equals("Pick item")||action.equals("Release item")) {
+							String text1 = JOptionPane
+									.showInputDialog("Add the item to pick");
+							if (text1 != null) {
+								item = text1.trim();
 
-							trips = tp.createTripWithName(tripName, item,
-									nameMission, missions, trips, items);
+								
 
+							}
 						}
-
+						else{
+							item="no item";
+						}
+						trips = atmp.createTripWithName(tripName, item,
+								nameMission, missions, trips, items);
 					}
+					
 
 					return;
 				}

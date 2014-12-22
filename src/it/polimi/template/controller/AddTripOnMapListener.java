@@ -11,9 +11,10 @@ public class AddTripOnMapListener {
 			ArrayList<Trip> trips, ArrayList<Item> items) {
 
 		
-		
 		Trip t = new Trip();
 		t.setName(name);
+		
+		
 		
 		for(Item i: items)
 			if(i.getName().equals(nameItem))
