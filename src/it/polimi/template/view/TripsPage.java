@@ -54,6 +54,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private static final long serialVersionUID = 1L;
 	private DefaultListModel model;
 	private JList list;
+	private DefaultListModel model1;
+	private JList list1;
 	private String nameMission;
 	private ArrayList<Mission> missions;
 	private ArrayList<Trip> trips;
@@ -203,44 +205,69 @@ public class TripsPage extends JFrame implements DragSourceListener,
 					String priority = null;
 					String delay = null;
 
-					if (text != null) {
+					if (text != null)
 						tripName = text.trim();
+					else
+						return;
+
+					if (!tripName.isEmpty()) {
 
 						if (action.equals("Pick item")
 								|| action.equals("Release item")) {
-							String text1 = JOptionPane
-									.showInputDialog("Add the item to pick");
-							if (text1 != null) 
-								item = text1.trim();
+							
+							
+							ArrayList<String> choices = new ArrayList<String>();
+							for(Item i: items)
+								choices.add(i.getName());
+							
+							String[] simpleArray = new String[ choices.size() ];
+							choices.toArray( simpleArray );
 
 							
+						    String input = (String) JOptionPane.showInputDialog(null, "Choose the item",
+						        "The Choice of a Lifetime", JOptionPane.QUESTION_MESSAGE, null,
+						        simpleArray,
+						        simpleArray[0]);
+						    System.out.println(input);
+
+						    item=input.toString();
+							
+						/*	String text1 = JOptionPane
+									.showInputDialog("Add the item to pick");
+							if (text1 != null)
+								item = text1.trim();
+
 							else
-								return;
+								return;*/
 						} else {
 							item = "no item";
 						}
-						String text2 = JOptionPane
-								.showInputDialog("Indicate the priority of the trip");
-						if (text2 != null){
-							priority = text2.trim();
+
+
+							String text2 = JOptionPane
+									.showInputDialog("Indicate the priority of the trip");
+							if (text2 != null)
+								priority = text2.trim();
+							else
+								return;
+
+							if (!priority.isEmpty()) {
+
+								String text3 = JOptionPane
+										.showInputDialog("Indicate the delay for the trip");
+								if (text3 != null)
+									delay = text3.trim();
+								else
+									return;
+								
+								if (!delay.isEmpty())
+
+								trips = atmp.createTripWithName(tripName, item,
+										priority, delay, nameMission, missions,
+										trips, items);
+							}
 						
-						
-						String text3 = JOptionPane
-								.showInputDialog("Indicate the delay for the trip");
-						if (text3 != null)
-							delay = text3.trim();
-						else
-							return;
-						}
-						else 
-							return;
-						
-						trips = atmp.createTripWithName(tripName, item,
-								priority, delay, nameMission, missions, trips,
-								items);
-					} else 
-						return;
-					
+					}
 
 				}
 				event.rejectDrop();

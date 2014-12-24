@@ -70,8 +70,8 @@ public class DronesPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				for (int i = 0; i < missions.size(); i++) {
-					mpob.startDroneAllocator(missions.get(i), drones);
+				for (Mission m: missions) {
+					mpob.startDroneAllocator(m, drones);
 
 					for (Trip t : trips) {
 						DefaultTableModel model = (DefaultTableModel) table
