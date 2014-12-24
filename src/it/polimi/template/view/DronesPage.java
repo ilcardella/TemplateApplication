@@ -31,23 +31,22 @@ import javax.swing.table.DefaultTableModel;
 
 public class DronesPage extends JFrame {
 
-	private ArrayList<Trip> trips = new ArrayList<Trip>();
 	private ArrayList<Mission> missions = new ArrayList<Mission>();
 	private ArrayList<Drone> drones = new ArrayList<Drone>();
 
-	public DronesPage(ArrayList<Trip> trips, ArrayList<Mission> missions,
+	public DronesPage(ArrayList<Mission> missions,
 			ArrayList<Drone> drones) {
-		this.trips = trips;
 		this.missions = missions;
 		this.drones = drones;
 		initUI();
 	}
 
 	public final void initUI() {
+		
 
 		setLayout(new BorderLayout());
 
-		DefaultTableModel model= new DefaultTableModel();
+		DefaultTableModel model = new DefaultTableModel();
 		final JTable table = new JTable(model);
 		model.addColumn("ID");
 		model.addColumn("Trip");
@@ -70,10 +69,10 @@ public class DronesPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				for (Mission m: missions) {
+				for (Mission m : missions) {
 					mpob.startDroneAllocator(m, drones);
 
-					for (Trip t : trips) {
+					for (Trip t : m.getTrips()) {
 						DefaultTableModel model = (DefaultTableModel) table
 								.getModel();
 						model.addRow(new Object[] { t.getDrone().getId(),
@@ -96,52 +95,42 @@ public class DronesPage extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	/* class MyTableModel extends AbstractTableModel {
-		
-		private static final long serialVersionUID = 1L;
-
-		private List<String> columnNames = new ArrayList();
-
-		{
-			columnNames.add("ID");
-			columnNames.add("Trip");
-			columnNames.add("Status");
-
-		}
-
-		private List<List> data = new ArrayList();
-
-		public int getColumnCount() {
-			return columnNames.size();
-		}
-
-		public int getRowCount() {
-			return data.size();
-		}
-
-		public String getColumnName(int col) {
-			return columnNames.get(col);
-		}
-
-		public Object getValueAt(int row, int col) {
-			return data.get(row).get(col);
-		}
-
-		public boolean isCellEditable(int row, int col) {
-			return false;
-		}
-
-		public Class getColumnClass(int c) {
-			return getValueAt(0, c).getClass();
-		}
-
-		public void addRow(List rowData) {
-
-			data.add(rowData);
-			fireTableRowsInserted(data.size() - 1, data.size() - 1);
-
-		}
-
-	};*/
+	/*
+	 * class MyTableModel extends AbstractTableModel {
+	 * 
+	 * private static final long serialVersionUID = 1L;
+	 * 
+	 * private List<String> columnNames = new ArrayList();
+	 * 
+	 * { columnNames.add("ID"); columnNames.add("Trip");
+	 * columnNames.add("Status");
+	 * 
+	 * }
+	 * 
+	 * private List<List> data = new ArrayList();
+	 * 
+	 * public int getColumnCount() { return columnNames.size(); }
+	 * 
+	 * public int getRowCount() { return data.size(); }
+	 * 
+	 * public String getColumnName(int col) { return columnNames.get(col); }
+	 * 
+	 * public Object getValueAt(int row, int col) { return
+	 * data.get(row).get(col); }
+	 * 
+	 * public boolean isCellEditable(int row, int col) { return false; }
+	 * 
+	 * public Class getColumnClass(int c) { return getValueAt(0, c).getClass();
+	 * }
+	 * 
+	 * public void addRow(List rowData) {
+	 * 
+	 * data.add(rowData); fireTableRowsInserted(data.size() - 1, data.size() -
+	 * 1);
+	 * 
+	 * }
+	 * 
+	 * };
+	 */
 
 }

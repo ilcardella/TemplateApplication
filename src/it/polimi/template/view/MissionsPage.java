@@ -26,7 +26,6 @@ public class MissionsPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Mission> missions=new ArrayList<Mission>();
-	private ArrayList<Trip> trips=new ArrayList<Trip>();
 	private ArrayList<Drone> drones=new ArrayList<Drone>();
 	private ArrayList<Item> items=new ArrayList<Item>();
 
@@ -40,8 +39,7 @@ public class MissionsPage extends JFrame {
 	private JButton tpsbtn;
 	private JButton okbtn;
 
-	public MissionsPage(ArrayList<Mission> missions, ArrayList<Trip> trips, ArrayList<Drone> drones, ArrayList<Item> items) {
-		this.trips=trips;
+	public MissionsPage(ArrayList<Mission> missions, ArrayList<Drone> drones, ArrayList<Item> items) {
 		this.missions=missions;
 		this.drones=drones;
 		this.items=items;
@@ -176,7 +174,7 @@ public class MissionsPage extends JFrame {
 				Object item = model.getElementAt(index);
 				String mission = item.toString();
 
-				TripsPage tp = new TripsPage(mission, missions,trips,drones,items);
+				TripsPage tp = new TripsPage(mission, missions,drones,items);
 				tp.setVisible(true);
 			}
 		});
@@ -184,7 +182,7 @@ public class MissionsPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				DronesPage dp = new DronesPage(trips,missions,drones);
+				DronesPage dp = new DronesPage(missions,drones);
 				dp.setVisible(true);
 				
 			}
@@ -230,6 +228,7 @@ public class MissionsPage extends JFrame {
 
 		gl.linkSize(addbtn, renbtn, delbtn, remallbtn, tpsbtn, okbtn);
 		pack();
+
 
 		setTitle("Pluto-Missions Page");
 		setSize(1000, 800);

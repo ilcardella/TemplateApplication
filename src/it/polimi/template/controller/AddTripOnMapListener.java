@@ -6,9 +6,9 @@ import it.polimi.template.model.*;
 
 public class AddTripOnMapListener {
 
-	public ArrayList<Trip> createTripWithName(String name, String nameItem,
+	public void createTripWithName(String name, String nameItem,
 			String priority, String delay, String missionName,
-			ArrayList<Mission> missions, ArrayList<Trip> trips,
+			ArrayList<Mission> missions, 
 			ArrayList<Item> items) {
 
 		Trip t = new Trip();
@@ -22,12 +22,13 @@ public class AddTripOnMapListener {
 				t.setItem(i);
 
 		for (Mission m : missions)
-			if (m.getName().equals(missionName))
+			if (m.getName().equals(missionName)){
 				t.setMission(m);
+				m.getTrips().add(t);
+			}
 
-		trips.add(t);
+		
 
-		return trips;
 
 	}
 

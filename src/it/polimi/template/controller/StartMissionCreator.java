@@ -15,17 +15,14 @@ public class StartMissionCreator {
 	Mission targetMission = new Mission();
 	ArrayList<Trip> targetTrips = new ArrayList<Trip>();
 
-	public void run(String name, ArrayList<Mission> missions,
-			ArrayList<Trip> trips) {
+	public void run(String name, ArrayList<Mission> missions) {
 
-		for (Mission m : missions)
+		for (Mission m : missions){
 			if (m.getName() == name)
 				targetMission = m;
-
-		for (Trip t : trips)
-			if (t.getMission() == targetMission)
+			for(Trip t: m.getTrips())
 				targetTrips.add(t);
-
+		}
 		mc.run(targetMission, targetTrips);
 
 	}

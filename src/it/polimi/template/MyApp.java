@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class MyApp {
 
 	static ArrayList<Mission> missions = new ArrayList<Mission>();
-	static ArrayList<Trip> trips = new ArrayList<Trip>();
 	static ArrayList<Drone> drones = new ArrayList<Drone>();
 	static ArrayList<Item> items = new ArrayList<Item>();
 
@@ -61,7 +60,7 @@ public class MyApp {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				MissionsPage mp = new MissionsPage(missions, trips, drones,
+				MissionsPage mp = new MissionsPage(missions, drones,
 						items);
 				mp.setVisible(true);
 			}

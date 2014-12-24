@@ -16,11 +16,11 @@ public class DroneAllocator implements Node {
 				for (Drone d : drones) {
 					if ((t.getItem().getName().equals("no item"))
 							|| (t.getItem().getShapeCategory() == d
-									.getShapeCategory())) {
+									.getShapeCategory())) 
 						t.setDrone(d);
 
-						break;
-					}
+						//break;
+					
 
 				}
 			}
