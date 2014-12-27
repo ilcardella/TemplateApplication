@@ -43,6 +43,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.TransferHandler.DropLocation;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
@@ -160,7 +161,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		getContentPane().add(actionsPane, BorderLayout.NORTH);
 		getContentPane().add(buttonsPane, BorderLayout.WEST);
 
-		setTitle("Pluto-Trips Page");
+		setTitle("Pluto-Trips Page ("+nameMission+")");
 		setSize(700, 600);
 		setLocationRelativeTo(null);
 	}
@@ -193,10 +194,14 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			dropTarget = new DropTarget(label, DnDConstants.ACTION_COPY, this,
 					true, null);
 		}
+		
+		
+	
 
 		@Override
 		public void drop(DropTargetDropEvent event) {
-
+			
+			
 			try {
 				AddTripOnMapListener atmp = new AddTripOnMapListener();
 				Transferable tr = event.getTransferable();
@@ -207,7 +212,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 					event.acceptDrop(DnDConstants.ACTION_COPY);
 
+
 					event.dropComplete(true);
+					
 
 					String text = JOptionPane
 							.showInputDialog("Add a name for the trip");
