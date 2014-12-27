@@ -2,7 +2,9 @@ package it.polimi.template.view;
 
 import it.polimi.template.controller.AddTripOnMapListener;
 
-import it.polimi.template.controller.StartMissionCreator;
+import it.polimi.template.controller.TripsPageDeleteAllTripsButtonListener;
+import it.polimi.template.controller.TripsPageOkButtonListener;
+
 import it.polimi.template.model.*;
 
 import java.awt.BorderLayout;
@@ -125,16 +127,27 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		JButton ok = new JButton("Ok");
 
 		ok.addActionListener(new ActionListener() {
-			StartMissionCreator sm = new StartMissionCreator();
+			TripsPageOkButtonListener tpobl = new TripsPageOkButtonListener();
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				sm.run(nameMission, missions);
+				tpobl.run(nameMission, missions);
 
 			}
 		});
-		JButton delete = new JButton("Delete");
+		JButton delete = new JButton("Delete all trips");
+
+		delete.addActionListener(new ActionListener() {
+			TripsPageDeleteAllTripsButtonListener tpdtbl= new TripsPageDeleteAllTripsButtonListener();
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				
+				tpdtbl.removeTrips(nameMission,missions);
+			}
+
+		});
 
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
@@ -225,13 +238,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 							item = input.toString();
 
-							/*
-							 * String text1 = JOptionPane
-							 * .showInputDialog("Add the item to pick"); if
-							 * (text1 != null) item = text1.trim();
-							 * 
-							 * else return;
-							 */
 						} else {
 							item = "no item";
 						}
@@ -247,7 +253,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 								delay = text3.trim();
 								atmp.createTripWithName(tripName, item,
 										priority, delay, nameMission, missions,
-										 items);
+										items);
 							}
 
 						}

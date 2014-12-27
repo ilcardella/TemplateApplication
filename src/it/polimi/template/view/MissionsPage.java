@@ -1,6 +1,7 @@
 package it.polimi.template.view;
 
-import it.polimi.template.controller.AddMissionButtonListener;
+
+import it.polimi.template.controller.MissionsPageAddMissionButtonListener;
 import it.polimi.template.controller.MissionsPageOkButtonListener;
 
 import it.polimi.template.model.*;
@@ -89,7 +90,7 @@ public class MissionsPage extends JFrame {
 		delbtn = new JButton("Delete");
 		tpsbtn = new JButton("Set Trips");
 		okbtn = new JButton("Ok");
-		final AddMissionButtonListener ambl = new AddMissionButtonListener();
+		final MissionsPageAddMissionButtonListener ambl = new MissionsPageAddMissionButtonListener();
 
 		addbtn.addActionListener(new ActionListener() {
 

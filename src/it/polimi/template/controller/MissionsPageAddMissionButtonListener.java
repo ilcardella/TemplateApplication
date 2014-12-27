@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import it.polimi.template.model.*;
 
-public class AddMissionButtonListener {
+public class MissionsPageAddMissionButtonListener {
 	
 
 
