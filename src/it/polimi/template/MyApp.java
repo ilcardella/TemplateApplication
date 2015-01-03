@@ -23,7 +23,6 @@ public class MyApp {
 		Item i2 = new Item();
 		Item i3 = new Item();
 		Item i4 = new Item();
-		Item voidItem = new Item();
 
 		d1.setShapeCategory(2);
 		d2.setShapeCategory(3);
@@ -39,7 +38,6 @@ public class MyApp {
 		i2.setName("2");
 		i3.setName("3");
 		i4.setName("4");
-		voidItem.setName("no item");
 
 		drones.add(d1);
 		drones.add(d2);
@@ -49,7 +47,6 @@ public class MyApp {
 		items.add(i2);
 		items.add(i3);
 		items.add(i4);
-		items.add(voidItem);
 
 	}
 
@@ -60,8 +57,7 @@ public class MyApp {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				MissionsPage mp = new MissionsPage(missions, drones,
-						items);
+				MissionsPage mp = new MissionsPage(missions, drones, items);
 				mp.setVisible(true);
 			}
 		});

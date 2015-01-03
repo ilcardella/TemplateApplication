@@ -7,6 +7,10 @@ public class Trip {
 	public static final int WAITING = 1;
 	public static final int COMPLETED = 2;
 	public static final int FAILED = 3;
+	public static final int EXECUTING = 4;
+	public static final int DELAYED = 5;
+
+
 
 	private String name;
 	private String sourceLocation;

@@ -14,15 +14,22 @@ public class DroneAllocator implements Node {
 				// item associated to the first trip, or the trip doesn't have
 				// an associated item, assign that drone to the that trip
 				for (Drone d : drones) {
-					if ((t.getItem().getName().equals("no item"))
-							|| (t.getItem().getShapeCategory() == d
-									.getShapeCategory())) 
-						t.setDrone(d);
+					if (d.getStatus() == 5) {
+						if ((t.getItem() == null)
+								|| (t.getItem().getShapeCategory() == d
+										.getShapeCategory())) {
+							d.setStatus(6);
+							t.setDrone(d);
+							t.setStatus(4);
+							
+							break;
+						}
 
-						//break;
-					
+					}
 
 				}
+				
+				
 			}
 
 		}

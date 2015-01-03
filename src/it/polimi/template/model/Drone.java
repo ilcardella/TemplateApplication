@@ -9,15 +9,20 @@ public class Drone {
 	public static final int HEAVY = 3;
 	public static final int LIGHT = 4;
 
+	public static final int FREE = 5;
+	public static final int BUSY = 6;
+	public static final int CHARGING = 6;
+
 	private int id;
 	private int status;
 	private int shapeCategory;
 	private int batteryLevel;
-	
+
 	Random number = new Random();
-	
-	public Drone(){
-		this.id=number.nextInt(1000);
+
+	public Drone() {
+		this.id = number.nextInt(1000);
+		this.status=5;
 	}
 
 	public int getId() {

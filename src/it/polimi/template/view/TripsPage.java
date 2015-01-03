@@ -140,12 +140,12 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		JButton delete = new JButton("Delete all trips");
 
 		delete.addActionListener(new ActionListener() {
-			TripsPageDeleteAllTripsButtonListener tpdtbl= new TripsPageDeleteAllTripsButtonListener();
+			TripsPageDeleteAllTripsButtonListener tpdtbl = new TripsPageDeleteAllTripsButtonListener();
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				
-				tpdtbl.removeTrips(nameMission,missions);
+
+				tpdtbl.removeTrips(nameMission, missions);
 			}
 
 		});
@@ -161,7 +161,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		getContentPane().add(actionsPane, BorderLayout.NORTH);
 		getContentPane().add(buttonsPane, BorderLayout.WEST);
 
-		setTitle("Pluto-Trips Page ("+nameMission+")");
+		setTitle("Pluto-Trips Page (" + nameMission + ")");
 		setSize(700, 600);
 		setLocationRelativeTo(null);
 	}
@@ -194,14 +194,10 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			dropTarget = new DropTarget(label, DnDConstants.ACTION_COPY, this,
 					true, null);
 		}
-		
-		
-	
 
 		@Override
 		public void drop(DropTargetDropEvent event) {
-			
-			
+
 			try {
 				AddTripOnMapListener atmp = new AddTripOnMapListener();
 				Transferable tr = event.getTransferable();
@@ -212,9 +208,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 					event.acceptDrop(DnDConstants.ACTION_COPY);
 
-
 					event.dropComplete(true);
-					
 
 					String text = JOptionPane
 							.showInputDialog("Add a name for the trip");
@@ -245,26 +239,53 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 							item = input.toString();
 
-						} else {
-							item = "no item";
 						}
+						
+						ArrayList<String> choosePriority = new ArrayList<String>();
+						
+							choosePriority.add("NORMAL");
+							choosePriority.add("LOW");
+							choosePriority.add("HIGH");
+							choosePriority.add("VERY HIGH");
+							choosePriority.add("VERY LOW");
 
-						String text2 = JOptionPane
-								.showInputDialog("Indicate the priority of the trip");
-						if (text2 != null) {
-							priority = text2.trim();
 
-							String text3 = JOptionPane
-									.showInputDialog("Indicate the delay for the trip");
-							if (text3 != null) {
-								delay = text3.trim();
-								atmp.createTripWithName(tripName, item,
-										priority, delay, nameMission, missions,
-										items);
-							}
+						String[] simpleArray = new String[choosePriority.size()];
+						choosePriority.toArray(simpleArray);
 
+						String input1 = (String) JOptionPane
+								.showInputDialog(null, "Set the priority for the trip ",
+										"Choose the priority",
+										JOptionPane.QUESTION_MESSAGE, null,
+										simpleArray, simpleArray[0]);
+						System.out.println(input1);
+
+						if(input1.toString()=="NORMAL")
+							priority="100";
+						if(input1.toString()=="LOW")
+							priority="50";
+						if(input1.toString()=="HIGH")
+							priority="150";
+						if(input1.toString()=="VERY HIGH")
+							priority="200";
+						if(input1.toString()=="VERY LOW")
+							priority="1";
+
+		
+						String text3 = JOptionPane
+								.showInputDialog("Indicate the delay for the trip");
+						if (text3 != null)
+							delay = text3.trim();
+
+						if(delay.isEmpty()){
+							delay = "0";
 						}
-
+						
+						
+						
+						
+						atmp.createTripWithName(tripName, item, priority,
+								delay, nameMission, missions, items);
 					}
 
 				}

@@ -34,15 +34,13 @@ public class DronesPage extends JFrame {
 	private ArrayList<Mission> missions = new ArrayList<Mission>();
 	private ArrayList<Drone> drones = new ArrayList<Drone>();
 
-	public DronesPage(ArrayList<Mission> missions,
-			ArrayList<Drone> drones) {
+	public DronesPage(ArrayList<Mission> missions, ArrayList<Drone> drones) {
 		this.missions = missions;
 		this.drones = drones;
 		initUI();
 	}
 
 	public final void initUI() {
-		
 
 		setLayout(new BorderLayout());
 
@@ -70,14 +68,22 @@ public class DronesPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				for (Mission m : missions) {
+
 					mpob.startDroneAllocator(m, drones);
 
 					for (Trip t : m.getTrips()) {
 						DefaultTableModel model = (DefaultTableModel) table
 								.getModel();
-						model.addRow(new Object[] { t.getDrone().getId(),
-								t.getName(), "" });
+
+						if (t.getDrone() == null)
+							model.addRow(new Object[] { "", t.getName(),
+									t.getStatus() });
+						else
+							model.addRow(new Object[] { t.getDrone().getId(),
+									t.getName(), t.getStatus() });
+
 					}
+
 				}
 
 			}
@@ -94,43 +100,5 @@ public class DronesPage extends JFrame {
 		setSize(1000, 800);
 		setLocationRelativeTo(null);
 	}
-
-	/*
-	 * class MyTableModel extends AbstractTableModel {
-	 * 
-	 * private static final long serialVersionUID = 1L;
-	 * 
-	 * private List<String> columnNames = new ArrayList();
-	 * 
-	 * { columnNames.add("ID"); columnNames.add("Trip");
-	 * columnNames.add("Status");
-	 * 
-	 * }
-	 * 
-	 * private List<List> data = new ArrayList();
-	 * 
-	 * public int getColumnCount() { return columnNames.size(); }
-	 * 
-	 * public int getRowCount() { return data.size(); }
-	 * 
-	 * public String getColumnName(int col) { return columnNames.get(col); }
-	 * 
-	 * public Object getValueAt(int row, int col) { return
-	 * data.get(row).get(col); }
-	 * 
-	 * public boolean isCellEditable(int row, int col) { return false; }
-	 * 
-	 * public Class getColumnClass(int c) { return getValueAt(0, c).getClass();
-	 * }
-	 * 
-	 * public void addRow(List rowData) {
-	 * 
-	 * data.add(rowData); fireTableRowsInserted(data.size() - 1, data.size() -
-	 * 1);
-	 * 
-	 * }
-	 * 
-	 * };
-	 */
 
 }
