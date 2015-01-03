@@ -258,7 +258,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 										"Choose the priority",
 										JOptionPane.QUESTION_MESSAGE, null,
 										simpleArray, simpleArray[0]);
-						System.out.println(input1);
 
 						if(input1.toString()=="NORMAL")
 							priority="100";

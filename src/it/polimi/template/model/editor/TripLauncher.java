@@ -1,4 +1,5 @@
 package it.polimi.template.model.editor;
+
 import java.text.SimpleDateFormat;
 
 import it.polimi.template.model.*;
@@ -14,12 +15,19 @@ public class TripLauncher implements Node {
 
 		// the mission status is set to RUNNING
 		m.setStatus(2);
-		// the start time is set for the trip
-		m.getTrips()
-				.get(0)
-				.setStartTime(
-						new SimpleDateFormat("HH:mm:ss").format(cal.getTime()));
-		
+
+		// the trips which have an associated drone can start
+
+		for (Trip t : m.getTrips()) {
+
+			
+			if (t.getDrone() != null) {
+				t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
+						.getTime()));
+				t.setStatus(4);
+			}
+
+		}
 
 		return m;
 	}

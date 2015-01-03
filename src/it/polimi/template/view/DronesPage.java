@@ -2,6 +2,7 @@ package it.polimi.template.view;
 
 import java.awt.BorderLayout;
 
+import it.polimi.template.controller.DronesPageStartButtonListener;
 import it.polimi.template.controller.MissionsPageOkButtonListener;
 import it.polimi.template.model.*;
 
@@ -26,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,6 +53,7 @@ public class DronesPage extends JFrame {
 		model.addColumn("Trip");
 		model.addColumn("Status");
 		final MissionsPageOkButtonListener mpob = new MissionsPageOkButtonListener();
+		final DronesPageStartButtonListener dpsbl = new DronesPageStartButtonListener();
 
 		JScrollPane tablePane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
@@ -67,11 +71,13 @@ public class DronesPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				for (Mission m : missions) {
+				for (final Mission m : missions) {
 
 					mpob.startDroneAllocator(m, drones);
+					dpsbl.StartTripLauncher(m);
 
 					for (Trip t : m.getTrips()) {
+
 						DefaultTableModel model = (DefaultTableModel) table
 								.getModel();
 
