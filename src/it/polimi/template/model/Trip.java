@@ -1,16 +1,14 @@
 package it.polimi.template.model;
 
+import java.util.Comparator;
 
+public class Trip  {
 
-public class Trip {
-	
 	public static final int WAITING = 1;
 	public static final int COMPLETED = 2;
 	public static final int FAILED = 3;
 	public static final int EXECUTING = 4;
 	public static final int DELAYED = 5;
-
-
 
 	private String name;
 	private String sourceLocation;
@@ -22,10 +20,10 @@ public class Trip {
 	private Item item;
 	private String startTime;
 	private Mission mission;
-		
+
 	public Trip() {
-		this.delay=0;
-		this.priority=100;
+		this.delay = 0;
+		this.priority = 100;
 		this.status = WAITING;
 	}
 
@@ -110,4 +108,9 @@ public class Trip {
 	}
 
 
+
 }
+
+
+
+

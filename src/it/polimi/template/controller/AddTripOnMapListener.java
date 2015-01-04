@@ -7,13 +7,13 @@ import it.polimi.template.model.*;
 public class AddTripOnMapListener {
 
 	public void createTripWithName(String name, String nameItem,
-			String priority, String delay, String missionName,
+			int priority, String delay, String missionName,
 			ArrayList<Mission> missions, 
 			ArrayList<Item> items) {
 
 		Trip t = new Trip();
 		t.setName(name);
-		t.setPriority(Integer.parseInt(priority));
+		t.setPriority(priority);
 		t.setDelay(Integer.parseInt(delay));
 
 

@@ -18,6 +18,7 @@ public class Mission {
 	private String name;
 	private int status;
 	private List<Trip> trips;
+	private boolean used = false;
 
 	public Mission() {
 
@@ -66,6 +67,14 @@ public class Mission {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean getUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 
 

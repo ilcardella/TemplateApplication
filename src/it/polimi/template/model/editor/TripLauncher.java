@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import it.polimi.template.model.*;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TripLauncher implements Node {
 
@@ -15,12 +17,18 @@ public class TripLauncher implements Node {
 
 		// the mission status is set to RUNNING
 		m.setStatus(2);
+		
+	
+
+			
+		
+		
+		
 
 		// the trips which have an associated drone can start
 
 		for (Trip t : m.getTrips()) {
 
-			
 			if (t.getDrone() != null) {
 				t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
 						.getTime()));
@@ -31,5 +39,8 @@ public class TripLauncher implements Node {
 
 		return m;
 	}
+
+	
+
 
 }

@@ -34,6 +34,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class DronesPage extends JFrame {
 
+	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Mission> missions = new ArrayList<Mission>();
 	private ArrayList<Drone> drones = new ArrayList<Drone>();
 
@@ -73,8 +75,10 @@ public class DronesPage extends JFrame {
 
 				for (final Mission m : missions) {
 
+					if(m.getUsed()==false){
 					mpob.startDroneAllocator(m, drones);
 					dpsbl.StartTripLauncher(m);
+					
 
 					for (Trip t : m.getTrips()) {
 
@@ -87,8 +91,10 @@ public class DronesPage extends JFrame {
 						else
 							model.addRow(new Object[] { t.getDrone().getId(),
 									t.getName(), t.getStatus() });
+					}
 
 					}
+					m.setUsed(true);
 
 				}
 

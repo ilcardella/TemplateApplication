@@ -214,7 +214,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 							.showInputDialog("Add a name for the trip");
 					String tripName = null;
 					String item = null;
-					String priority = null;
+					int priority = 100;
 					String delay = null;
 
 					if (text != null) {
@@ -260,21 +260,23 @@ public class TripsPage extends JFrame implements DragSourceListener,
 										simpleArray, simpleArray[0]);
 
 						if(input1.toString()=="NORMAL")
-							priority="100";
+							priority=100;
 						if(input1.toString()=="LOW")
-							priority="50";
+							priority=50;
 						if(input1.toString()=="HIGH")
-							priority="150";
+							priority=150;
 						if(input1.toString()=="VERY HIGH")
-							priority="200";
+							priority=200;
 						if(input1.toString()=="VERY LOW")
-							priority="1";
+							priority=1;
 
 		
 						String text3 = JOptionPane
 								.showInputDialog("Indicate the delay for the trip");
 						if (text3 != null)
 							delay = text3.trim();
+						
+
 
 						if(delay.isEmpty()){
 							delay = "0";
