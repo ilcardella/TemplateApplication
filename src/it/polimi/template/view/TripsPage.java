@@ -2,6 +2,7 @@ package it.polimi.template.view;
 
 import it.polimi.template.controller.AddTripOnMapListener;
 
+
 import it.polimi.template.controller.TripsPageDeleteAllTripsButtonListener;
 import it.polimi.template.controller.TripsPageOkButtonListener;
 
@@ -43,7 +44,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.TransferHandler.DropLocation;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
@@ -57,8 +57,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private static final long serialVersionUID = 1L;
 	private DefaultListModel model;
 	private JList list;
-	private DefaultListModel model1;
-	private JList list1;
+	
 	private String nameMission;
 	private ArrayList<Mission> missions;
 	private ArrayList<Drone> drones;

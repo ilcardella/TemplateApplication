@@ -4,9 +4,6 @@ import it.polimi.template.model.*;
 
 public class TripMonitor implements Node {
 
-
-
-
 	@Override
 	public Mission run(Mission m) {
 		// if the current trip is completed, remove it from the list of trips
@@ -17,7 +14,7 @@ public class TripMonitor implements Node {
 		// set to failed
 		else if (m.getTrips().get(0).getStatus() == 3) {
 			m.setStatus(4);
-			
+
 		}
 
 		// if there are no more trips to perform, the mission is completed
@@ -27,12 +24,10 @@ public class TripMonitor implements Node {
 		// mission status is set to standby
 		else {
 			m.setStatus(5);
-		
+
 		}
 
 		return m;
 	}
-
-
 
 }

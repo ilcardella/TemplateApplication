@@ -1,24 +1,27 @@
 package it.polimi.template.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.polimi.template.model.Drone;
 import it.polimi.template.model.Mission;
+import it.polimi.template.model.Trip;
 import it.polimi.template.model.editor.Clock;
 import it.polimi.template.model.editor.TripLauncher;
 
 public class DronesPageStartButtonListener {
-	
-	
-	public void StartClock(Mission m, ArrayList<Drone> drones){
+
+	public void StartClock(Mission m, ArrayList<Drone> drones) {
 		Clock c = new Clock(drones);
 
-	c.run(m);
+		c.run(m);
 	}
-	
-	public void StartTripLauncher(Mission m){
+
+	public void StartTripLauncher(Mission m) {
 		TripLauncher tl = new TripLauncher();
 
-	tl.run(m);
+		tl.run(m);
 	}
+
+
 }

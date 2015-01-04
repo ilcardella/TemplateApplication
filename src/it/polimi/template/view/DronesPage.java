@@ -74,13 +74,13 @@ public class DronesPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				for (final Mission m : missions) {
-
-					if(m.getUsed()==false){
 					mpob.startDroneAllocator(m, drones);
 					dpsbl.StartTripLauncher(m);
 					
 
 					for (Trip t : m.getTrips()) {
+						
+						if(m.getUsed()==false){
 
 						DefaultTableModel model = (DefaultTableModel) table
 								.getModel();
@@ -91,9 +91,11 @@ public class DronesPage extends JFrame {
 						else
 							model.addRow(new Object[] { t.getDrone().getId(),
 									t.getName(), t.getStatus() });
-					}
+						
+						}
 
 					}
+
 					m.setUsed(true);
 
 				}
