@@ -74,6 +74,7 @@ public class DronesPage extends JFrame {
 
 				for (Mission m : missions) {
 
+					dpsbl.sortTripsByPriority(m.getTrips());
 					mpob.startDroneAllocator(m, drones);
 					dpsbl.StartTripLauncher(m);
 

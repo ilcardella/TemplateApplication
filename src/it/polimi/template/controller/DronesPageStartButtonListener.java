@@ -1,6 +1,8 @@
 package it.polimi.template.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import it.polimi.template.model.Drone;
@@ -21,6 +23,19 @@ public class DronesPageStartButtonListener {
 		TripLauncher tl = new TripLauncher();
 
 		tl.run(m);
+	}
+	
+	public void sortTripsByPriority(List<Trip> trips){
+		
+		Collections.sort(trips, new Comparator<Trip>() {
+	   
+			@Override
+			public int compare(Trip o1, Trip o2) {
+				 return o2.getPriority() - o1.getPriority(); 
+			}
+
+	    });
+		
 	}
 
 
