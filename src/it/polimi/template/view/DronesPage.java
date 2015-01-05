@@ -78,6 +78,8 @@ public class DronesPage extends JFrame {
 					dpsbl.StartTripLauncher(m);
 
 					for (Trip t : m.getTrips()) {
+						
+						if(!t.getUsed()){
 
 						DefaultTableModel model = (DefaultTableModel) table
 								.getModel();
@@ -88,9 +90,10 @@ public class DronesPage extends JFrame {
 						else
 							model.addRow(new Object[] { t.getDrone().getId(),
 									t.getName(), t.getStatus() });
+						t.setUsed(true);
 
 					}
-
+					}
 				}
 
 			}

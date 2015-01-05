@@ -20,6 +20,7 @@ public class Trip  {
 	private Item item;
 	private String startTime;
 	private Mission mission;
+	private boolean used=false;
 
 	public Trip() {
 		this.delay = 0;
@@ -105,6 +106,14 @@ public class Trip  {
 
 	public void setMission(Mission mission) {
 		this.mission = mission;
+	}
+
+	public boolean getUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 
 
