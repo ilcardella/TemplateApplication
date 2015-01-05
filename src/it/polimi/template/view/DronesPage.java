@@ -34,7 +34,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class DronesPage extends JFrame {
 
-	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Mission> missions = new ArrayList<Mission>();
 	private ArrayList<Drone> drones = new ArrayList<Drone>();
@@ -73,14 +72,12 @@ public class DronesPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				for (final Mission m : missions) {
+				for (Mission m : missions) {
+
 					mpob.startDroneAllocator(m, drones);
 					dpsbl.StartTripLauncher(m);
-					
 
 					for (Trip t : m.getTrips()) {
-						
-						if(m.getUsed()==false){
 
 						DefaultTableModel model = (DefaultTableModel) table
 								.getModel();
@@ -91,18 +88,28 @@ public class DronesPage extends JFrame {
 						else
 							model.addRow(new Object[] { t.getDrone().getId(),
 									t.getName(), t.getStatus() });
-						
-						}
 
 					}
-
-					m.setUsed(true);
 
 				}
 
 			}
 		});
 		JButton stop = new JButton("Stop");
+		stop.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel dm = (DefaultTableModel) table.getModel();
+				int rowCount = dm.getRowCount();
+				// Remove rows one by one from the end of the table
+				for (int i = rowCount - 1; i >= 0; i--) {
+					dm.removeRow(i);
+				}
+			}
+
+		});
+
 		buttonsPane.add(start);
 		buttonsPane.add(stop);
 

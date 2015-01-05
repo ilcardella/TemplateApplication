@@ -17,13 +17,6 @@ public class TripLauncher implements Node {
 
 		// the mission status is set to RUNNING
 		m.setStatus(2);
-		
-	
-
-			
-		
-		
-		
 
 		// the trips which have an associated drone can start
 
@@ -39,8 +32,5 @@ public class TripLauncher implements Node {
 
 		return m;
 	}
-
-	
-
 
 }

@@ -1,7 +1,7 @@
 package it.polimi.template.view;
 
-
 import it.polimi.template.controller.MissionsPageAddMissionButtonListener;
+import it.polimi.template.controller.MissionsPageDeleteButtonListener;
 import it.polimi.template.controller.MissionsPageOkButtonListener;
 
 import it.polimi.template.model.*;
@@ -26,10 +26,9 @@ import javax.swing.ListSelectionModel;
 public class MissionsPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Mission> missions=new ArrayList<Mission>();
-	private ArrayList<Drone> drones=new ArrayList<Drone>();
-	private ArrayList<Item> items=new ArrayList<Item>();
-
+	private ArrayList<Mission> missions = new ArrayList<Mission>();
+	private ArrayList<Drone> drones = new ArrayList<Drone>();
+	private ArrayList<Item> items = new ArrayList<Item>();
 
 	private DefaultListModel model;
 	private JList list;
@@ -40,10 +39,11 @@ public class MissionsPage extends JFrame {
 	private JButton tpsbtn;
 	private JButton okbtn;
 
-	public MissionsPage(ArrayList<Mission> missions, ArrayList<Drone> drones, ArrayList<Item> items) {
-		this.missions=missions;
-		this.drones=drones;
-		this.items=items;
+	public MissionsPage(ArrayList<Mission> missions, ArrayList<Drone> drones,
+			ArrayList<Item> items) {
+		this.missions = missions;
+		this.drones = drones;
+		this.items = items;
 
 		initUI();
 	}
@@ -115,14 +115,23 @@ public class MissionsPage extends JFrame {
 		});
 		delbtn.addActionListener(new ActionListener() {
 
+			MissionsPageDeleteButtonListener mpdbl = new MissionsPageDeleteButtonListener();
+
 			@Override
 			public void actionPerformed(ActionEvent event) {
 
 				ListSelectionModel selmodel = list.getSelectionModel();
 				int index = selmodel.getMinSelectionIndex();
 				if (index >= 0) {
-					model.remove(index);
+				
+
+				String mission = model.getElementAt(index).toString();
+				model.remove(index);
+				mpdbl.remove(missions, mission);
+
+
 				}
+				
 			}
 
 		});
@@ -158,6 +167,7 @@ public class MissionsPage extends JFrame {
 		remallbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				missions.clear();
 				model.clear();
 			}
 		});
@@ -175,17 +185,17 @@ public class MissionsPage extends JFrame {
 				Object item = model.getElementAt(index);
 				String mission = item.toString();
 
-				TripsPage tp = new TripsPage(mission, missions,drones,items);
+				TripsPage tp = new TripsPage(mission, missions, drones, items);
 				tp.setVisible(true);
 			}
 		});
 		okbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				DronesPage dp = new DronesPage(missions,drones);
+
+				DronesPage dp = new DronesPage(missions, drones);
 				dp.setVisible(true);
-				
+
 			}
 		});
 
@@ -229,7 +239,6 @@ public class MissionsPage extends JFrame {
 
 		gl.linkSize(addbtn, renbtn, delbtn, remallbtn, tpsbtn, okbtn);
 		pack();
-
 
 		setTitle("Pluto-Missions Page");
 		setSize(1000, 800);
