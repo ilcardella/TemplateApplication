@@ -10,19 +10,26 @@ import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
 import it.polimi.template.model.editor.Clock;
 import it.polimi.template.model.editor.TripLauncher;
+import it.polimi.template.model.editor.TripMonitor;
 
 public class DronesPageStartButtonListener {
 
-	public void StartClock(Mission m, ArrayList<Drone> drones) {
+	public void startClock(Mission m, ArrayList<Drone> drones) {
 		Clock c = new Clock(drones);
 
 		c.run(m);
 	}
 
-	public void StartTripLauncher(Mission m) {
+	public void startTripLauncher(Mission m) {
 		TripLauncher tl = new TripLauncher();
 
 		tl.run(m);
+	}
+	
+	public void startTripMonitor(Mission m) {
+		TripMonitor tm = new TripMonitor();
+
+		tm.run(m);
 	}
 	
 	public void sortTripsByPriority(List<Trip> trips){

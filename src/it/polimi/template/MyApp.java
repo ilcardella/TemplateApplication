@@ -18,6 +18,10 @@ public class MyApp {
 		Drone d2 = new Drone();
 		Drone d3 = new Drone();
 		Drone d4 = new Drone();
+		Drone d5 = new Drone();
+		Drone d6 = new Drone();
+		Drone d7 = new Drone();
+		Drone d8 = new Drone();
 
 		Item i1 = new Item();
 		Item i2 = new Item();
@@ -28,6 +32,10 @@ public class MyApp {
 		d2.setShapeCategory(3);
 		d3.setShapeCategory(1);
 		d4.setShapeCategory(4);
+		d5.setShapeCategory(2);
+		d6.setShapeCategory(3);
+		d7.setShapeCategory(1);
+		d8.setShapeCategory(4);
 
 		i1.setShapeCategory(1);
 		i2.setShapeCategory(2);
@@ -43,6 +51,10 @@ public class MyApp {
 		drones.add(d2);
 		drones.add(d3);
 		drones.add(d4);
+		drones.add(d5);
+		drones.add(d6);
+		drones.add(d7);
+		drones.add(d8);
 		items.add(i1);
 		items.add(i2);
 		items.add(i3);

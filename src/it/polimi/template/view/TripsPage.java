@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 
+import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -115,7 +116,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		JLabel label = new JLabel(icon);
 		label.setTransferHandler(new TransferHandler("text"));
-
+		
+		
 		createList();
 		JScrollPane actionsPane = new JScrollPane(list);
 		ds = new DragSource();
@@ -179,6 +181,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		System.out.println("Drag Gesture Recognized!");
 		transferable = new StringSelection(list.getSelectedValue().toString());
 		ds.startDrag(dge, DragSource.DefaultCopyDrop, transferable, this);
+		
 
 	}
 
@@ -205,9 +208,12 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 
+					
 					event.acceptDrop(DnDConstants.ACTION_COPY);
 
 					event.dropComplete(true);
+					
+
 
 					String text = JOptionPane
 							.showInputDialog("Add a name for the trip");
@@ -358,6 +364,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		@Override
 		public boolean isDataFlavorSupported(DataFlavor flavor) {
+			
 			if (flavor.equals(DataFlavor.stringFlavor))
 				return true;
 
@@ -367,6 +374,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		@Override
 		public Object getTransferData(DataFlavor flavor)
 				throws UnsupportedFlavorException, IOException {
+			
+			
 			if (flavor.equals(DataFlavor.stringFlavor))
 				return action;
 

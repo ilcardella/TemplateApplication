@@ -46,6 +46,10 @@ public class DronesPage extends JFrame {
 
 	public final void initUI() {
 
+		final MissionsPageOkButtonListener mpob = new MissionsPageOkButtonListener();
+		final DronesPageStartButtonListener dpsbl = new DronesPageStartButtonListener();
+		final ArrayList<Trip> trips = new ArrayList<Trip>();
+
 		setLayout(new BorderLayout());
 
 		DefaultTableModel model = new DefaultTableModel();
@@ -53,8 +57,6 @@ public class DronesPage extends JFrame {
 		model.addColumn("ID");
 		model.addColumn("Trip");
 		model.addColumn("Status");
-		final MissionsPageOkButtonListener mpob = new MissionsPageOkButtonListener();
-		final DronesPageStartButtonListener dpsbl = new DronesPageStartButtonListener();
 
 		JScrollPane tablePane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
@@ -76,25 +78,30 @@ public class DronesPage extends JFrame {
 
 					dpsbl.sortTripsByPriority(m.getTrips());
 					mpob.startDroneAllocator(m, drones);
-					dpsbl.StartTripLauncher(m);
+					dpsbl.startTripLauncher(m);
+					dpsbl.startTripMonitor(m);
 
 					for (Trip t : m.getTrips()) {
-						
-						if(!t.getUsed()){
 
-						DefaultTableModel model = (DefaultTableModel) table
-								.getModel();
+						trips.add(t);
 
-						if (t.getDrone() == null)
-							model.addRow(new Object[] { "", t.getName(),
-									t.getStatus() });
-						else
-							model.addRow(new Object[] { t.getDrone().getId(),
-									t.getName(), t.getStatus() });
-						t.setUsed(true);
+						if (!t.getUsed()) {
 
+							DefaultTableModel model = (DefaultTableModel) table
+									.getModel();
+
+							if (t.getDrone() == null)
+								model.addRow(new Object[] { "", t.getName(),
+										t.getStatus() });
+							else
+								model.addRow(new Object[] {
+										t.getDrone().getId(), t.getName(),
+										t.getStatus() });
+							t.setUsed(true);
+
+						}
 					}
-					}
+
 				}
 
 			}
@@ -104,6 +111,7 @@ public class DronesPage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				DefaultTableModel dm = (DefaultTableModel) table.getModel();
 				int rowCount = dm.getRowCount();
 				// Remove rows one by one from the end of the table
