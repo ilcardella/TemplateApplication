@@ -4,6 +4,7 @@ import it.polimi.template.model.Action;
 import it.polimi.template.model.Item;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
+import it.polimi.template.utils.ItemsManager;
 import it.polimi.template.view.TripsPage;
 
 import java.awt.event.ActionEvent;
@@ -14,14 +15,11 @@ import java.util.List;
 public class TripsPageController {
 
 	private TripsPage tripsPage;
-	private List<Item> items;
 	private Mission mission;
 	private char tripCounter = 65;
 
-	public TripsPageController(TripsPage tripsPage, List<Item> items,
-			Mission mission) {
+	public TripsPageController(TripsPage tripsPage, Mission mission) {
 		this.tripsPage = tripsPage;
-		this.items = items;
 		this.mission = mission;
 		
 		this.tripsPage.setOkButtonListener(new TripsPageOkButtonListener());
@@ -61,14 +59,14 @@ public class TripsPageController {
 
 			// create a string list with the name of the items
 			List<String> itemsNames = new ArrayList<String>();
-			for (Item i : items)
+			for (Item i : ItemsManager.getItems())
 				itemsNames.add(i.getName());
 
 			// get the items from the user input
 			String iName = tripsPage.showItemsPanel(itemsNames);
 
 			// set the item to the trip
-			for (Item i : items)
+			for (Item i : ItemsManager.getItems())
 				if (i.getName().equals(iName))
 					trip.setItem(i);
 
