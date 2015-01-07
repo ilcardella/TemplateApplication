@@ -21,32 +21,40 @@ public class TripsPageController {
 	public TripsPageController(TripsPage tripsPage, Mission mission) {
 		this.tripsPage = tripsPage;
 		this.mission = mission;
-		
+
 		this.tripsPage.setOkButtonListener(new TripsPageOkButtonListener());
-		this.tripsPage.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
+		this.tripsPage
+				.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
 
 	}
-	
-	class TripsPageOkButtonListener implements ActionListener{
+
+	class TripsPageOkButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			// TODO simulo l'aggiunta di 5 trip alla missione
+			manageDragAndDrop(Action.PICK_ITEM.toString());
+			manageDragAndDrop(Action.RELEASE_ITEM.toString());
+			manageDragAndDrop(Action.PICK_ITEM.toString());
+			manageDragAndDrop(Action.RELEASE_ITEM.toString());
+			manageDragAndDrop(Action.TAKE_PHOTO.toString());
+
 			tripsPage.killWindow();
 		}
 	}
-	
-	class TripsPageDeleteAllButtonListener implements ActionListener{
+
+	class TripsPageDeleteAllButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 			mission.getTrips().clear();
-			
+
 			// update the view
 			tripsPage.deleteAllTrips();
 		}
-		
+
 	}
-	
+
 	public void manageDragAndDrop(String action) {
 
 		// if drop event is ok, create the Trip and set the name
@@ -83,6 +91,5 @@ public class TripsPageController {
 		}
 
 	}
-
 
 }
