@@ -68,7 +68,6 @@ public class MissionPageController {
 	}
 
 	class RemoveAllMissionButtonListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
@@ -89,11 +88,7 @@ public class MissionPageController {
 				if (missions.get(i).getName().equals(oldName))
 					missions.get(i).setName(newName);
 			missionPage.renameSelectedMission(newName);
-				
-			
-			
 		}
-
 	}
 	
 	class SetTripsListener implements ActionListener {
@@ -110,7 +105,6 @@ public class MissionPageController {
 					TripsPageController tripsPageController = new TripsPageController(tripsPage, items, missionName);
 					tripsPage.setVisible(true);
 				}
-			
 		}
 	}
 	
@@ -118,10 +112,10 @@ public class MissionPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+			MonitorPage monitorPage = new MonitorPage();
+			MonitorController monitorController = new MonitorController(items, drones, missions);
+			monitorPage.setVisible(true);
 		}
-		
 	}
 
 }
