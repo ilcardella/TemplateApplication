@@ -32,15 +32,14 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
-public class DronesPage extends JFrame {
+public class MonitorPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Mission> missions = new ArrayList<Mission>();
 	private ArrayList<Drone> drones = new ArrayList<Drone>();
 
-	public DronesPage(ArrayList<Mission> missions, ArrayList<Drone> drones) {
-		this.missions = missions;
-		this.drones = drones;
+	public MonitorPage() {
+	
 		initUI();
 	}
 
