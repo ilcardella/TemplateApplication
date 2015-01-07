@@ -79,36 +79,6 @@ public class MissionsPage extends JFrame {
 		tpsbtn = new JButton("Set Trips");
 		okbtn = new JButton("Ok");
 
-
-
-		tpsbtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				ListSelectionModel selmodel = list.getSelectionModel();
-				int index = selmodel.getMinSelectionIndex();
-				if (index == -1) {
-					return;
-				}
-
-				Object item = model.getElementAt(index);
-				String mission = item.toString();
-
-				// TripsPage tp = new TripsPage(mission, missions, drones,
-				// items);
-				// tp.setVisible(true);
-			}
-		});
-		okbtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				// DronesPage dp = new DronesPage(missions, drones);
-				// dp.setVisible(true);
-
-			}
-		});
-
 	}
 
 	private void initUI() {
@@ -227,10 +197,22 @@ public class MissionsPage extends JFrame {
 	public void renameSelectedMission(String name) {
 		ListSelectionModel selmodel = list.getSelectionModel();
 		int index = selmodel.getMinSelectionIndex();
-		if (index>=0){
+		if (index >= 0) {
 			model.remove(index);
 			model.add(index, name);
 		}
-		
+
 	}
+
+	// set trips button
+
+	public void setTripsListener(ActionListener listener) {
+		tpsbtn.addActionListener(listener);
+	}
+
+	public void missionsPageOkButtonListener(ActionListener listener) {
+		okbtn.addActionListener(listener);
+
+	}
+
 }

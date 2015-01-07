@@ -65,19 +65,14 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private JList list;
 
 	private String nameMission;
-	private ArrayList<Mission> missions;
-	private ArrayList<Drone> drones;
-	private ArrayList<Item> items;
+	
 
 	DragSource ds;
 	StringSelection transferable;
 
-	public TripsPage(String name, ArrayList<Mission> m, ArrayList<Drone> d,
-			ArrayList<Item> i) {
+	public TripsPage(String name) {
 		this.nameMission = name;
-		this.missions = m;
-		this.drones = d;
-		this.items = i;
+	
 
 		try {
 			initUI();
@@ -140,7 +135,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				tpobl.run(nameMission, missions);
+		//		tpobl.run(nameMission, missions);
 
 			}
 		});
@@ -152,7 +147,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			@Override
 			public void actionPerformed(ActionEvent event) {
 
-				tpdtbl.removeTrips(nameMission, missions);
+			//	tpdtbl.removeTrips(nameMission, missions);
 			}
 
 		});
@@ -233,8 +228,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 								|| action.equals("Release item")) {
 
 							ArrayList<String> choices = new ArrayList<String>();
-							for (Item i : items)
-								choices.add(i.getName());
+				//			for (Item i : items)
+					//			choices.add(i.getName());
 
 							String[] simpleArray = new String[choices.size()];
 							choices.toArray(simpleArray);
@@ -287,8 +282,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 							delay = "0";
 						}
 
-						atmp.createTripWithName(tripName, item, priority,
-								delay, nameMission, missions, items);
+			//			atmp.createTripWithName(tripName, item, priority,
+			//					delay, nameMission, missions, items);
 					}
 
 				}
