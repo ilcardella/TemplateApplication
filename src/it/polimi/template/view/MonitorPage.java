@@ -83,7 +83,7 @@ public class MonitorPage extends JFrame {
 		getContentPane().add(buttonsPane, BorderLayout.EAST);
 		getContentPane().add(textPane);
 
-		setTitle("Pluto-Drones Page");
+		setTitle("Pluto - Monitor Page");
 		setSize(1000, 800);
 		setLocationRelativeTo(null);
 	}
@@ -109,6 +109,19 @@ public class MonitorPage extends JFrame {
 		for (int i = rowCount - 1; i >= 0; i--) {
 			dm.removeRow(i);
 		}
+	}
+	
+	public void tableManager(){
+//		DefaultTableModel model = (DefaultTableModel) table
+//				.getModel();
+//
+//		if (t.getDrone() == null)
+//			model.addRow(new Object[] { "", t.getName(),
+//					t.getStatus() });
+//		else
+//			model.addRow(new Object[] {
+//					t.getDrone().getId(), t.getName(),
+//					t.getStatus() });
 	}
 
 }
