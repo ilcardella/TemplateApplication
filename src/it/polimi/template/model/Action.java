@@ -9,6 +9,11 @@ public enum Action implements IAction{
          public void doAction() {
 			// TODO Auto-generated method stub 
          }
+		 
+		 @Override
+		public String toString() {
+			return "Take photo";
+		}
 
 	}, MEASURE{
 
@@ -16,6 +21,10 @@ public enum Action implements IAction{
 		public void doAction() {
 			// TODO Auto-generated method stub
 			
+		}
+		@Override
+		public String toString() {
+			return "Measure";
 		}
 		
 	}, PICK_ITEM{
@@ -25,6 +34,10 @@ public enum Action implements IAction{
 			// TODO Auto-generated method stub
 			
 		}
+		@Override
+		public String toString() {
+			return "Pick item";
+		}
 		
 	}, RELEASE_ITEM{
 
@@ -32,6 +45,10 @@ public enum Action implements IAction{
 		public void doAction() {
 			// TODO Auto-generated method stub
 			
+		}
+		@Override
+		public String toString() {
+			return "Release item";
 		}
 		
 	};
