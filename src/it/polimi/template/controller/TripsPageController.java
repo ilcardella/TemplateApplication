@@ -37,7 +37,7 @@ public class TripsPageController {
 
 	}
 
-	class MyDropTargetListener extends DropTargetAdapter {
+	public class MyDropTargetListener extends DropTargetAdapter {
 
 		private DropTarget dropTarget;
 		private JLabel label;
