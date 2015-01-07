@@ -36,7 +36,6 @@ public class TripsPageController {
 			manageDragAndDrop(Action.RELEASE_ITEM.toString());
 			manageDragAndDrop(Action.PICK_ITEM.toString());
 			manageDragAndDrop(Action.RELEASE_ITEM.toString());
-			manageDragAndDrop(Action.TAKE_PHOTO.toString());
 
 			tripsPage.killWindow();
 		}
@@ -56,7 +55,8 @@ public class TripsPageController {
 	}
 
 	public void manageDragAndDrop(String action) {
-
+		// TODO Implementare anche le altre Action
+		
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
 		trip.setName(mission.getName() + " - " + tripCounter);
@@ -65,6 +65,11 @@ public class TripsPageController {
 		if (action.equals(Action.PICK_ITEM.toString())
 				|| action.equals(Action.RELEASE_ITEM.toString())) {
 
+			if (action.equals(Action.PICK_ITEM.toString())) 
+				trip.setAction(Action.PICK_ITEM);
+			else
+				trip.setAction(Action.RELEASE_ITEM);
+			
 			// create a string list with the name of the items
 			List<String> itemsNames = new ArrayList<String>();
 			for (Item i : ItemsManager.getItems())

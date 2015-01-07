@@ -25,7 +25,6 @@ public class TripLauncher implements Node {
 			t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
 					.getTime()));
 			t.setStatus(Trip.EXECUTING);
-			//t.getDrone().startTrip(t.getAction());
 			t.getDrone().flyToAndDoAction(t.getTargetLocation(), t.getAction());
 			
 			System.out.println("Trip Launcher: Trip "+ t.getName() + " is executing");
