@@ -40,6 +40,7 @@ public class MonitorPage extends JFrame {
 
 	private JButton start;
 	private JButton stop;
+	private JTable table;
 
 	public MonitorPage() {
 
@@ -55,7 +56,7 @@ public class MonitorPage extends JFrame {
 		setLayout(new BorderLayout());
 
 		DefaultTableModel model = new DefaultTableModel();
-		final JTable table = new JTable(model);
+		table = new JTable(model);
 		model.addColumn("ID");
 		model.addColumn("Trip");
 		model.addColumn("Status");
@@ -72,57 +73,8 @@ public class MonitorPage extends JFrame {
 
 		JPanel buttonsPane = new JPanel();
 		start = new JButton("Start");
-		start.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
 
-				for (Mission m : missions) {
-
-					dpsbl.sortTripsByPriority(m.getTrips());
-					mpob.startDroneAllocator(m, drones);
-					dpsbl.startTripLauncher(m);
-					dpsbl.startTripMonitor(m);
-
-					for (Trip t : m.getTrips()) {
-
-						trips.add(t);
-
-						if (!t.getUsed()) {
-
-							DefaultTableModel model = (DefaultTableModel) table
-									.getModel();
-
-							if (t.getDrone() == null)
-								model.addRow(new Object[] { "", t.getName(),
-										t.getStatus() });
-							else
-								model.addRow(new Object[] {
-										t.getDrone().getId(), t.getName(),
-										t.getStatus() });
-							t.setUsed(true);
-
-						}
-					}
-
-				}
-
-			}
-		});
 		stop = new JButton("Stop");
-		stop.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				DefaultTableModel dm = (DefaultTableModel) table.getModel();
-				int rowCount = dm.getRowCount();
-				// Remove rows one by one from the end of the table
-				for (int i = rowCount - 1; i >= 0; i--) {
-					dm.removeRow(i);
-				}
-			}
-
-		});
 
 		buttonsPane.add(start);
 		buttonsPane.add(stop);
@@ -149,4 +101,14 @@ public class MonitorPage extends JFrame {
 		stop.addActionListener(listener);
 
 	}
+
+	public void clearTable() {
+		DefaultTableModel dm = (DefaultTableModel) table.getModel();
+		int rowCount = dm.getRowCount();
+		// Remove rows one by one from the end of the table
+		for (int i = rowCount - 1; i >= 0; i--) {
+			dm.removeRow(i);
+		}
+	}
+
 }
