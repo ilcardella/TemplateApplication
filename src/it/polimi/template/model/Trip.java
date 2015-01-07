@@ -11,6 +11,7 @@ public class Trip  {
 	public static final int DELAYED = 5;
 
 	private String name;
+	private Action action;
 	private String sourceLocation;
 	private String targetLocation;
 	private int delay;
@@ -114,6 +115,14 @@ public class Trip  {
 
 	public void setUsed(boolean used) {
 		this.used = used;
+	}
+
+	public Action getAction() {
+		return action;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
 	}
 
 
