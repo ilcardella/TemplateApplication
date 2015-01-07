@@ -17,6 +17,8 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,22 +29,45 @@ public class TripsPageController {
 
 	private TripsPage tripsPage;
 	private List<Item> items;
-	private String missionName;
+	private Mission mission;
 	private char tripCounter = 65;
 
 	public TripsPageController(TripsPage tripsPage, List<Item> items,
-			String missionName) {
+			Mission mission) {
 		this.tripsPage = tripsPage;
 		this.items = items;
-		this.missionName = missionName;
+		this.mission = mission;
+		
+		this.tripsPage.setOkButtonListener(new TripsPageOkButtonListener());
+		this.tripsPage.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
 
 	}
+	
+	class TripsPageOkButtonListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			tripsPage.killWindow();
+		}
+	}
+	
+	class TripsPageDeleteAllButtonListener implements ActionListener{
 
-	public void manageDragAndDrop() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			mission.getTrips().clear();
+			
+			// update the view
+			tripsPage.deleteAllTrips();
+		}
+		
+	}
+	
+	public void manageDragAndDrop(String action) {
 
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
-		trip.setName(missionName + " - " + tripCounter);
+		trip.setName(mission.getName() + " - " + tripCounter);
 		tripCounter++;
 
 		if (action.equals(Action.PICK_ITEM.toString())
@@ -69,6 +94,8 @@ public class TripsPageController {
 			int delay = tripsPage.showDelayPanel();
 			trip.setDelay(delay);
 
+			// add to the trip list of the mission
+			mission.getTrips().add(trip);
 		}
 
 	}
