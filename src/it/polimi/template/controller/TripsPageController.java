@@ -36,8 +36,6 @@ public class TripsPageController {
 		this.items = items;
 		this.missionName = missionName;
 
-		this.tripsPage.setDropTargetListener(new DragDropListener());
-
 	}
 
 	public void manageDragAndDrop() {
@@ -75,25 +73,5 @@ public class TripsPageController {
 
 	}
 
-	class DragDropListener implements DropTargetListener {
-		
-		@Override
-		public void drop(DropTargetDropEvent arg0) {
-
-		}
-
-		@Override
-		public void dragEnter(DropTargetDragEvent arg0) {}
-
-		@Override
-		public void dragExit(DropTargetEvent arg0) {}
-
-		@Override
-		public void dragOver(DropTargetDragEvent arg0) {}
-
-		@Override
-		public void dropActionChanged(DropTargetDragEvent arg0) {}
-
-	}
 
 }
