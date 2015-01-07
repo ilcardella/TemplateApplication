@@ -175,6 +175,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			handler.exportAsDrag(c, e, TransferHandler.COPY);
 		}
 	}
+	
 
 	@Override
 	public void dragGestureRecognized(DragGestureEvent dge) {
