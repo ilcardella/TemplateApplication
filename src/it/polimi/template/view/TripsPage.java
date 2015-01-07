@@ -1,12 +1,9 @@
 package it.polimi.template.view;
 
-import it.polimi.template.controller.AddTripOnMapListener;
 import it.polimi.template.controller.TripsPageDeleteAllTripsButtonListener;
 import it.polimi.template.controller.TripsPageOkButtonListener;
 import it.polimi.template.model.*;
-
 import java.awt.BorderLayout;
-import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -20,9 +17,6 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetAdapter;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -34,7 +28,6 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -43,12 +36,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.TransferHandler.DropLocation;
-import javax.swing.TransferHandler.TransferSupport;
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
-import javax.xml.stream.Location;
 
 public class TripsPage extends JFrame implements DragSourceListener,
 		DragGestureListener {
@@ -60,17 +49,17 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private DefaultListModel model;
 	private JList list;
 	private JLabel label;
+	private JButton ok;
+	private JButton delete;
 
 	private String nameMission;
 	private ImageIcon icon;
-	
 
 	DragSource ds;
 	StringSelection transferable;
 
 	public TripsPage(String name) {
 		this.nameMission = name;
-	
 
 		try {
 			initUI();
@@ -88,10 +77,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		list.setDragEnabled(true);
 		list.setTransferHandler(new TransferHandler("text"));
 
-		for(Action a: Action.values())
+		for (Action a : Action.values())
 			model.addElement(a.toString());
 
-	
 	}
 
 	public final void initUI() throws IOException {
@@ -111,30 +99,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		setVisible(true);
 
 		JPanel buttonsPane = new JPanel();
-		JButton ok = new JButton("Ok");
+		ok = new JButton("Ok");
 
-		ok.addActionListener(new ActionListener() {
-			TripsPageOkButtonListener tpobl = new TripsPageOkButtonListener();
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-		//		tpobl.run(nameMission, missions);
-
-			}
-		});
-		JButton delete = new JButton("Delete all trips");
-
-		delete.addActionListener(new ActionListener() {
-			TripsPageDeleteAllTripsButtonListener tpdtbl = new TripsPageDeleteAllTripsButtonListener();
-
-			@Override
-			public void actionPerformed(ActionEvent event) {
-
-			//	tpdtbl.removeTrips(nameMission, missions);
-			}
-
-		});
+		delete = new JButton("Delete all trips");
 
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
@@ -158,7 +125,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			handler.exportAsDrag(c, e, TransferHandler.COPY);
 		}
 	}
-	
 
 	@Override
 	public void dragGestureRecognized(DragGestureEvent dge) {
@@ -167,94 +133,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		transferable = new StringSelection(list.getSelectedValue().toString());
 		ds.startDrag(dge, DragSource.DefaultCopyDrop, transferable, this);
 
-	}
-
-	private class MyDropTargetListener extends DropTargetAdapter {
-
-		private DropTarget dropTarget;
-		private JLabel label;
-
-		public MyDropTargetListener(JLabel label) {
-			this.label = label;
-
-			dropTarget = new DropTarget(label, DnDConstants.ACTION_COPY, this,
-					true, null);
-		}
-
-		@Override
-		public void drop(DropTargetDropEvent event) {
-
-			try {
-				AddTripOnMapListener atmp = new AddTripOnMapListener();
-				Point p = event.getLocation();
-				Transferable tr = event.getTransferable();
-
-				String action = (String) tr
-						.getTransferData(DataFlavor.stringFlavor);
-
-				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-
-					event.acceptDrop(DnDConstants.ACTION_COPY);
-
-					event.dropComplete(true);
-
-					String text = JOptionPane
-							.showInputDialog("Add a name for the trip");
-					
-					int priority = 100;
-					String delay = null;
-
-					if (text != null) {
-			
-
-						ArrayList<String> choosePriority = new ArrayList<String>();
-
-						choosePriority.add("NORMAL");
-						choosePriority.add("LOW");
-						choosePriority.add("HIGH");
-						choosePriority.add("VERY HIGH");
-						choosePriority.add("VERY LOW");
-
-						String[] simpleArray = new String[choosePriority.size()];
-						choosePriority.toArray(simpleArray);
-
-						String input1 = (String) JOptionPane.showInputDialog(
-								null, "Set the priority for the trip ",
-								"Choose the priority",
-								JOptionPane.QUESTION_MESSAGE, null,
-								simpleArray, simpleArray[0]);
-
-						if (input1.toString() == "NORMAL")
-							priority = 100;
-						if (input1.toString() == "LOW")
-							priority = 50;
-						if (input1.toString() == "HIGH")
-							priority = 150;
-						if (input1.toString() == "VERY HIGH")
-							priority = 200;
-						if (input1.toString() == "VERY LOW")
-							priority = 1;
-
-						String text3 = JOptionPane
-								.showInputDialog("Indicate the delay for the trip");
-						if (text3 != null)
-							delay = text3.trim();
-
-						if (delay.isEmpty()) {
-							delay = "0";
-						}
-
-			//			atmp.createTripWithName(tripName, item, priority,
-			//					delay, nameMission, missions, items);
-					}
-
-				}
-				event.rejectDrop();
-			} catch (Exception e) {
-				e.printStackTrace();
-				event.rejectDrop();
-			}
-		}
 	}
 
 	@Override
@@ -336,36 +214,34 @@ public class TripsPage extends JFrame implements DragSourceListener,
 				throw new UnsupportedFlavorException(flavor);
 		}
 	}
-	
-	//drag and drop listeners
-	
-	public void setDropTargetListener(){
-		
-		MyDropTargetListener dropListener=new MyDropTargetListener(label);
+
+	// drag and drop listeners
+
+	public void setDropTargetListener() {
+
+		label.setDropTarget(new DropTarget());
 
 	}
-	
-	public String showItemsPanel(List<String> items){
+
+	public String showItemsPanel(List<String> items) {
 		ArrayList<String> choices = new ArrayList<String>();
 		for (String i : items)
-		choices.add(i);
+			choices.add(i);
 
 		String[] simpleArray = new String[choices.size()];
 		choices.toArray(simpleArray);
 
 		String input = (String) JOptionPane
-				.showInputDialog(null, "Set the item",
-						"Choose the item",
-						JOptionPane.QUESTION_MESSAGE, null,
-						simpleArray, simpleArray[0]);
+				.showInputDialog(null, "Set the item", "Choose the item",
+						JOptionPane.QUESTION_MESSAGE, null, simpleArray,
+						simpleArray[0]);
 		System.out.println(input);
-		
+
 		return input;
 	}
-	
-	public int showPriorityPanel(){
-		
-		
+
+	public int showPriorityPanel() {
+
 		ArrayList<String> choosePriority = new ArrayList<String>();
 
 		choosePriority.add("NORMAL");
@@ -377,11 +253,10 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		String[] simpleArray = new String[choosePriority.size()];
 		choosePriority.toArray(simpleArray);
 
-		String input1 = (String) JOptionPane.showInputDialog(
-				null, "Set the priority for the trip ",
-				"Choose the priority",
-				JOptionPane.QUESTION_MESSAGE, null,
-				simpleArray, simpleArray[0]);
+		String input1 = (String) JOptionPane
+				.showInputDialog(null, "Set the priority for the trip ",
+						"Choose the priority", JOptionPane.QUESTION_MESSAGE,
+						null, simpleArray, simpleArray[0]);
 
 		if (input1.toString() == "NORMAL")
 			return 100;
@@ -393,20 +268,41 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			return 200;
 		if (input1.toString() == "VERY LOW")
 			return 1;
-		
-		
+
 		return 100;
 	}
-	
-	public int showDelayPanel(){
-		
+
+	public int showDelayPanel() {
+
 		String text3 = JOptionPane
 				.showInputDialog("Indicate the delay for the trip");
 		if (text3 != null)
 			return Integer.parseInt(text3.trim());
-	
-		
+
 		return 0;
+	}
+
+	// ok button
+
+	public void SetOkButtonListener(ActionListener listener) {
+		ok.addActionListener(listener);
+
+	}
+
+	public void killWindow() {
+		setVisible(false);
+	}
+
+	// delete button
+
+	public void setDeleteAllButtonListener(ActionListener listener) {
+		delete.addActionListener(listener);
+
+	}
+	
+	
+	public void deleteAllTrips(){
+		//TODO
 	}
 
 }
