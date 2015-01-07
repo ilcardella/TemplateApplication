@@ -84,8 +84,7 @@ public class MissionsPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				ListSelectionModel selmodel = list.getSelectionModel();
-				int index = selmodel.getMinSelectionIndex();
+				
 				if (index == -1) {
 					return;
 				}
@@ -100,10 +99,6 @@ public class MissionsPage extends JFrame {
 					return;
 				}
 
-				if (!newitem.isEmpty()) {
-					model.remove(index);
-					model.add(index, newitem);
-				}
 			}
 		});
 
@@ -184,8 +179,8 @@ public class MissionsPage extends JFrame {
 
 	// add button
 
-	public String showNewMissionNamePanel() {
-		String text = JOptionPane.showInputDialog("Add a new mission");
+	public String showNewNamePanel(String name) {
+		String text = JOptionPane.showInputDialog(name);
 		String missionName = null;
 
 		if (text != null) {
@@ -243,11 +238,20 @@ public class MissionsPage extends JFrame {
 	public void removeAllMissionButtonListener(ActionListener listener) {
 		remallbtn.addActionListener(listener);
 	}
-	
+
 	// rename button
 
-	
 	public void renameButtonListener(ActionListener listener) {
 		renbtn.addActionListener(listener);
+	}
+
+	public void renameSelectedMission(String name) {
+		ListSelectionModel selmodel = list.getSelectionModel();
+		int index = selmodel.getMinSelectionIndex();
+		if (index>=0){
+			model.remove(index);
+			model.add(index, name);
+		}
+		
 	}
 }
