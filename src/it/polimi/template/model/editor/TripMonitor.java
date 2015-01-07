@@ -6,27 +6,34 @@ public class TripMonitor implements Node {
 
 	@Override
 	public Mission run(Mission m) {
+		Trip t = m.getTrips().get(0);
+
+		while (t.getStatus() != Trip.COMPLETED) {
+
+			// if the current trip is failed for an exception, the mission
+			// status is
+			// set to failed
+			if (t.getStatus() == Trip.FAILED) {
+				m.setStatus(Mission.FAILED);
+				return m;
+			}
+
+			// if there are no more trips to perform, the mission is completed
+			if (m.getTrips().isEmpty()) {
+				m.setStatus(Mission.COMPLETED);
+				return m;
+			}
+			// otherwise there is at least another trip in the mission and the
+			// mission status is set to standby
+			else {
+				m.setStatus(Mission.STANDBY);
+				return m;
+			}
+
+		}
 		// if the current trip is completed, remove it from the list of trips
 		// associated to the mission
-		if (m.getTrips().get(0).getStatus() == Trip.COMPLETED)
-			m.getTrips().remove(0);
-		// if the current trip is failed for an exception, the mission status is
-		// set to failed
-		else if (m.getTrips().get(0).getStatus() == Trip.FAILED) {
-			m.setStatus(Mission.FAILED);
-
-		}
-		
-
-		// if there are no more trips to perform, the mission is completed
-		if (m.getTrips().isEmpty())
-			m.setStatus(Mission.COMPLETED);
-		// otherwise there is at least another trip in the mission and the
-		// mission status is set to standby
-		else {
-			m.setStatus(Mission.STANDBY);
-
-		}
+		m.getTrips().remove(0);
 
 		return m;
 	}
