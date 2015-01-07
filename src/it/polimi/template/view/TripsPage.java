@@ -2,6 +2,7 @@ package it.polimi.template.view;
 
 import it.polimi.template.controller.AddTripOnMapListener;
 
+
 import it.polimi.template.controller.TripsPageDeleteAllTripsButtonListener;
 import it.polimi.template.controller.TripsPageOkButtonListener;
 
@@ -26,6 +27,7 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -345,7 +347,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	
 	public void setDropTargetListener(){
 		
-		DropTargetListener dropListener=new DropTargetListener(label);
+		MyDropTargetListener dropListener=new MyDropTargetListener(label);
 
 	}
 	
