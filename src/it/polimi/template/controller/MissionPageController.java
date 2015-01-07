@@ -114,7 +114,7 @@ public class MissionPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			MonitorPage monitorPage = new MonitorPage();
-			MonitorController monitorController = new MonitorController(items, drones, missions);
+			MonitorPageController monitorController = new MonitorPageController(items, drones, missions);
 			monitorPage.setVisible(true);
 		}
 	}
