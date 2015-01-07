@@ -79,28 +79,7 @@ public class MissionsPage extends JFrame {
 		tpsbtn = new JButton("Set Trips");
 		okbtn = new JButton("Ok");
 
-		renbtn.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				
-				if (index == -1) {
-					return;
-				}
-
-				Object item = model.getElementAt(index);
-				String text = JOptionPane.showInputDialog("Rename item", item);
-				String newitem = null;
-
-				if (text != null) {
-					newitem = text.trim();
-				} else {
-					return;
-				}
-
-			}
-		});
 
 		tpsbtn.addActionListener(new ActionListener() {
 			@Override
