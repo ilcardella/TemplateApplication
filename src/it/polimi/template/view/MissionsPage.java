@@ -1,6 +1,5 @@
 package it.polimi.template.view;
 
-
 import it.polimi.template.model.*;
 
 import javax.swing.JFrame;
@@ -71,53 +70,6 @@ public class MissionsPage extends JFrame {
 		});
 	}
 
-	public String showNewMissionNamePanel() {
-		String text = JOptionPane.showInputDialog("Add a new mission");
-		String missionName = null;
-
-		if (text != null) {
-			missionName = text.trim();
-
-		} else {
-			return "null";
-		}
-
-		return missionName;
-	}
-
-	public void addMissionButtonListener(ActionListener listener) {
-		addbtn.addActionListener(listener);
-	}
-
-	public void addMissionToList(String name) {
-
-		if (!name.isEmpty())
-			model.addElement(name);
-	}
-
-	public String getSelectedMission() {
-		ListSelectionModel selmodel = list.getSelectionModel();
-		int index = selmodel.getMinSelectionIndex();
-		if (index >= 0) {
-
-			String mission = model.getElementAt(index).toString();
-			return mission;
-		}
-		return "";
-	}
-	
-	public void removeMissionFromList(String name) {
-		
-		ListSelectionModel selmodel = list.getSelectionModel();
-		int index = selmodel.getMinSelectionIndex();
-
-		model.remove(index);
-	}
-	
-	public void deleteMissionButtonListener(ActionListener listener) {
-		delbtn.addActionListener(listener);
-	}
-
 	private void createButtons() {
 
 		remallbtn = new JButton("Remove All");
@@ -126,8 +78,6 @@ public class MissionsPage extends JFrame {
 		delbtn = new JButton("Delete");
 		tpsbtn = new JButton("Set Trips");
 		okbtn = new JButton("Ok");
-
-
 
 		renbtn.addActionListener(new ActionListener() {
 
@@ -157,14 +107,6 @@ public class MissionsPage extends JFrame {
 			}
 		});
 
-		remallbtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-	//			missions.clear();
-				model.clear();
-			}
-		});
-
 		tpsbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -178,16 +120,17 @@ public class MissionsPage extends JFrame {
 				Object item = model.getElementAt(index);
 				String mission = item.toString();
 
-	//			TripsPage tp = new TripsPage(mission, missions, drones, items);
-		//		tp.setVisible(true);
+				// TripsPage tp = new TripsPage(mission, missions, drones,
+				// items);
+				// tp.setVisible(true);
 			}
 		});
 		okbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-		//		DronesPage dp = new DronesPage(missions, drones);
-		//		dp.setVisible(true);
+				// DronesPage dp = new DronesPage(missions, drones);
+				// dp.setVisible(true);
 
 			}
 		});
@@ -239,4 +182,72 @@ public class MissionsPage extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
+	// add button
+
+	public String showNewMissionNamePanel() {
+		String text = JOptionPane.showInputDialog("Add a new mission");
+		String missionName = null;
+
+		if (text != null) {
+			missionName = text.trim();
+
+		} else {
+			return "null";
+		}
+
+		return missionName;
+	}
+
+	public void addMissionButtonListener(ActionListener listener) {
+		addbtn.addActionListener(listener);
+	}
+
+	public void addMissionToList(String name) {
+
+		if (!name.isEmpty())
+			model.addElement(name);
+	}
+
+	// delete button
+
+	public String getSelectedMission() {
+		ListSelectionModel selmodel = list.getSelectionModel();
+		int index = selmodel.getMinSelectionIndex();
+		if (index >= 0) {
+
+			String mission = model.getElementAt(index).toString();
+			return mission;
+		}
+		return "";
+	}
+
+	public void removeMissionFromList(String name) {
+
+		ListSelectionModel selmodel = list.getSelectionModel();
+		int index = selmodel.getMinSelectionIndex();
+
+		model.remove(index);
+	}
+
+	public void deleteMissionButtonListener(ActionListener listener) {
+		delbtn.addActionListener(listener);
+	}
+
+	// remove all button
+
+	public void clearMissionList() {
+
+		model.clear();
+	}
+
+	public void removeAllMissionButtonListener(ActionListener listener) {
+		remallbtn.addActionListener(listener);
+	}
+	
+	// rename button
+
+	
+	public void renameButtonListener(ActionListener listener) {
+		renbtn.addActionListener(listener);
+	}
 }
