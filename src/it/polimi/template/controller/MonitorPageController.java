@@ -32,7 +32,7 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Inizia tutto
+			// TODO Start the execution, the behaviour depends on the diagram generation
 		}
 	}
 
@@ -40,7 +40,8 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Stoppa tutto
+			// TODO Stop all the drones
+			monitorPage.clearTable();
 		}
 	}
 
