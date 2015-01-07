@@ -19,6 +19,8 @@ public class WorkerThread implements Runnable {
 	@Override
 	public void run() {
 
+		System.out.println("Mission " + m.getName() + " started");
+
 		m = mc.run(m);
 
 		while (m.getStatus() != Mission.COMPLETED) {
@@ -29,9 +31,12 @@ public class WorkerThread implements Runnable {
 
 			m = tm.run(m);
 
-			if(m.getStatus() == Mission.FAILED)
+			if (m.getStatus() == Mission.FAILED)
 				break;
 		}
+
+		System.out.println("Mission " + m.getName() + " ended with result: "
+				+ m.getStatus());
 
 	}
 }

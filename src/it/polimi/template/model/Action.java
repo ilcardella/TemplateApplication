@@ -8,6 +8,12 @@ public enum Action implements IAction{
 		 @Override
          public void doAction() {
 			// TODO Auto-generated method stub 
+			 try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
          }
 		 
 		 @Override
@@ -20,6 +26,12 @@ public enum Action implements IAction{
 		@Override
 		public void doAction() {
 			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		@Override
@@ -32,6 +44,12 @@ public enum Action implements IAction{
 		@Override
 		public void doAction() {
 			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		@Override
@@ -44,6 +62,12 @@ public enum Action implements IAction{
 		@Override
 		public void doAction() {
 			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		@Override

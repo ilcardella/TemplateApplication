@@ -12,15 +12,21 @@ public class DroneAllocator implements Node {
 		// if there is at least a trip to perform in the mission
 		if (!m.getTrips().isEmpty()) {
 
-			if (t.getDelay() > 0)
+			if (t.getDelay() > 0) {
 				t.setStatus(Trip.DELAYED);
-
+				System.out.println("Drone Allocator: Trip " + t.getName()
+						+ " is delayed");
+			}
 			for (Drone d : drones) {
 				if (d.getStatus() == Drone.FREE
 						&& t.getStatus() != Trip.DELAYED) {
 					if (t.getItem().getShapeCategory() == d.getShapeCategory()) {
 						d.setStatus(Drone.BUSY);
 						t.setDrone(d);
+
+						System.out.println("Drone Allocator: Drone "
+								+ d.getId() + " assigned to Trip "
+								+ t.getName());
 
 						break;
 					}

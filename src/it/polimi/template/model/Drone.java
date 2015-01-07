@@ -18,10 +18,9 @@ public class Drone {
 	private int shapeCategory;
 	private int batteryLevel;
 
-	Random number = new Random();
 
 	public Drone() {
-		this.id = number.nextInt(1000);
+		this.id = new Random().nextInt(Integer.MAX_VALUE) +1;
 		this.status=5;
 	}
 
@@ -58,14 +57,14 @@ public class Drone {
 	}
 	
 	
-	public boolean startTrip(Action a){
+	public boolean flyToAndDoAction(String target, Action action){
 		//TODO
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		action.doAction();
 		return true;
 	}
 }

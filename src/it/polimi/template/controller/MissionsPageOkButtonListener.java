@@ -9,12 +9,12 @@ import it.polimi.template.model.editor.*;
 
 public class MissionsPageOkButtonListener {
 
-	public void startDroneAllocator(Mission m, ArrayList<Drone> drones) {
-
-		
-		DroneAllocator da = new DroneAllocator();
-		da.run(m, drones);
-	}
+//	public void startDroneAllocator(Mission m, ArrayList<Drone> drones) {
+//
+//		
+//		DroneAllocator da = new DroneAllocator();
+//		da.run(m, drones);
+//	}
 
 
 

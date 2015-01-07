@@ -10,21 +10,21 @@ import java.util.ArrayList;
 
 public class TripsPageOkButtonListener {
 
-	MissionCreator mc = new MissionCreator();
-
-	Mission targetMission = new Mission();
-	ArrayList<Trip> targetTrips = new ArrayList<Trip>();
-
-	public void run(String name, ArrayList<Mission> missions) {
-
-		for (Mission m : missions){
-			if (m.getName() == name)
-				targetMission = m;
-			for(Trip t: m.getTrips())
-				targetTrips.add(t);
-		}
-		mc.run(targetMission, targetTrips);
-
-	}
+//	MissionCreator mc = new MissionCreator();
+//
+//	Mission targetMission = new Mission();
+//	ArrayList<Trip> targetTrips = new ArrayList<Trip>();
+//
+//	public void run(String name, ArrayList<Mission> missions) {
+//
+//		for (Mission m : missions){
+//			if (m.getName() == name)
+//				targetMission = m;
+//			for(Trip t: m.getTrips())
+//				targetTrips.add(t);
+//		}
+//		mc.run(targetMission, targetTrips);
+//
+//	}
 
 }
