@@ -1,17 +1,12 @@
 package it.polimi.template.view;
 
 import it.polimi.template.controller.AddTripOnMapListener;
-
-
 import it.polimi.template.controller.TripsPageDeleteAllTripsButtonListener;
 import it.polimi.template.controller.TripsPageOkButtonListener;
-
 import it.polimi.template.model.*;
 
 import java.awt.BorderLayout;
-
 import java.awt.Point;
-
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -35,10 +30,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-
 import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -51,7 +46,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.TransferHandler.DropLocation;
 import javax.swing.TransferHandler.TransferSupport;
-
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
 import javax.xml.stream.Location;
@@ -351,7 +345,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	}
 	
-	public String showItemsPanel(ArrayList<String> items){
+	public String showItemsPanel(List<String> items){
 		ArrayList<String> choices = new ArrayList<String>();
 		for (String i : items)
 		choices.add(i);
