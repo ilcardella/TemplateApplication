@@ -37,12 +37,12 @@ public class TripsPageController {
 
 	}
 
-	class DropTargetListener extends DropTargetAdapter {
+	class MyDropTargetListener extends DropTargetAdapter {
 
 		private DropTarget dropTarget;
 		private JLabel label;
 
-		public DropTargetListener(JLabel label) {
+		public MyDropTargetListener(JLabel label) {
 			this.label = label;
 			dropTarget = new DropTarget(label, DnDConstants.ACTION_COPY, this,
 					true, null);
