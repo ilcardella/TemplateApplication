@@ -38,8 +38,11 @@ public class MonitorPage extends JFrame {
 	private ArrayList<Mission> missions = new ArrayList<Mission>();
 	private ArrayList<Drone> drones = new ArrayList<Drone>();
 
+	private JButton start;
+	private JButton stop;
+
 	public MonitorPage() {
-	
+
 		initUI();
 	}
 
@@ -68,7 +71,7 @@ public class MonitorPage extends JFrame {
 		text.setForeground(Color.RED);
 
 		JPanel buttonsPane = new JPanel();
-		JButton start = new JButton("Start");
+		start = new JButton("Start");
 		start.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -105,7 +108,7 @@ public class MonitorPage extends JFrame {
 
 			}
 		});
-		JButton stop = new JButton("Stop");
+		stop = new JButton("Stop");
 		stop.addActionListener(new ActionListener() {
 
 			@Override
@@ -133,4 +136,17 @@ public class MonitorPage extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
+	// start button
+
+	public void setStartButtonListener(ActionListener listener) {
+		start.addActionListener(listener);
+
+	}
+
+	// stop button
+
+	public void setStopButtonListener(ActionListener listener) {
+		stop.addActionListener(listener);
+
+	}
 }
