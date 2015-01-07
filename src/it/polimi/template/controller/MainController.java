@@ -27,6 +27,8 @@ public class MainController {
 				.deleteMissionButtonListener(new DeleteMissionButtonListener());
 		this.missionPage
 				.removeAllMissionButtonListener(new RemoveAllMissionButtonListener());
+		this.missionPage
+				.renameButtonListener(new RenameButtonListener());
 
 	}
 
@@ -35,7 +37,7 @@ public class MainController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Mission m = new Mission();
-			String name = missionPage.showNewMissionNamePanel();
+			String name = missionPage.showNewMissionNamePanel("Write mission name");
 			m.setName(name);
 			if (missions == null)
 				missions = new ArrayList<Mission>();
@@ -59,14 +61,14 @@ public class MainController {
 		}
 
 	}
-	
+
 	class RemoveAllMissionButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			missions.clear();
-			
+
 			missionPage.clearMissionList();
 		}
 
@@ -76,7 +78,14 @@ public class MainController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			String oldName = missionPage.getSelectedMission();
+			String newName = missionPage.showNewMissionNamePanel("Rename Mission");
+			for (int i = 0; i < missions.size(); i++)
+				if (missions.get(i).getName().equals(oldName))
+					missions.get(i).setName(newName);
+			missionPage.renameSelectedMission(newName);
+				
+			
 			
 		}
 
