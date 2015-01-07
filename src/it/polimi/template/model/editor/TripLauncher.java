@@ -15,19 +15,18 @@ public class TripLauncher implements Node {
 	@Override
 	public Mission run(Mission m) {
 
+		Trip t = m.getTrips().get(0);
+
 		// the mission status is set to RUNNING
-		m.setStatus(2);
+		m.setStatus(Mission.RUNNING);
 
 		// the trips which have an associated drone can start
 
-		for (Trip t : m.getTrips()) {
-
-			if (t.getDrone() != null) {
-				t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
-						.getTime()));
-				t.setStatus(4);
-			}
-
+		if (t.getDrone() != null) {
+			t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
+					.getTime()));
+			t.setStatus(Trip.EXECUTING);
+			t.getDrone().startTrip(t.getAction());
 		}
 
 		return m;
