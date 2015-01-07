@@ -13,16 +13,12 @@ import it.polimi.template.model.*;
 public class MissionPageController {
 
 	private MissionsPage missionPage;
-	List<Item> items;
-	List<Drone> drones;
 	List<Mission> missions;
 
 	public MissionPageController(MissionsPage view, List<Item> items,
 			List<Drone> drones) {
 
 		this.missionPage = view;
-		this.items = items;
-		this.drones = drones;
 		this.missionPage
 				.addMissionButtonListener(new AddMissionButtonListener());
 		this.missionPage
@@ -103,7 +99,7 @@ public class MissionPageController {
 			
 			for(int i = 0; i<missions.size();i++)
 				if(missions.get(i).getName().equals(missionName)){
-					TripsPageController tripsPageController = new TripsPageController(tripsPage, items, missions.get(i));
+					TripsPageController tripsPageController = new TripsPageController(tripsPage, missions.get(i));
 					tripsPage.setVisible(true);
 				}
 		}
@@ -114,7 +110,7 @@ public class MissionPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			MonitorPage monitorPage = new MonitorPage();
-			MonitorPageController monitorController = new MonitorPageController(monitorPage, items, drones, missions);
+			MonitorPageController monitorController = new MonitorPageController(monitorPage, missions);
 			monitorPage.setVisible(true);
 		}
 	}
