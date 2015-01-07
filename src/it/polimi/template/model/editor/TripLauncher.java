@@ -26,7 +26,7 @@ public class TripLauncher implements Node {
 					.getTime()));
 			t.setStatus(Trip.EXECUTING);
 			t.getDrone().flyToAndDoAction(t.getTargetLocation(), t.getAction());
-			
+			// TODO Settare il Trip come Completed e il drone come free
 			System.out.println("Trip Launcher: Trip "+ t.getName() + " is executing");
 		}
 
