@@ -10,13 +10,13 @@ public class TripsPageController {
 	
 	private TripsPage tripsPage;
 	private List<Item> items;
-	private Mission mission;
+	private String missionName;
 
 	public TripsPageController(TripsPage tripsPage, List<Item> items,
 			String missionName) {
 		this.tripsPage = tripsPage;
 		this.items = items;
-		//this.mission = missionName;
+		this.missionName = missionName;
 	}
 
 }

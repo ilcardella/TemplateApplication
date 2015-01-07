@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.template.view.MissionsPage;
+import it.polimi.template.view.MonitorPage;
 import it.polimi.template.view.TripsPage;
 import it.polimi.template.model.*;
 
