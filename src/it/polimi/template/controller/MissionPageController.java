@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.template.view.MissionsPage;
+import it.polimi.template.view.TripsPage;
 import it.polimi.template.model.*;
 
-public class MainController {
+public class MissionPageController {
 
 	private MissionsPage missionPage;
 	List<Item> items;
 	List<Drone> drones;
 	List<Mission> missions;
 
-	public MainController(MissionsPage view, List<Item> items,
+	public MissionPageController(MissionsPage view, List<Item> items,
 			List<Drone> drones) {
 
 		this.missionPage = view;
@@ -29,6 +30,10 @@ public class MainController {
 				.removeAllMissionButtonListener(new RemoveAllMissionButtonListener());
 		this.missionPage
 				.renameButtonListener(new RenameButtonListener());
+		this.missionPage
+				.setTripsListener(new SetTripsListener());
+		this.missionPage
+				.missionsPageOkButtonListener(new MissionsPageOkButtonListener());
 
 	}
 
@@ -89,6 +94,34 @@ public class MainController {
 			
 		}
 
+	}
+	
+	class SetTripsListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			String missionName = missionPage.getSelectedMission();
+			
+			TripsPage tripsPage = new TripsPage(missionName);
+			
+			for(int i = 0; i<missions.size();i++)
+				if(missions.get(i).getName().equals(missionName)){
+					TripsPageController tripsPageController = new TripsPageController(tripsPage, items, missionName);
+					tripsPage.setVisible(true);
+				}
+			
+		}
+	}
+	
+	class MissionsPageOkButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 }
