@@ -37,7 +37,7 @@ public class MainController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Mission m = new Mission();
-			String name = missionPage.showNewMissionNamePanel("Write mission name");
+			String name = missionPage.showNewNamePanel("Write mission name");
 			m.setName(name);
 			if (missions == null)
 				missions = new ArrayList<Mission>();
@@ -79,7 +79,7 @@ public class MainController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String oldName = missionPage.getSelectedMission();
-			String newName = missionPage.showNewMissionNamePanel("Rename Mission");
+			String newName = missionPage.showNewNamePanel("Rename Mission");
 			for (int i = 0; i < missions.size(); i++)
 				if (missions.get(i).getName().equals(oldName))
 					missions.get(i).setName(newName);
