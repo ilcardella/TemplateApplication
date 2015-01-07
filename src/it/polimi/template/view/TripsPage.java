@@ -398,6 +398,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		if (input1.toString() == "VERY LOW")
 			return 1;
 		
+		
 		return 100;
 	}
 	
