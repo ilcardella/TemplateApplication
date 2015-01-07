@@ -284,7 +284,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	// ok button
 
-	public void SetOkButtonListener(ActionListener listener) {
+	public void setOkButtonListener(ActionListener listener) {
 		ok.addActionListener(listener);
 
 	}
