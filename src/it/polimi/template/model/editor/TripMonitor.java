@@ -16,6 +16,7 @@ public class TripMonitor implements Node {
 			m.setStatus(Mission.FAILED);
 
 		}
+		
 
 		// if there are no more trips to perform, the mission is completed
 		if (m.getTrips().isEmpty())
