@@ -13,7 +13,12 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
+import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,84 +29,76 @@ public class TripsPageController {
 
 	private TripsPage tripsPage;
 	private List<Item> items;
-	private String missionName;
+	private Mission mission;
 	private char tripCounter = 65;
 
 	public TripsPageController(TripsPage tripsPage, List<Item> items,
-			String missionName) {
+			Mission mission) {
 		this.tripsPage = tripsPage;
 		this.items = items;
-		this.missionName = missionName;
+		this.mission = mission;
 		
-		this.tripsPage.setDropTargetListener();
+		this.tripsPage.setOkButtonListener(new TripsPageOkButtonListener());
+		this.tripsPage.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
 
 	}
-
-	public class MyDropTargetListener extends DropTargetAdapter {
-
-		private DropTarget dropTarget;
-		private JLabel label;
-
-		public MyDropTargetListener(JLabel label) {
-			this.label = label;
-			dropTarget = new DropTarget(label, DnDConstants.ACTION_COPY, this,
-					true, null);
-		}
-		
+	
+	class TripsPageOkButtonListener implements ActionListener{
 		@Override
-		public void drop(DropTargetDropEvent event) {
-			try {
-				Point p = event.getLocation();
-				Transferable tr = event.getTransferable();
+		public void actionPerformed(ActionEvent e) {
+			tripsPage.killWindow();
+		}
+	}
+	
+	class TripsPageDeleteAllButtonListener implements ActionListener{
 
-				String action = (String) tr
-						.getTransferData(DataFlavor.stringFlavor);
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			mission.getTrips().clear();
+			
+			// update the view
+			tripsPage.deleteAllTrips();
+		}
+		
+	}
+	
+	public void manageDragAndDrop(String action) {
 
-				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-					event.acceptDrop(DnDConstants.ACTION_COPY);
-					event.dropComplete(true);
+		// if drop event is ok, create the Trip and set the name
+		Trip trip = new Trip();
+		trip.setName(mission.getName() + " - " + tripCounter);
+		tripCounter++;
 
-					// if drop event is ok, create the Trip and set the name
-					Trip trip = new Trip();
-					trip.setName(missionName + " - " + tripCounter);
-					tripCounter++;
-					
-					if( action.equals(Action.PICK_ITEM.toString()) || action.equals(Action.RELEASE_ITEM.toString()) ){
-						
-						// create a string list with the name of the items
-						List<String> itemsNames = new ArrayList<String>();
-						for(Item i: items)
-							itemsNames.add(i.getName());
-						
-						// get the items from the user input
-						String iName = tripsPage.showItemsPanel(itemsNames);
-						
-						// set the item to the trip
-						for(Item i: items)
-							if(i.getName().equals(iName))
-								trip.setItem(i);
-						
-						// set the priority to the trip
-						int priority = tripsPage.showPriorityPanel();
-						trip.setPriority(priority);
-						
-						// set the delay
-						int delay = tripsPage.showDelayPanel();
-						trip.setDelay(delay);
-						
-						
-						
-					}
-				}
+		if (action.equals(Action.PICK_ITEM.toString())
+				|| action.equals(Action.RELEASE_ITEM.toString())) {
 
-				event.rejectDrop();
-			} catch (Exception e) {
-				e.printStackTrace();
-				event.rejectDrop();
-			}
+			// create a string list with the name of the items
+			List<String> itemsNames = new ArrayList<String>();
+			for (Item i : items)
+				itemsNames.add(i.getName());
 
+			// get the items from the user input
+			String iName = tripsPage.showItemsPanel(itemsNames);
+
+			// set the item to the trip
+			for (Item i : items)
+				if (i.getName().equals(iName))
+					trip.setItem(i);
+
+			// set the priority to the trip
+			int priority = tripsPage.showPriorityPanel();
+			trip.setPriority(priority);
+
+			// set the delay
+			int delay = tripsPage.showDelayPanel();
+			trip.setDelay(delay);
+
+			// add to the trip list of the mission
+			mission.getTrips().add(trip);
 		}
 
 	}
+
 
 }

@@ -103,7 +103,7 @@ public class MissionPageController {
 			
 			for(int i = 0; i<missions.size();i++)
 				if(missions.get(i).getName().equals(missionName)){
-					TripsPageController tripsPageController = new TripsPageController(tripsPage, items, missionName);
+					TripsPageController tripsPageController = new TripsPageController(tripsPage, items, missions.get(i));
 					tripsPage.setVisible(true);
 				}
 		}
