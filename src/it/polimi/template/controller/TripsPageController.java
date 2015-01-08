@@ -51,7 +51,8 @@ public class TripsPageController {
 	public class ExportDoneListener {
 
 		public void actionPerformed() {
-			manageDragAndDrop(tripsPage.getAction());
+			String actionName = tripsPage.getAction();
+			manageDragAndDrop(actionName); 
 		}
 
 	}
@@ -61,8 +62,8 @@ public class TripsPageController {
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
 		trip.setName(mission.getName() + " - " + tripCounter);
-		tripCounter++;
-
+		tripCounter++; 
+		
 		if (actionName.equals(Action.PICK_ITEM.toString())
 				|| actionName.equals(Action.RELEASE_ITEM.toString())) {
 
