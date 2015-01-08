@@ -10,7 +10,9 @@ public class MissionCreator implements Node {
 			System.out.println("Mission Creator: Mission " + m.getName()
 					+ " created");
 			return m;
+			
 		} else
+			
 			return null;
 	}
 	
