@@ -23,7 +23,7 @@ public class DroneAllocator implements Node {
 			for (Drone d : DronesManager.getDrones()) {
 				if (d.getStatus() == Drone.FREE
 						&& t.getStatus() != Trip.DELAYED) {
-					if (t.getItem().getShapeCategory() == d.getShapeCategory() || t.getItem() == null) {
+					if (t.getItem() == null ||t.getItem().getShapeCategory() == d.getShapeCategory()  ) {
 						d.setStatus(Drone.BUSY);
 						t.setDrone(d);
 
