@@ -40,12 +40,14 @@ public class MissionPageController {
 		public void actionPerformed(ActionEvent e) {
 			Mission m = new Mission();
 			String name = missionPage.showNewNamePanel("Write mission name");
+			if (name!=""){
 			m.setName(name);
 			if (missions == null)
 				missions = new ArrayList<Mission>();
 			missions.add(m);
 
 			missionPage.addMissionToList(name);
+		}
 		}
 
 	}

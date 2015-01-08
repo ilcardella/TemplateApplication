@@ -1,6 +1,7 @@
 package it.polimi.template.controller;
 
 import it.polimi.template.model.Action;
+
 import it.polimi.template.model.Item;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
@@ -25,6 +26,7 @@ public class TripsPageController {
 		this.tripsPage.setOkButtonListener(new TripsPageOkButtonListener());
 		this.tripsPage
 				.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
+		this.tripsPage.setExportDoneActionListener(new ExportDoneListener());
 
 	}
 
@@ -32,11 +34,7 @@ public class TripsPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO simulo l'aggiunta di 5 trip alla missione
-			manageDragAndDrop(Action.PICK_ITEM.toString());
-			manageDragAndDrop(Action.RELEASE_ITEM.toString());
-			manageDragAndDrop(Action.PICK_ITEM.toString());
-			manageDragAndDrop(Action.RELEASE_ITEM.toString());
-
+	
 			tripsPage.killWindow();
 		}
 	}
@@ -52,6 +50,14 @@ public class TripsPageController {
 			tripsPage.deleteAllTrips();
 		}
 
+	}
+	
+	public class ExportDoneListener {
+
+		public void actionPerformed() {
+		manageDragAndDrop(tripsPage.getAction());
+		}
+		
 	}
 
 	public void manageDragAndDrop(String action) {
@@ -82,7 +88,7 @@ public class TripsPageController {
 			for (Item i : ItemsManager.getItems())
 				if (i.getName().equals(iName))
 					trip.setItem(i);
-
+		}
 			// set the priority to the trip
 			int priority = tripsPage.showPriorityPanel();
 			trip.setPriority(priority);
@@ -93,8 +99,13 @@ public class TripsPageController {
 
 			// add to the trip list of the mission
 			mission.getTrips().add(trip);
-		}
+			tripsPage.fillTripList(trip.getName());
+		
 
 	}
+	
+
+	
+	
 
 }
