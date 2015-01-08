@@ -3,7 +3,7 @@ package it.polimi.template.model.editor;
 import it.polimi.template.model.*;
 
 public class MissionCreator implements Node {
-
+	
 	@Override
 	public Mission run(Mission m) {
 		if (m.getTrips() != null && m.getStatus() == Mission.UNEXECUTED) {
@@ -13,4 +13,6 @@ public class MissionCreator implements Node {
 		} else
 			return null;
 	}
+	
+
 }
