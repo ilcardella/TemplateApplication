@@ -106,10 +106,28 @@ public class MonitorPage extends JFrame {
 			int droneID, int droneStatus, String tripName, int tripStatus) {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-		
-		model.addRow(new Object[] { missionName, missionStatus, droneID,
-				droneStatus, tripName, tripStatus });
+		int rowCount = model.getRowCount();
 
+		if (rowCount == 0)
+			model.addRow(new Object[] { missionName, missionStatus, droneID,
+					droneStatus, tripName, tripStatus });
+
+		for (int i = rowCount - 1; i >= 0; i--) {
+			// if there is a row with the same missionName
+			if (model.getValueAt(i, 0).equals(missionName))
+				// if there is a row with the same trip
+				if (model.getValueAt(i, 4).equals(tripName))
+					// if the mission is not completed yet
+					if (!model.getValueAt(i, 1).equals(Mission.COMPLETED))
+						// if the trip is not completed yet
+						if (!model.getValueAt(i, 5).equals(Trip.COMPLETED)) {
+							// add the new row and delete the old one
+							model.removeRow(i);
+							model.addRow(new Object[] { missionName,
+									missionStatus, droneID, droneStatus,
+									tripName, tripStatus });
+						}
+
+		}
 	}
-
 }
