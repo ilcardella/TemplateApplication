@@ -40,7 +40,7 @@ public class TripsPage extends JFrame {
 
 	private JList list;
 	private JList tripList;
-	
+
 	private Object lalla;
 
 	private ExportDoneListener edp;
@@ -163,8 +163,8 @@ public class TripsPage extends JFrame {
 			Transferable t = null;
 			if (c instanceof JList) {
 				JList list = (JList) c;
-				 lalla = list.getSelectedValue();
-				
+				lalla = list.getSelectedValue();
+
 				if (lalla instanceof ListItem) {
 					ListItem li = (ListItem) lalla;
 					t = new ListItemTransferable(li);
@@ -284,10 +284,14 @@ public class TripsPage extends JFrame {
 
 		String text3 = JOptionPane
 				.showInputDialog("Indicate the delay for the trip");
-		if (text3 != null)
-			return Integer.parseInt(text3.trim());
+		
+		String delay=text3.trim();
 
-		return 0;
+	
+		
+			
+		return Integer.parseInt(delay);
+
 	}
 
 	public void fillTripList(String name) {
@@ -320,8 +324,8 @@ public class TripsPage extends JFrame {
 		edp = listener;
 
 	}
-	
-	public String getAction(){
+
+	public String getAction() {
 		return lalla.toString();
 	}
 

@@ -95,6 +95,7 @@ public class TripsPageController {
 
 			// set the delay
 			int delay = tripsPage.showDelayPanel();
+			
 			trip.setDelay(delay);
 
 			// add to the trip list of the mission
