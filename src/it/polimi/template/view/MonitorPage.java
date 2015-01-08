@@ -4,30 +4,13 @@ import java.awt.BorderLayout;
 
 import it.polimi.template.model.*;
 
-import java.awt.Color;
-
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 public class MonitorPage extends JFrame {

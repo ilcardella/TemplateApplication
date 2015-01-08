@@ -61,6 +61,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private JButton delete;
 
 	private String nameMission;
+	private String selectedAction;
 	private ImageIcon icon;
 
 	DragSource ds;
@@ -174,9 +175,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 			try {
 				Transferable tr = event.getTransferable();
-				String action = (String) tr
+				selectedAction = (String) tr
 						.getTransferData(DataFlavor.stringFlavor);
-				System.out.print(action);
 
 				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 
@@ -332,7 +332,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	public String getAction() {
-		return transferable.toString();
+		return selectedAction;
 	}
 
 	// ok button
