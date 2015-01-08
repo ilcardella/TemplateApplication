@@ -209,6 +209,8 @@ public class MissionsPage extends JFrame {
 	public void setTripsListener(ActionListener listener) {
 		tpsbtn.addActionListener(listener);
 	}
+	
+	//ok button 
 
 	public void missionsPageOkButtonListener(ActionListener listener) {
 		okbtn.addActionListener(listener);

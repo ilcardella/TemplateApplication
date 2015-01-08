@@ -95,6 +95,8 @@ public class MissionPageController {
 			
 			String missionName = missionPage.getSelectedMission();
 			
+			if (missionName!=""){
+			
 			TripsPage tripsPage = new TripsPage(missionName);
 			
 			for(int i = 0; i<missions.size();i++)
@@ -102,6 +104,7 @@ public class MissionPageController {
 					TripsPageController tripsPageController = new TripsPageController(tripsPage, missions.get(i));
 					tripsPage.setVisible(true);
 				}
+		}
 		}
 	}
 	
