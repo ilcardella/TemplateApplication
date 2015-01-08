@@ -2,8 +2,6 @@ package it.polimi.template.view;
 
 import java.awt.BorderLayout;
 
-
-
 import it.polimi.template.model.*;
 
 import java.awt.Color;
@@ -49,26 +47,21 @@ public class MonitorPage extends JFrame {
 
 	public final void initUI() {
 
-
 		final ArrayList<Trip> trips = new ArrayList<Trip>();
 
 		setLayout(new BorderLayout());
 
 		DefaultTableModel model = new DefaultTableModel();
 		table = new JTable(model);
-		model.addColumn("ID");
+		model.addColumn("Mission");
+		model.addColumn("Mission status");
+		model.addColumn("Drone");
+		model.addColumn("Drone status");
 		model.addColumn("Trip");
-		model.addColumn("Status");
+		model.addColumn("Trip Status");
 
 		JScrollPane tablePane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
-
-		JTextArea text = new JTextArea();
-		JScrollPane textPane = new JScrollPane(text);
-		text.setBackground(Color.LIGHT_GRAY);
-		text.append("console\n" + "Here there is the log of the execution\n"
-				+ "Pluto");
-		text.setForeground(Color.RED);
 
 		JPanel buttonsPane = new JPanel();
 		start = new JButton("Start");
@@ -79,8 +72,7 @@ public class MonitorPage extends JFrame {
 		buttonsPane.add(stop);
 
 		getContentPane().add(tablePane, BorderLayout.NORTH);
-		getContentPane().add(buttonsPane, BorderLayout.EAST);
-		getContentPane().add(textPane);
+		getContentPane().add(buttonsPane, BorderLayout.CENTER);
 
 		setTitle("Pluto - Monitor Page");
 		setSize(1000, 800);
@@ -109,18 +101,15 @@ public class MonitorPage extends JFrame {
 			dm.removeRow(i);
 		}
 	}
-	
-	public void tableManager(){
-//		DefaultTableModel model = (DefaultTableModel) table
-//				.getModel();
-//
-//		if (t.getDrone() == null)
-//			model.addRow(new Object[] { "", t.getName(),
-//					t.getStatus() });
-//		else
-//			model.addRow(new Object[] {
-//					t.getDrone().getId(), t.getName(),
-//					t.getStatus() });
+
+	public void updateTableRow(String missionName, int missionStatus,
+			int droneID, int droneStatus, String tripName, int tripStatus) {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+		
+		model.addRow(new Object[] { missionName, missionStatus, droneID,
+				droneStatus, tripName, tripStatus });
+
 	}
 
 }
