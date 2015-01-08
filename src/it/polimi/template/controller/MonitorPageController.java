@@ -28,17 +28,22 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			ExecutorService executor = Executors.newFixedThreadPool(missions
-					.size());
-			for (int i = 0; i < missions.size(); i++) {
-				Runnable worker = new WorkerThread(missions.get(i));
-				executor.execute(worker);
-			}
-			executor.shutdown();
-			while (!executor.isTerminated()) {
-			}
-			System.out.println("Finished all threads");
+			launchExecution();
 		}
+	}
+
+	protected void launchExecution() {
+		ExecutorService executor = Executors
+				.newFixedThreadPool(missions.size());
+		for (int i = 0; i < missions.size(); i++) {
+			Runnable worker = new WorkerThread(missions.get(i), this);
+			executor.execute(worker);
+		}
+		executor.shutdown();
+		while (!executor.isTerminated()) {
+		}
+		System.out.println("Finished all threads");
+
 	}
 
 	class StopButtonListener implements ActionListener {
@@ -50,4 +55,32 @@ public class MonitorPageController {
 		}
 	}
 
+	public void notifyUpdateOfStatus(Mission mission) {
+
+		String missionName = "";
+		int missionStatus = 0;
+		String tripName = "";
+		int tripStatus = 0;
+		int droneID = 0;
+		int droneStatus = 0;
+
+		if (mission.getTrips().size() > 0) {
+
+			// If there are other trips to complete
+			missionName = mission.getName();
+			missionStatus = mission.getStatus();
+			tripName = mission.getTrips().get(0).getName();
+			tripStatus = mission.getTrips().get(0).getStatus();
+			droneID = mission.getTrips().get(0).getDrone().getId();
+			droneStatus = mission.getTrips().get(0).getDrone().getStatus();
+
+		} else {
+			// If it is the last update
+			missionName = mission.getName();
+			missionStatus = mission.getStatus();
+		}
+
+		this.monitorPage.updateTableRow(missionName, missionStatus, droneID,
+				droneStatus, tripName, tripStatus);
+	}
 }
