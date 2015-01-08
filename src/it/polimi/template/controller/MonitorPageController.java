@@ -71,8 +71,11 @@ public class MonitorPageController {
 			missionStatus = mission.getStatus();
 			tripName = mission.getTrips().get(0).getName();
 			tripStatus = mission.getTrips().get(0).getStatus();
-			droneID = mission.getTrips().get(0).getDrone().getId();
-			droneStatus = mission.getTrips().get(0).getDrone().getStatus();
+			
+			if(mission.getTrips().get(0).getDrone() != null){
+				droneID = mission.getTrips().get(0).getDrone().getId();
+				droneStatus = mission.getTrips().get(0).getDrone().getStatus();
+			}
 
 		} else {
 			// If it is the last update

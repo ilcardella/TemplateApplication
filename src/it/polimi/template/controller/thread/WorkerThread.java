@@ -27,7 +27,7 @@ public class WorkerThread implements Runnable {
 		m = mc.run(m);
 
 		parent.notifyUpdateOfStatus(m);
-		
+
 		while (m.getStatus() != Mission.COMPLETED) {
 
 			m = da.run(m);
