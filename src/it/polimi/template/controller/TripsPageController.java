@@ -87,6 +87,8 @@ public class TripsPageController {
 		} else {
 			// TODO Implementare anche le altre Action, Forse meglio usare uno
 			// Switch-Case su actionName
+			
+			trip.setAction(Action.TAKE_PHOTO);
 		}
 		// set the priority to the trip
 		int priority = tripsPage.showPriorityPanel();
