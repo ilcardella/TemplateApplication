@@ -61,7 +61,7 @@ public class TripsPageController {
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
 		trip.setName(mission.getName() + " - " + tripCounter);
-		tripCounter++;
+		tripCounter++; 
 
 		if (actionName.equals(Action.PICK_ITEM.toString())
 				|| actionName.equals(Action.RELEASE_ITEM.toString())) {
