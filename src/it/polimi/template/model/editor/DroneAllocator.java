@@ -16,8 +16,8 @@ public class DroneAllocator implements Node {
 
 			if (t.getDelay() > 0) {
 				t.setStatus(Trip.DELAYED);
-				System.out.println("Drone Allocator: Trip " + t.getName()
-						+ " is delayed");
+//				System.out.println("Drone Allocator: Trip " + t.getName()
+//						+ " is delayed");
 			}
 			
 			for (Drone d : DronesManager.getDrones()) {
@@ -27,9 +27,9 @@ public class DroneAllocator implements Node {
 						d.setStatus(Drone.BUSY);
 						t.setDrone(d);
 
-						System.out.println("Drone Allocator: Drone "
-								+ d.getId() + " assigned to Trip "
-								+ t.getName());
+//						System.out.println("Drone Allocator: Drone "
+//								+ d.getId() + " assigned to Trip "
+//								+ t.getName());
 
 						break;
 					}

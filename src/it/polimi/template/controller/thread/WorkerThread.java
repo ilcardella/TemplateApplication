@@ -22,7 +22,7 @@ public class WorkerThread implements Runnable {
 	@Override
 	public void run() {
 
-		System.out.println("Mission " + m.getName() + " started");
+//		System.out.println("Mission " + m.getName() + " started");
 
 		m = mc.run(m);
 
@@ -48,8 +48,8 @@ public class WorkerThread implements Runnable {
 		
 		parent.notifyUpdateOfStatus(m);
 
-		System.out.println("Mission " + m.getName() + " ended with result: "
-				+ m.getStatus());
+//		System.out.println("Mission " + m.getName() + " ended with result: "
+//				+ m.getStatus());
 
 	}
 }
