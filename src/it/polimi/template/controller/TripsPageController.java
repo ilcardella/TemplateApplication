@@ -52,7 +52,7 @@ public class TripsPageController {
 
 		public void actionPerformed() {
 			String actionName = tripsPage.getAction();
-			manageDragAndDrop(actionName);
+			manageDragAndDrop(actionName); 
 		}
 
 	}
