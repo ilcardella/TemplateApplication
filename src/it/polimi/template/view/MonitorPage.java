@@ -2,8 +2,8 @@ package it.polimi.template.view;
 
 import java.awt.BorderLayout;
 
-import it.polimi.template.controller.DronesPageStartButtonListener;
-import it.polimi.template.controller.MissionsPageOkButtonListener;
+
+
 import it.polimi.template.model.*;
 
 import java.awt.Color;
@@ -49,8 +49,7 @@ public class MonitorPage extends JFrame {
 
 	public final void initUI() {
 
-		final MissionsPageOkButtonListener mpob = new MissionsPageOkButtonListener();
-		final DronesPageStartButtonListener dpsbl = new DronesPageStartButtonListener();
+
 		final ArrayList<Trip> trips = new ArrayList<Trip>();
 
 		setLayout(new BorderLayout());

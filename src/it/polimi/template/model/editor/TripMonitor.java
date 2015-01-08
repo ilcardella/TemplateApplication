@@ -39,8 +39,9 @@ public class TripMonitor implements Node {
 		}
 		// if the current trip is completed, remove it from the list of trips
 		// associated to the mission
-		t.setStatus(Trip.COMPLETED);
 		m.getTrips().remove(0);
+		if(m.getTrips().isEmpty())
+			m.setStatus(Mission.COMPLETED);
 		System.out.println("TripMonitor: Trip " + t.getName()
 				+ " completed and removed");
 

@@ -1,7 +1,6 @@
 package it.polimi.template.view;
 
-import it.polimi.template.controller.TripsPageDeleteAllTripsButtonListener;
-import it.polimi.template.controller.TripsPageOkButtonListener;
+
 import it.polimi.template.model.*;
 import java.awt.BorderLayout;
 import java.awt.datatransfer.DataFlavor;
