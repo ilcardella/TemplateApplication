@@ -91,41 +91,41 @@ public class MonitorPage extends JFrame {
 
 		int rowCount = model.getRowCount();
 
-		if (rowCount == 0)
+	//	if (rowCount == 0)
 			model.addRow(new Object[] { missionName, missionStatus, droneID,
 					droneStatus, tripName, tripStatus });
 
-		for (int i = rowCount - 1; i >= 0; i--) {
-			// if there is a row with the same missionName
-			if (model.getValueAt(i, 0).equals(missionName)){
-				// if there is a row with the same trip
-				if (model.getValueAt(i, 4).equals(tripName)){
-					// if the mission is not completed yet
-					if (!model.getValueAt(i, 1).equals(Mission.COMPLETED))
-						// if the trip is not completed yet
-						if (!model.getValueAt(i, 5).equals(Trip.COMPLETED)) {
-							// add the new row and delete the old one
-							model.removeRow(i);
-							model.addRow(new Object[] { missionName,
-									missionStatus, droneID, droneStatus,
-									tripName, tripStatus });
-						}
-			}
-				
-				// if the missionName is the same but the tripName is different, add a new row to the table
-
-				else{
-					model.addRow(new Object[] { missionName,
-							missionStatus, droneID, droneStatus,
-							tripName, tripStatus });
-				}
-			}
-			// if there is not a row with the same missionName, add a new row to the table
-			else{
-				model.addRow(new Object[] { missionName,
-						missionStatus, droneID, droneStatus,
-						tripName, tripStatus });
-			}
-		}
+//		for (int i = rowCount - 1; i >= 0; i--) {
+//			// if there is a row with the same missionName
+//			if (model.getValueAt(i, 0).equals(missionName)){
+//				// if there is a row with the same trip
+//				if (model.getValueAt(i, 4).equals(tripName)){
+//					// if the mission is not completed yet
+//					if (!model.getValueAt(i, 1).equals(Mission.COMPLETED))
+//						// if the trip is not completed yet
+//						if (!model.getValueAt(i, 5).equals(Trip.COMPLETED)) {
+//							// add the new row and delete the old one
+//							model.removeRow(i);
+//							model.addRow(new Object[] { missionName,
+//									missionStatus, droneID, droneStatus,
+//									tripName, tripStatus });
+//						}
+//			}
+//				
+//				// if the missionName is the same but the tripName is different, add a new row to the table
+//
+//				else{
+//					model.addRow(new Object[] { missionName,
+//							missionStatus, droneID, droneStatus,
+//							tripName, tripStatus });
+//				}
+//			}
+//			// if there is not a row with the same missionName, add a new row to the table
+//			else{
+//				model.addRow(new Object[] { missionName,
+//						missionStatus, droneID, droneStatus,
+//						tripName, tripStatus });
+//			}
+//		}
 	}
 }
