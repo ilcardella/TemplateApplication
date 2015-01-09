@@ -2,6 +2,7 @@ package it.polimi.template.controller;
 
 import it.polimi.template.controller.thread.WorkerThread;
 import it.polimi.template.model.Mission;
+import it.polimi.template.utils.TableUpdateJob;
 import it.polimi.template.view.MonitorPage;
 
 import java.awt.event.ActionEvent;
@@ -9,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.swing.SwingUtilities;
 
 public class MonitorPageController {
 
@@ -83,8 +86,8 @@ public class MonitorPageController {
 			missionStatus = mission.getStatus();
 		}
 
-		this.monitorPage.updateTableRow(missionName, missionStatus, droneID,
-				droneStatus, tripName, tripStatus);
+		SwingUtilities.invokeLater(new TableUpdateJob(missionName, missionStatus, tripName, tripStatus, droneID, droneStatus, monitorPage));
+
 		System.out
 				.println("MissionName = " + missionName + " - MissionStatus = "
 						+ missionStatus + " - DroneID = " + droneID
