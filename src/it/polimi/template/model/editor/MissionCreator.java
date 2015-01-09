@@ -7,8 +7,8 @@ public class MissionCreator implements Node {
 	@Override
 	public Mission run(Mission m) {
 		if (m.getTrips() != null && m.getStatus() == Mission.UNEXECUTED) {
-//			System.out.println("Mission Creator: Mission " + m.getName()
-//					+ " created");
+			System.out.println("Mission " + m.getName()
+					+ " created");
 			return m;
 			
 		} else

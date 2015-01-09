@@ -22,34 +22,34 @@ public class WorkerThread implements Runnable {
 	@Override
 	public void run() {
 
-//		System.out.println("Mission " + m.getName() + " started");
+		System.out.println("Mission " + m.getName() + " started");
 
 		m = mc.run(m);
 
-		parent.notifyUpdateOfStatus(m);
+		//parent.notifyUpdateOfStatus(m);
 
 		while (m.getStatus() != Mission.COMPLETED) {
 
 			m = da.run(m);
 
-			parent.notifyUpdateOfStatus(m);
+			//parent.notifyUpdateOfStatus(m);
 			
 			m = tl.run(m);
 
-			parent.notifyUpdateOfStatus(m);
+			//parent.notifyUpdateOfStatus(m);
 			
 			m = tm.run(m);
 
-			parent.notifyUpdateOfStatus(m);
+			//parent.notifyUpdateOfStatus(m);
 			
 			if (m.getStatus() == Mission.FAILED)
 				break;
 		}
 		
-		parent.notifyUpdateOfStatus(m);
+		//parent.notifyUpdateOfStatus(m);
 
-//		System.out.println("Mission " + m.getName() + " ended with result: "
-//				+ m.getStatus());
+		System.out.println("Mission " + m.getName() + " ended with result: "
+				+ m.getStatus());
 
 	}
 }

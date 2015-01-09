@@ -16,21 +16,21 @@ public class DroneAllocator implements Node {
 
 			if (t.getDelay() > 0) {
 				t.setStatus(Trip.DELAYED);
-//				System.out.println("Drone Allocator: Trip " + t.getName()
-//						+ " is delayed");
+				System.out.println("Trip " + t.getName() + " is delayed");
 			}
-			
+
 			for (Drone d : DronesManager.getDrones()) {
 				if (d.getStatus() == Drone.FREE
 						&& t.getStatus() != Trip.DELAYED) {
-					if (t.getItem() == null ||t.getItem().getShapeCategory() == d.getShapeCategory()  ) {
+					if (t.getItem() == null
+							|| t.getItem().getShapeCategory() == d
+									.getShapeCategory()) {
 						d.setStatus(Drone.BUSY);
 						t.setDrone(d);
 
-//						System.out.println("Drone Allocator: Drone "
-//								+ d.getId() + " assigned to Trip "
-//								+ t.getName());
-
+						System.out.println("Drone " + t.getDrone().getId()
+								+ " is busy");
+						
 						break;
 					}
 

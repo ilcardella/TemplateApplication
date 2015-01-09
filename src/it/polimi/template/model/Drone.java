@@ -65,7 +65,6 @@ public class Drone {
 			e.printStackTrace();
 		}
 		action.doAction();
-		this.status=Drone.FREE;
 		return true;
 	}
 }
