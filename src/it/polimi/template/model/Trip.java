@@ -125,7 +125,23 @@ public class Trip  {
 		this.action = action;
 	}
 
+	public static String getStatusNameFromValue(int value) {
 
+		switch (value) {
+			case WAITING:
+				return "WAITING";
+			case EXECUTING:
+				return "EXECUTING";
+			case COMPLETED:
+				return "COMPLETED";
+			case FAILED:
+				return "FAILED";
+			case DELAYED:
+				return "DELAYED";
+			default:
+				return "Unknown";
+		}
+	}
 
 
 

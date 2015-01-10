@@ -16,7 +16,7 @@ public class Drone {
 
 	public static final int FREE = 5;
 	public static final int BUSY = 6;
-	public static final int CHARGING = 6;
+	public static final int CHARGING = 7;
 
 	private int id;
 	private int status;
@@ -73,5 +73,19 @@ public class Drone {
 			e.printStackTrace();
 		}
 		return true;
+	}
+	
+	public static String getStatusNameFromValue(int value) {
+
+		switch (value) {
+			case FREE:
+				return "FREE";
+			case BUSY:
+				return "BUSY";
+			case CHARGING:
+				return "CHARGING";
+			default:
+				return "Unknown";
+		}
 	}
 }
