@@ -73,7 +73,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		try {
 			initUI();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -318,7 +317,11 @@ public class TripsPage extends JFrame implements DragSourceListener,
 				.showInputDialog("Indicate the delay for the trip");
 
 		String delay = text3.trim();
+		
+		if (delay.isEmpty())
+			return 0;
 
+		else
 		return Integer.parseInt(delay);
 
 	}
