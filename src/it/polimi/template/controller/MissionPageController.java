@@ -97,29 +97,7 @@ public class MissionPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
-			final String missionName = missionPage.getSelectedMission();
-
-			if (!missionName.equals("")) {
-
-				for (int i = 0; i < missions.size(); i++) {
-
-					if (missions.get(i).getName().equals(missionName)) {
-
-						final Mission m = missions.get(i);
-
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								TripsPage tripsPage = new TripsPage(missionName);
-								TripsPageController tripsPageController = new TripsPageController(
-										tripsPage, m);
-								tripsPage.setVisible(true);
-							}
-						});
-					}
-				}
-			}
+			 launchTripsPage();
 		}
 	}
 
@@ -140,28 +118,7 @@ public class MissionPageController {
 		public void mouseClicked(MouseEvent e) {
 
 			 if (e.getClickCount() == 2) {
-				 final String missionName = missionPage.getSelectedMission();
-
-					if (!missionName.equals("")) {
-
-						for (int i = 0; i < missions.size(); i++) {
-
-							if (missions.get(i).getName().equals(missionName)) {
-
-								final Mission m = missions.get(i);
-
-								SwingUtilities.invokeLater(new Runnable() {
-									@Override
-									public void run() {
-										TripsPage tripsPage = new TripsPage(missionName);
-										TripsPageController tripsPageController = new TripsPageController(
-												tripsPage, m);
-										tripsPage.setVisible(true);
-									}
-								});
-							}
-						}
-					}
+				 launchTripsPage();
 			 }
 		}
 		@Override
@@ -172,6 +129,31 @@ public class MissionPageController {
 		public void mousePressed(MouseEvent arg0) {}
 		@Override
 		public void mouseReleased(MouseEvent arg0) {}
+	}
+	
+	private void launchTripsPage(){
+		String missionName = missionPage.getSelectedMission();
+
+		if (!missionName.equals("")) {
+
+			for (int i = 0; i < missions.size(); i++) {
+
+				if (missions.get(i).getName().equals(missionName)) {
+
+					Mission m = missions.get(i);
+
+					SwingUtilities.invokeLater(new Runnable() {
+						@Override
+						public void run() {
+							TripsPage tripsPage = new TripsPage(missionName);
+							TripsPageController tripsPageController = new TripsPageController(
+									tripsPage, m);
+							tripsPage.setVisible(true);
+						}
+					});
+				}
+			}
+		}
 	}
 
 }
