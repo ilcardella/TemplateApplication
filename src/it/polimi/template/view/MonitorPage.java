@@ -15,8 +15,8 @@ import javax.swing.table.DefaultTableModel;
 public class MonitorPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-//	private ArrayList<Mission> missions = new ArrayList<Mission>();
-//	private ArrayList<Drone> drones = new ArrayList<Drone>();
+	// private ArrayList<Mission> missions = new ArrayList<Mission>();
+	// private ArrayList<Drone> drones = new ArrayList<Drone>();
 
 	private JButton start;
 	private JButton stop;
@@ -30,7 +30,7 @@ public class MonitorPage extends JFrame {
 
 	public final void initUI() {
 
-//		final ArrayList<Trip> trips = new ArrayList<Trip>();
+		// final ArrayList<Trip> trips = new ArrayList<Trip>();
 
 		setLayout(new BorderLayout());
 
@@ -92,7 +92,7 @@ public class MonitorPage extends JFrame {
 	}
 
 	public void fillConsole(final String log) {
-		text.append(log);	
+		text.append(log);
 	}
 
 	public void updateTableRow(String missionName, String missionStatus,
@@ -101,12 +101,20 @@ public class MonitorPage extends JFrame {
 
 		int rowCount = model.getRowCount();
 
+		boolean exist = false;
+
+		if (rowCount == 0) {
+			model.addRow(new Object[] { missionName, missionStatus, droneID,
+					droneStatus, tripName, tripStatus });
+		}
+
 		if (rowCount > 0) {
 
 			for (int i = 0; i < rowCount; i++) {
 				// if there is a row with the same missionName
 				if (model.getValueAt(i, 0).equals(missionName)) {
-					// if there is a row with the same trip
+
+					exist = true;
 					model.setValueAt(missionName, i, 0);
 					model.fireTableCellUpdated(i, 0);
 
@@ -124,18 +132,12 @@ public class MonitorPage extends JFrame {
 
 					model.setValueAt(tripStatus, i, 5);
 					model.fireTableCellUpdated(i, 5);
-
-				} else {
-					// mission not found
-					model.addRow(new Object[] { missionName, missionStatus,
-							droneID, droneStatus, tripName, tripStatus });
-
 				}
+
 			}
-		} else {
-			// the table is empty
-			model.addRow(new Object[] { missionName, missionStatus, droneID,
-					droneStatus, tripName, tripStatus });
+			if (exist == false)
+				model.addRow(new Object[] { missionName, missionStatus,
+						droneID, droneStatus, tripName, tripStatus });
 		}
 
 	}
