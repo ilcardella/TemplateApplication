@@ -93,12 +93,7 @@ public class MonitorPage extends JFrame {
 	}
 
 	public void fillConsole(final String log) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				text.append(log);
-			}
-		});
+		text.append(log);	
 	}
 
 	public void updateTableRow(String missionName, int missionStatus,

@@ -15,8 +15,7 @@ public class MissionPageController {
 	private MissionsPage missionPage;
 	List<Mission> missions;
 
-	public MissionPageController(MissionsPage view, List<Item> items,
-			List<Drone> drones) {
+	public MissionPageController(MissionsPage view) {
 
 		this.missionPage = view;
 		this.missionPage
