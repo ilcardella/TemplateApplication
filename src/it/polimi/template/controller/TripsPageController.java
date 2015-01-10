@@ -17,12 +17,26 @@ public class TripsPageController {
 
 	private TripsPage tripsPage;
 	private Mission mission;
-	private char tripCounter = 65;
+	private char tripCounter;
 
 	public TripsPageController(TripsPage tripsPage, Mission mission) {
 		this.tripsPage = tripsPage;
 		this.mission = mission;
 
+		// Initialize the tripCounter
+		if(mission.getTrips() != null && mission.getTrips().size() > 0){
+			String max = "A";
+			for(Trip t: mission.getTrips()){
+				String[] array = t.getName().split("-");
+				max = array[1];
+			}
+			tripCounter = max.charAt(0);
+			tripCounter++;
+		}
+		else{
+			tripCounter = 65; // equals to A
+		}
+		
 		this.tripsPage.setOkButtonListener(new TripsPageOkButtonListener());
 		this.tripsPage
 				.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
@@ -61,7 +75,8 @@ public class TripsPageController {
 
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
-		trip.setName(mission.getName() + " - " + tripCounter);
+		
+		trip.setName(mission.getName() + "-" + tripCounter);
 		tripCounter++; 
 		
 		if (actionName.equals(Action.PICK_ITEM.toString())

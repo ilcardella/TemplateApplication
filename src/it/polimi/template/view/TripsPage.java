@@ -59,6 +59,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private JButton ok;
 	private JButton delete;
 
+	List<String> tripsNames;
 	private String nameMission;
 	private String selectedAction;
 	private ImageIcon icon;
@@ -66,8 +67,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	DragSource ds;
 	StringSelection transferable;
 
-	public TripsPage(String name) {
+	public TripsPage(String name, List<String> tripsNames) {
 		this.nameMission = name;
+		this.tripsNames = tripsNames;
 
 		try {
 			initUI();
@@ -94,6 +96,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		model1 = new DefaultListModel<String>();
 		tripList = new JList<String>(model1);
 		tripList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		for(String name: tripsNames){
+			 model1.addElement(name);
+		}
 
 	}
 

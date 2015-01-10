@@ -142,10 +142,18 @@ public class MissionPageController {
 
 					Mission m = missions.get(i);
 
+					//build list of trips names 
+					List<String> tripsNames = new ArrayList<String>();
+					if(m.getTrips() != null && m.getTrips().size() > 0){
+						for(Trip t: m.getTrips()){
+							tripsNames.add(t.getName());
+						}
+					}
+					
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							TripsPage tripsPage = new TripsPage(missionName);
+							TripsPage tripsPage = new TripsPage(missionName, tripsNames);
 							TripsPageController tripsPageController = new TripsPageController(
 									tripsPage, m);
 							tripsPage.setVisible(true);
