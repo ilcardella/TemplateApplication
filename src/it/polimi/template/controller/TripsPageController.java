@@ -105,6 +105,8 @@ public class TripsPageController {
 			
 			trip.setAction(Action.TAKE_PHOTO);
 		}
+		
+		
 		// set the priority to the trip
 		int priority = tripsPage.showPriorityPanel();
 		trip.setPriority(priority);
