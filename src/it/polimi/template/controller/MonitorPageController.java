@@ -33,16 +33,6 @@ public class MonitorPageController {
 	}
 
 	protected void launchExecution() {
-//		ExecutorService executor = Executors
-//				.newFixedThreadPool(missions.size());
-//		for (int i = 0; i < missions.size(); i++) {
-//			Runnable worker = new WorkerThread(missions.get(i), this);
-//			executor.execute(worker);
-//		}
-//		executor.shutdown();
-//		while (!executor.isTerminated()) {
-//		}
-//		System.out.println("Finished all threads");
 		
 		for (int i = 0; i < missions.size(); i++) {
 			MyWorker worker = new MyWorker(missions.get(i), this);
