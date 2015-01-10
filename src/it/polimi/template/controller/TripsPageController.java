@@ -24,19 +24,18 @@ public class TripsPageController {
 		this.mission = mission;
 
 		// Initialize the tripCounter
-		if(mission.getTrips() != null && mission.getTrips().size() > 0){
+		if (mission.getTrips() != null && mission.getTrips().size() > 0) {
 			String max = "A";
-			for(Trip t: mission.getTrips()){
+			for (Trip t : mission.getTrips()) {
 				String[] array = t.getName().split("-");
 				max = array[1];
 			}
 			tripCounter = max.charAt(0);
 			tripCounter++;
-		}
-		else{
+		} else {
 			tripCounter = 65; // equals to A
 		}
-		
+
 		this.tripsPage.setOkButtonListener(new TripsPageOkButtonListener());
 		this.tripsPage
 				.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
@@ -66,7 +65,7 @@ public class TripsPageController {
 
 		public void actionPerformed() {
 			String actionName = tripsPage.getAction();
-			manageDragAndDrop(actionName); 
+			manageDragAndDrop(actionName);
 		}
 
 	}
@@ -75,38 +74,36 @@ public class TripsPageController {
 
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
-		
+
 		trip.setName(mission.getName() + "-" + tripCounter);
-		tripCounter++; 
-		
-		if (actionName.equals(Action.PICK_ITEM.toString())
-				|| actionName.equals(Action.RELEASE_ITEM.toString())) {
+		tripCounter++;
 
-			if (actionName.equals(Action.PICK_ITEM.toString()))
-				trip.setAction(Action.PICK_ITEM);
-			else
-				trip.setAction(Action.RELEASE_ITEM);
+		// cycles all the possible actions
+		for (Action a : Action.values()) {
 
-			// create a string list with the name of the items
-			List<String> itemsNames = new ArrayList<String>();
-			for (Item i : ItemsManager.getItems())
-				itemsNames.add(i.getName());
+			// assign the right action to the trip
+			if (a.toString().equals(actionName)) {
+				trip.setAction(a);
 
-			// get the items from the user input
-			String iName = tripsPage.showItemsPanel(itemsNames);
+				// some actions requires the items, other not
+				if (a.isItemRequired()) {
 
-			// set the item to the trip
-			for (Item i : ItemsManager.getItems())
-				if (i.getName().equals(iName))
-					trip.setItem(i);
-		} else {
-			// TODO Implementare anche le altre Action, Forse meglio usare uno
-			// Switch-Case su actionName
-			
-			trip.setAction(Action.TAKE_PHOTO);
+					// create a string list with the name of the items
+					List<String> itemsNames = new ArrayList<String>();
+					for (Item i : ItemsManager.getItems())
+						itemsNames.add(i.getName());
+
+					// get the items from the user input
+					String iName = tripsPage.showItemsPanel(itemsNames);
+
+					// set the item to the trip
+					for (Item i : ItemsManager.getItems())
+						if (i.getName().equals(iName))
+							trip.setItem(i);
+				}
+			}
 		}
-		
-		
+
 		// set the priority to the trip
 		int priority = tripsPage.showPriorityPanel();
 		trip.setPriority(priority);
