@@ -8,9 +8,11 @@ public enum Action implements IAction {
 		@Override
 		public void doAction() {
 			// TODO Auto-generated method stub
-			long start = System.currentTimeMillis();
-			long delay = 3000;
-			while(System.currentTimeMillis() > start + delay ){}
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 		@Override
@@ -24,9 +26,11 @@ public enum Action implements IAction {
 		@Override
 		public void doAction() {
 			// TODO Auto-generated method stub
-			long start = System.currentTimeMillis();
-			long delay = 3000;
-			while(System.currentTimeMillis() > start + delay ){}
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 		@Override
@@ -40,9 +44,11 @@ public enum Action implements IAction {
 		@Override
 		public void doAction() {
 			// TODO Auto-generated method stub
-			long start = System.currentTimeMillis();
-			long delay = 3000;
-			while(System.currentTimeMillis() > start + delay ){}
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 		@Override
@@ -56,9 +62,11 @@ public enum Action implements IAction {
 		@Override
 		public void doAction() {
 			// TODO Auto-generated method stub
-			long start = System.currentTimeMillis();
-			long delay = 3000;
-			while(System.currentTimeMillis() > start + delay ){}
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 		@Override
