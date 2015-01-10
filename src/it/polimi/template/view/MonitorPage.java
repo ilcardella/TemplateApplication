@@ -95,8 +95,8 @@ public class MonitorPage extends JFrame {
 		text.append(log);	
 	}
 
-	public void updateTableRow(String missionName, int missionStatus,
-			int droneID, int droneStatus, String tripName, int tripStatus) {
+	public void updateTableRow(String missionName, String missionStatus,
+			int droneID, String droneStatus, String tripName, String tripStatus) {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 
 		int rowCount = model.getRowCount();

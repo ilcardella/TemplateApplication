@@ -98,7 +98,7 @@ public class MissionPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			String missionName = missionPage.getSelectedMission();
+			final String missionName = missionPage.getSelectedMission();
 
 			if (!missionName.equals("")) {
 
@@ -106,7 +106,7 @@ public class MissionPageController {
 
 					if (missions.get(i).getName().equals(missionName)) {
 
-						Mission m = missions.get(i);
+						final Mission m = missions.get(i);
 
 						SwingUtilities.invokeLater(new Runnable() {
 							@Override
@@ -140,7 +140,7 @@ public class MissionPageController {
 		public void mouseClicked(MouseEvent e) {
 
 			 if (e.getClickCount() == 2) {
-				 String missionName = missionPage.getSelectedMission();
+				 final String missionName = missionPage.getSelectedMission();
 
 					if (!missionName.equals("")) {
 
@@ -148,7 +148,7 @@ public class MissionPageController {
 
 							if (missions.get(i).getName().equals(missionName)) {
 
-								Mission m = missions.get(i);
+								final Mission m = missions.get(i);
 
 								SwingUtilities.invokeLater(new Runnable() {
 									@Override
