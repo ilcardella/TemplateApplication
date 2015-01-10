@@ -3,23 +3,21 @@ package it.polimi.template.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-import it.polimi.template.model.*;
-
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 public class MonitorPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Mission> missions = new ArrayList<Mission>();
-	private ArrayList<Drone> drones = new ArrayList<Drone>();
+//	private ArrayList<Mission> missions = new ArrayList<Mission>();
+//	private ArrayList<Drone> drones = new ArrayList<Drone>();
 
 	private JButton start;
 	private JButton stop;
@@ -33,7 +31,7 @@ public class MonitorPage extends JFrame {
 
 	public final void initUI() {
 
-		final ArrayList<Trip> trips = new ArrayList<Trip>();
+//		final ArrayList<Trip> trips = new ArrayList<Trip>();
 
 		setLayout(new BorderLayout());
 
@@ -94,10 +92,13 @@ public class MonitorPage extends JFrame {
 		}
 	}
 
-	public void fillConsole(String log) {
-
-		text.append(log);
-
+	public void fillConsole(final String log) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				text.append(log);
+			}
+		});
 	}
 
 	public void updateTableRow(String missionName, int missionStatus,

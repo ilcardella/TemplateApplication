@@ -2,8 +2,6 @@ package it.polimi.template.controller;
 
 import it.polimi.template.controller.thread.WorkerThread;
 import it.polimi.template.model.Mission;
-import it.polimi.template.utils.ConsoleUpdateJob;
-import it.polimi.template.utils.TableUpdateJob;
 import it.polimi.template.view.MonitorPage;
 
 import java.awt.event.ActionEvent;
@@ -11,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import javax.swing.SwingUtilities;
 
 public class MonitorPageController {
 
@@ -87,14 +83,16 @@ public class MonitorPageController {
 			missionStatus = mission.getStatus();
 		}
 
-//		this.monitorPage.fillConsole("MissionName = " + missionName + ", MissionStatus = "
-//						+ missionStatus + ", DroneID = " + droneID
-//						+ ", DroneStatus = " + droneStatus + ", TripName = "
-//						+ tripName + ", TripStatus = " + tripStatus+'\n');
+		this.monitorPage.fillConsole("MissionName = " + missionName
+				+ ", MissionStatus = " + missionStatus + ", DroneID = "
+				+ droneID + ", DroneStatus = " + droneStatus + ", TripName = "
+				+ tripName + ", TripStatus = " + tripStatus + '\n');
 		
-//		SwingUtilities.invokeLater(new TableUpdateJob(missionName, missionStatus, tripName, tripStatus, droneID, droneStatus, monitorPage));
-//		SwingUtilities.invokeLater(new ConsoleUpdateJob(missionName, missionStatus, tripName, tripStatus, droneID, droneStatus, monitorPage));
+		this.monitorPage.updateTableRow(missionName, missionStatus, droneID, droneStatus, tripName, tripStatus);
+		
+	}
 
-		
+	public MonitorPage getView() {
+		return this.monitorPage;
 	}
 }
