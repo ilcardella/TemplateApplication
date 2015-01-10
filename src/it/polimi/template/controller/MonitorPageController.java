@@ -1,5 +1,6 @@
 package it.polimi.template.controller;
 
+import it.polimi.template.controller.thread.MyWorker;
 import it.polimi.template.controller.thread.WorkerThread;
 import it.polimi.template.model.Mission;
 import it.polimi.template.view.MonitorPage;
@@ -9,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.swing.SwingUtilities;
 
 public class MonitorPageController {
 
@@ -33,16 +36,22 @@ public class MonitorPageController {
 	}
 
 	protected void launchExecution() {
-		ExecutorService executor = Executors
-				.newFixedThreadPool(missions.size());
+//		ExecutorService executor = Executors
+//				.newFixedThreadPool(missions.size());
+//		for (int i = 0; i < missions.size(); i++) {
+//			Runnable worker = new WorkerThread(missions.get(i), this);
+//			executor.execute(worker);
+//		}
+//		executor.shutdown();
+//		while (!executor.isTerminated()) {
+//		}
+//		System.out.println("Finished all threads");
+		
 		for (int i = 0; i < missions.size(); i++) {
-			Runnable worker = new WorkerThread(missions.get(i), this);
-			executor.execute(worker);
+			MyWorker worker = new MyWorker(missions.get(i), this);
+			worker.execute();
 		}
-		executor.shutdown();
-		while (!executor.isTerminated()) {
-		}
-		System.out.println("Finished all threads");
+		
 
 	}
 
@@ -92,7 +101,4 @@ public class MonitorPageController {
 		
 	}
 
-	public MonitorPage getView() {
-		return this.monitorPage;
-	}
 }

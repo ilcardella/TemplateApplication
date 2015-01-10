@@ -67,7 +67,13 @@ public class Drone {
 	}
 
 	private boolean flyTo(String target) {
-
+		long a = System.currentTimeMillis();
+	    long b = System.currentTimeMillis();
+	    long amt = 3000;
+	    while ((b - a) <= amt)
+	    {
+	        b = System.currentTimeMillis();
+	    }
 		return true;
 	}
 }
