@@ -37,33 +37,6 @@ public class MissionsPage extends JFrame {
 		model = new DefaultListModel();
 		list = new JList(model);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-		// list.addMouseListener(new MouseAdapter() {
-		//
-		// @Override
-		// public void mouseClicked(MouseEvent e) {
-		//
-		// if (e.getClickCount() == 2) {
-		// int index = list.locationToIndex(e.getPoint());
-		// Object item = model.getElementAt(index);
-		// String text = JOptionPane.showInputDialog("Rename item",
-		// item);
-		// String newitem = null;
-		// if (text != null) {
-		// newitem = text.trim();
-		// } else {
-		// return;
-		// }
-		//
-		// if (!newitem.isEmpty()) {
-		// model.remove(index);
-		// model.add(index, newitem);
-		// ListSelectionModel selmodel = list.getSelectionModel();
-		// selmodel.setLeadSelectionIndex(index);
-		// }
-		// }
-		// }
-		// });
 	}
 
 	private void createButtons() {
