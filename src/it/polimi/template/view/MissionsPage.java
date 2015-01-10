@@ -1,5 +1,7 @@
 package it.polimi.template.view;
 
+import it.polimi.template.controller.MissionPageController.MissionDoubleClickListener;
+import it.polimi.template.controller.TripsPageController.ExportDoneListener;
 import it.polimi.template.model.*;
 
 import javax.swing.JFrame;
@@ -32,6 +34,8 @@ public class MissionsPage extends JFrame {
 	private JButton tpsbtn;
 	private JButton okbtn;
 
+	private MissionDoubleClickListener mdc;
+
 	public MissionsPage() {
 		initUI();
 	}
@@ -48,23 +52,9 @@ public class MissionsPage extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 
 				if (e.getClickCount() == 2) {
-					int index = list.locationToIndex(e.getPoint());
-					Object item = model.getElementAt(index);
-					String text = JOptionPane.showInputDialog("Rename item",
-							item);
-					String newitem = null;
-					if (text != null) {
-						newitem = text.trim();
-					} else {
-						return;
-					}
 
-					if (!newitem.isEmpty()) {
-						model.remove(index);
-						model.add(index, newitem);
-						ListSelectionModel selmodel = list.getSelectionModel();
-						selmodel.setLeadSelectionIndex(index);
-					}
+					mdc.actionPerformed();
+
 				}
 			}
 		});
@@ -209,11 +199,18 @@ public class MissionsPage extends JFrame {
 	public void setTripsListener(ActionListener listener) {
 		tpsbtn.addActionListener(listener);
 	}
-	
-	//ok button 
+
+	// ok button
 
 	public void missionsPageOkButtonListener(ActionListener listener) {
 		okbtn.addActionListener(listener);
+
+	}
+
+	// double click on mission
+
+	public void setDoubleClickListener(MissionDoubleClickListener listener) {
+		mdc = listener;
 
 	}
 

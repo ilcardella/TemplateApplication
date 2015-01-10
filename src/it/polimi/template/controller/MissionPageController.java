@@ -30,6 +30,8 @@ public class MissionPageController {
 				.setTripsListener(new SetTripsListener());
 		this.missionPage
 				.missionsPageOkButtonListener(new MissionsPageOkButtonListener());
+		this.missionPage
+		.setDoubleClickListener(new MissionDoubleClickListener());
 
 	}
 
@@ -117,6 +119,25 @@ public class MissionPageController {
 			MonitorPageController monitorController = new MonitorPageController(monitorPage, missions);
 			monitorPage.setVisible(true);
 		}
+	}
+	
+	
+	 public class MissionDoubleClickListener{
+
+		public void actionPerformed() {
+			String missionName = missionPage.getSelectedMission();
+			if (missionName!=""){
+				
+				TripsPage tripsPage = new TripsPage(missionName);
+				
+				for(int i = 0; i<missions.size();i++)
+					if(missions.get(i).getName().equals(missionName)){
+						TripsPageController tripsPageController = new TripsPageController(tripsPage, missions.get(i));
+						tripsPage.setVisible(true);
+					}
+			}
+		}
+
 	}
 
 }
