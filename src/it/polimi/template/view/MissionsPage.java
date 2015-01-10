@@ -47,25 +47,25 @@ public class MissionsPage extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				if (e.getClickCount() == 2) {
-					int index = list.locationToIndex(e.getPoint());
-					Object item = model.getElementAt(index);
-					String text = JOptionPane.showInputDialog("Rename item",
-							item);
-					String newitem = null;
-					if (text != null) {
-						newitem = text.trim();
-					} else {
-						return;
-					}
-
-					if (!newitem.isEmpty()) {
-						model.remove(index);
-						model.add(index, newitem);
-						ListSelectionModel selmodel = list.getSelectionModel();
-						selmodel.setLeadSelectionIndex(index);
-					}
-				}
+//				if (e.getClickCount() == 2) {
+//					int index = list.locationToIndex(e.getPoint());
+//					Object item = model.getElementAt(index);
+//					String text = JOptionPane.showInputDialog("Rename item",
+//							item);
+//					String newitem = null;
+//					if (text != null) {
+//						newitem = text.trim();
+//					} else {
+//						return;
+//					}
+//
+//					if (!newitem.isEmpty()) {
+//						model.remove(index);
+//						model.add(index, newitem);
+//						ListSelectionModel selmodel = list.getSelectionModel();
+//						selmodel.setLeadSelectionIndex(index);
+//					}
+//				}
 			}
 		});
 	}
@@ -142,7 +142,7 @@ public class MissionsPage extends JFrame {
 		return missionName;
 	}
 
-	public void addMissionButtonListener(ActionListener listener) {
+	public void setAddMissionButtonListener(ActionListener listener) {
 		addbtn.addActionListener(listener);
 	}
 
@@ -173,7 +173,7 @@ public class MissionsPage extends JFrame {
 		model.remove(index);
 	}
 
-	public void deleteMissionButtonListener(ActionListener listener) {
+	public void setDeleteMissionButtonListener(ActionListener listener) {
 		delbtn.addActionListener(listener);
 	}
 
@@ -184,13 +184,13 @@ public class MissionsPage extends JFrame {
 		model.clear();
 	}
 
-	public void removeAllMissionButtonListener(ActionListener listener) {
+	public void setRemoveAllMissionButtonListener(ActionListener listener) {
 		remallbtn.addActionListener(listener);
 	}
 
 	// rename button
 
-	public void renameButtonListener(ActionListener listener) {
+	public void setRenameButtonListener(ActionListener listener) {
 		renbtn.addActionListener(listener);
 	}
 
@@ -206,13 +206,13 @@ public class MissionsPage extends JFrame {
 
 	// set trips button
 
-	public void setTripsListener(ActionListener listener) {
+	public void setTripsButtonListener(ActionListener listener) {
 		tpsbtn.addActionListener(listener);
 	}
 	
 	//ok button 
 
-	public void missionsPageOkButtonListener(ActionListener listener) {
+	public void setMissionsPageOkButtonListener(ActionListener listener) {
 		okbtn.addActionListener(listener);
 
 	}
