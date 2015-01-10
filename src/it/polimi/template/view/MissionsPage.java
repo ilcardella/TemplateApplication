@@ -19,8 +19,8 @@ public class MissionsPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private DefaultListModel model;
-	private JList list;
+	private DefaultListModel<String> model;
+	private JList<String> list;
 	private JButton remallbtn;
 	private JButton addbtn;
 	private JButton renbtn;
@@ -34,8 +34,8 @@ public class MissionsPage extends JFrame {
 
 	private void createList() {
 
-		model = new DefaultListModel();
-		list = new JList(model);
+		model = new DefaultListModel<String>();
+		list = new JList<String>(model);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 
