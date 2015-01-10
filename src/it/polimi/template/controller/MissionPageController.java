@@ -32,6 +32,8 @@ public class MissionPageController {
 		this.missionPage.setTripsButtonListener(new SetTripsButtonListener());
 		this.missionPage
 				.setMissionsPageOkButtonListener(new MissionsPageOkButtonListener());
+		this.missionPage.setListMouseListener(new ListMouseListener());
+		;
 
 	}
 
@@ -131,39 +133,45 @@ public class MissionPageController {
 			monitorPage.setVisible(true);
 		}
 	}
-	
-	class SetTripsMouseListener implements MouseListener{
+
+	class ListMouseListener implements MouseListener {
 
 		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mouseClicked(MouseEvent e) {
 
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+			 if (e.getClickCount() == 2) {
+				 String missionName = missionPage.getSelectedMission();
 
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+					if (!missionName.equals("")) {
 
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+						for (int i = 0; i < missions.size(); i++) {
 
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
+							if (missions.get(i).getName().equals(missionName)) {
+
+								Mission m = missions.get(i);
+
+								SwingUtilities.invokeLater(new Runnable() {
+									@Override
+									public void run() {
+										TripsPage tripsPage = new TripsPage(missionName);
+										TripsPageController tripsPageController = new TripsPageController(
+												tripsPage, m);
+										tripsPage.setVisible(true);
+									}
+								});
+							}
+						}
+					}
+			 }
 		}
-		
+		@Override
+		public void mouseEntered(MouseEvent arg0) {}
+		@Override
+		public void mouseExited(MouseEvent arg0) {}
+		@Override
+		public void mousePressed(MouseEvent arg0) {}
+		@Override
+		public void mouseReleased(MouseEvent arg0) {}
 	}
 
 }
