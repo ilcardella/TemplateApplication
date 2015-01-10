@@ -49,8 +49,6 @@ public class MyWorker extends SwingWorker<Integer, String> {
 				break;
 		}
 
-		parent.notifyUpdateOfStatus(m);
-
 		return 42;
 	}
 
