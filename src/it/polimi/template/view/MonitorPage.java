@@ -1,6 +1,7 @@
 package it.polimi.template.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import it.polimi.template.model.*;
 
@@ -11,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 public class MonitorPage extends JFrame {
@@ -22,6 +24,7 @@ public class MonitorPage extends JFrame {
 	private JButton start;
 	private JButton stop;
 	private JTable table;
+	private JTextArea text;
 
 	public MonitorPage() {
 
@@ -46,16 +49,22 @@ public class MonitorPage extends JFrame {
 		JScrollPane tablePane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
 
+		text = new JTextArea();
+		text.setBackground(Color.LIGHT_GRAY);
+		text.setForeground(Color.RED);
+		JScrollPane textPane = new JScrollPane(text);
+
 		JPanel buttonsPane = new JPanel();
 		start = new JButton("Start");
-
 		stop = new JButton("Stop");
 
 		buttonsPane.add(start);
 		buttonsPane.add(stop);
 
 		getContentPane().add(tablePane, BorderLayout.NORTH);
-		getContentPane().add(buttonsPane, BorderLayout.CENTER);
+
+		getContentPane().add(buttonsPane, BorderLayout.EAST);
+		getContentPane().add(textPane);
 
 		setTitle("Pluto - Monitor Page");
 		setSize(1000, 800);
@@ -85,47 +94,54 @@ public class MonitorPage extends JFrame {
 		}
 	}
 
+	public void fillConsole(String log) {
+
+		text.append(log);
+
+	}
+
 	public void updateTableRow(String missionName, int missionStatus,
 			int droneID, int droneStatus, String tripName, int tripStatus) {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 
 		int rowCount = model.getRowCount();
 
-	//	if (rowCount == 0)
+		if (rowCount > 0) {
+
+			for (int i = 0; i < rowCount; i++) {
+				// if there is a row with the same missionName
+				if (model.getValueAt(i, 0).equals(missionName)) {
+					// if there is a row with the same trip
+					model.setValueAt(missionName, i, 0);
+					model.fireTableCellUpdated(i, 0);
+
+					model.setValueAt(missionStatus, i, 1);
+					model.fireTableCellUpdated(i, 1);
+
+					model.setValueAt(droneID, i, 2);
+					model.fireTableCellUpdated(i, 2);
+
+					model.setValueAt(droneStatus, i, 3);
+					model.fireTableCellUpdated(i, 3);
+
+					model.setValueAt(tripName, i, 4);
+					model.fireTableCellUpdated(i, 4);
+
+					model.setValueAt(tripStatus, i, 5);
+					model.fireTableCellUpdated(i, 5);
+
+				} else {
+					// mission not found
+					model.addRow(new Object[] { missionName, missionStatus,
+							droneID, droneStatus, tripName, tripStatus });
+
+				}
+			}
+		} else {
+			// the table is empty
 			model.addRow(new Object[] { missionName, missionStatus, droneID,
 					droneStatus, tripName, tripStatus });
+		}
 
-//		for (int i = rowCount - 1; i >= 0; i--) {
-//			// if there is a row with the same missionName
-//			if (model.getValueAt(i, 0).equals(missionName)){
-//				// if there is a row with the same trip
-//				if (model.getValueAt(i, 4).equals(tripName)){
-//					// if the mission is not completed yet
-//					if (!model.getValueAt(i, 1).equals(Mission.COMPLETED))
-//						// if the trip is not completed yet
-//						if (!model.getValueAt(i, 5).equals(Trip.COMPLETED)) {
-//							// add the new row and delete the old one
-//							model.removeRow(i);
-//							model.addRow(new Object[] { missionName,
-//									missionStatus, droneID, droneStatus,
-//									tripName, tripStatus });
-//						}
-//			}
-//				
-//				// if the missionName is the same but the tripName is different, add a new row to the table
-//
-//				else{
-//					model.addRow(new Object[] { missionName,
-//							missionStatus, droneID, droneStatus,
-//							tripName, tripStatus });
-//				}
-//			}
-//			// if there is not a row with the same missionName, add a new row to the table
-//			else{
-//				model.addRow(new Object[] { missionName,
-//						missionStatus, droneID, droneStatus,
-//						tripName, tripStatus });
-//			}
-//		}
 	}
 }
