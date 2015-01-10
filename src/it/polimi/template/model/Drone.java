@@ -1,11 +1,6 @@
 package it.polimi.template.model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.Timer;
 
 public class Drone {
 

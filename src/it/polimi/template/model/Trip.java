@@ -1,7 +1,5 @@
 package it.polimi.template.model;
 
-import java.util.Comparator;
-
 public class Trip  {
 
 	public static final int WAITING = 1;
