@@ -132,7 +132,7 @@ public class MissionPageController {
 	}
 	
 	private void launchTripsPage(){
-		String missionName = missionPage.getSelectedMission();
+		final String missionName = missionPage.getSelectedMission();
 
 		if (!missionName.equals("")) {
 
@@ -140,10 +140,10 @@ public class MissionPageController {
 
 				if (missions.get(i).getName().equals(missionName)) {
 
-					Mission m = missions.get(i);
+					final Mission m = missions.get(i);
 
 					//build list of trips names 
-					List<String> tripsNames = new ArrayList<String>();
+					final List<String> tripsNames = new ArrayList<String>();
 					if(m.getTrips() != null && m.getTrips().size() > 0){
 						for(Trip t: m.getTrips()){
 							tripsNames.add(t.getName());
