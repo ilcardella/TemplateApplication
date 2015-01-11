@@ -33,6 +33,12 @@ public class MyWorker extends SwingWorker<Integer, String> {
 
 		while (m.getStatus() != Mission.COMPLETED) {
 
+			// TODO Nel caso del Clock
+			// viene sempre controllato se esiste un delay sul next trip
+			// se esiste si aspetta che sia passato il tempo
+			// altrimenti si continua normalmente
+			// m = clock.run(m);
+			
 			m = da.run(m);
 
 			parent.notifyUpdateOfStatus(m);
@@ -46,6 +52,12 @@ public class MyWorker extends SwingWorker<Integer, String> {
 			parent.notifyUpdateOfStatus(m);
 
 			if (m.getStatus() == Mission.FAILED)
+				
+				//TODO Nel caso del Priority Manager
+				// viene inserita la missione 
+				// il pm cambia la priorità e risetta gli stati
+				// il "break non serve più e si ritorna all'inizio del ciclo
+				// m = pm.run(m)
 				break;
 		}
 
