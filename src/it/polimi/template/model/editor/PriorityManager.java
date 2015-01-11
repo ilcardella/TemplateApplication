@@ -6,10 +6,8 @@ public class PriorityManager implements Node {
 
 	@Override
 	public Mission run(Mission m) {
-		// the new priority for the trip is set by the user
-		int newPriority = m.getTrips().get(0).getPriority();
-		newPriority++;
-		m.getTrips().get(0).setPriority(newPriority);
+		// increment the priority to HIGH level
+		m.getTrips().get(0).setPriority(150);
 		m.setStatus(Mission.STANDBY);
 		return m;
 	}

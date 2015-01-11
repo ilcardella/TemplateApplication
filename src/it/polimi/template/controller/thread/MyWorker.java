@@ -2,8 +2,10 @@ package it.polimi.template.controller.thread;
 
 import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.model.Mission;
+import it.polimi.template.model.editor.Clock;
 import it.polimi.template.model.editor.DroneAllocator;
 import it.polimi.template.model.editor.MissionCreator;
+import it.polimi.template.model.editor.PriorityManager;
 import it.polimi.template.model.editor.TripLauncher;
 import it.polimi.template.model.editor.TripMonitor;
 
@@ -17,6 +19,8 @@ public class MyWorker extends SwingWorker<Integer, String> {
 	private DroneAllocator da = new DroneAllocator();
 	private TripLauncher tl = new TripLauncher();
 	private TripMonitor tm = new TripMonitor();
+	private Clock clk = new Clock();
+	private PriorityManager pm = new PriorityManager();
 
 	public MyWorker(Mission mission, MonitorPageController parent) {
 		this.m = mission;
@@ -34,11 +38,13 @@ public class MyWorker extends SwingWorker<Integer, String> {
 
 		while (m.getStatus() != Mission.COMPLETED) {
 
-			// TODO Nel caso del Clock
+			// Nel caso del Clock
 			// viene sempre controllato se esiste un delay sul next trip
 			// se esiste si aspetta che sia passato il tempo
 			// altrimenti si continua normalmente
-			// m = clock.run(m);
+			m = clk.run(m);
+			
+			parent.notifyUpdateOfStatus(m);
 			
 			m = da.run(m);
 
@@ -54,11 +60,11 @@ public class MyWorker extends SwingWorker<Integer, String> {
 
 			if (m.getStatus() == Mission.FAILED)
 				
-				//TODO Nel caso del Priority Manager
+				// Nel caso del Priority Manager
 				// viene inserita la missione 
 				// il pm cambia la priorità e risetta gli stati
 				// il "break non serve più e si ritorna all'inizio del ciclo
-				// m = pm.run(m)
+				m = pm.run(m);
 				break;
 		}
 
