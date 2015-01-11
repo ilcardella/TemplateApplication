@@ -65,7 +65,7 @@ public class MyWorker extends SwingWorker<Integer, String> {
 				// il pm cambia la priorità e risetta gli stati
 				// il "break non serve più e si ritorna all'inizio del ciclo
 				m = pm.run(m);
-				break;
+				// break;
 		}
 
 		return 42;

@@ -105,10 +105,17 @@ public class MissionPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			MonitorPage monitorPage = new MonitorPage();
-			MonitorPageController monitorController = new MonitorPageController(
-					monitorPage, missions);
-			monitorPage.setVisible(true);
+			
+			SwingUtilities.invokeLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					MonitorPage monitorPage = new MonitorPage();
+					MonitorPageController monitorController = new MonitorPageController(
+							monitorPage, missions);
+					monitorPage.setVisible(true);
+				}
+			});
 		}
 	}
 
