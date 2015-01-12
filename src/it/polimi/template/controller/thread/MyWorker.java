@@ -15,6 +15,8 @@ public class MyWorker extends SwingWorker<Integer, String> {
 
 	private MonitorPageController parent;
 	private Mission m;
+	
+	//<dec>
 	private MissionCreator mc = new MissionCreator();
 	private DroneAllocator da = new DroneAllocator();
 	private TripLauncher tl = new TripLauncher();
@@ -62,8 +64,8 @@ public class MyWorker extends SwingWorker<Integer, String> {
 				
 				// Nel caso del Priority Manager
 				// viene inserita la missione 
-				// il pm cambia la priorità e risetta gli stati
-				// il "break non serve più e si ritorna all'inizio del ciclo
+				// il pm cambia la prioritï¿½ e risetta gli stati
+				// il "break non serve piï¿½ e si ritorna all'inizio del ciclo
 				m = pm.run(m);
 				// break;
 		}

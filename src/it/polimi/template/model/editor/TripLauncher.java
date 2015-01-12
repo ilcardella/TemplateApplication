@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import it.polimi.template.model.*;
 
 import java.util.Calendar;
+import java.util.Observable;
+import java.util.Observer;
 
-public class TripLauncher implements Node {
+public class TripLauncher extends Node implements Observer {
 
 	private Calendar cal = Calendar.getInstance();
 
@@ -36,6 +38,12 @@ public class TripLauncher implements Node {
 		}
 
 		return m;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

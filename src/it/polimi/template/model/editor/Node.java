@@ -1,9 +1,12 @@
 package it.polimi.template.model.editor;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import it.polimi.template.model.*;
 
-public interface Node {
+public abstract class Node extends Observable{
 	
-	public Mission run(Mission m);
+	public abstract Mission run(Mission m);
 
 }

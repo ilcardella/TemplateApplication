@@ -33,13 +33,10 @@ public class MonitorPageController {
 	}
 
 	protected void launchExecution() {
-		
 		for (int i = 0; i < missions.size(); i++) {
 			MyWorker worker = new MyWorker(missions.get(i), this);
 			worker.execute();
 		}
-		
-
 	}
 
 	class StopButtonListener implements ActionListener {

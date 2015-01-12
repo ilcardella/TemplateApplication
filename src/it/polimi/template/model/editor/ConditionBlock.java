@@ -1,8 +1,11 @@
 package it.polimi.template.model.editor;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import it.polimi.template.model.*;
 
-public class ConditionBlock implements Node {
+public class ConditionBlock extends Node implements Observer {
 
 	@Override
 	public Mission run(Mission m) {
@@ -15,6 +18,12 @@ public class ConditionBlock implements Node {
 			t.setStatus(Trip.DELAYED);
 
 		return m;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

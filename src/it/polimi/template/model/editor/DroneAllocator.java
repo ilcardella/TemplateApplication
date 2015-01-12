@@ -1,9 +1,12 @@
 package it.polimi.template.model.editor;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import it.polimi.template.model.*;
 import it.polimi.template.utils.DronesManager;
 
-public class DroneAllocator implements Node {
+public class DroneAllocator extends Node implements Observer {
 
 	@Override
 	public Mission run(Mission m) {
@@ -45,6 +48,12 @@ public class DroneAllocator implements Node {
 		}
 
 		return m;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

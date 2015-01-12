@@ -1,10 +1,12 @@
 package it.polimi.template.model.editor;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import it.polimi.template.model.*;
 
-public class MissionCreator implements Node {
+public class MissionCreator extends Node implements Observer {
 	
-	@Override
 	public Mission run(Mission m) {
 		if (m.getTrips() != null && m.getStatus() == Mission.UNEXECUTED) {
 			System.out.println("Mission " + m.getName()
@@ -14,6 +16,12 @@ public class MissionCreator implements Node {
 		} else
 			
 			return null;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
