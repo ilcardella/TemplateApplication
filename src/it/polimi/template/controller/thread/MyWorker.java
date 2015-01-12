@@ -16,13 +16,7 @@ public class MyWorker extends SwingWorker<Integer, String> {
 	private MonitorPageController parent;
 	private Mission m;
 	
-	/*<dec>*/
-	private MissionCreator mc = new MissionCreator();
-	private DroneAllocator da = new DroneAllocator();
-	private TripLauncher tl = new TripLauncher();
-	private TripMonitor tm = new TripMonitor();
-	private Clock clk = new Clock();
-	private PriorityManager pm = new PriorityManager();
+	<dec>
 
 	public MyWorker(Mission mission, MonitorPageController parent) {
 		this.m = mission;
@@ -31,17 +25,7 @@ public class MyWorker extends SwingWorker<Integer, String> {
 
 	@Override
 	protected Integer doInBackground() throws Exception {
-		/*<exe>*/
-		
-		// Registro gli oggetti observable ai corretti observer in base alle connessioni
-		// Questa cosa la fa l'editor nella generazione del codice
-		
-		// Lancio il primo blocco il quale a sua volta notificherà
-		// agli observer la missione modificata
-		// a quel punto ogni observer eseguirà il suo codice e notificherà
-		// ai suoi observer il risultato e così via...
-		// il primo blocco è quello che non ha connessioni in ingresso
-		// Anche qui ci pensa l'editor a generare il tutto
+		<exe>
 		
 		return 4;
 	}
