@@ -21,6 +21,7 @@ public class MissionCreator extends Node implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		Mission m = this.run((Mission) arg);
+		setChanged();
 		notifyObservers(m);
 	}
 	
