@@ -16,7 +16,11 @@ public class MyWorker extends SwingWorker<Integer, String> {
 	private MonitorPageController parent;
 	private Mission m;
 	
-	<dec>
+	//<dec>
+	MissionCreator missioncreator = new MissionCreator();
+	DroneAllocator droneallocator = new DroneAllocator();
+	TripLauncher triplauncher = new TripLauncher();
+	TripMonitor tripmonitor = new TripMonitor();
 
 	public MyWorker(Mission mission, MonitorPageController parent) {
 		this.m = mission;
@@ -25,7 +29,11 @@ public class MyWorker extends SwingWorker<Integer, String> {
 
 	@Override
 	protected Integer doInBackground() throws Exception {
-		<exe>
+		missioncreator.addObserver(droneallocator);
+		droneallocator.addObserver(triplauncher);
+		triplauncher.addObserver(tripmonitor);
+		tripmonitor.addObserver(droneallocator);
+		missioncreator.run(m);
 		
 		return 4;
 	}
