@@ -15,8 +15,8 @@ public class MissionModifier extends Node implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		Mission m = this.run((Mission) arg);
+		notifyObservers(m);
 	}
 
 }

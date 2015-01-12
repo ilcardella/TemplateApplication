@@ -15,17 +15,6 @@ public class DroneAllocator extends Node implements Observer {
 		// if there is at least a trip to perform in the mission
 		if (!m.getTrips().isEmpty()) {
 
-//			if (t.getDelay() > 0) {
-//				t.setStatus(Trip.DELAYED);
-//				System.out.println("Trip " + t.getName() + " is delayed");
-//				try {
-//					Thread.sleep(t.getDelay()*1000);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//				t.setStatus(Trip.WAITING);
-//			}
-
 			for (Drone d : DronesManager.getDrones()) {
 				if (d.getStatus() == Drone.FREE
 						&& t.getStatus() != Trip.DELAYED) {
@@ -52,7 +41,8 @@ public class DroneAllocator extends Node implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		Mission m = this.run((Mission) arg);
+		notifyObservers(m);
 		
 	}
 
