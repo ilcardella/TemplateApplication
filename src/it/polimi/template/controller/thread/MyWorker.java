@@ -33,7 +33,7 @@ public class MyWorker extends SwingWorker<Integer, String> {
 		droneallocator.addObserver(triplauncher);
 		triplauncher.addObserver(tripmonitor);
 		tripmonitor.addObserver(droneallocator);
-		missioncreator.run(m);
+		missioncreator.update(null, m);
 		
 		return 4;
 	}
