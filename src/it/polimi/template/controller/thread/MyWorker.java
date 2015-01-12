@@ -29,6 +29,7 @@ public class MyWorker extends SwingWorker<Integer, String> {
 
 	@Override
 	protected Integer doInBackground() throws Exception {
+		//<exe>
 		missioncreator.addObserver(droneallocator);
 		droneallocator.addObserver(triplauncher);
 		triplauncher.addObserver(tripmonitor);
