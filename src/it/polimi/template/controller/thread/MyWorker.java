@@ -34,7 +34,8 @@ public class MyWorker extends SwingWorker<Integer, String> {
 		return 4;
 	}
 
-	public void log(Mission m, String s) {
+	// synchronized because in this way the ui is updated without problems
+	public synchronized void log(Mission m, String s) {
 		controller.log(m, s);
 	}
 	
