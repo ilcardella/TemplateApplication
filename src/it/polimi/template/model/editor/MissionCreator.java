@@ -9,9 +9,8 @@ public class MissionCreator extends Node implements Observer {
 
 	public Mission run(Mission m) {
 		if (m.getTrips() != null && m.getStatus() == Mission.UNEXECUTED) {
-			log(m, "Mission " + m.getName() + " created");
+			log(m, "Mission " + m.getName() + " created"+'\n');
 			return m;
-
 		} else
 			return null;
 	}

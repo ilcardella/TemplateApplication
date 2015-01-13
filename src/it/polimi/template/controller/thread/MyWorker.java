@@ -1,6 +1,5 @@
 package it.polimi.template.controller.thread;
 
-import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.editor.*;
 import javax.swing.SwingWorker;

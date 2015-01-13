@@ -1,7 +1,6 @@
 package it.polimi.template.model.editor;
 
 import it.polimi.template.model.*;
-import it.polimi.template.utils.Logger;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -17,13 +16,14 @@ public class Clock extends Node implements Observer{
 		// if delay > 0 change the status
 		if (t.getDelay() > 0) {
 			t.setStatus(Trip.DELAYED);
-			System.out.println("Trip " + t.getName() + " is delayed");
+			log(m, "Trip " + t.getName() + " is delayed"+'\n');
 			try {
 				Thread.sleep(t.getDelay()*1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			t.setStatus(Trip.WAITING);
+			log(m, "Trip " + t.getName() + " is waiting"+'\n');
 		}
 
 		return m;

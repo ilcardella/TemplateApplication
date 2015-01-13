@@ -49,11 +49,6 @@ public class MonitorPageController implements Observer {
 			monitorPage.clearTable();
 		}
 	}
-
-	public void logUpdateOfStatus(Mission m, String s){
-		updateMonitorTable(m);
-		printToMonitorConsole(s);
-	}
 	
 	private void updateMonitorTable(Mission mission) {
 
@@ -91,7 +86,8 @@ public class MonitorPageController implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		logUpdateOfStatus((Mission)o, (String)arg);
+		updateMonitorTable((Mission)o);
+		printToMonitorConsole((String)arg);
 	}
 	
 

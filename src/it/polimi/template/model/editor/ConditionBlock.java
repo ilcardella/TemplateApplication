@@ -10,13 +10,6 @@ public class ConditionBlock extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 
-		// get the next trip
-		Trip t = m.getTrips().get(0);
-		
-		// if delay > 0 change the status
-		if (t.getDelay() > 0)
-			t.setStatus(Trip.DELAYED);
-
 		return m;
 	}
 

@@ -5,7 +5,6 @@ import java.util.Observer;
 
 import it.polimi.template.model.*;
 import it.polimi.template.utils.DronesManager;
-import it.polimi.template.utils.Logger;
 
 public class DroneAllocator extends Node implements Observer {
 
@@ -24,9 +23,9 @@ public class DroneAllocator extends Node implements Observer {
 									.getShapeCategory()) {
 						d.setStatus(Drone.BUSY);
 						t.setDrone(d);
-
-						System.out.println("Drone " + t.getDrone().getId()
-								+ " is busy");
+						
+						log(m, "Drone " + t.getDrone().getId()
+								+ " is busy"+'\n');
 						
 						break;
 					}
