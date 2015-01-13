@@ -97,8 +97,11 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		model1 = new DefaultListModel<String>();
 		tripList = new JList<String>(model1);
 		tripList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		for(String name: tripsNames){
-			 model1.addElement(name);
+		tripList.setFixedCellWidth(200);
+
+		for (String name : tripsNames) {
+			model1.addElement(name);
+
 		}
 
 	}
@@ -126,13 +129,12 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		ok = new JButton("Ok");
 
 		delete = new JButton("Delete all");
-		
-		deleteOne= new JButton("Delete trip");
+
+		deleteOne = new JButton("Delete trip");
 
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
 		buttonsPane.add(deleteOne);
-
 
 		new MyDropTargetListener(label);
 		MouseListener listener = new DragMouseAdapter();
@@ -169,8 +171,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private class MyDropTargetListener extends DropTargetAdapter {
 
 		public MyDropTargetListener(JLabel label) {
-			new DropTarget(label, DnDConstants.ACTION_COPY, this,
-					true, null);
+			new DropTarget(label, DnDConstants.ACTION_COPY, this, true, null);
 		}
 
 		@Override
@@ -187,6 +188,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 					edp.actionPerformed();
 					event.dropComplete(true);
+					// String TransferHandler.setVisible(true);
 
 				}
 			} catch (Exception e) {
@@ -199,19 +201,24 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	@Override
-	public void dragEnter(DragSourceDragEvent dsde) {}
+	public void dragEnter(DragSourceDragEvent dsde) {
+	}
 
 	@Override
-	public void dragOver(DragSourceDragEvent dsde) {}
+	public void dragOver(DragSourceDragEvent dsde) {
+	}
 
 	@Override
-	public void dropActionChanged(DragSourceDragEvent dsde) {}
+	public void dropActionChanged(DragSourceDragEvent dsde) {
+	}
 
 	@Override
-	public void dragExit(DragSourceEvent dse) {}
+	public void dragExit(DragSourceEvent dse) {
+	}
 
 	@Override
-	public void dragDropEnd(DragSourceDropEvent dsde) {}
+	public void dragDropEnd(DragSourceDropEvent dsde) {
+	}
 
 	// drag and drop listeners
 
@@ -270,18 +277,19 @@ public class TripsPage extends JFrame implements DragSourceListener,
 				.showInputDialog("Indicate the delay for the trip");
 
 		String delay = text3.trim();
-		
+
 		if (delay.isEmpty())
 			return 0;
 
 		else
-		return Integer.parseInt(delay);
+			return Integer.parseInt(delay);
 
 	}
 
 	public void fillTripList(String name) {
 		model1.addElement(name);
 	}
+
 	public void setExportDoneActionListener(ExportDoneListener listener) {
 		edp = listener;
 
@@ -312,14 +320,14 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	public void deleteAllTrips() {
 		model1.removeAllElements();
 	}
-	
+
 	// delete one button
 
 	public void setDeleteOneButtonListener(ActionListener listener) {
 		deleteOne.addActionListener(listener);
 
 	}
-	
+
 	public String getSelectedTrip() {
 		ListSelectionModel selmodel = tripList.getSelectionModel();
 		int index = selmodel.getMinSelectionIndex();
@@ -335,6 +343,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		ListSelectionModel selmodel = tripList.getSelectionModel();
 		int index = selmodel.getMinSelectionIndex();
 
-		model1.remove(index);	}
+		model1.remove(index);
+	}
 
 }
