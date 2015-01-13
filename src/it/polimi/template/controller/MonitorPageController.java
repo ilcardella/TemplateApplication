@@ -38,7 +38,7 @@ public class MonitorPageController {
 
 	protected void launchExecution() {
 		for (int i = 0; i < missions.size(); i++) {
-			MyWorker worker = new MyWorker(missions.get(i));
+			MyWorker worker = new MyWorker(missions.get(i), this);
 			worker.execute();
 		}
 	}
@@ -52,9 +52,7 @@ public class MonitorPageController {
 		}
 	}
 
-	// TODO
 	public void log(Mission m, String s) {
-		System.out.println(SwingUtilities.isEventDispatchThread());
 		updateMonitorTable(m);
 		printToMonitorConsole(s);
 		System.out.println(s);
@@ -92,7 +90,7 @@ public class MonitorPageController {
 	}
 
 	private void printToMonitorConsole(String s) {
-		this.monitorPage.fillConsole(s);
+		this.monitorPage.fillConsole(s+'\n');
 	}
 
 }

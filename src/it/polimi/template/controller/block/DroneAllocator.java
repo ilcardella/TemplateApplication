@@ -3,10 +3,17 @@ package it.polimi.template.controller.block;
 import java.util.Observable;
 import java.util.Observer;
 
+import it.polimi.template.controller.thread.MyWorker;
 import it.polimi.template.model.*;
 import it.polimi.template.utils.DronesManager;
 
 public class DroneAllocator extends Node implements Observer {
+
+	MyWorker w;
+
+	public DroneAllocator(MyWorker w) {
+		this.w = w;
+	}
 
 	@Override
 	public Mission run(Mission m) {
@@ -23,7 +30,9 @@ public class DroneAllocator extends Node implements Observer {
 									.getShapeCategory()) {
 						d.setStatus(Drone.BUSY);
 						t.setDrone(d);
-						
+						w.log(m, "Drone "+d.getId()+" assigned to Trip "+t.getName());
+						w.log(m, "Drone "+d.getId()+" is BUSY");
+
 						break;
 					}
 
@@ -41,7 +50,7 @@ public class DroneAllocator extends Node implements Observer {
 		Mission m = this.run((Mission) arg);
 		setChanged();
 		notifyObservers(m);
-		
+
 	}
 
 }

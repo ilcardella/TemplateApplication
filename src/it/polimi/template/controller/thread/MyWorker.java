@@ -1,5 +1,6 @@
 package it.polimi.template.controller.thread;
 
+import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.controller.block.*;
 import it.polimi.template.model.Mission;
 
@@ -7,16 +8,18 @@ import javax.swing.SwingWorker;
 
 public class MyWorker extends SwingWorker<Integer, String> {
 
+	private MonitorPageController controller;
 	private Mission m;
 	
 	//<dec>
-	MissionCreator missioncreator = new MissionCreator();
-	DroneAllocator droneallocator = new DroneAllocator();
-	TripLauncher triplauncher = new TripLauncher();
-	TripMonitor tripmonitor = new TripMonitor();
+	MissionCreator missioncreator = new MissionCreator(this);
+	DroneAllocator droneallocator = new DroneAllocator(this);
+	TripLauncher triplauncher = new TripLauncher(this);
+	TripMonitor tripmonitor = new TripMonitor(this);
 
-	public MyWorker(Mission mission) {
+	public MyWorker(Mission mission, MonitorPageController controller) {
 		this.m = mission;
+		this.controller = controller;
 	}
 
 	@Override
@@ -29,6 +32,10 @@ public class MyWorker extends SwingWorker<Integer, String> {
 		missioncreator.update(null, m);
 		
 		return 4;
+	}
+
+	public void log(Mission m, String s) {
+		controller.log(m, s);
 	}
 	
 }
