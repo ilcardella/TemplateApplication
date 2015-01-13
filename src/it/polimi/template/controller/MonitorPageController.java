@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.SwingUtilities;
+
 public class MonitorPageController {
 
 	private MonitorPage monitorPage;
@@ -52,6 +54,7 @@ public class MonitorPageController {
 
 	// TODO
 	public void log(Mission m, String s) {
+		System.out.println(SwingUtilities.isEventDispatchThread());
 		updateMonitorTable(m);
 		printToMonitorConsole(s);
 		System.out.println(s);

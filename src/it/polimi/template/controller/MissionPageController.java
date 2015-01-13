@@ -105,9 +105,7 @@ public class MissionPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
 			SwingUtilities.invokeLater(new Runnable() {
-				
 				@Override
 				public void run() {
 					MonitorPage monitorPage = new MonitorPage();
