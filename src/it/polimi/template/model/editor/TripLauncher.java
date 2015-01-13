@@ -18,7 +18,7 @@ public class TripLauncher extends Node implements Observer {
 
 		// the mission status is set to RUNNING
 		m.setStatus(Mission.RUNNING);
-		log(m, "Mission " + m.getName() + " is running");
+		log(m, "Mission " + m.getName() + " is running"+'\n');
 
 		// the trips which have an associated drone can start
 
@@ -27,19 +27,19 @@ public class TripLauncher extends Node implements Observer {
 			t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
 					.getTime()));
 			t.setStatus(Trip.EXECUTING);
-			log(m, "Trip " + t.getName() + " is executing");
+			log(m, "Trip " + t.getName() + " is executing"+'\n');
 			
 			
 			if(t.getDrone().flyToAndDoAction(t.getTargetLocation(), t.getAction())){
 				t.setStatus(Trip.COMPLETED);
-				log(m, "Trip " + t.getName() + " is completed");
+				log(m, "Trip " + t.getName() + " is completed"+'\n');
 			}else{
 				t.setStatus(Trip.FAILED);
-				log(m, "Trip " + t.getName() + " is failed");
+				log(m, "Trip " + t.getName() + " is failed"+'\n');
 			}
 
 			t.getDrone().setStatus(Drone.FREE);
-			log(m, "Drone " + t.getDrone().getId() + " is free");
+			log(m, "Drone " + t.getDrone().getId() + " is free"+'\n');
 
 		}
 
