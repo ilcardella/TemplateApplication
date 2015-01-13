@@ -1,4 +1,4 @@
-package it.polimi.template.model.editor;
+package it.polimi.template.controller.block;
 
 import java.util.Observable;
 import java.util.Observer;

@@ -1,16 +1,18 @@
-package it.polimi.template.model.editor;
+package it.polimi.template.controller.block;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import it.polimi.template.model.*;
 
-public class MissionModifier extends Node implements Observer {
-	
+public class PriorityManager extends Node implements Observer {
+
 	@Override
 	public Mission run(Mission m) {
-		// TODO Auto-generated method stub
-		return null;
+		// increment the priority to HIGH level
+		m.getTrips().get(0).setPriority(150);
+		m.setStatus(Mission.STANDBY);
+		return m;
 	}
 
 	@Override

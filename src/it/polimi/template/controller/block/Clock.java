@@ -1,4 +1,4 @@
-package it.polimi.template.model.editor;
+package it.polimi.template.controller.block;
 
 import it.polimi.template.model.*;
 

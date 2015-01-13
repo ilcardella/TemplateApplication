@@ -1,7 +1,8 @@
 package it.polimi.template.controller.thread;
 
+import it.polimi.template.controller.block.*;
 import it.polimi.template.model.Mission;
-import it.polimi.template.model.editor.*;
+
 import javax.swing.SwingWorker;
 
 public class MyWorker extends SwingWorker<Integer, String> {
