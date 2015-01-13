@@ -56,9 +56,13 @@ public class Drone {
 	}
 
 	public boolean flyToAndDoAction(String target, final Action action) {
-		this.flyTo(target);
-		action.doAction();
-		return true;
+		if(this.flyTo(target)){
+			if(action.doAction()){
+				return true;
+			}
+		}
+		// TODO settare la posizione corrente come source location per il ripristino del trip
+		return false;
 	}
 
 	private boolean flyTo(String target) {

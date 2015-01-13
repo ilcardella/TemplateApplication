@@ -4,9 +4,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import it.polimi.template.model.*;
+import it.polimi.template.utils.Logger;
 
 public class MissionModifier extends Node implements Observer {
-
+	
 	@Override
 	public Mission run(Mission m) {
 		// TODO Auto-generated method stub

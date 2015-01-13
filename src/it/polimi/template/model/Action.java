@@ -6,13 +6,14 @@ public enum Action implements IAction {
 
 	TAKE_PHOTO {
 		@Override
-		public void doAction() {
+		public boolean doAction() {
 			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			return true;
 		}
 
 		@Override
@@ -29,13 +30,14 @@ public enum Action implements IAction {
 	MEASURE {
 
 		@Override
-		public void doAction() {
+		public boolean doAction() {
 			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			return true;
 		}
 
 		@Override
@@ -52,13 +54,14 @@ public enum Action implements IAction {
 	PICK_ITEM {
 
 		@Override
-		public void doAction() {
+		public boolean doAction() {
 			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			return true;
 		}
 
 		@Override
@@ -75,13 +78,14 @@ public enum Action implements IAction {
 	RELEASE_ITEM {
 
 		@Override
-		public void doAction() {
+		public boolean doAction() {
 			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			return true;
 		}
 
 		@Override

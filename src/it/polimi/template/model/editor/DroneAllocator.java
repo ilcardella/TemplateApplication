@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import it.polimi.template.model.*;
 import it.polimi.template.utils.DronesManager;
+import it.polimi.template.utils.Logger;
 
 public class DroneAllocator extends Node implements Observer {
 

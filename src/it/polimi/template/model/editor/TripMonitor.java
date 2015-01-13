@@ -11,6 +11,8 @@ public class TripMonitor extends Node implements Observer {
 	public Mission run(Mission m) {
 		Trip t = m.getTrips().get(0);
 
+		// TODO in questo ciclo while non ci entriamo mai perchè il tripLauncher prima di notificare aspetta che il drone abbia finito il trip
+		// bisogna reimplementare il tutto senza ciclo ma con solo if
 		while (t.getStatus() != Trip.COMPLETED) {
 
 			// if the current trip is failed for an exception, the mission
@@ -42,8 +44,10 @@ public class TripMonitor extends Node implements Observer {
 		// associated to the mission
 		m.getTrips().remove(0);
 
-		if (m.getTrips().isEmpty())
+		if (m.getTrips().isEmpty()) {
 			m.setStatus(Mission.COMPLETED);
+			System.out.println("Mission " + m.getName() + " is completed");
+		}
 
 		return m;
 	}

@@ -3,7 +3,6 @@ package it.polimi.template.model.editor;
 import java.text.SimpleDateFormat;
 
 import it.polimi.template.model.*;
-
 import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,16 +23,23 @@ public class TripLauncher extends Node implements Observer {
 		// the trips which have an associated drone can start
 
 		if (t.getDrone() != null) {
+			
 			t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
 					.getTime()));
 			t.setStatus(Trip.EXECUTING);
 			System.out.println("Trip " + t.getName() + " is executing");
-			t.getDrone().flyToAndDoAction(t.getTargetLocation(), t.getAction());
+			
+			
+			if(t.getDrone().flyToAndDoAction(t.getTargetLocation(), t.getAction())){
+				t.setStatus(Trip.COMPLETED);
+				System.out.println("Trip " + t.getName() + " is completed");
+			}else{
+				t.setStatus(Trip.FAILED);
+				System.out.println("Trip " + t.getName() + " is failed");
+			}
 
 			t.getDrone().setStatus(Drone.FREE);
 			System.out.println("Drone " + t.getDrone().getId() + " is free");
-			t.setStatus(Trip.COMPLETED);
-			System.out.println("Trip " + t.getName() + " is completed");
 
 		}
 

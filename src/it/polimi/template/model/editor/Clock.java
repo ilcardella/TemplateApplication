@@ -1,15 +1,13 @@
 package it.polimi.template.model.editor;
 
 import it.polimi.template.model.*;
+import it.polimi.template.utils.Logger;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 public class Clock extends Node implements Observer{
-
-	ArrayList<Drone> drones = new ArrayList<Drone>();
-
+	
 	@Override
 	public Mission run(Mission m) {
 

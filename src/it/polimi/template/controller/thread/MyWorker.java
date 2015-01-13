@@ -3,12 +3,12 @@ package it.polimi.template.controller.thread;
 import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.editor.*;
+import it.polimi.template.utils.Logger;
 
 import javax.swing.SwingWorker;
 
 public class MyWorker extends SwingWorker<Integer, String> {
 
-	private MonitorPageController parent;
 	private Mission m;
 	
 	//<dec>
@@ -17,9 +17,8 @@ public class MyWorker extends SwingWorker<Integer, String> {
 	TripLauncher triplauncher = new TripLauncher();
 	TripMonitor tripmonitor = new TripMonitor();
 
-	public MyWorker(Mission mission, MonitorPageController parent) {
+	public MyWorker(Mission mission) {
 		this.m = mission;
-		this.parent = parent;
 	}
 
 	@Override
