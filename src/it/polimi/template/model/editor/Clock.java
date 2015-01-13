@@ -16,14 +16,12 @@ public class Clock extends Node implements Observer{
 		// if delay > 0 change the status
 		if (t.getDelay() > 0) {
 			t.setStatus(Trip.DELAYED);
-			log(m, "Trip " + t.getName() + " is delayed"+'\n');
 			try {
 				Thread.sleep(t.getDelay()*1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			t.setStatus(Trip.WAITING);
-			log(m, "Trip " + t.getName() + " is waiting"+'\n');
 		}
 
 		return m;

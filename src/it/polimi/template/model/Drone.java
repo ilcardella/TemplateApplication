@@ -1,5 +1,6 @@
 package it.polimi.template.model;
 
+import java.util.Observable;
 import java.util.Random;
 
 public class Drone {
@@ -56,12 +57,13 @@ public class Drone {
 	}
 
 	public boolean flyToAndDoAction(String target, final Action action) {
-		if(this.flyTo(target)){
-			if(action.doAction()){
+		if (this.flyTo(target)) {
+			if (action.doAction()) {
 				return true;
 			}
 		}
-		// TODO settare la posizione corrente come source location per il ripristino del trip
+		// TODO settare la posizione corrente come source location per il
+		// ripristino del trip
 		return false;
 	}
 
@@ -73,18 +75,18 @@ public class Drone {
 		}
 		return true;
 	}
-	
+
 	public static String getStatusNameFromValue(int value) {
 
 		switch (value) {
-			case FREE:
-				return "FREE";
-			case BUSY:
-				return "BUSY";
-			case CHARGING:
-				return "CHARGING";
-			default:
-				return "Unknown";
+		case FREE:
+			return "FREE";
+		case BUSY:
+			return "BUSY";
+		case CHARGING:
+			return "CHARGING";
+		default:
+			return "Unknown";
 		}
 	}
 }

@@ -1,6 +1,8 @@
 package it.polimi.template.model;
 
-public class Trip  {
+import java.util.Observable;
+
+public class Trip {
 
 	public static final int WAITING = 1;
 	public static final int COMPLETED = 2;
@@ -19,7 +21,7 @@ public class Trip  {
 	private Item item;
 	private String startTime;
 	private Mission mission;
-	private boolean used=false;
+	private boolean used = false;
 
 	public Trip() {
 		this.delay = 0;
@@ -126,25 +128,19 @@ public class Trip  {
 	public static String getStatusNameFromValue(int value) {
 
 		switch (value) {
-			case WAITING:
-				return "WAITING";
-			case EXECUTING:
-				return "EXECUTING";
-			case COMPLETED:
-				return "COMPLETED";
-			case FAILED:
-				return "FAILED";
-			case DELAYED:
-				return "DELAYED";
-			default:
-				return "Unknown";
+		case WAITING:
+			return "WAITING";
+		case EXECUTING:
+			return "EXECUTING";
+		case COMPLETED:
+			return "COMPLETED";
+		case FAILED:
+			return "FAILED";
+		case DELAYED:
+			return "DELAYED";
+		default:
+			return "Unknown";
 		}
 	}
 
-
-
 }
-
-
-
-

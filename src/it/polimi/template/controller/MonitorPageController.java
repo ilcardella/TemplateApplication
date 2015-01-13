@@ -4,6 +4,7 @@ import it.polimi.template.controller.thread.MyWorker;
 import it.polimi.template.model.Drone;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
+import it.polimi.template.utils.DronesManager;
 import it.polimi.template.view.MonitorPage;
 
 import java.awt.event.ActionEvent;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MonitorPageController implements Observer {
+public class MonitorPageController {
 
 	private MonitorPage monitorPage;
 	private List<Mission> missions;
@@ -35,7 +36,6 @@ public class MonitorPageController implements Observer {
 
 	protected void launchExecution() {
 		for (int i = 0; i < missions.size(); i++) {
-			missions.get(i).addObserver(this);
 			MyWorker worker = new MyWorker(missions.get(i));
 			worker.execute();
 		}
@@ -49,7 +49,14 @@ public class MonitorPageController implements Observer {
 			monitorPage.clearTable();
 		}
 	}
-	
+
+	// TODO
+	public void log(Mission m, String s) {
+		updateMonitorTable(m);
+		printToMonitorConsole(s);
+		System.out.println(s);
+	}
+
 	private void updateMonitorTable(Mission mission) {
 
 		String missionName = "";
@@ -61,34 +68,28 @@ public class MonitorPageController implements Observer {
 
 		missionName = mission.getName();
 		missionStatus = Mission.getStatusNameFromValue(mission.getStatus());
-		
+
 		if (mission.getTrips().size() > 0) {
 
 			// If there are other trips to complete
 			tripName = mission.getTrips().get(0).getName();
-			tripStatus = Trip.getStatusNameFromValue(mission.getTrips().get(0).getStatus());
+			tripStatus = Trip.getStatusNameFromValue(mission.getTrips().get(0)
+					.getStatus());
 
 			if (mission.getTrips().get(0).getDrone() != null) {
 				droneID = mission.getTrips().get(0).getDrone().getId();
-				droneStatus = Drone.getStatusNameFromValue(mission.getTrips().get(0).getDrone().getStatus());
+				droneStatus = Drone.getStatusNameFromValue(mission.getTrips()
+						.get(0).getDrone().getStatus());
 			}
 		}
-		
 
-		
-		this.monitorPage.updateTableRow(missionName, missionStatus, droneID, droneStatus, tripName, tripStatus);
-		
+		this.monitorPage.updateTableRow(missionName, missionStatus, droneID,
+				droneStatus, tripName, tripStatus);
+
 	}
-	
-	private void printToMonitorConsole(String s){
+
+	private void printToMonitorConsole(String s) {
 		this.monitorPage.fillConsole(s);
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		updateMonitorTable((Mission)o);
-		printToMonitorConsole((String)arg);
-	}
-	
 
 }

@@ -12,7 +12,6 @@ public class PriorityManager extends Node implements Observer {
 		// increment the priority to HIGH level
 		m.getTrips().get(0).setPriority(150);
 		m.setStatus(Mission.STANDBY);
-		log(m, "Mission " + m.getName() + " is standby"+'\n');
 		return m;
 	}
 

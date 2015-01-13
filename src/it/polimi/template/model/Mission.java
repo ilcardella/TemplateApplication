@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
-public class Mission extends Observable{
+public class Mission {
 
 	public static final int UNEXECUTED = 1;
 	public static final int RUNNING = 2;
@@ -83,10 +83,6 @@ public class Mission extends Observable{
 		default:
 			return "Unknown";
 		}
-	}
-	
-	public void setAsChanged(){
-		setChanged();
 	}
 
 }

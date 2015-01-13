@@ -24,9 +24,6 @@ public class DroneAllocator extends Node implements Observer {
 						d.setStatus(Drone.BUSY);
 						t.setDrone(d);
 						
-						log(m, "Drone " + t.getDrone().getId()
-								+ " is busy"+'\n');
-						
 						break;
 					}
 
