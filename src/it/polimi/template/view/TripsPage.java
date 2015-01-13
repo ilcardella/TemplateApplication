@@ -58,6 +58,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private JLabel label;
 	private JButton ok;
 	private JButton delete;
+	private JButton deleteOne;
 
 	List<String> tripsNames;
 	private String nameMission;
@@ -124,10 +125,14 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		JPanel buttonsPane = new JPanel();
 		ok = new JButton("Ok");
 
-		delete = new JButton("Delete all trips");
+		delete = new JButton("Delete all");
+		
+		deleteOne= new JButton("Delete trip");
 
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
+		buttonsPane.add(deleteOne);
+
 
 		new MyDropTargetListener(label);
 		MouseListener listener = new DragMouseAdapter();
@@ -297,7 +302,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		setVisible(false);
 	}
 
-	// delete button
+	// delete all button
 
 	public void setDeleteAllButtonListener(ActionListener listener) {
 		delete.addActionListener(listener);
@@ -307,6 +312,29 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	public void deleteAllTrips() {
 		model1.removeAllElements();
 	}
+	
+	// delete one button
 
+	public void setDeleteOneButtonListener(ActionListener listener) {
+		deleteOne.addActionListener(listener);
+
+	}
+	
+	public String getSelectedTrip() {
+		ListSelectionModel selmodel = tripList.getSelectionModel();
+		int index = selmodel.getMinSelectionIndex();
+		if (index >= 0) {
+
+			String trip = model.getElementAt(index).toString();
+			return trip;
+		}
+		return "";
+	}
+
+	public void deleteTrip() {
+		ListSelectionModel selmodel = tripList.getSelectionModel();
+		int index = selmodel.getMinSelectionIndex();
+
+		model1.remove(index);	}
 
 }

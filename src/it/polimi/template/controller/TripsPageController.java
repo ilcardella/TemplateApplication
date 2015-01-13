@@ -40,6 +40,7 @@ public class TripsPageController {
 		this.tripsPage
 				.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
 		this.tripsPage.setExportDoneActionListener(new ExportDoneListener());
+		this.tripsPage.setDeleteOneButtonListener(new DeleteOneButtonListener());
 
 	}
 
@@ -66,6 +67,20 @@ public class TripsPageController {
 		public void actionPerformed() {
 			String actionName = tripsPage.getAction();
 			manageDragAndDrop(actionName);
+		}
+
+	}
+	
+	class DeleteOneButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String name = tripsPage.getSelectedTrip();
+			for (int i = 0; i < mission.getTrips().size(); i++)
+				if (mission.getTrips().get(i).getName().equals(name))
+					mission.getTrips().remove(i);
+			tripsPage.deleteTrip();
+
 		}
 
 	}
