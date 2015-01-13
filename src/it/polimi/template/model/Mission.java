@@ -2,9 +2,10 @@ package it.polimi.template.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Random;
 
-public class Mission {
+public class Mission extends Observable{
 
 	public static final int UNEXECUTED = 1;
 	public static final int RUNNING = 2;
@@ -69,19 +70,23 @@ public class Mission {
 	public static String getStatusNameFromValue(int value) {
 
 		switch (value) {
-			case UNEXECUTED:
-				return "UNEXECUTED";
-			case RUNNING:
-				return "RUNNING";
-			case COMPLETED:
-				return "COMPLETED";
-			case FAILED:
-				return "FAILED";
-			case STANDBY:
-				return "STANDBY";
-			default:
-				return "Unknown";
+		case UNEXECUTED:
+			return "UNEXECUTED";
+		case RUNNING:
+			return "RUNNING";
+		case COMPLETED:
+			return "COMPLETED";
+		case FAILED:
+			return "FAILED";
+		case STANDBY:
+			return "STANDBY";
+		default:
+			return "Unknown";
 		}
+	}
+	
+	public void setAsChanged(){
+		setChanged();
 	}
 
 }

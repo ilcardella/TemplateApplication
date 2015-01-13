@@ -4,18 +4,15 @@ import java.util.Observable;
 import java.util.Observer;
 
 import it.polimi.template.model.*;
-import it.polimi.template.utils.Logger;
 
 public class MissionCreator extends Node implements Observer {
 
 	public Mission run(Mission m) {
 		if (m.getTrips() != null && m.getStatus() == Mission.UNEXECUTED) {
-			System.out.println("Mission " + m.getName()
-					+ " created");
+			log(m, "Mission " + m.getName() + " created");
 			return m;
-			
+
 		} else
-			
 			return null;
 	}
 
@@ -25,6 +22,5 @@ public class MissionCreator extends Node implements Observer {
 		setChanged();
 		notifyObservers(m);
 	}
-	
 
 }

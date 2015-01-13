@@ -3,8 +3,6 @@ package it.polimi.template.controller.thread;
 import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.editor.*;
-import it.polimi.template.utils.Logger;
-
 import javax.swing.SwingWorker;
 
 public class MyWorker extends SwingWorker<Integer, String> {
