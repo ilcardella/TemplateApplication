@@ -61,6 +61,7 @@ public class TripsPageController {
 			// update the view
 			tripsPage.deleteAllTrips();
 			tripsPage.deleteAllTripsFromMap();
+			tripCounter=65;
 		}
 
 	}
