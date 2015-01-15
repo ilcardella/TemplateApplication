@@ -377,5 +377,13 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		model1.remove(index);
 	}
+	
+	public void deleteOneTripFromMap() {
+
+		label.remove(label.getComponentAt(locX, locY));
+		label.revalidate();
+		label.repaint();
+			
+	}
 
 }
