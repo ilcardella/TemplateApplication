@@ -311,8 +311,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		
 		text.setEditable(false);
 		
-		text.setBackground(Color.RED);
-		text.setForeground(Color.YELLOW);
+		text.setBackground(Color.BLUE);
+		text.setForeground(Color.CYAN);
 
 		label.add(text);
 	}
