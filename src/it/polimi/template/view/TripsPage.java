@@ -3,7 +3,7 @@ package it.polimi.template.view;
 import it.polimi.template.model.*;
 
 import java.awt.BorderLayout;
-import java.awt.Point;
+import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -310,6 +310,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		text.setBounds(locX, locY, 30, 20);
 		
 		text.setEditable(false);
+		
+		text.setBackground(Color.RED);
+		text.setForeground(Color.YELLOW);
 
 		label.add(text);
 	}
