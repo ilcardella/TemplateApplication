@@ -3,6 +3,7 @@ package it.polimi.template.view;
 import it.polimi.template.model.*;
 
 import java.awt.BorderLayout;
+import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -39,6 +40,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
+import javax.swing.TransferHandler.DropLocation;
 
 public class TripsPage extends JFrame implements DragSourceListener,
 		DragGestureListener {
@@ -86,6 +88,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setDragEnabled(true);
 		list.setTransferHandler(new TransferHandler("text"));
+		ds = new DragSource();
+		ds.createDefaultDragGestureRecognizer(list, DnDConstants.ACTION_COPY,
+				this);
 
 		for (Action a : Action.values())
 			model.addElement(a.toString());
@@ -111,36 +116,37 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		setLayout(new BorderLayout());
 
 		icon = new ImageIcon("Map/casa.gif");
-
 		label = new JLabel(icon);
-		label.setTransferHandler(new TransferHandler("text"));
+
 		createActionList();
 		createTripList();
+
 		JScrollPane actionsPane = new JScrollPane(list);
 		JScrollPane tripsPane = new JScrollPane(tripList);
-
-		ds = new DragSource();
-		ds.createDefaultDragGestureRecognizer(list, DnDConstants.ACTION_COPY,
-				this);
-
-		setVisible(true);
-
+		JPanel imagePane = new JPanel();
 		JPanel buttonsPane = new JPanel();
+
 		ok = new JButton("Ok");
-
 		delete = new JButton("Delete all");
-
 		deleteOne = new JButton("Delete trip");
+
+		imagePane.add(label);
+		imagePane.setTransferHandler(new TransferHandler("text"));
+		new MyDropTargetListener(imagePane);
+		MouseListener listener = new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				JComponent c = (JComponent) e.getSource();
+				TransferHandler th = c.getTransferHandler();
+				th.exportAsDrag(c, e, TransferHandler.COPY);
+			}
+		};
+		imagePane.addMouseListener(listener);
 
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
 		buttonsPane.add(deleteOne);
 
-		new MyDropTargetListener(label);
-		MouseListener listener = new DragMouseAdapter();
-		label.addMouseListener(listener);
-
-		getContentPane().add(label, BorderLayout.WEST);
+		getContentPane().add(imagePane, BorderLayout.WEST);
 		getContentPane().add(actionsPane, BorderLayout.NORTH);
 		getContentPane().add(buttonsPane, BorderLayout.SOUTH);
 		getContentPane().add(tripsPane, BorderLayout.EAST);
@@ -148,30 +154,23 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		setTitle("Pluto-Trips Page (" + nameMission + ")");
 		setSize(700, 600);
 		setLocationRelativeTo(null);
+		setVisible(true);
 
-	}
-
-	private class DragMouseAdapter extends MouseAdapter {
-		public void mousePressed(MouseEvent e) {
-			JComponent c = (JComponent) e.getSource();
-			TransferHandler handler = c.getTransferHandler();
-			handler.exportAsDrag(c, e, TransferHandler.COPY);
-		}
 	}
 
 	@Override
 	public void dragGestureRecognized(DragGestureEvent dge) {
 
 		System.out.println("Drag Gesture Recognized!");
-		transferable = new StringSelection(list.getSelectedValue().toString());
+		transferable = new StringSelection(list.getSelectedValue());
 		ds.startDrag(dge, DragSource.DefaultCopyDrop, transferable, this);
 
 	}
 
 	private class MyDropTargetListener extends DropTargetAdapter {
 
-		public MyDropTargetListener(JLabel label) {
-			new DropTarget(label, DnDConstants.ACTION_COPY, this, true, null);
+		public MyDropTargetListener(JPanel panel) {
+			new DropTarget(panel, DnDConstants.ACTION_COPY, this);
 		}
 
 		@Override
@@ -185,10 +184,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 
 					event.acceptDrop(DnDConstants.ACTION_COPY);
-
 					edp.actionPerformed();
 					event.dropComplete(true);
-					// String TransferHandler.setVisible(true);
+					System.out.print("Drop!");
 
 				}
 			} catch (Exception e) {
@@ -333,7 +331,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		int index = selmodel.getMinSelectionIndex();
 		if (index >= 0) {
 
-			String trip = model.getElementAt(index).toString();
+			String trip = model1.getElementAt(index).toString();
 			return trip;
 		}
 		return "";

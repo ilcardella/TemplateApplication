@@ -76,6 +76,7 @@ public class TripsPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String name = tripsPage.getSelectedTrip();
+			System.out.print(name);
 			for (int i = 0; i < mission.getTrips().size(); i++)
 				if (mission.getTrips().get(i).getName().equals(name))
 					mission.getTrips().remove(i);
