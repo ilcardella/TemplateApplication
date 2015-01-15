@@ -41,6 +41,8 @@ public class TripsPageController {
 				.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
 		this.tripsPage.setExportDoneActionListener(new ExportDoneListener());
 		this.tripsPage.setDeleteOneButtonListener(new DeleteOneButtonListener());
+		this.tripsPage.putTripOnMapListener(new PutTripOnMapListener());
+
 
 	}
 
@@ -71,27 +73,23 @@ public class TripsPageController {
 
 	}
 	
-	class DeleteOneButtonListener implements ActionListener {
+	public class PutTripOnMapListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String name = tripsPage.getSelectedTrip();
-			System.out.print(name);
-			for (int i = 0; i < mission.getTrips().size(); i++)
-				if (mission.getTrips().get(i).getName().equals(name))
-					mission.getTrips().remove(i);
-			tripsPage.deleteTrip();
-
+		public void actionPerformed() {
+			
+			tripsPage.putTripName(mission.getName() + "-" + tripCounter);
 		}
 
-	}
+	}	
+
+
 
 	public void manageDragAndDrop(String actionName) {
 
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
 
-		trip.setName(mission.getName() + "-" + tripCounter);
+		trip.setName(mission.getName() + "-" + tripCounter);		
 		tripCounter++;
 
 		// cycles all the possible actions
@@ -133,6 +131,21 @@ public class TripsPageController {
 
 		// update the view
 		tripsPage.fillTripList(trip.getName());
+
+
+	}
+	class DeleteOneButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String name = tripsPage.getSelectedTrip();
+			System.out.print(name);
+			for (int i = 0; i < mission.getTrips().size(); i++)
+				if (mission.getTrips().get(i).getName().equals(name))
+					mission.getTrips().remove(i);
+			tripsPage.deleteTrip();
+
+		}
 
 	}
 

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.template.controller.TripsPageController.ExportDoneListener;
+import it.polimi.template.controller.TripsPageController.PutTripOnMapListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -38,6 +39,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
 import javax.swing.TransferHandler.DropLocation;
@@ -56,16 +58,20 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private JList<String> tripList;
 
 	private ExportDoneListener edp;
+	private PutTripOnMapListener ptm;
 
 	private JLabel label;
 	private JButton ok;
 	private JButton delete;
 	private JButton deleteOne;
+	private JTextField text;
 
 	List<String> tripsNames;
 	private String nameMission;
 	private String selectedAction;
 	private ImageIcon icon;
+
+	private int locX, locY;
 
 	DragSource ds;
 	StringSelection transferable;
@@ -184,9 +190,14 @@ public class TripsPage extends JFrame implements DragSourceListener,
 				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 
 					event.acceptDrop(DnDConstants.ACTION_COPY);
+					locX = (int) event.getLocation().getX();
+					locY = (int) event.getLocation().getY();
+					ptm.actionPerformed();
+
 					edp.actionPerformed();
 					event.dropComplete(true);
-					System.out.print("Drop!");
+					
+
 
 				}
 			} catch (Exception e) {
@@ -286,6 +297,21 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	public void fillTripList(String name) {
 		model1.addElement(name);
+	}
+
+	public void putTripOnMapListener(PutTripOnMapListener listener) {
+		ptm = listener;
+
+	}
+
+	public void putTripName(String name) {
+		text = new JTextField(name);
+
+		text.setBounds(locX, locY, 30, 20);
+		
+		text.setEditable(false);
+
+		label.add(text);
 	}
 
 	public void setExportDoneActionListener(ExportDoneListener listener) {
