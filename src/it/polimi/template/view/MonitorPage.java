@@ -90,6 +90,11 @@ public class MonitorPage extends JFrame {
 			dm.removeRow(i);
 		}
 	}
+	public void clearConsole() {
+		text.setText(null);
+		text.revalidate();
+		text.repaint();
+	}
 
 	public void fillConsole(final String log) {
 		text.append(log);
