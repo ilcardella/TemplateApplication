@@ -196,8 +196,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 					edp.actionPerformed();
 					event.dropComplete(true);
-					
-
 
 				}
 			} catch (Exception e) {
@@ -308,9 +306,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		text = new JTextField(name);
 
 		text.setBounds(locX, locY, 30, 20);
-		
+
 		text.setEditable(false);
-		
+
 		text.setBackground(Color.BLUE);
 		text.setForeground(Color.CYAN);
 
@@ -346,6 +344,13 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	public void deleteAllTrips() {
 		model1.removeAllElements();
+	}
+
+	public void deleteAllTripsFromMap() {
+
+		label.removeAll();
+		label.revalidate();
+		label.repaint();
 	}
 
 	// delete one button

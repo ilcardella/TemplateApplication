@@ -60,6 +60,7 @@ public class TripsPageController {
 			mission.getTrips().clear();
 			// update the view
 			tripsPage.deleteAllTrips();
+			tripsPage.deleteAllTripsFromMap();
 		}
 
 	}
