@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -90,6 +93,7 @@ public class MonitorPage extends JFrame {
 			dm.removeRow(i);
 		}
 	}
+
 	public void clearConsole() {
 		text.setText(null);
 		text.revalidate();
@@ -98,6 +102,22 @@ public class MonitorPage extends JFrame {
 
 	public void fillConsole(final String log) {
 		text.append(log);
+	}
+
+	public void showStopOptions() {
+
+		ArrayList<String> chooseStopMethod = new ArrayList<String>();
+
+		chooseStopMethod.add("RTL");
+		chooseStopMethod.add("Land");
+
+		String[] simpleArray = new String[chooseStopMethod.size()];
+		chooseStopMethod.toArray(simpleArray);
+
+		JOptionPane.showInputDialog(null, "Choose the action to perform ",
+				"Choose the stop method", JOptionPane.QUESTION_MESSAGE, null,
+				simpleArray, simpleArray[0]);
+
 	}
 
 	public void updateTableRow(String missionName, String missionStatus,

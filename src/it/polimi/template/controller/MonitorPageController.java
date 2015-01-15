@@ -48,7 +48,10 @@ public class MonitorPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Stop all the drones
+			
 			monitorPage.clearTable();
+			monitorPage.clearConsole();
+			monitorPage.showStopOptions();
 		}
 	}
 
@@ -92,5 +95,7 @@ public class MonitorPageController {
 	private void printToMonitorConsole(String s) {
 		this.monitorPage.fillConsole(s+'\n');
 	}
+
+
 
 }
