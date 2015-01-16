@@ -143,13 +143,14 @@ public class TripsPageController {
 		int delay = tripsPage.showDelayPanel();
 		trip.setDelay(delay);
 
+		// setting the targetPosition coordinates
+		trip.setTargetLocation(tripsPage.getCoordinatesOfCurrentTrip());
+				
 		// add to the trip list of the mission
 		mission.getTrips().add(trip);
 
 		// update the view
 		tripsPage.fillTripList(trip.getName());
-
-
 	}
 
 
