@@ -2,8 +2,8 @@ package it.polimi.template.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -98,15 +98,16 @@ public class MonitorPage extends JFrame {
 		text.append(log);
 	}
 
-	public void showStopOptions() {
+	public String showStopOptions() {
 
 		String[] simpleArray = new String[2];
 		simpleArray[0] = "RTL";
 		simpleArray[1] = "Land";
 
-		JOptionPane.showInputDialog(null, "Choose the action to perform ",
+		String selection = (String) JOptionPane.showInputDialog(null, "Choose the action to perform ",
 				"Choose the stop behaviour", JOptionPane.QUESTION_MESSAGE, null,
 				simpleArray, simpleArray[0]);
+		return selection;
 
 	}
 

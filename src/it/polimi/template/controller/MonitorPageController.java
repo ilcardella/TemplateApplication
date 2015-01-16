@@ -47,11 +47,22 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Stop all the drones
-			
+			// clear the view
 			monitorPage.clearTable();
 			monitorPage.clearConsole();
-			monitorPage.showStopOptions();
+			// prompt user what to do
+			String selection = monitorPage.showStopOptions();
+			switch (selection) {
+				case "RTL":
+					// do RTL
+					break;
+				case "Land":
+					// do Land
+					break;
+				default:
+					// do RTL as default
+					break;
+			}
 		}
 	}
 
@@ -93,9 +104,7 @@ public class MonitorPageController {
 	}
 
 	private void printToMonitorConsole(String s) {
-		this.monitorPage.fillConsole(s+'\n');
+		this.monitorPage.fillConsole(s + '\n');
 	}
-
-
 
 }
