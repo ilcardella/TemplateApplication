@@ -112,27 +112,29 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		tripList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tripList.setFixedCellWidth(200);
 
-		
 		for (String name : tripsMap.keySet()) {
 			model1.addElement(name);
 		}
 	}
-	
-	private void createTripsIconsOnMap(){
-		// TODO questo è l'equivalente ciclo for del metodo sopra "createTripList"
-		// bisogna prendere i valori delle coordinate di tutti i trips dalla hashmap
+
+	private void createTripsIconsOnMap() {
+		// TODO questo è l'equivalente ciclo for del metodo sopra
+		// "createTripList"
+		// bisogna prendere i valori delle coordinate di tutti i trips dalla
+		// hashmap
 		Collection<String> nameList = tripsMap.keySet();
-		// ora per ogni valore nella lista bisogna far apparire l'iconcina sulla mappa
+		// ora per ogni valore nella lista bisogna far apparire l'iconcina sulla
+		// mappa
 		// prendendo le coordinate così
-		for(String s: nameList){
+		for (String s : nameList) {
 			String[] xy = tripsMap.get(s).split("/");
 			locX = Integer.parseInt(xy[0]);
 			locY = Integer.parseInt(xy[1]);
-			
+
 			// Qui fai apparire l'icona con le coordinate x e y
 			putTripNameOnMap(s);
 		}
-		
+
 	}
 
 	public final void initUI() throws IOException {
@@ -396,13 +398,17 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		model1.remove(index);
 	}
-	
+
 	public void deleteOneTripFromMap() {
 
 		label.remove(label.getComponentAt(locX, locY));
 		label.revalidate();
 		label.repaint();
-			
+
+	}
+
+	public String getCoordinatesOfCurrentTrip() {
+		return locX + "/" + locY;
 	}
 
 }
