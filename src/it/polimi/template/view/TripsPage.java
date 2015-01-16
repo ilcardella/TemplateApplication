@@ -107,10 +107,10 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		tripList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tripList.setFixedCellWidth(200);
 
-		// fill the list with already existing trips
-		for (String name : tripsMap.keySet()) {
-			tripListModel.addElement(name);
-		}
+//		// fill the list with already existing trips
+//		for (String name : tripsMap.keySet()) {
+//			tripListModel.addElement(name);
+//		}
 	}
 
 	private void createTripsIconsOnMap() {

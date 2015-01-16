@@ -164,7 +164,6 @@ public class MissionPageController {
 							map.put(t.getName(), t.getTargetLocation());
 						}
 					}
-					
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
