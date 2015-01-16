@@ -121,15 +121,16 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private void createTripsIconsOnMap(){
 		// TODO questo è l'equivalente ciclo for del metodo sopra "createTripList"
 		// bisogna prendere i valori delle coordinate di tutti i trips dalla hashmap
-		Collection<String> coordinateList = tripsMap.values();
+		Collection<String> nameList = tripsMap.keySet();
 		// ora per ogni valore nella lista bisogna far apparire l'iconcina sulla mappa
 		// prendendo le coordinate così
-		for(String s: coordinateList){
-			String[] xy = s.split("/");
-			String x = xy[0];
-			String y = xy[1];
+		for(String s: nameList){
+			String[] xy = tripsMap.get(s).split("/");
+			locX = Integer.parseInt(xy[0]);
+			locY = Integer.parseInt(xy[1]);
 			
 			// Qui fai apparire l'icona con le coordinate x e y
+			putTripNameOnMap(s);
 		}
 		
 	}
