@@ -24,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -116,6 +117,22 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			model1.addElement(name);
 		}
 	}
+	
+	private void createTripsIconsOnMap(){
+		// TODO questo è l'equivalente ciclo for del metodo sopra "createTripList"
+		// bisogna prendere i valori delle coordinate di tutti i trips dalla hashmap
+		Collection<String> coordinateList = tripsMap.values();
+		// ora per ogni valore nella lista bisogna far apparire l'iconcina sulla mappa
+		// prendendo le coordinate così
+		for(String s: coordinateList){
+			String[] xy = s.split("/");
+			String x = xy[0];
+			String y = xy[1];
+			
+			// Qui fai apparire l'icona con le coordinate x e y
+		}
+		
+	}
 
 	public final void initUI() throws IOException {
 
@@ -126,6 +143,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		createActionList();
 		createTripList();
+		createTripsIconsOnMap();
 
 		JScrollPane actionsPane = new JScrollPane(list);
 		JScrollPane tripsPane = new JScrollPane(tripList);
