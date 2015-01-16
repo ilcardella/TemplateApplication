@@ -24,7 +24,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -106,11 +105,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		tripList = new JList<String>(tripListModel);
 		tripList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tripList.setFixedCellWidth(200);
-
-//		// fill the list with already existing trips
-//		for (String name : tripsMap.keySet()) {
-//			tripListModel.addElement(name);
-//		}
 	}
 
 	private void createTripsIconsOnMap() {

@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,8 +16,6 @@ import javax.swing.table.DefaultTableModel;
 public class MonitorPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	// private ArrayList<Mission> missions = new ArrayList<Mission>();
-	// private ArrayList<Drone> drones = new ArrayList<Drone>();
 
 	private JButton start;
 	private JButton stop;
@@ -32,8 +28,6 @@ public class MonitorPage extends JFrame {
 	}
 
 	public final void initUI() {
-
-		// final ArrayList<Trip> trips = new ArrayList<Trip>();
 
 		setLayout(new BorderLayout());
 
@@ -106,15 +100,9 @@ public class MonitorPage extends JFrame {
 
 	public void showStopOptions() {
 
-		//ArrayList<String> chooseStopMethod = new ArrayList<String>();
-
-//		chooseStopMethod.add("RTL");
-//		chooseStopMethod.add("Land");
-
 		String[] simpleArray = new String[2];
-		simpleArray[0] = "RTL";//[chooseStopMethod.size()];
+		simpleArray[0] = "RTL";
 		simpleArray[1] = "Land";
-		//chooseStopMethod.toArray(simpleArray);
 
 		JOptionPane.showInputDialog(null, "Choose the action to perform ",
 				"Choose the stop behaviour", JOptionPane.QUESTION_MESSAGE, null,

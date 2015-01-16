@@ -148,14 +148,6 @@ public class MissionPageController {
 				if (missions.get(i).getName().equals(missionName)) {
 
 					final Mission m = missions.get(i);
-
-//					//build list of trips names 
-//					final List<String> tripsNames = new ArrayList<String>();
-//					if(m.getTrips() != null && m.getTrips().size() > 0){
-//						for(Trip t: m.getTrips()){
-//							tripsNames.add(t.getName());
-//						}
-//					}
 					
 					// Build hashmap with tripsName and its position
 					final Map<String,String> map = new HashMap<String, String>();
