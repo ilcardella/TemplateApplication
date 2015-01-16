@@ -115,16 +115,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	private void createTripsIconsOnMap() {
-		Collection<String> nameList = tripsMap.keySet();
 		
-		for (String s : nameList) {
+		for (String s : tripsMap.keySet()) {
 			addTripToView(s);
-//			String[] xy = tripsMap.get(s).split("/");
-//			locX = Integer.parseInt(xy[0]);
-//			locY = Integer.parseInt(xy[1]);
-//
-//			// Qui fai apparire l'icona con le coordinate x e y
-//			putTripNameOnMap(s);
 		}
 
 	}
@@ -320,8 +313,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		int locX = Integer.parseInt(coords[0]);
 		int locY = Integer.parseInt(coords[1]);
 		
-		// update the list
-		model1.addElement(name);
+//		// update the list
+//		model1.addElement(name);
 		
 		// update the map
 		text = new JTextField(name);
