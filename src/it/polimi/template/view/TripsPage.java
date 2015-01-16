@@ -401,6 +401,10 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	public void deleteOneTripFromMap() {
 
+		String name = getSelectedTrip();
+		String[] xy = tripsMap.get(name).split("/");
+		locX = Integer.parseInt(xy[0]);
+		locY = Integer.parseInt(xy[1]);
 		label.remove(label.getComponentAt(locX, locY));
 		label.revalidate();
 		label.repaint();
