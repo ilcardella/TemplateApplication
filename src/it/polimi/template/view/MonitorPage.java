@@ -106,16 +106,18 @@ public class MonitorPage extends JFrame {
 
 	public void showStopOptions() {
 
-		ArrayList<String> chooseStopMethod = new ArrayList<String>();
+		//ArrayList<String> chooseStopMethod = new ArrayList<String>();
 
-		chooseStopMethod.add("RTL");
-		chooseStopMethod.add("Land");
+//		chooseStopMethod.add("RTL");
+//		chooseStopMethod.add("Land");
 
-		String[] simpleArray = new String[chooseStopMethod.size()];
-		chooseStopMethod.toArray(simpleArray);
+		String[] simpleArray = new String[2];
+		simpleArray[0] = "RTL";//[chooseStopMethod.size()];
+		simpleArray[1] = "Land";
+		//chooseStopMethod.toArray(simpleArray);
 
 		JOptionPane.showInputDialog(null, "Choose the action to perform ",
-				"Choose the stop method", JOptionPane.QUESTION_MESSAGE, null,
+				"Choose the stop behaviour", JOptionPane.QUESTION_MESSAGE, null,
 				simpleArray, simpleArray[0]);
 
 	}
