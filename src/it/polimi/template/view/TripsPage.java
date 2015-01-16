@@ -25,6 +25,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import it.polimi.template.controller.TripsPageController.ExportDoneListener;
 import it.polimi.template.controller.TripsPageController.PutTripOnMapListener;
@@ -66,7 +67,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private JButton deleteOne;
 	private JTextField text;
 
-	List<String> tripsNames;
+	Map<String, String> tripsMap;
 	private String nameMission;
 	private String selectedAction;
 	private ImageIcon icon;
@@ -76,9 +77,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	DragSource ds;
 	StringSelection transferable;
 
-	public TripsPage(String name, List<String> tripsNames) {
+	public TripsPage(String name, Map<String, String> map) {
 		this.nameMission = name;
-		this.tripsNames = tripsNames;
+		this.tripsMap = map;
 
 		try {
 			initUI();
@@ -110,11 +111,10 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		tripList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tripList.setFixedCellWidth(200);
 
-		for (String name : tripsNames) {
+		
+		for (String name : tripsMap.keySet()) {
 			model1.addElement(name);
-
 		}
-
 	}
 
 	public final void initUI() throws IOException {
@@ -297,12 +297,12 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		model1.addElement(name);
 	}
 
-	public void putTripOnMapListener(PutTripOnMapListener listener) {
+	public void setPutTripOnMapListener(PutTripOnMapListener listener) {
 		ptm = listener;
 
 	}
 
-	public void putTripName(String name) {
+	public void putTripNameOnMap(String name) {
 		text = new JTextField(name);
 
 		text.setBounds(locX, locY, 30, 20);

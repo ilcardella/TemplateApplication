@@ -41,7 +41,7 @@ public class TripsPageController {
 				.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
 		this.tripsPage.setExportDoneActionListener(new ExportDoneListener());
 		this.tripsPage.setDeleteOneButtonListener(new DeleteOneButtonListener());
-		this.tripsPage.putTripOnMapListener(new PutTripOnMapListener());
+		this.tripsPage.setPutTripOnMapListener(new PutTripOnMapListener());
 
 
 	}
@@ -94,7 +94,7 @@ public class TripsPageController {
 
 		public void actionPerformed() {
 			
-			tripsPage.putTripName(mission.getName() + "-" + tripCounter);
+			tripsPage.putTripNameOnMap(mission.getName() + "-" + tripCounter);
 		}
 
 	}	

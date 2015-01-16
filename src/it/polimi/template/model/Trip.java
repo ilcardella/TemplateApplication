@@ -12,8 +12,8 @@ public class Trip {
 
 	private String name;
 	private Action action;
-	private String sourceLocation;
-	private String targetLocation;
+	private String sourceLocation; // Pattern: "x/y"
+	private String targetLocation; // Pattern: "x/y"
 	private int delay;
 	private int priority;
 	private int status;

@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.SwingUtilities;
 
@@ -147,18 +149,26 @@ public class MissionPageController {
 
 					final Mission m = missions.get(i);
 
-					//build list of trips names 
-					final List<String> tripsNames = new ArrayList<String>();
+//					//build list of trips names 
+//					final List<String> tripsNames = new ArrayList<String>();
+//					if(m.getTrips() != null && m.getTrips().size() > 0){
+//						for(Trip t: m.getTrips()){
+//							tripsNames.add(t.getName());
+//						}
+//					}
+					
+					// Build hashmap with tripsName and its position
+					final Map<String,String> map = new HashMap<String, String>();
 					if(m.getTrips() != null && m.getTrips().size() > 0){
 						for(Trip t: m.getTrips()){
-							tripsNames.add(t.getName());
+							map.put(t.getName(), t.getTargetLocation());
 						}
 					}
 					
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							TripsPage tripsPage = new TripsPage(missionName, tripsNames);
+							TripsPage tripsPage = new TripsPage(missionName, map);
 							TripsPageController tripsPageController = new TripsPageController(
 									tripsPage, m);
 							tripsPage.setVisible(true);
