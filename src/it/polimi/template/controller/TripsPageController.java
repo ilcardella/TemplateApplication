@@ -39,9 +39,8 @@ public class TripsPageController {
 		this.tripsPage.setOkButtonListener(new TripsPageOkButtonListener());
 		this.tripsPage
 				.setDeleteAllButtonListener(new TripsPageDeleteAllButtonListener());
-		this.tripsPage.setExportDoneActionListener(new ExportDoneListener());
+		this.tripsPage.setDragAndDropListener(new DragAndDropListener());
 		this.tripsPage.setDeleteOneButtonListener(new DeleteOneButtonListener());
-		this.tripsPage.setPutTripOnMapListener(new PutTripOnMapListener());
 
 
 	}
@@ -59,8 +58,7 @@ public class TripsPageController {
 		public void actionPerformed(ActionEvent e) {
 			mission.getTrips().clear();
 			// update the view
-			tripsPage.deleteAllTrips();
-			tripsPage.deleteAllTripsFromMap();
+			tripsPage.deleteAllTripsFromView();
 			tripCounter=65;
 		}
 
@@ -81,27 +79,16 @@ public class TripsPageController {
 
 	}
 
-	public class ExportDoneListener {
+	public class DragAndDropListener {
 
 		public void actionPerformed() {
-			String actionName = tripsPage.getAction();
-			manageDragAndDrop(actionName);
+			// update the model creating the Trip object
+			manageDragAndDrop();
 		}
 
 	}
-	
-	public class PutTripOnMapListener {
 
-		public void actionPerformed() {
-			
-			tripsPage.putTripNameOnMap(mission.getName() + "-" + tripCounter);
-		}
-
-	}	
-
-
-
-	public void manageDragAndDrop(String actionName) {
+	public void manageDragAndDrop() {
 
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
@@ -113,7 +100,7 @@ public class TripsPageController {
 		for (Action a : Action.values()) {
 
 			// assign the right action to the trip
-			if (a.toString().equals(actionName)) {
+			if (a.toString().equals(tripsPage.getAction())) {
 				trip.setAction(a);
 
 				// some actions requires the items, other not
@@ -144,13 +131,15 @@ public class TripsPageController {
 		trip.setDelay(delay);
 
 		// setting the targetPosition coordinates
-		trip.setTargetLocation(tripsPage.getCoordinatesOfCurrentTrip());
+		trip.setTargetLocation(tripsPage.getCoordinatesOfDroppedTrip());
 				
 		// add to the trip list of the mission
 		mission.getTrips().add(trip);
 
+		// update the view hashmap
+		tripsPage.addTripToHashMap(trip.getName());
 		// update the view
-		tripsPage.fillTripList(trip.getName());
+		tripsPage.addTripToView(trip.getName());
 	}
 
 

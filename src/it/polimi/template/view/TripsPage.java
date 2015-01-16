@@ -28,8 +28,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import it.polimi.template.controller.TripsPageController.ExportDoneListener;
-import it.polimi.template.controller.TripsPageController.PutTripOnMapListener;
+import it.polimi.template.controller.TripsPageController.DragAndDropListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -44,7 +43,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
-import javax.swing.TransferHandler.DropLocation;
 
 public class TripsPage extends JFrame implements DragSourceListener,
 		DragGestureListener {
@@ -59,8 +57,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private JList<String> list;
 	private JList<String> tripList;
 
-	private ExportDoneListener edp;
-	private PutTripOnMapListener ptm;
+	private DragAndDropListener dndListener;
 
 	private JLabel label;
 	private JButton ok;
@@ -118,21 +115,16 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	private void createTripsIconsOnMap() {
-		// TODO questo è l'equivalente ciclo for del metodo sopra
-		// "createTripList"
-		// bisogna prendere i valori delle coordinate di tutti i trips dalla
-		// hashmap
 		Collection<String> nameList = tripsMap.keySet();
-		// ora per ogni valore nella lista bisogna far apparire l'iconcina sulla
-		// mappa
-		// prendendo le coordinate così
+		
 		for (String s : nameList) {
-			String[] xy = tripsMap.get(s).split("/");
-			locX = Integer.parseInt(xy[0]);
-			locY = Integer.parseInt(xy[1]);
-
-			// Qui fai apparire l'icona con le coordinate x e y
-			putTripNameOnMap(s);
+			addTripToView(s);
+//			String[] xy = tripsMap.get(s).split("/");
+//			locX = Integer.parseInt(xy[0]);
+//			locY = Integer.parseInt(xy[1]);
+//
+//			// Qui fai apparire l'icona con le coordinate x e y
+//			putTripNameOnMap(s);
 		}
 
 	}
@@ -211,11 +203,18 @@ public class TripsPage extends JFrame implements DragSourceListener,
 				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 
 					event.acceptDrop(DnDConstants.ACTION_COPY);
+					
+					// update the location of dnd
 					locX = (int) event.getLocation().getX();
 					locY = (int) event.getLocation().getY();
-					ptm.actionPerformed();
+					
 
-					edp.actionPerformed();
+					// update the hashmap
+					//tripsMap.put(getSelectedTrip(), locX+"/"+locY);
+					
+					// notify the controller of the drag and drop
+					dndListener.actionPerformed();
+					
 					event.dropComplete(true);
 
 				}
@@ -229,24 +228,19 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	@Override
-	public void dragEnter(DragSourceDragEvent dsde) {
-	}
+	public void dragEnter(DragSourceDragEvent dsde) {}
 
 	@Override
-	public void dragOver(DragSourceDragEvent dsde) {
-	}
+	public void dragOver(DragSourceDragEvent dsde) {}
 
 	@Override
-	public void dropActionChanged(DragSourceDragEvent dsde) {
-	}
+	public void dropActionChanged(DragSourceDragEvent dsde) {}
 
 	@Override
-	public void dragExit(DragSourceEvent dse) {
-	}
+	public void dragExit(DragSourceEvent dse) {}
 
 	@Override
-	public void dragDropEnd(DragSourceDropEvent dsde) {
-	}
+	public void dragDropEnd(DragSourceDropEvent dsde) {}
 
 	// drag and drop listeners
 
@@ -313,31 +307,33 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			return Integer.parseInt(delay);
 
 	}
+	
+	public void addTripToHashMap(String name){
+		// update the hashmap
+		tripsMap.put(name, getCoordinatesOfDroppedTrip());
+	}
 
-	public void fillTripList(String name) {
+	public void addTripToView(String name) {
+
+		// update the view
+		String[] coords = tripsMap.get(name).split("/");
+		int locX = Integer.parseInt(coords[0]);
+		int locY = Integer.parseInt(coords[1]);
+		
+		// update the list
 		model1.addElement(name);
-	}
-
-	public void setPutTripOnMapListener(PutTripOnMapListener listener) {
-		ptm = listener;
-
-	}
-
-	public void putTripNameOnMap(String name) {
+		
+		// update the map
 		text = new JTextField(name);
-
 		text.setBounds(locX, locY, 30, 20);
-
 		text.setEditable(false);
-
 		text.setBackground(Color.BLUE);
 		text.setForeground(Color.CYAN);
-
 		label.add(text);
 	}
 
-	public void setExportDoneActionListener(ExportDoneListener listener) {
-		edp = listener;
+	public void setDragAndDropListener(DragAndDropListener listener) {
+		dndListener = listener;
 
 	}
 
@@ -363,12 +359,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	}
 
-	public void deleteAllTrips() {
+	public void deleteAllTripsFromView() {
 		model1.removeAllElements();
-	}
-
-	public void deleteAllTripsFromMap() {
-
 		label.removeAll();
 		label.revalidate();
 		label.repaint();
@@ -403,15 +395,16 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		String name = getSelectedTrip();
 		String[] xy = tripsMap.get(name).split("/");
-		locX = Integer.parseInt(xy[0]);
-		locY = Integer.parseInt(xy[1]);
+		int locX = Integer.parseInt(xy[0]);
+		int locY = Integer.parseInt(xy[1]);
 		label.remove(label.getComponentAt(locX, locY));
 		label.revalidate();
 		label.repaint();
 
 	}
 
-	public String getCoordinatesOfCurrentTrip() {
+	public String getCoordinatesOfDroppedTrip() {
+		// take the coords of the dropped trip and return them
 		return locX + "/" + locY;
 	}
 
