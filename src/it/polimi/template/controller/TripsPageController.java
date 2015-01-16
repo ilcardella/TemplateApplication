@@ -69,14 +69,15 @@ public class TripsPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String name = tripsPage.getSelectedTrip();
-			for (int i = 0; i < mission.getTrips().size(); i++)
-				if (mission.getTrips().get(i).getName().equals(name))
+			for (int i = 0; i < mission.getTrips().size(); i++){
+				if (mission.getTrips().get(i).getName().equals(name)){
+					tripsPage.deleteSelectedTripFromList();
+					tripsPage.deleteTripFromMap(name);
+					tripsPage.removeTripFromHashMap(name);
 					mission.getTrips().remove(i);
-			tripsPage.deleteTrip();
-			tripsPage.deleteOneTripFromMap();
-
+				}
+			}
 		}
-
 	}
 
 	public class DragAndDropListener {
@@ -137,7 +138,8 @@ public class TripsPageController {
 		mission.getTrips().add(trip);
 
 		// update the view hashmap
-		tripsPage.addTripToHashMap(trip.getName());
+		tripsPage.addTripToHashMap(trip.getName(), trip.getTargetLocation());
+		
 		// update the view
 		tripsPage.addTripToView(trip.getName());
 	}

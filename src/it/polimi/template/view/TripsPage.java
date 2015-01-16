@@ -51,8 +51,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		 * 
 		 */
 	private static final long serialVersionUID = 1L;
-	private DefaultListModel<String> model;
-	private DefaultListModel<String> model1;
+	private DefaultListModel<String> actionListModel;
+	private DefaultListModel<String> tripListModel;
 
 	private JList<String> list;
 	private JList<String> tripList;
@@ -70,7 +70,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	private String selectedAction;
 	private ImageIcon icon;
 
-	private int locX, locY;
+	private String currentCoordinates;
 
 	DragSource ds;
 	StringSelection transferable;
@@ -87,9 +87,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	private void createActionList() {
-
-		model = new DefaultListModel<String>();
-		list = new JList<String>(model);
+		actionListModel = new DefaultListModel<String>();
+		list = new JList<String>(actionListModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setDragEnabled(true);
 		list.setTransferHandler(new TransferHandler("text"));
@@ -97,29 +96,27 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		ds.createDefaultDragGestureRecognizer(list, DnDConstants.ACTION_COPY,
 				this);
 
+		// add the action names
 		for (Action a : Action.values())
-			model.addElement(a.toString());
-
+			actionListModel.addElement(a.toString());
 	}
 
 	private void createTripList() {
-
-		model1 = new DefaultListModel<String>();
-		tripList = new JList<String>(model1);
+		tripListModel = new DefaultListModel<String>();
+		tripList = new JList<String>(tripListModel);
 		tripList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tripList.setFixedCellWidth(200);
 
+		// fill the list with already existing trips
 		for (String name : tripsMap.keySet()) {
-			model1.addElement(name);
+			tripListModel.addElement(name);
 		}
 	}
 
 	private void createTripsIconsOnMap() {
-		
 		for (String s : tripsMap.keySet()) {
 			addTripToView(s);
 		}
-
 	}
 
 	public final void initUI() throws IOException {
@@ -172,11 +169,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	@Override
 	public void dragGestureRecognized(DragGestureEvent dge) {
-
 		System.out.println("Drag Gesture Recognized!");
 		transferable = new StringSelection(list.getSelectedValue());
 		ds.startDrag(dge, DragSource.DefaultCopyDrop, transferable, this);
-
 	}
 
 	private class MyDropTargetListener extends DropTargetAdapter {
@@ -198,9 +193,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 					event.acceptDrop(DnDConstants.ACTION_COPY);
 					
 					// update the location of dnd
-					locX = (int) event.getLocation().getX();
-					locY = (int) event.getLocation().getY();
-					
+					int locX = (int) event.getLocation().getX();
+					int locY = (int) event.getLocation().getY();
+					currentCoordinates = locX + "/" + locY;
 
 					// update the hashmap
 					//tripsMap.put(getSelectedTrip(), locX+"/"+locY);
@@ -301,20 +296,27 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	}
 	
-	public void addTripToHashMap(String name){
+	public void addTripToHashMap(String name, String coords){
 		// update the hashmap
-		tripsMap.put(name, getCoordinatesOfDroppedTrip());
+		if(!tripsMap.containsKey(name)){
+			tripsMap.put(name, coords);
+		}else{
+			tripsMap.remove(name);
+			tripsMap.put(name, coords);
+		}
+	}
+	
+	public void removeTripFromHashMap(String name){
+		if(tripsMap.containsKey(name))
+			tripsMap.remove(name);
 	}
 
 	public void addTripToView(String name) {
 
-		// update the view
+		// getting coordinates from hashmap
 		String[] coords = tripsMap.get(name).split("/");
 		int locX = Integer.parseInt(coords[0]);
 		int locY = Integer.parseInt(coords[1]);
-		
-//		// update the list
-//		model1.addElement(name);
 		
 		// update the map
 		text = new JTextField(name);
@@ -323,6 +325,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		text.setBackground(Color.BLUE);
 		text.setForeground(Color.CYAN);
 		label.add(text);
+		
+		// add the trip to the tripList
+		tripListModel.addElement(name);
 	}
 
 	public void setDragAndDropListener(DragAndDropListener listener) {
@@ -353,7 +358,11 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	public void deleteAllTripsFromView() {
-		model1.removeAllElements();
+		// clear the hashmap
+		tripsMap.clear();
+		// clear the trip list
+		tripListModel.removeAllElements();
+		// clear the map
 		label.removeAll();
 		label.revalidate();
 		label.repaint();
@@ -371,22 +380,19 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		int index = selmodel.getMinSelectionIndex();
 		if (index >= 0) {
 
-			String trip = model1.getElementAt(index).toString();
+			String trip = tripListModel.getElementAt(index).toString();
 			return trip;
 		}
 		return "";
 	}
 
-	public void deleteTrip() {
+	public void deleteSelectedTripFromList() {
 		ListSelectionModel selmodel = tripList.getSelectionModel();
 		int index = selmodel.getMinSelectionIndex();
-
-		model1.remove(index);
+		tripListModel.remove(index);
 	}
 
-	public void deleteOneTripFromMap() {
-
-		String name = getSelectedTrip();
+	public void deleteTripFromMap(String name) {
 		String[] xy = tripsMap.get(name).split("/");
 		int locX = Integer.parseInt(xy[0]);
 		int locY = Integer.parseInt(xy[1]);
@@ -398,7 +404,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 	public String getCoordinatesOfDroppedTrip() {
 		// take the coords of the dropped trip and return them
-		return locX + "/" + locY;
+		return currentCoordinates;
 	}
 
 }
