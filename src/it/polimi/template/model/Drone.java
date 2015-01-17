@@ -13,6 +13,8 @@ public class Drone {
 	public static final int FREE = 5;
 	public static final int BUSY = 6;
 	public static final int CHARGING = 7;
+	
+	public static final String HOME_LOCATION = "0/0"; // coordinates of home location
 
 	private int id;
 	private int status;
@@ -67,7 +69,7 @@ public class Drone {
 		return false;
 	}
 
-	private boolean flyTo(String target) {
+	public boolean flyTo(String target) {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -88,5 +90,25 @@ public class Drone {
 		default:
 			return "Unknown";
 		}
+	}
+
+	// The drone lands at the current position
+	public boolean land() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	// The drone takes off
+	public boolean takeOff(){
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 }

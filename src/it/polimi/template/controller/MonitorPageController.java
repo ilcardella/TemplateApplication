@@ -52,16 +52,36 @@ public class MonitorPageController {
 			monitorPage.clearConsole();
 			// prompt user what to do
 			String selection = monitorPage.showStopOptions();
-			switch (selection) {
-				case "RTL":
-					// do RTL
-					break;
-				case "Land":
-					// do Land
-					break;
-				default:
-					// do RTL as default
-					break;
+			// for each drone that is flyng
+			for (Drone d : DronesManager.getDrones()) {
+				// if the drone is busy it means it is not at home location
+				if (d.getStatus() == Drone.BUSY) {
+					// depending on the user selection
+					switch (selection) {
+					case "RTL":
+						// do RTL
+						d.setStatus(Drone.BUSY);
+						d.flyTo(Drone.HOME_LOCATION);
+						d.setStatus(Drone.FREE);
+						break;
+					case "Land":
+						// do Land
+						d.setStatus(Drone.BUSY);
+						d.land();
+						d.setStatus(Drone.FREE);
+						break;
+					default:
+						// do RTL as default
+						d.setStatus(Drone.BUSY);
+						d.flyTo(Drone.HOME_LOCATION);
+						d.setStatus(Drone.FREE);
+						break;
+					}
+				}
+			}
+			for(Mission m: missions){
+				m.setStatus(Mission.STANDBY);
+				log(m, "Mission "+m.getName()+" STOPPED");
 			}
 		}
 	}
