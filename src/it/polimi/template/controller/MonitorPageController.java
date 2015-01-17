@@ -9,6 +9,7 @@ import it.polimi.template.view.MonitorPage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,6 +20,7 @@ public class MonitorPageController {
 
 	private MonitorPage monitorPage;
 	private List<Mission> missions;
+	private List<MyWorker> threadList;
 
 	public MonitorPageController(MonitorPage monitorPage, List<Mission> missions) {
 		this.monitorPage = monitorPage;
@@ -37,8 +39,10 @@ public class MonitorPageController {
 	}
 
 	protected void launchExecution() {
+		threadList = new ArrayList<MyWorker>();
 		for (int i = 0; i < missions.size(); i++) {
 			MyWorker worker = new MyWorker(missions.get(i), this);
+			threadList.add(worker);
 			worker.execute();
 		}
 	}
@@ -48,8 +52,13 @@ public class MonitorPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// clear the view
-			monitorPage.clearTable();
-			monitorPage.clearConsole();
+			// monitorPage.clearTable();
+			// monitorPage.clearConsole();
+			// kill all the threads to stop the execution of the missions
+			for (MyWorker t : threadList) {
+				while(!t.isCancelled())
+					t.cancel(true);
+			}
 			// prompt user what to do
 			String selection = monitorPage.showStopOptions();
 			// for each drone that is flyng
@@ -79,10 +88,12 @@ public class MonitorPageController {
 					}
 				}
 			}
-			for(Mission m: missions){
+			// log the status of all missions after the stop
+			for (Mission m : missions) {
 				m.setStatus(Mission.STANDBY);
-				log(m, "Mission "+m.getName()+" STOPPED");
+				log(m, "Mission " + m.getName() + " STOPPED");
 			}
+
 		}
 	}
 
