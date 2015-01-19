@@ -1,8 +1,14 @@
 package it.polimi.template.view;
 
+import it.polimi.template.controller.MonitorPageController.CloseWindowListener;
+
 import java.awt.BorderLayout;
+
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
+
 public class MonitorPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -21,10 +28,12 @@ public class MonitorPage extends JFrame {
 	private JButton stop;
 	private JTable table;
 	private JTextArea text;
+	private CloseWindowListener cwl;
 
 	public MonitorPage() {
 
 		initUI();
+		
 	}
 
 	public final void initUI() {
@@ -63,6 +72,15 @@ public class MonitorPage extends JFrame {
 		setTitle("Pluto - Monitor Page");
 		setSize(1000, 800);
 		setLocationRelativeTo(null);
+		
+		   addWindowListener(new WindowAdapter()
+	        {
+	            @Override
+	            public void windowClosing(WindowEvent e)
+	            {
+	                cwl.actionPerformed();
+	            }
+	        });
 	}
 
 	// start button
@@ -70,44 +88,6 @@ public class MonitorPage extends JFrame {
 	public void setStartButtonListener(ActionListener listener) {
 		start.addActionListener(listener);
 
-	}
-
-	// stop button
-
-	public void setStopButtonListener(ActionListener listener) {
-		stop.addActionListener(listener);
-
-	}
-
-	public void clearTable() {
-		DefaultTableModel dm = (DefaultTableModel) table.getModel();
-		int rowCount = dm.getRowCount();
-		// Remove rows one by one from the end of the table
-		for (int i = rowCount - 1; i >= 0; i--) {
-			dm.removeRow(i);
-		}
-	}
-
-	public void clearConsole() {
-		text.setText(null);
-		text.revalidate();
-		text.repaint();
-	}
-
-	public void fillConsole(final String log) {
-		text.append(log);
-	}
-
-	public String showStopOptions() {
-
-		String[] simpleArray = new String[2];
-		simpleArray[0] = "RTL";
-		simpleArray[1] = "Land";
-
-		String selection = (String) JOptionPane.showInputDialog(null, "Choose the action to perform ",
-				"Choose the stop behaviour", JOptionPane.QUESTION_MESSAGE, null,
-				simpleArray, simpleArray[0]);
-		return selection;
 
 	}
 
@@ -157,4 +137,53 @@ public class MonitorPage extends JFrame {
 		}
 
 	}
+
+	public void fillConsole(final String log) {
+		text.append(log);
+	}
+
+	// stop button
+
+	public void setStopButtonListener(ActionListener listener) {
+		stop.addActionListener(listener);
+
+	}
+
+	public void clearTable() {
+		DefaultTableModel dm = (DefaultTableModel) table.getModel();
+		int rowCount = dm.getRowCount();
+		// Remove rows one by one from the end of the table
+		for (int i = rowCount - 1; i >= 0; i--) {
+			dm.removeRow(i);
+		}
+	}
+
+	public void clearConsole() {
+		text.setText(null);
+		text.revalidate();
+		text.repaint();
+	}
+
+	public String showStopOptions() {
+
+		String[] simpleArray = new String[2];
+		simpleArray[0] = "RTL";
+		simpleArray[1] = "Land";
+
+		String selection = (String) JOptionPane
+				.showInputDialog(null, "Choose the action to perform ",
+						"Choose the stop behaviour",
+						JOptionPane.QUESTION_MESSAGE, null, simpleArray,
+						simpleArray[0]);
+		return selection;
+
+	}
+	
+	//close window
+	
+	public void setCloseWindowListener(CloseWindowListener listener) {
+		cwl=listener;
+
+	}
+
 }

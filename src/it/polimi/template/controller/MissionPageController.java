@@ -35,7 +35,7 @@ public class MissionPageController {
 		this.missionPage
 				.setMissionsPageOkButtonListener(new MissionsPageOkButtonListener());
 		this.missionPage.setListMouseListener(new ListMouseListener());
-		;
+		
 
 	}
 
@@ -52,6 +52,7 @@ public class MissionPageController {
 				missions.add(m);
 
 				missionPage.addMissionToList(name);
+				
 			}
 		}
 
@@ -99,7 +100,7 @@ public class MissionPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			 launchTripsPage();
+			launchTripsPage();
 		}
 	}
 
@@ -112,33 +113,43 @@ public class MissionPageController {
 				public void run() {
 					MonitorPage monitorPage = new MonitorPage();
 					MonitorPageController monitorController = new MonitorPageController(
-							monitorPage, missions);
+							monitorPage,missionPage, missions);
 					monitorPage.setVisible(true);
 				}
 			});
 		}
 	}
+	
+
 
 	class ListMouseListener implements MouseListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 
-			 if (e.getClickCount() == 2) {
-				 launchTripsPage();
-			 }
+			if (e.getClickCount() == 2) {
+				launchTripsPage();
+			}
 		}
+
 		@Override
-		public void mouseEntered(MouseEvent arg0) {}
+		public void mouseEntered(MouseEvent arg0) {
+		}
+
 		@Override
-		public void mouseExited(MouseEvent arg0) {}
+		public void mouseExited(MouseEvent arg0) {
+		}
+
 		@Override
-		public void mousePressed(MouseEvent arg0) {}
+		public void mousePressed(MouseEvent arg0) {
+		}
+
 		@Override
-		public void mouseReleased(MouseEvent arg0) {}
+		public void mouseReleased(MouseEvent arg0) {
+		}
 	}
-	
-	private void launchTripsPage(){
+
+	private void launchTripsPage() {
 		final String missionName = missionPage.getSelectedMission();
 
 		if (!missionName.equals("")) {
@@ -148,18 +159,19 @@ public class MissionPageController {
 				if (missions.get(i).getName().equals(missionName)) {
 
 					final Mission m = missions.get(i);
-					
+
 					// Build hashmap with tripsName and its position
-					final Map<String,String> map = new HashMap<String, String>();
-					if(m.getTrips() != null && m.getTrips().size() > 0){
-						for(Trip t: m.getTrips()){
+					final Map<String, String> map = new HashMap<String, String>();
+					if (m.getTrips() != null && m.getTrips().size() > 0) {
+						for (Trip t : m.getTrips()) {
 							map.put(t.getName(), t.getTargetLocation());
 						}
 					}
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							TripsPage tripsPage = new TripsPage(missionName, map);
+							TripsPage tripsPage = new TripsPage(missionName,
+									map);
 							TripsPageController tripsPageController = new TripsPageController(
 									tripsPage, m);
 							tripsPage.setVisible(true);

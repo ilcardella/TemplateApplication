@@ -190,4 +190,13 @@ public class MissionsPage extends JFrame {
 		list.addMouseListener(listener);
 	}
 
+	// monitor page start button
+
+	public void deleteCompletedMission(String name) {
+		for (int i = 0; i < list.getModel().getSize(); i++)
+			if (list.getModel().getElementAt(i).equals(name))
+				model.remove(i);
+		
+	}
+
 }

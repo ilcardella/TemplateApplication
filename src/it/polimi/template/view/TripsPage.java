@@ -2,6 +2,7 @@ package it.polimi.template.view;
 
 import it.polimi.template.model.*;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;

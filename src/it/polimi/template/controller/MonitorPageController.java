@@ -5,6 +5,7 @@ import it.polimi.template.model.Drone;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
 import it.polimi.template.utils.DronesManager;
+import it.polimi.template.view.MissionsPage;
 import it.polimi.template.view.MonitorPage;
 
 import java.awt.event.ActionEvent;
@@ -19,15 +20,20 @@ import javax.swing.SwingUtilities;
 public class MonitorPageController {
 
 	private MonitorPage monitorPage;
+	private MissionsPage missionPage;
+
 	private List<Mission> missions;
 	private List<MyWorker> threadList;
 
-	public MonitorPageController(MonitorPage monitorPage, List<Mission> missions) {
+	public MonitorPageController(MonitorPage monitorPage,
+			MissionsPage missionPage, List<Mission> missions) {
 		this.monitorPage = monitorPage;
+		this.missionPage=missionPage;
 		this.missions = missions;
 
 		this.monitorPage.setStartButtonListener(new StartButtonListener());
 		this.monitorPage.setStopButtonListener(new StopButtonListener());
+		this.monitorPage.setCloseWindowListener(new CloseWindowListener());
 	}
 
 	class StartButtonListener implements ActionListener {
@@ -35,6 +41,24 @@ public class MonitorPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			launchExecution();
+//			for (int j = 0; j < missions.size(); j++) {
+//				if(missions.get(j).getStatus()==Mission.COMPLETED){
+//				missionPage.deleteCompletedMission(missions.get(j).getName());
+//				missions.remove(j);
+//				}
+//			}
+		}
+	}
+	
+	public class CloseWindowListener  {
+
+		public void actionPerformed() {
+			for (int j = 0; j < missions.size(); j++) {
+				if(missions.get(j).getStatus()==Mission.COMPLETED){
+				missionPage.deleteCompletedMission(missions.get(j).getName());
+				missions.remove(j);
+				}
+			}
 		}
 	}
 
@@ -43,7 +67,9 @@ public class MonitorPageController {
 		for (int i = 0; i < missions.size(); i++) {
 			MyWorker worker = new MyWorker(missions.get(i), this);
 			threadList.add(worker);
+
 			worker.execute();
+
 		}
 	}
 
@@ -56,7 +82,7 @@ public class MonitorPageController {
 			// monitorPage.clearConsole();
 			// kill all the threads to stop the execution of the missions
 			for (MyWorker t : threadList) {
-				while(!t.isCancelled())
+				while (!t.isCancelled())
 					t.cancel(true);
 			}
 			// prompt user what to do
