@@ -314,8 +314,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		int locY = Integer.parseInt(coords[1]);
 		
 		// update the map
-		text = new JTextField(name);
-		text.setBounds(locX, locY, 30, 20);
+		text = new JTextField(name.split("-")[1]);
+		text.setBounds(locX, locY, 15, 20);
 		text.setEditable(false);
 		text.setBackground(Color.BLUE);
 		text.setForeground(Color.CYAN);

@@ -46,7 +46,7 @@ public class MissionsPage extends JFrame {
 		renbtn = new JButton("Rename");
 		delbtn = new JButton("Delete");
 		tpsbtn = new JButton("Set Trips");
-		okbtn = new JButton("Ok");
+		okbtn = new JButton("Monitor Page");
 
 	}
 
@@ -79,8 +79,8 @@ public class MissionsPage extends JFrame {
 				.addGroup(
 						gl.createSequentialGroup().addComponent(addbtn)
 								.addComponent(renbtn).addComponent(delbtn)
-								.addComponent(tpsbtn).addComponent(okbtn)
-								.addComponent(remallbtn)
+								.addComponent(remallbtn).addComponent(tpsbtn)
+								.addComponent(okbtn)
 
 				)
 
@@ -196,7 +196,7 @@ public class MissionsPage extends JFrame {
 		for (int i = 0; i < list.getModel().getSize(); i++)
 			if (list.getModel().getElementAt(i).equals(name))
 				model.remove(i);
-		
+
 	}
 
 }
