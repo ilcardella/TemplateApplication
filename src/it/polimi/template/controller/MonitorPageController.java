@@ -28,7 +28,7 @@ public class MonitorPageController {
 	public MonitorPageController(MonitorPage monitorPage,
 			MissionsPage missionPage, List<Mission> missions) {
 		this.monitorPage = monitorPage;
-		this.missionPage=missionPage;
+		this.missionPage = missionPage;
 		this.missions = missions;
 
 		this.monitorPage.setStartButtonListener(new StartButtonListener());
@@ -41,22 +41,18 @@ public class MonitorPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			launchExecution();
-//			for (int j = 0; j < missions.size(); j++) {
-//				if(missions.get(j).getStatus()==Mission.COMPLETED){
-//				missionPage.deleteCompletedMission(missions.get(j).getName());
-//				missions.remove(j);
-//				}
-//			}
+
 		}
 	}
-	
-	public class CloseWindowListener  {
+
+	public class CloseWindowListener {
 
 		public void actionPerformed() {
 			for (int j = 0; j < missions.size(); j++) {
-				if(missions.get(j).getStatus()==Mission.COMPLETED){
-				missionPage.deleteCompletedMission(missions.get(j).getName());
-				missions.remove(j);
+				if (missions.get(j).getStatus() == Mission.COMPLETED) {
+					missionPage.deleteCompletedMission(missions.get(j)
+							.getName());
+					missions.remove(j);
 				}
 			}
 		}
