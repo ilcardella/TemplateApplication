@@ -33,7 +33,7 @@ public class MonitorPageController {
 
 		this.monitorPage.setStartButtonListener(new StartButtonListener());
 		this.monitorPage.setStopButtonListener(new StopButtonListener());
-		this.monitorPage.setCloseWindowListener(new CloseWindowListener());
+		this.monitorPage.setBackButtonListener(new BackButtonListener());
 	}
 
 	class StartButtonListener implements ActionListener {
@@ -45,16 +45,19 @@ public class MonitorPageController {
 		}
 	}
 
-	public class CloseWindowListener {
+	class BackButtonListener implements ActionListener {
 
-		public void actionPerformed() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
 			for (int j = 0; j < missions.size(); j++) {
 				if (missions.get(j).getStatus() == Mission.COMPLETED) {
 					missionPage.deleteCompletedMission(missions.get(j)
 							.getName());
 					missions.remove(j);
+				
 				}
 			}
+			monitorPage.setVisible(false);
 		}
 	}
 

@@ -1,6 +1,6 @@
 package it.polimi.template.view;
 
-import it.polimi.template.controller.MonitorPageController.CloseWindowListener;
+
 
 import java.awt.BorderLayout;
 
@@ -26,9 +26,9 @@ public class MonitorPage extends JFrame {
 
 	private JButton start;
 	private JButton stop;
+	private JButton back;
 	private JTable table;
 	private JTextArea text;
-	private CloseWindowListener cwl;
 
 	public MonitorPage() {
 
@@ -60,9 +60,11 @@ public class MonitorPage extends JFrame {
 		JPanel buttonsPane = new JPanel();
 		start = new JButton("Start");
 		stop = new JButton("Stop");
+		back = new JButton("Back"); 
 
 		buttonsPane.add(start);
 		buttonsPane.add(stop);
+		buttonsPane.add(back);
 
 		getContentPane().add(tablePane, BorderLayout.NORTH);
 
@@ -73,14 +75,7 @@ public class MonitorPage extends JFrame {
 		setSize(1000, 800);
 		setLocationRelativeTo(null);
 		
-		   addWindowListener(new WindowAdapter()
-	        {
-	            @Override
-	            public void windowClosing(WindowEvent e)
-	            {
-	                cwl.actionPerformed();
-	            }
-	        });
+	
 	}
 
 	// start button
@@ -179,10 +174,10 @@ public class MonitorPage extends JFrame {
 
 	}
 	
-	//close window
+	//back button
 	
-	public void setCloseWindowListener(CloseWindowListener listener) {
-		cwl=listener;
+	public void setBackButtonListener(ActionListener listener) {
+		back.addActionListener(listener);
 
 	}
 
