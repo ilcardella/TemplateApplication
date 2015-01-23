@@ -2,7 +2,8 @@ package it.polimi.template.controller.block;
 
 import java.text.SimpleDateFormat;
 
-import it.polimi.template.controller.thread.MyWorker;
+import it.polimi.template.controller.thread.MissionWorker;
+import it.polimi.template.controller.thread.TripWorker;
 import it.polimi.template.model.*;
 
 import java.util.Calendar;
@@ -12,9 +13,9 @@ import java.util.Observer;
 public class TripLauncher extends Node implements Observer {
 
 	private Calendar cal = Calendar.getInstance();
-	MyWorker w;
+	MissionWorker w;
 
-	public TripLauncher(MyWorker w) {
+	public TripLauncher(MissionWorker w) {
 		this.w = w;
 	}
 
@@ -36,18 +37,14 @@ public class TripLauncher extends Node implements Observer {
 			t.setStatus(Trip.EXECUTING);
 			w.log(m, "Trip "+t.getName()+" is EXECUTING");
 
-			if (t.getDrone().flyToAndDoAction(t.getTargetLocation(),
-					t.getAction())) {
-				t.setStatus(Trip.COMPLETED);
-				w.log(m, "Trip "+t.getName()+" is COMPLETED");
-			} else {
-				t.setStatus(Trip.FAILED);
-				w.log(m, "Trip "+t.getName()+" is FAILED");
-			}
-
-			t.getDrone().setStatus(Drone.FREE);
-			w.log(m, "Drone "+t.getDrone().getId()+" is FREE");
-
+//			boolean tripResult = t.executeTrip();
+			
+			// Create a new SwingWorker that will manage the execution of the Trip
+			TripWorker tripThread = new TripWorker(t);
+			// Setting the instance of the thread to the Mission SwingWorker 
+			w.setTripThread(tripThread);
+			// Launching the thread
+			tripThread.execute();
 		}
 
 		return m;

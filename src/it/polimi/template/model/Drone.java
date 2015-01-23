@@ -63,6 +63,8 @@ public class Drone {
 			if (action.doAction()) {
 				return true;
 			}
+			// TODO settare la posizione corrente come source location per il
+			// ripristino del trip
 		}
 		// TODO settare la posizione corrente come source location per il
 		// ripristino del trip

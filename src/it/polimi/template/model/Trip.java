@@ -143,4 +143,10 @@ public class Trip {
 		}
 	}
 
+	public boolean executeTrip() {
+		if (this.drone.flyToAndDoAction(this.targetLocation, this.action)) {
+			return true;
+		}
+		return false;
+	}
 }

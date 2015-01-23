@@ -6,10 +6,11 @@ import it.polimi.template.model.Mission;
 
 import javax.swing.SwingWorker;
 
-public class MyWorker extends SwingWorker<Integer, String> {
+public class MissionWorker extends SwingWorker<Integer, String> {
 
 	private MonitorPageController controller;
 	private Mission m;
+	private TripWorker tripThread;
 	
 	//<dec>
 	MissionCreator missioncreator = new MissionCreator(this);
@@ -17,7 +18,7 @@ public class MyWorker extends SwingWorker<Integer, String> {
 	TripLauncher triplauncher = new TripLauncher(this);
 	TripMonitor tripmonitor = new TripMonitor(this);
 
-	public MyWorker(Mission mission, MonitorPageController controller) {
+	public MissionWorker(Mission mission, MonitorPageController controller) {
 		this.m = mission;
 		this.controller = controller;
 	}
@@ -37,6 +38,14 @@ public class MyWorker extends SwingWorker<Integer, String> {
 	// synchronized because in this way the ui is updated without problems
 	public synchronized void log(Mission m, String s) {
 		controller.log(m, s);
+	}
+
+	public TripWorker getTripThread() {
+		return tripThread;
+	}
+
+	public void setTripThread(TripWorker tripThread) {
+		this.tripThread = tripThread;
 	}
 	
 }

@@ -1,6 +1,6 @@
 package it.polimi.template.controller;
 
-import it.polimi.template.controller.thread.MyWorker;
+import it.polimi.template.controller.thread.MissionWorker;
 import it.polimi.template.model.Drone;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
@@ -23,7 +23,7 @@ public class MonitorPageController {
 	private MissionsPage missionPage;
 
 	private List<Mission> missions;
-	private List<MyWorker> threadList;
+	private List<MissionWorker> threadList;
 
 	public MonitorPageController(MonitorPage monitorPage,
 			MissionsPage missionPage, List<Mission> missions) {
@@ -62,9 +62,9 @@ public class MonitorPageController {
 	}
 
 	protected void launchExecution() {
-		threadList = new ArrayList<MyWorker>();
+		threadList = new ArrayList<MissionWorker>();
 		for (int i = 0; i < missions.size(); i++) {
-			MyWorker worker = new MyWorker(missions.get(i), this);
+			MissionWorker worker = new MissionWorker(missions.get(i), this);
 			threadList.add(worker);
 
 			worker.execute();
@@ -80,7 +80,7 @@ public class MonitorPageController {
 			// monitorPage.clearTable();
 			// monitorPage.clearConsole();
 			// kill all the threads to stop the execution of the missions
-			for (MyWorker t : threadList) {
+			for (MissionWorker t : threadList) {
 				while (!t.isCancelled())
 					t.cancel(true);
 			}

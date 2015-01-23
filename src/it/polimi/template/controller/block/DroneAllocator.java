@@ -3,15 +3,15 @@ package it.polimi.template.controller.block;
 import java.util.Observable;
 import java.util.Observer;
 
-import it.polimi.template.controller.thread.MyWorker;
+import it.polimi.template.controller.thread.MissionWorker;
 import it.polimi.template.model.*;
 import it.polimi.template.utils.DronesManager;
 
 public class DroneAllocator extends Node implements Observer {
 
-	MyWorker w;
+	MissionWorker w;
 
-	public DroneAllocator(MyWorker w) {
+	public DroneAllocator(MissionWorker w) {
 		this.w = w;
 	}
 

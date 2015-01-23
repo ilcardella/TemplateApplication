@@ -3,14 +3,14 @@ package it.polimi.template.controller.block;
 import java.util.Observable;
 import java.util.Observer;
 
-import it.polimi.template.controller.thread.MyWorker;
+import it.polimi.template.controller.thread.MissionWorker;
 import it.polimi.template.model.*;
 
 public class MissionCreator extends Node implements Observer {
 
-	MyWorker w;
+	MissionWorker w;
 	
-	public MissionCreator(MyWorker w){
+	public MissionCreator(MissionWorker w){
 		this.w = w;
 	}
 	
