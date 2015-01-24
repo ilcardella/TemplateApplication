@@ -3,6 +3,7 @@ package it.polimi.template.controller.thread;
 import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.controller.block.*;
 import it.polimi.template.model.Mission;
+import it.polimi.template.model.Trip;
 
 import javax.swing.SwingWorker;
 
@@ -44,8 +45,9 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 		return tripThread;
 	}
 
-	public void setTripThread(TripWorker tripThread) {
-		this.tripThread = tripThread;
+	public void executeTrip(Trip t) {
+		tripThread = new TripWorker(t);
+		tripThread.execute();
 	}
 	
 }
