@@ -19,7 +19,6 @@ public class MissionsPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private DefaultListModel<String> model;
 	private JList<String> list;
 	private JButton remallbtn;
 	private JButton addbtn;
@@ -34,7 +33,7 @@ public class MissionsPage extends JFrame {
 
 	private void createList() {
 
-		model = new DefaultListModel<String>();
+		DefaultListModel<String> model = new DefaultListModel<String>();
 		list = new JList<String>(model);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
@@ -118,7 +117,7 @@ public class MissionsPage extends JFrame {
 	public void addMissionToList(String name) {
 
 		if (!name.isEmpty())
-			model.addElement(name);
+			((DefaultListModel<String>) list.getModel()).addElement(name);
 	}
 
 	// delete button
@@ -128,18 +127,18 @@ public class MissionsPage extends JFrame {
 		int index = selmodel.getMinSelectionIndex();
 		if (index >= 0) {
 
-			String mission = model.getElementAt(index).toString();
+			String mission = ((DefaultListModel<String>) list.getModel()).getElementAt(index).toString();
 			return mission;
 		}
 		return "";
 	}
 
-	public void removeMissionFromList(String name) {
+	public void removeSelectedMissionFromList() {
 
 		ListSelectionModel selmodel = list.getSelectionModel();
 		int index = selmodel.getMinSelectionIndex();
 
-		model.remove(index);
+		((DefaultListModel<String>) list.getModel()).remove(index);
 	}
 
 	public void setDeleteMissionButtonListener(ActionListener listener) {
@@ -150,7 +149,7 @@ public class MissionsPage extends JFrame {
 
 	public void clearMissionList() {
 
-		model.clear();
+		((DefaultListModel<String>) list.getModel()).clear();
 	}
 
 	public void setRemoveAllMissionButtonListener(ActionListener listener) {
@@ -167,8 +166,8 @@ public class MissionsPage extends JFrame {
 		ListSelectionModel selmodel = list.getSelectionModel();
 		int index = selmodel.getMinSelectionIndex();
 		if (index >= 0) {
-			model.remove(index);
-			model.add(index, name);
+			((DefaultListModel<String>) list.getModel()).remove(index);
+			((DefaultListModel<String>) list.getModel()).add(index, name);
 		}
 
 	}
@@ -192,10 +191,13 @@ public class MissionsPage extends JFrame {
 
 	// monitor page start button
 
-	public void deleteCompletedMission(String name) {
-		for (int i = 0; i < list.getModel().getSize(); i++)
-			if (list.getModel().getElementAt(i).equals(name))
-				model.remove(i);
+	public void removeMissionFromList(String name) {
+		for (int i = 0; i < list.getModel().getSize(); i++){
+			if (list.getModel().getElementAt(i).equals(name)){
+				((DefaultListModel<String>) list.getModel()).remove(i);
+				break;
+			}
+		}
 
 	}
 

@@ -11,6 +11,7 @@ import it.polimi.template.view.MonitorPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -49,13 +50,12 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (int j = 0; j < missions.size(); j++) {
-				if (missions.get(j).getStatus() == Mission.COMPLETED) {
-					missionPage.deleteCompletedMission(missions.get(j)
-							.getName());
-					missions.remove(j);
-				
-				}
+			for (Iterator<Mission> iter = missions.listIterator(); iter.hasNext(); ) {
+			    Mission m = iter.next();
+			    if (m.getStatus() == Mission.COMPLETED) {
+			    	missionPage.removeMissionFromList(m.getName());
+			    	iter.remove();
+			    }
 			}
 			monitorPage.dispose();
 			monitorPage.setVisible(false);
@@ -125,7 +125,7 @@ public class MonitorPageController {
 		}
 	}
 
-	public void log(Mission m, String s) {
+	public synchronized void log(Mission m, String s) {
 		updateMonitorTable(m);
 		printToMonitorConsole(s);
 		System.out.println(s);

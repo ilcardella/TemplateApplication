@@ -35,7 +35,6 @@ public class MissionPageController {
 		this.missionPage
 				.setMissionsPageOkButtonListener(new MissionsPageOkButtonListener());
 		this.missionPage.setListMouseListener(new ListMouseListener());
-		
 
 	}
 
@@ -52,7 +51,7 @@ public class MissionPageController {
 				missions.add(m);
 
 				missionPage.addMissionToList(name);
-				
+
 			}
 		}
 
@@ -63,11 +62,12 @@ public class MissionPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String name = missionPage.getSelectedMission();
-			for (int i = 0; i < missions.size(); i++)
-				if (missions.get(i).getName().equals(name))
+			for (int i = 0; i < missions.size(); i++) {
+				if (missions.get(i).getName().equals(name)) {
 					missions.remove(i);
-			missionPage.removeMissionFromList(name);
-
+					missionPage.removeSelectedMissionFromList();
+				}
+			}
 		}
 
 	}
@@ -75,9 +75,7 @@ public class MissionPageController {
 	class RemoveAllMissionButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
 			missions.clear();
-
 			missionPage.clearMissionList();
 		}
 
@@ -113,14 +111,12 @@ public class MissionPageController {
 				public void run() {
 					MonitorPage monitorPage = new MonitorPage();
 					MonitorPageController monitorController = new MonitorPageController(
-							monitorPage,missionPage, missions);
+							monitorPage, missionPage, missions);
 					monitorPage.setVisible(true);
 				}
 			});
 		}
 	}
-	
-
 
 	class ListMouseListener implements MouseListener {
 
