@@ -9,7 +9,7 @@ public class ItemsManager {
 
 	private static List<Item> items;
 
-	public static List<Item> getItems() {
+	public synchronized static List<Item> getItems() {
 		if(items == null){
 			items = new ArrayList<Item>();
 
