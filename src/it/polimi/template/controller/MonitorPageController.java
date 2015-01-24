@@ -82,9 +82,10 @@ public class MonitorPageController {
 			// monitorPage.clearConsole();
 			// kill all the threads to stop the execution of the missions
 			
-			// TODO si blocca la view, risolvere
+			// TODO Bisogna usare un Thread per ogni drone ed eseguire l'azione.
 			for (MissionWorker t : threadList) {
-				while (!t.isCancelled())
+				if (!t.isCancelled())
+					// TODO non blocca i thread, risolvere
 					t.cancel(true);
 			}
 			// prompt user what to do
