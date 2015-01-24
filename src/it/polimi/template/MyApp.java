@@ -1,5 +1,12 @@
 package it.polimi.template;
-
+/**
+ * Politecnico di Milano 2014/2015
+ * Master Thesis Project developed by
+ * Alberto Cardellini and Manuel Belgioioso
+ * 
+ * 
+ * papà
+ */
 import it.polimi.template.controller.MissionPageController;
 import it.polimi.template.model.*;
 import it.polimi.template.utils.DronesManager;
