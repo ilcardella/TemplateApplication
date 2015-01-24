@@ -57,6 +57,7 @@ public class MonitorPageController {
 				
 				}
 			}
+			monitorPage.dispose();
 			monitorPage.setVisible(false);
 		}
 	}
@@ -80,6 +81,8 @@ public class MonitorPageController {
 			// monitorPage.clearTable();
 			// monitorPage.clearConsole();
 			// kill all the threads to stop the execution of the missions
+			
+			// TODO si blocca la view, risolvere
 			for (MissionWorker t : threadList) {
 				while (!t.isCancelled())
 					t.cancel(true);

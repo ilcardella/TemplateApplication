@@ -31,12 +31,6 @@ public class TripLauncher extends Node implements Observer {
 					.getTime()));
 			
 			missionThread.executeTrip(t);
-//			// Create a new SwingWorker that will manage the execution of the Trip
-//			TripWorker tripThread = new TripWorker(t);
-//			// Setting the instance of the thread to the Mission SwingWorker 
-//			missionThread.setTripThread(tripThread);
-//			// Launching the thread
-//			tripThread.execute();
 			
 			// the trip status is set to EXECUTING
 			t.setStatus(Trip.EXECUTING);
