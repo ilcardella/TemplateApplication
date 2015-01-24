@@ -8,7 +8,7 @@ import java.util.List;
 public class DronesManager {
 private static List<Drone> drones;
 	
-	public static List<Drone> getDrones(){
+	public synchronized static List<Drone> getDrones(){
 		if(drones == null){
 			drones = new ArrayList<Drone>();
 			
