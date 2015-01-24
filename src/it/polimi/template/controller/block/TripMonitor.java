@@ -40,11 +40,13 @@ public class TripMonitor extends Node implements Observer {
 
 		if (tripResult == TripWorker.COMPLETED) {
 			t.setStatus(Trip.COMPLETED);
+			m.setStatus(Mission.STANDBY);
 			missionThread.log(m, "Trip " + t.getName() + " is COMPLETED");
 			// if the current trip is completed, remove it from the list of trips
 			m.getTrips().remove(0);
 		} else {
 			t.setStatus(Trip.FAILED);
+			m.setStatus(Mission.FAILED);
 			missionThread.log(m, "Trip " + t.getName() + " is FAILED");
 			// TODO manage failing
 		}
