@@ -17,6 +17,8 @@ import java.awt.EventQueue;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class MyApp {
 
@@ -26,6 +28,15 @@ public class MyApp {
 
 			@Override
 			public void run() {
+				
+				try {
+					UIManager.setLookAndFeel(
+					        UIManager.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException
+						| IllegalAccessException
+						| UnsupportedLookAndFeelException e) {
+					e.printStackTrace();
+				}
 				
 				MissionsPage mp = new MissionsPage();
 
