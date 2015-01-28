@@ -50,12 +50,13 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (Iterator<Mission> iter = missions.listIterator(); iter.hasNext(); ) {
-			    Mission m = iter.next();
-			    if (m.getStatus() == Mission.COMPLETED) {
-			    	missionPage.removeMissionFromList(m.getName());
-			    	iter.remove();
-			    }
+			for (Iterator<Mission> iter = missions.listIterator(); iter
+					.hasNext();) {
+				Mission m = iter.next();
+				if (m.getStatus() == Mission.COMPLETED) {
+					missionPage.removeMissionFromList(m.getName());
+					iter.remove();
+				}
 			}
 			monitorPage.dispose();
 			monitorPage.setVisible(false);
@@ -81,7 +82,7 @@ public class MonitorPageController {
 			// monitorPage.clearTable();
 			// monitorPage.clearConsole();
 			// kill all the threads to stop the execution of the missions
-			
+
 			// TODO Bisogna usare un Thread per ogni drone ed eseguire l'azione.
 			for (MissionWorker t : threadList) {
 				if (!t.isCancelled())
@@ -90,6 +91,10 @@ public class MonitorPageController {
 			}
 			// prompt user what to do
 			String selection = monitorPage.showStopOptions();
+			// TODO al posto di iterare tutti i droni, iterare le missioni
+			// e prendere i droni associati al primo trip e usare quelli
+			// così è possibile mettere anche il log all'interno dello switch
+			// case
 			// for each drone that is flyng
 			for (Drone d : DronesManager.getDrones()) {
 				// if the drone is busy it means it is not at home location
@@ -117,10 +122,14 @@ public class MonitorPageController {
 					}
 				}
 			}
-			// log the status of all missions after the stop
+			// log the status of all not-completed missions after the stop
 			for (Mission m : missions) {
-				m.setStatus(Mission.STANDBY);
-				log(m, "Mission " + m.getName() + " STOPPED");
+				// if the mission is not completed yet
+				if (!(m.getStatus() == Mission.COMPLETED)) {
+					// set it to stanby because it could be completed in future
+					m.setStatus(Mission.STANDBY);
+					log(m, "Mission " + m.getName() + " STOPPED");
+				}
 			}
 
 		}
