@@ -19,47 +19,54 @@ public class TripMonitor extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 
-		int tripResult = 0;
-		
-		// Getting the current trip instance
-		Trip t = m.getTrips().get(0);
-		
-		// Getting the instance of the Thread that is running the current Trip
-		TripWorker tw = missionThread.getTripThread();
-		
-		while (!tw.isDone()) {
-			// While the thread is running we need to wait for it to end
-		}
-		
-		// get the result of the thread
-		try {
-			tripResult = tw.get();
-		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
-		}
+		// Here only Running mission must be considered
+		if (m != null && m.getStatus() == Mission.RUNNING) {
+			int tripResult = 0;
 
-		if (tripResult == TripWorker.COMPLETED) {
-			t.setStatus(Trip.COMPLETED);
-			m.setStatus(Mission.STANDBY);
-			missionThread.log(m, "Trip " + t.getName() + " is COMPLETED");
-			// if the current trip is completed, remove it from the list of trips
-			m.getTrips().remove(0);
-		} else {
-			t.setStatus(Trip.FAILED);
-			m.setStatus(Mission.FAILED);
-			missionThread.log(m, "Trip " + t.getName() + " is FAILED");
-			// TODO manage failing
-		}
-		
-		t.getDrone().setStatus(Drone.FREE);
-		missionThread.log(m, "Drone " + t.getDrone().getId() + " is FREE");
+			// Getting the current trip instance
+			Trip t = m.getTrips().get(0);
 
-		if (m.getTrips().isEmpty()) {
-			m.setStatus(Mission.COMPLETED);
-			missionThread.log(m, "Mission " + m.getName() + " is COMPLETED");
-		}
+			// Getting the instance of the Thread that is running the current
+			// Trip
+			TripWorker tw = missionThread.getTripThread();
 
-		return m;
+			while (!tw.isDone()) {
+				// While the thread is running we need to wait for it to end
+			}
+
+			// get the result of the thread
+			try {
+				tripResult = tw.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+
+			if (tripResult == TripWorker.COMPLETED) {
+				t.setStatus(Trip.COMPLETED);
+				m.setStatus(Mission.STANDBY);
+				missionThread.log(m, "Trip " + t.getName() + " is COMPLETED");
+				// if the current trip is completed, remove it from the list of
+				// trips
+				m.getTrips().remove(0);
+			} else {
+				t.setStatus(Trip.FAILED);
+				m.setStatus(Mission.FAILED);
+				missionThread.log(m, "Trip " + t.getName() + " is FAILED");
+				// TODO manage failing
+			}
+
+			t.getDrone().setStatus(Drone.FREE);
+			missionThread.log(m, "Drone " + t.getDrone().getId() + " is FREE");
+
+			if (m.getTrips().isEmpty()) {
+				m.setStatus(Mission.COMPLETED);
+				missionThread
+						.log(m, "Mission " + m.getName() + " is COMPLETED");
+			}
+
+			return m;
+		}
+		return null;
 	}
 
 	@Override

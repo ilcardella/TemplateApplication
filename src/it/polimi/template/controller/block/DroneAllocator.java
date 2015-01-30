@@ -17,32 +17,39 @@ public class DroneAllocator extends Node implements Observer {
 
 	@Override
 	public Mission run(Mission m) {
-		Trip t = m.getTrips().get(0);
+		// Here only missions in standby or unexecuted must be considered
+		if (m != null
+				&& (m.getStatus() == Mission.UNEXECUTED || m.getStatus() == Mission.STANDBY)) {
 
-		// if there is at least a trip to perform in the mission
-		if (!m.getTrips().isEmpty()) {
+			Trip t = m.getTrips().get(0);
 
-			for (Drone d : DronesManager.getDrones()) {
-				if (d.getStatus() == Drone.FREE
-						&& t.getStatus() != Trip.DELAYED) {
-					if (t.getItem() == null
-							|| t.getItem().getShapeCategory() == d
-									.getShapeCategory()) {
-						d.setStatus(Drone.BUSY);
-						t.setDrone(d);
-						w.log(m, "Drone "+d.getId()+" assigned to Trip "+t.getName());
-						w.log(m, "Drone "+d.getId()+" is BUSY");
+			// if there is at least a trip to perform in the mission
+			if (!m.getTrips().isEmpty()) {
 
-						break;
+				for (Drone d : DronesManager.getDrones()) {
+					if (d.getStatus() == Drone.FREE
+							&& t.getStatus() != Trip.DELAYED) {
+						if (t.getItem() == null
+								|| t.getItem().getShapeCategory() == d
+										.getShapeCategory()) {
+							d.setStatus(Drone.BUSY);
+							t.setDrone(d);
+							w.log(m, "Drone " + d.getId()
+									+ " assigned to Trip " + t.getName());
+							w.log(m, "Drone " + d.getId() + " is BUSY");
+
+							break;
+						}
+
 					}
 
 				}
 
 			}
 
+			return m;
 		}
-
-		return m;
+		return null;
 	}
 
 	@Override

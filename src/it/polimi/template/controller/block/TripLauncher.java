@@ -21,27 +21,32 @@ public class TripLauncher extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 
-		Trip t = m.getTrips().get(0);
+		if (m != null
+				&& (m.getStatus() == Mission.UNEXECUTED || m.getStatus() == Mission.STANDBY)) {
 
-		// the trips which have an associated drone can start
+			Trip t = m.getTrips().get(0);
 
-		if (t.getDrone() != null) {
+			// the trips which have an associated drone can start
 
-			t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
-					.getTime()));
-			
-			missionThread.executeTrip(t);
-			
-			// the trip status is set to EXECUTING
-			t.setStatus(Trip.EXECUTING);
-			missionThread.log(m, "Trip "+t.getName()+" is EXECUTING");
-			
-			// the mission status is set to RUNNING
-			m.setStatus(Mission.RUNNING);
-			missionThread.log(m, "Mission "+m.getName()+" is RUNNING");
+			if (t.getDrone() != null) {
+
+				t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
+						.getTime()));
+
+				missionThread.executeTrip(t);
+
+				// the trip status is set to EXECUTING
+				t.setStatus(Trip.EXECUTING);
+				missionThread.log(m, "Trip " + t.getName() + " is EXECUTING");
+
+				// the mission status is set to RUNNING
+				m.setStatus(Mission.RUNNING);
+				missionThread.log(m, "Mission " + m.getName() + " is RUNNING");
+			}
+
+			return m;
 		}
-
-		return m;
+		return null;
 	}
 
 	@Override
