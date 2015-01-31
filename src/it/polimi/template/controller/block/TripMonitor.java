@@ -27,18 +27,27 @@ public class TripMonitor extends Node implements Observer {
 			// Getting the current trip instance
 			Trip t = m.getTrips().get(0);
 
-			// Getting the instance of the Thread that is running the Trip
-			TripWorker tw = missionThread.getTripThread();
+			// If a TimerMonitor has been added to the diagram
+			// we check if the current Trip is expired
+			if (t.getStatus() == Trip.EXPIRED) {
+				// If the Trip is Expired we set the result as FAILED
+				tripResult = TripWorker.FAILED;
+			} else {
+				// If it was not expired we has to wait for the result
+				
+				// Getting the instance of the Thread that is running the Trip
+				TripWorker tw = missionThread.getTripThread();
 
-			while (!tw.isDone()) {
-				// While the thread is running we need to wait for it to end
-			}
+				while (!tw.isDone()) {
+					// While the thread is running we need to wait for it to end
+				}
 
-			// get the result of the thread
-			try {
-				tripResult = tw.get();
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
+				// get the result of the thread
+				try {
+					tripResult = tw.get();
+				} catch (InterruptedException | ExecutionException e) {
+					e.printStackTrace();
+				}
 			}
 
 			if (tripResult == TripWorker.COMPLETED) {

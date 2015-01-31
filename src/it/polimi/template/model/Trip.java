@@ -1,7 +1,5 @@
 package it.polimi.template.model;
 
-import java.util.Observable;
-
 public class Trip {
 
 	public static final int WAITING = 1;
@@ -9,6 +7,7 @@ public class Trip {
 	public static final int FAILED = 3;
 	public static final int EXECUTING = 4;
 	public static final int DELAYED = 5;
+	public static final int EXPIRED = 6;
 
 	private String name;
 	private Action action;
@@ -138,6 +137,8 @@ public class Trip {
 			return "FAILED";
 		case DELAYED:
 			return "DELAYED";
+		case EXPIRED:
+			return "EXPIRED";
 		default:
 			return "Unknown";
 		}
