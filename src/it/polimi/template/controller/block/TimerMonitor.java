@@ -18,7 +18,7 @@ public class TimerMonitor extends Node implements Observer {
 
 	@Override
 	public Mission run(Mission m) {
-		
+
 		// Getting the current trip instance
 		Trip t = m.getTrips().get(0);
 
@@ -26,12 +26,18 @@ public class TimerMonitor extends Node implements Observer {
 		TripWorker tw = missionThread.getTripThread();
 
 		boolean isExpired = false;
+
 		while (!tw.isDone()) {
-			// TODO contare il tempo di esecuzione
-			 if (isExpired){
-					t.setStatus(Trip.EXPIRED);
-					break;
-			 }
+
+			if (System.currentTimeMillis() - Integer.parseInt(t.getStartTime()) > m
+					.getSafeTimer()) {
+				isExpired = true;
+			}
+
+			if (isExpired) {
+				t.setStatus(Trip.EXPIRED);
+				break;
+			}
 		}
 
 		return m;

@@ -18,6 +18,7 @@ public class Mission {
 	private int status;
 	private List<Trip> trips;
 	private boolean used = false;
+	private int safeTimer;
 
 	public Mission() {
 
@@ -83,6 +84,14 @@ public class Mission {
 		default:
 			return "Unknown";
 		}
+	}
+
+	public int getSafeTimer() {
+		return this.safeTimer;
+	}
+	
+	public void setSafeTimer(int t) {
+		this.safeTimer = t;
 	}
 
 }
