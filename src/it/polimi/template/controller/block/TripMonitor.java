@@ -19,15 +19,15 @@ public class TripMonitor extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 
-		// Here only Running mission must be considered
+		// Here mission is in Running status
 		if (m != null && m.getStatus() == Mission.RUNNING) {
+			// Result of the current runnng trip of the mission
 			int tripResult = 0;
 
 			// Getting the current trip instance
 			Trip t = m.getTrips().get(0);
 
-			// Getting the instance of the Thread that is running the current
-			// Trip
+			// Getting the instance of the Thread that is running the Trip
 			TripWorker tw = missionThread.getTripThread();
 
 			while (!tw.isDone()) {
@@ -45,14 +45,12 @@ public class TripMonitor extends Node implements Observer {
 				t.setStatus(Trip.COMPLETED);
 				m.setStatus(Mission.STANDBY);
 				missionThread.log(m, "Trip " + t.getName() + " is COMPLETED");
-				// if the current trip is completed, remove it from the list of
-				// trips
+				// remove it from the list of trips
 				m.getTrips().remove(0);
 			} else {
 				t.setStatus(Trip.FAILED);
 				m.setStatus(Mission.FAILED);
 				missionThread.log(m, "Trip " + t.getName() + " is FAILED");
-				// TODO manage failing
 			}
 
 			t.getDrone().setStatus(Drone.FREE);
