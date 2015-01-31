@@ -7,7 +7,6 @@ public enum Action implements IAction {
 	TAKE_PHOTO {
 		@Override
 		public boolean doAction() {
-			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -31,7 +30,6 @@ public enum Action implements IAction {
 
 		@Override
 		public boolean doAction() {
-			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -55,7 +53,6 @@ public enum Action implements IAction {
 
 		@Override
 		public boolean doAction() {
-			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -79,7 +76,6 @@ public enum Action implements IAction {
 
 		@Override
 		public boolean doAction() {
-			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

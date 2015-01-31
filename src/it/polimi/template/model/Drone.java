@@ -20,10 +20,12 @@ public class Drone {
 	private int status;
 	private int shapeCategory;
 	private int batteryLevel;
+	private String currentLocation;
 
 	public Drone() {
 		this.id = new Random().nextInt(Integer.MAX_VALUE) + 1;
 		this.status = 5;
+		this.currentLocation = "0/0"; // homelocation
 	}
 
 	public int getId() {
@@ -63,8 +65,6 @@ public class Drone {
 			if (action.doAction()) {
 				return true;
 			}
-			// TODO settare la posizione corrente come source location per il
-			// ripristino del trip
 		}
 		// TODO settare la posizione corrente come source location per il
 		// ripristino del trip
@@ -112,5 +112,9 @@ public class Drone {
 			e.printStackTrace();
 		}
 		return true;
+	}
+
+	public String getCurrentLocation() {
+		return currentLocation;
 	}
 }

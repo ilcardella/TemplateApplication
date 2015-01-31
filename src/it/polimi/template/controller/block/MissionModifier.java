@@ -9,7 +9,6 @@ public class MissionModifier extends Node implements Observer {
 	
 	@Override
 	public Mission run(Mission m) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
