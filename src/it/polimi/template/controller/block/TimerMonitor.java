@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import it.polimi.template.model.*;
 
-public class ConditionBlock extends Node implements Observer {
+public class TimerMonitor extends Node implements Observer {
 
 	@Override
 	public Mission run(Mission m) {
