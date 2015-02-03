@@ -115,7 +115,7 @@ public enum Action implements IAction {
 
 		@Override
 		public boolean isItemRequired() {
-			return true;
+			return false;
 		}
 
 	};
