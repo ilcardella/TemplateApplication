@@ -75,6 +75,7 @@ public class TripMonitor extends Node implements Observer {
 
 			// if the mission must be repeated and the tripsList is empty
 			if (m.getRepeat() == true && m.getTrips().isEmpty()) {
+				// the mission status is set to STANDBY
 				m.setStatus(Mission.STANDBY);
 				// all the trips are moved from completedTrips to trips
 				// and their status is set to WAITING
