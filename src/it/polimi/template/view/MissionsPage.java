@@ -5,13 +5,17 @@ import static javax.swing.GroupLayout.Alignment.LEADING;
 import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
@@ -110,6 +114,23 @@ public class MissionsPage extends JFrame {
 		return missionName;
 	}
 
+	public boolean showRepeatPanel() {
+
+		String[] simpleArray = new String[2];
+		simpleArray[0] = "Yes";
+		simpleArray[1] = "No";
+
+		String selection = (String) JOptionPane
+				.showInputDialog(null, "Do you want to repeat the mission?",
+						"Mission Repeat", JOptionPane.QUESTION_MESSAGE, null,
+						simpleArray, simpleArray[0]);
+		if (selection.equals("Yes"))
+			return true;
+
+		return false;
+
+	}
+
 	public void setAddMissionButtonListener(ActionListener listener) {
 		addbtn.addActionListener(listener);
 	}
@@ -127,7 +148,8 @@ public class MissionsPage extends JFrame {
 		int index = selmodel.getMinSelectionIndex();
 		if (index >= 0) {
 
-			String mission = ((DefaultListModel<String>) list.getModel()).getElementAt(index).toString();
+			String mission = ((DefaultListModel<String>) list.getModel())
+					.getElementAt(index).toString();
 			return mission;
 		}
 		return "";
@@ -192,8 +214,8 @@ public class MissionsPage extends JFrame {
 	// monitor page start button
 
 	public void removeMissionFromList(String name) {
-		for (int i = 0; i < list.getModel().getSize(); i++){
-			if (list.getModel().getElementAt(i).equals(name)){
+		for (int i = 0; i < list.getModel().getSize(); i++) {
+			if (list.getModel().getElementAt(i).equals(name)) {
 				((DefaultListModel<String>) list.getModel()).remove(i);
 				break;
 			}

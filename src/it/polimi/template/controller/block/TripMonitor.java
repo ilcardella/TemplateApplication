@@ -54,6 +54,8 @@ public class TripMonitor extends Node implements Observer {
 				t.setStatus(Trip.COMPLETED);
 				m.setStatus(Mission.STANDBY);
 				missionThread.log(m, "Trip " + t.getName() + " is COMPLETED");
+				//add it to the list of the completed trips of the mission
+				m.getCompletedTrips().add(t);
 				// remove it from the list of trips
 				m.getTrips().remove(0);
 			} else {

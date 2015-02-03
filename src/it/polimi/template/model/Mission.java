@@ -17,7 +17,9 @@ public class Mission {
 	private String name;
 	private int status;
 	private List<Trip> trips;
+	private List<Trip> completedTrips;
 	private boolean used = false;
+	private boolean repeat = false;
 	private int safeTimer;
 
 	public Mission() {
@@ -25,6 +27,8 @@ public class Mission {
 		this.id = new Random().nextInt(Integer.MAX_VALUE) + 1;
 		this.status = UNEXECUTED;
 		this.trips = new ArrayList<Trip>();
+		this.completedTrips = new ArrayList<Trip>();
+
 
 	}
 
@@ -50,6 +54,14 @@ public class Mission {
 
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
+	}
+	
+	public List<Trip> getCompletedTrips() {
+		return completedTrips;
+	}
+
+	public void setCompletedTrips(List<Trip> trips) {
+		this.completedTrips = trips;
 	}
 
 	public String getName() {
@@ -92,6 +104,14 @@ public class Mission {
 	
 	public void setSafeTimer(int t) {
 		this.safeTimer = t;
+	}
+
+	public boolean getRepeat() {
+		return repeat;
+	}
+
+	public void setRepeat(boolean repeat) {
+		this.repeat = repeat;
 	}
 
 }

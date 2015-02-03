@@ -51,8 +51,10 @@ public class MissionPageController {
 				missions.add(m);
 
 				missionPage.addMissionToList(name);
-
+			
 			}
+			m.setRepeat(missionPage.showRepeatPanel());
+			System.out.print(m.getRepeat());
 		}
 
 	}
