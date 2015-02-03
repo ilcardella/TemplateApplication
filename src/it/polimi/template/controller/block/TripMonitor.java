@@ -21,7 +21,7 @@ public class TripMonitor extends Node implements Observer {
 
 		// Here mission is in Running status
 		if (m != null && m.getStatus() == Mission.RUNNING) {
-			// Result of the current runnng trip of the mission
+			// Result of the current running trip of the mission
 			int tripResult = 0;
 
 			// Getting the current trip instance
@@ -34,7 +34,7 @@ public class TripMonitor extends Node implements Observer {
 				tripResult = TripWorker.FAILED;
 			} else {
 				// If it was not expired we has to wait for the result
-				
+
 				// Getting the instance of the Thread that is running the Trip
 				TripWorker tw = missionThread.getTripThread();
 
@@ -54,7 +54,7 @@ public class TripMonitor extends Node implements Observer {
 				t.setStatus(Trip.COMPLETED);
 				m.setStatus(Mission.STANDBY);
 				missionThread.log(m, "Trip " + t.getName() + " is COMPLETED");
-				//add it to the list of the completed trips of the mission
+				// add it to the list of the completed trips of the mission
 				m.getCompletedTrips().add(t);
 				// remove it from the list of trips
 				m.getTrips().remove(0);
