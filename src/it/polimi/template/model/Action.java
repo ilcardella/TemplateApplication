@@ -94,6 +94,30 @@ public enum Action implements IAction {
 			return true;
 		}
 
+	},
+	
+	CUSTOM {
+
+		@Override
+		public boolean doAction() {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "Custom action";
+		}
+
+		@Override
+		public boolean isItemRequired() {
+			return true;
+		}
+
 	};
 
 }
