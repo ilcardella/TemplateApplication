@@ -73,6 +73,12 @@ public class TripMonitor extends Node implements Observer {
 						.log(m, "Mission " + m.getName() + " is COMPLETED");
 			}
 
+			// TODO Qui, se la missione è ripetibile "repeat == true" 
+			// AND la lista dei Trips è vuota, cioè li abbiamo fatti tutti
+			// Spostare tutti i Trip della lista CompletedTrips, nella lista dei Trips da fare
+			// Mentre lo si fa gli si cambia lo stato in WAITING
+			
+			
 			return m;
 		}
 		return null;
