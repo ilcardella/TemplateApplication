@@ -117,8 +117,8 @@ public class MissionsPage extends JFrame {
 	public boolean showRepeatPanel() {
 
 		String[] simpleArray = new String[2];
-		simpleArray[0] = "Yes";
-		simpleArray[1] = "No";
+		simpleArray[0] = "No";
+		simpleArray[1] = "Yes";
 
 		String selection = (String) JOptionPane
 				.showInputDialog(null, "Do you want to repeat the mission?",
