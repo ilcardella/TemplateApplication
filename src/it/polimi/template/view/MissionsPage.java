@@ -130,6 +130,22 @@ public class MissionsPage extends JFrame {
 		return false;
 
 	}
+	
+	public int showTimerPanel() {
+
+		String text3 = JOptionPane
+				.showInputDialog("Indicate the delay for the trip");
+
+		String delay = text3.trim();
+
+		if (delay.isEmpty())
+			return 0;
+
+		else
+			return Integer.parseInt(delay);
+
+
+	}
 
 	public void setAddMissionButtonListener(ActionListener listener) {
 		addbtn.addActionListener(listener);

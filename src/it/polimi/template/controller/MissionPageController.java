@@ -52,6 +52,9 @@ public class MissionPageController {
 
 				missionPage.addMissionToList(name);
 				m.setRepeat(missionPage.showRepeatPanel());
+				m.setSafeTimer(missionPage.showTimerPanel());
+				
+				System.out.print(m.getSafeTimer());
 
 			}
 		}
