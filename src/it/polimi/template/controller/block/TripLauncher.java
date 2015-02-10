@@ -33,6 +33,7 @@ public class TripLauncher extends Node implements Observer {
 				t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
 						.getTime()));
 
+				// launch the execution of the Trip
 				missionThread.executeTrip(t);
 
 				// the trip status is set to EXECUTING
