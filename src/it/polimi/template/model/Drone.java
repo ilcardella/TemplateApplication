@@ -13,8 +13,9 @@ public class Drone {
 	public static final int FREE = 5;
 	public static final int BUSY = 6;
 	public static final int CHARGING = 7;
-	
-	public static final String HOME_LOCATION = "0/0"; // coordinates of home location
+
+	public static final String HOME_LOCATION = "0/0"; // coordinates of home
+														// location
 
 	private int id;
 	private int status;
@@ -61,14 +62,15 @@ public class Drone {
 	}
 
 	public boolean flyToAndDoAction(String target, final Action action) {
-		if (this.flyTo(target)) {
-			if (action.doAction()) {
-				return true;
-			}
+		try {
+			// fly to the target location
+			flyTo(target);
+			// do the action
+			action.doAction();
+		} catch (Exception e) {
+			return false;
 		}
-		// TODO settare la posizione corrente come source location per il
-		// ripristino del trip
-		return false;
+		return true;
 	}
 
 	public boolean flyTo(String target) {
@@ -103,9 +105,9 @@ public class Drone {
 		}
 		return true;
 	}
-	
+
 	// The drone takes off
-	public boolean takeOff(){
+	public boolean takeOff() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
