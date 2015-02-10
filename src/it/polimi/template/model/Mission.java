@@ -1,5 +1,7 @@
 package it.polimi.template.model;
 
+import it.polimi.template.utils.Evaluator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -21,6 +23,7 @@ public class Mission {
 	private boolean used = false;
 	private boolean repeat = false;
 	private int safeTimer;
+	private Evaluator evaluator;
 
 	public Mission() {
 
@@ -28,8 +31,7 @@ public class Mission {
 		this.status = UNEXECUTED;
 		this.trips = new ArrayList<Trip>();
 		this.completedTrips = new ArrayList<Trip>();
-
-
+		this.setEvaluator(new Evaluator());
 	}
 
 	public int getId() {
@@ -112,6 +114,14 @@ public class Mission {
 
 	public void setRepeat(boolean repeat) {
 		this.repeat = repeat;
+	}
+
+	public Evaluator getEvaluator() {
+		return evaluator;
+	}
+
+	public void setEvaluator(Evaluator evaluator) {
+		this.evaluator = evaluator;
 	}
 
 }

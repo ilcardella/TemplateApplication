@@ -19,8 +19,9 @@ public class Trip {
 	private Drone drone;
 	private Item item;
 	private String startTime;
-	private Mission mission;
-	private boolean used = false;
+	private Mission parentMission;
+//	private boolean used = false;
+	
 
 	public Trip() {
 		this.delay = 0;
@@ -100,21 +101,21 @@ public class Trip {
 		this.name = name;
 	}
 
-	public Mission getMission() {
-		return mission;
+	public Mission getParentMission() {
+		return parentMission;
 	}
 
-	public void setMission(Mission mission) {
-		this.mission = mission;
+	public void setParentMission(Mission mission) {
+		this.parentMission = mission;
 	}
 
-	public boolean getUsed() {
-		return used;
-	}
-
-	public void setUsed(boolean used) {
-		this.used = used;
-	}
+//	public boolean getUsed() {
+//		return used;
+//	}
+//
+//	public void setUsed(boolean used) {
+//		this.used = used;
+//	}
 
 	public Action getAction() {
 		return action;
@@ -145,7 +146,7 @@ public class Trip {
 	}
 
 	public boolean executeTrip() {
-		if (this.drone.flyToAndDoAction(this.targetLocation, this.action)) {
+		if (this.drone.flyToAndDoAction(this.targetLocation, this.action, this.parentMission.getEvaluator())) {
 			return true;
 		}
 		return false;

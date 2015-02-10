@@ -94,6 +94,8 @@ public class TripsPageController {
 		// if drop event is ok, create the Trip and set the name
 		Trip trip = new Trip();
 
+		trip.setParentMission(mission);
+		
 		trip.setName(mission.getName() + "-" + tripCounter);		
 		tripCounter++;
 
@@ -133,7 +135,7 @@ public class TripsPageController {
 
 		// setting the targetPosition coordinates
 		trip.setTargetLocation(tripsPage.getCoordinatesOfDroppedTrip());
-				
+		
 		// add to the trip list of the mission
 		mission.getTrips().add(trip);
 

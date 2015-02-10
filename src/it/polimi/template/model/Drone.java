@@ -1,5 +1,7 @@
 package it.polimi.template.model;
 
+import it.polimi.template.utils.Evaluator;
+
 import java.util.Observable;
 import java.util.Random;
 
@@ -61,12 +63,14 @@ public class Drone {
 		this.batteryLevel = batteryLevel;
 	}
 
-	public boolean flyToAndDoAction(String target, final Action action) {
+	public boolean flyToAndDoAction(String target, final Action action, Evaluator eval) {
 		try {
 			// fly to the target location
 			flyTo(target);
 			// do the action
-			action.doAction();
+			Object outcome = action.doAction();
+			// save the action result in the evaluator
+			eval.writeActionOutcome(outcome);
 		} catch (Exception e) {
 			return false;
 		}

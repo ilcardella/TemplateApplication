@@ -1,7 +1,6 @@
 package it.polimi.template.controller.thread;
 
 import it.polimi.template.model.Trip;
-
 import javax.swing.SwingWorker;
 
 public class TripWorker extends SwingWorker<Integer, String> {
