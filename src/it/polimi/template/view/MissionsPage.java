@@ -134,7 +134,7 @@ public class MissionsPage extends JFrame {
 	public int showTimerPanel() {
 
 		String text3 = JOptionPane
-				.showInputDialog("Indicate the delay for the trip");
+				.showInputDialog("Indicate the Maximum safe time for a Trip");
 
 		String delay = text3.trim();
 
