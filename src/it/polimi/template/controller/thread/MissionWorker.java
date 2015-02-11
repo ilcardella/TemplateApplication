@@ -2,9 +2,9 @@ package it.polimi.template.controller.thread;
 
 import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.controller.block.*;
+import it.polimi.template.controller.engine.Evaluator;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
-import it.polimi.template.utils.Evaluator;
 
 import javax.swing.SwingWorker;
 

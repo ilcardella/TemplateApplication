@@ -1,6 +1,6 @@
 package it.polimi.template.model;
 
-import it.polimi.template.utils.Evaluator;
+import it.polimi.template.controller.engine.Evaluator;
 
 import java.util.Observable;
 import java.util.Random;
