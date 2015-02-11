@@ -25,9 +25,7 @@ public class ActionEvaluator extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 		// Start the evaluation process of the last Action
-		m.getEvaluator().evaluate();
-		// Get the evaluation result
-		String result = m.getEvaluator().getEvaluationResult();
+		String result = m.getEvaluator().evaluate();
 		// If the result is NOT "Success"
 		if ( !result.equals("Success") ) {
 			// Redo the last Trip
