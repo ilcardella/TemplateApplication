@@ -6,7 +6,7 @@ public enum Action implements IAction {
 
 	TAKE_PHOTO {
 		@Override
-		public boolean doAction() {
+		public Object doAction() {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -29,7 +29,7 @@ public enum Action implements IAction {
 	MEASURE {
 
 		@Override
-		public boolean doAction() {
+		public Object doAction() {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -52,7 +52,7 @@ public enum Action implements IAction {
 	PICK_ITEM {
 
 		@Override
-		public boolean doAction() {
+		public Object doAction() {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -75,7 +75,7 @@ public enum Action implements IAction {
 	RELEASE_ITEM {
 
 		@Override
-		public boolean doAction() {
+		public Object doAction() {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -99,7 +99,7 @@ public enum Action implements IAction {
 	CUSTOM {
 
 		@Override
-		public boolean doAction() {
+		public Object doAction() {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

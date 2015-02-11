@@ -36,6 +36,7 @@ public class TimerMonitor extends Node implements Observer {
 
 			if (isExpired) {
 				t.setStatus(Trip.EXPIRED);
+				m.setStatus(Mission.FAILED);
 				break;
 			}
 		}

@@ -146,7 +146,9 @@ public class Trip {
 	}
 
 	public boolean executeTrip() {
-		if (this.drone.flyToAndDoAction(this.targetLocation, this.action, this.parentMission.getEvaluator())) {
+		Object actionOutcome = this.drone.flyToAndDoAction(this.targetLocation, this.action);
+		if (actionOutcome != null) {
+			this.parentMission.getEvaluator().writeActionOutcome(actionOutcome, this);
 			return true;
 		}
 		return false;

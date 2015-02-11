@@ -63,18 +63,18 @@ public class Drone {
 		this.batteryLevel = batteryLevel;
 	}
 
-	public boolean flyToAndDoAction(String target, final Action action, Evaluator eval) {
+	public Object flyToAndDoAction(String target, final Action action) {
 		try {
 			// fly to the target location
 			flyTo(target);
 			// do the action
 			Object outcome = action.doAction();
 			// save the action result in the evaluator
-			eval.writeActionOutcome(outcome);
+//			eval.writeActionOutcome(outcome);
+			return outcome;
 		} catch (Exception e) {
-			return false;
+			return null;
 		}
-		return true;
 	}
 
 	public boolean flyTo(String target) {

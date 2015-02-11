@@ -4,6 +4,7 @@ import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.controller.block.*;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
+import it.polimi.template.utils.Evaluator;
 
 import javax.swing.SwingWorker;
 
@@ -18,6 +19,7 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 	DroneAllocator droneallocator = new DroneAllocator(this);
 	TripLauncher triplauncher = new TripLauncher(this);
 	TripMonitor tripmonitor = new TripMonitor(this);
+	PriorityManager prioritymanager = new PriorityManager(this);
 
 	public MissionWorker(Mission mission, MonitorPageController controller) {
 		this.m = mission;
@@ -31,6 +33,8 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 		droneallocator.addObserver(triplauncher);
 		triplauncher.addObserver(tripmonitor);
 		tripmonitor.addObserver(droneallocator);
+		tripmonitor.addObserver(prioritymanager);
+		prioritymanager.addObserver(droneallocator);
 		missioncreator.update(null, m);
 		
 		return 4;

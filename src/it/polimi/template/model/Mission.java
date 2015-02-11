@@ -31,7 +31,6 @@ public class Mission {
 		this.status = UNEXECUTED;
 		this.trips = new ArrayList<Trip>();
 		this.completedTrips = new ArrayList<Trip>();
-		this.setEvaluator(new Evaluator());
 	}
 
 	public int getId() {

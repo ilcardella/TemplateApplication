@@ -5,6 +5,7 @@ import it.polimi.template.model.Drone;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
 import it.polimi.template.utils.DronesManager;
+import it.polimi.template.utils.Engine;
 import it.polimi.template.view.MissionsPage;
 import it.polimi.template.view.MonitorPage;
 
@@ -22,15 +23,19 @@ public class MonitorPageController {
 
 	private MonitorPage monitorPage;
 	private MissionsPage missionPage;
+	private Engine engine;
 
-	private List<Mission> missions;
-	private List<MissionWorker> threadList;
+//	private List<Mission> missions;
+//	private List<MissionWorker> threadList;
 
 	public MonitorPageController(MonitorPage monitorPage,
 			MissionsPage missionPage, List<Mission> missions) {
+		
 		this.monitorPage = monitorPage;
 		this.missionPage = missionPage;
-		this.missions = missions;
+//		this.missions = missions;
+		this.engine = new Engine(this);
+		this.engine.setMissions(missions);
 
 		this.monitorPage.setStartButtonListener(new StartButtonListener());
 		this.monitorPage.setStopButtonListener(new StopButtonListener());
@@ -41,7 +46,8 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			launchExecution();
+//			launchExecution();
+			engine.startMissionsExecution();
 
 		}
 	}
@@ -50,7 +56,7 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (Iterator<Mission> iter = missions.listIterator(); iter
+			for (Iterator<Mission> iter = engine.getMissions().listIterator(); iter
 					.hasNext();) {
 				Mission m = iter.next();
 				if (m.getStatus() == Mission.COMPLETED) {
@@ -63,16 +69,16 @@ public class MonitorPageController {
 		}
 	}
 
-	protected void launchExecution() {
-		threadList = new ArrayList<MissionWorker>();
-		for (int i = 0; i < missions.size(); i++) {
-			MissionWorker worker = new MissionWorker(missions.get(i), this);
-			threadList.add(worker);
-
-			worker.execute();
-
-		}
-	}
+//	protected void launchExecution() {
+//		threadList = new ArrayList<MissionWorker>();
+//		for (int i = 0; i < missions.size(); i++) {
+//			MissionWorker worker = new MissionWorker(missions.get(i), this);
+//			threadList.add(worker);
+//
+//			worker.execute();
+//
+//		}
+//	}
 
 	class StopButtonListener implements ActionListener {
 
@@ -84,7 +90,7 @@ public class MonitorPageController {
 			// kill all the threads to stop the execution of the missions
 
 			// TODO Bisogna usare un Thread per ogni drone ed eseguire l'azione.
-			for (MissionWorker t : threadList) {
+			for (MissionWorker t : engine.getMissionsThreadList()) {
 				if (!t.isCancelled())
 					// TODO non blocca i thread, risolvere
 					t.cancel(true);
@@ -123,7 +129,7 @@ public class MonitorPageController {
 				}
 			}
 			// log the status of all not-completed missions after the stop
-			for (Mission m : missions) {
+			for (Mission m : engine.getMissions()) {
 				// if the mission is not completed yet
 				if (!(m.getStatus() == Mission.COMPLETED)) {
 					// set it to stanby because it could be completed in future
