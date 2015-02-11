@@ -9,11 +9,11 @@ import it.polimi.template.model.*;
 public class PriorityManager extends Node implements Observer {
 
 	MissionWorker mw;
-	
+
 	public PriorityManager(MissionWorker mw) {
 		this.mw = mw;
 	}
-	
+
 	@Override
 	public Mission run(Mission m) {
 		// Here only Failed missions arrives
@@ -29,8 +29,10 @@ public class PriorityManager extends Node implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		Mission m = this.run((Mission) arg);
-		setChanged();
-		notifyObservers(m);
+		if (m != null) {
+			setChanged();
+			notifyObservers(m);
+		}
 	}
 
 }

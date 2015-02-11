@@ -18,8 +18,10 @@ public class ActionEvaluator extends Node implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		Mission m = this.run((Mission) arg);
-		setChanged();
-		notifyObservers(m);
+		if (m != null) {
+			setChanged();
+			notifyObservers(m);
+		}
 	}
 
 	@Override
@@ -27,17 +29,18 @@ public class ActionEvaluator extends Node implements Observer {
 		// Start the evaluation process of the last Action
 		String result = m.getEvaluator().evaluate();
 		// If the result is NOT "Success"
-		if ( !result.equals("Success") ) {
+		if (!result.equals("Success")) {
 			// Redo the last Trip
 			// Get the last completed trip
-			Trip last = m.getCompletedTrips().get(m.getCompletedTrips().size()-1);
+			Trip last = m.getCompletedTrips().get(
+					m.getCompletedTrips().size() - 1);
 			// Set the status to Waiting
 			last.setStatus(Trip.WAITING);
 			// Put that trip in the first position of the tripList to be done
 			m.getTrips().add(0, last);
-			
+
 			mw.log(m, "Trip " + last.getName() + " will be executed again.");
-		} 
+		}
 		return m;
 	}
 

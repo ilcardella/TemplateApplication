@@ -9,16 +9,18 @@ import java.util.Observer;
 public class MissionRepeater extends Node implements Observer {
 
 	MissionWorker mw;
-	
+
 	public MissionRepeater(MissionWorker mw) {
 		this.mw = mw;
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		Mission m = this.run((Mission) arg);
-		setChanged();
-		notifyObservers(m);
+		if (m != null) {
+			setChanged();
+			notifyObservers(m);
+		}
 	}
 
 	@Override
