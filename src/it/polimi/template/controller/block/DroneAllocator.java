@@ -18,8 +18,8 @@ public class DroneAllocator extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 		// Here only missions in standby or unexecuted must be considered
-		if (m != null
-				&& (m.getStatus() == Mission.UNEXECUTED || m.getStatus() == Mission.STANDBY)) {
+		if (m.getStatus() == Mission.UNEXECUTED
+				|| m.getStatus() == Mission.STANDBY) {
 
 			Trip t = m.getTrips().get(0);
 

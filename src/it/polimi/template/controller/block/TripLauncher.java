@@ -21,8 +21,7 @@ public class TripLauncher extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 
-		if (m != null
-				&& (m.getStatus() == Mission.UNEXECUTED || m.getStatus() == Mission.STANDBY)) {
+		if (m.getStatus() == Mission.UNEXECUTED || m.getStatus() == Mission.STANDBY) {
 
 			Trip t = m.getTrips().get(0);
 

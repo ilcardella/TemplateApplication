@@ -19,26 +19,30 @@ public class TimerMonitor extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 
-		// Getting the current trip instance
-		Trip t = m.getTrips().get(0);
+		// accept mission only if they are running
+		if (m.getStatus() == Mission.RUNNING) {
+			// Getting the current trip instance
+			Trip t = m.getTrips().get(0);
 
-		// Getting the instance of the Thread that is running the Trip
-		TripWorker tw = missionThread.getTripThread();
+			// Getting the instance of the Thread that is running the Trip
+			TripWorker tw = missionThread.getTripThread();
 
-		boolean isExpired = false;
+			boolean isExpired = false;
 
-		while (System.currentTimeMillis() - Integer.parseInt(t.getStartTime()) < m
-				.getSafeTimer()) {
+			while (System.currentTimeMillis()
+					- Integer.parseInt(t.getStartTime()) < m.getSafeTimer()) {
+			}
+
+			isExpired = !tw.isDone();
+
+			if (isExpired) {
+				t.setStatus(Trip.EXPIRED);
+				m.setStatus(Mission.FAILED);
+			}
+
+			return m;
 		}
-
-		isExpired = !tw.isDone();
-
-		if (isExpired) {
-			t.setStatus(Trip.EXPIRED);
-			m.setStatus(Mission.FAILED);
-		}
-
-		return m;
+		return null;
 	}
 
 	@Override

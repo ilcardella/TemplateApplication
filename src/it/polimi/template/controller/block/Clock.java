@@ -17,9 +17,8 @@ public class Clock extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 
-		// Here arrives only missions in standby
-		// if m is null we don't have to consider it
-		if (m != null && m.getStatus() == Mission.STANDBY) {
+		// Here arrives only missions in standby or unexecuted
+		if (m.getStatus() == Mission.STANDBY || m.getStatus() == Mission.UNEXECUTED) {
 
 			// get the next trip
 			Trip t = m.getTrips().get(0);

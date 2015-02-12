@@ -26,22 +26,28 @@ public class ActionEvaluator extends Node implements Observer {
 
 	@Override
 	public Mission run(Mission m) {
-		// Start the evaluation process of the last Action
-		String result = m.getEvaluator().evaluate();
-		// If the result is NOT "Success"
-		if (!result.equals("Success")) {
-			// Redo the last Trip
-			// Get the last completed trip
-			Trip last = m.getCompletedTrips().get(
-					m.getCompletedTrips().size() - 1);
-			// Set the status to Waiting
-			last.setStatus(Trip.WAITING);
-			// Put that trip in the first position of the tripList to be done
-			m.getTrips().add(0, last);
+		// we need to evaluate an action only if the mission is in standby or completed
+		if (m.getStatus() == Mission.COMPLETED
+				|| m.getStatus() == Mission.STANDBY) {
+			// Start the evaluation process of the last Action
+			String result = m.getEvaluator().evaluate();
+			// If the result is NOT "Success"
+			if (!result.equals("Success")) {
+				// Redo the last Trip
+				// Get the last completed trip
+				Trip last = m.getCompletedTrips().get(
+						m.getCompletedTrips().size() - 1);
+				// Set the status to Waiting
+				last.setStatus(Trip.WAITING);
+				// Put that trip in the first position of the tripList to be
+				// done
+				m.getTrips().add(0, last);
 
-			mw.log(m, "Trip " + last.getName() + " will be executed again.");
+				mw.log(m, "Trip " + last.getName() + " will be executed again.");
+			}
+			return m;
 		}
-		return m;
+		return null;
 	}
 
 }
