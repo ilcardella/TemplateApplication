@@ -2,8 +2,6 @@ package it.polimi.template.controller.block;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.ExecutionException;
-
 import it.polimi.template.controller.thread.MissionWorker;
 import it.polimi.template.controller.thread.TripWorker;
 import it.polimi.template.model.*;

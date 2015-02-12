@@ -2,8 +2,6 @@ package it.polimi.template.controller.block;
 
 import it.polimi.template.controller.thread.MissionWorker;
 import it.polimi.template.model.Mission;
-import it.polimi.template.model.Trip;
-
 import java.util.Observable;
 import java.util.Observer;
 
