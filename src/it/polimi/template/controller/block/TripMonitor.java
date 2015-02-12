@@ -30,8 +30,12 @@ public class TripMonitor extends Node implements Observer {
 			// Getting the instance of the Thread that is running the Trip
 			TripWorker tw = missionThread.getTripThread();
 
+			// While the thread is executing we need to wait for it to end
 			while (!tw.isDone()) {
-				// While the thread is running we need to wait for it to end
+				// if the status is Expired we need to break
+				if(t.getStatus() == Trip.EXPIRED)
+					// returning null will not notify the observers
+					return null;
 			}
 
 			// getting the result of the thread
