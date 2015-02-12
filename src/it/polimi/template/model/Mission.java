@@ -107,7 +107,7 @@ public class Mission {
 		this.safeTimer = t;
 	}
 
-	public boolean getRepeat() {
+	public boolean isRepeateable() {
 		return repeat;
 	}
 

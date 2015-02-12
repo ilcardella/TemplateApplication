@@ -27,18 +27,15 @@ public class TimerMonitor extends Node implements Observer {
 
 		boolean isExpired = false;
 
-		while (!tw.isDone()) {
+		while (System.currentTimeMillis() - Integer.parseInt(t.getStartTime()) < m
+				.getSafeTimer()) {
+		}
 
-			if (System.currentTimeMillis() - Integer.parseInt(t.getStartTime()) > m
-					.getSafeTimer()) {
-				isExpired = true;
-			}
+		isExpired = !tw.isDone();
 
-			if (isExpired) {
-				t.setStatus(Trip.EXPIRED);
-				m.setStatus(Mission.FAILED);
-				break;
-			}
+		if (isExpired) {
+			t.setStatus(Trip.EXPIRED);
+			m.setStatus(Mission.FAILED);
 		}
 
 		return m;

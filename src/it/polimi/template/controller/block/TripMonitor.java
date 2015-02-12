@@ -20,34 +20,25 @@ public class TripMonitor extends Node implements Observer {
 	public Mission run(Mission m) {
 
 		// Here mission is in Running status
-		if (m != null && m.getStatus() == Mission.RUNNING) {
+		if (m.getStatus() == Mission.RUNNING) {
 			// Result of the current running trip of the mission
 			int tripResult = 0;
 
 			// Getting the current trip instance
 			Trip t = m.getTrips().get(0);
 
-			// If a TimerMonitor has been added to the diagram
-			// we check if the current Trip is expired
-			if (t.getStatus() == Trip.EXPIRED) {
-				// If the Trip is Expired we set the result as FAILED
-				tripResult = TripWorker.FAILED;
-			} else {
-				// If it was not expired we has to wait for the result
+			// Getting the instance of the Thread that is running the Trip
+			TripWorker tw = missionThread.getTripThread();
 
-				// Getting the instance of the Thread that is running the Trip
-				TripWorker tw = missionThread.getTripThread();
+			while (!tw.isDone()) {
+				// While the thread is running we need to wait for it to end
+			}
 
-				while (!tw.isDone()) {
-					// While the thread is running we need to wait for it to end
-				}
-
-				// get the result of the thread
-				try {
-					tripResult = tw.get();
-				} catch (InterruptedException | ExecutionException e) {
-					e.printStackTrace();
-				}
+			// getting the result of the thread
+			try {
+				tripResult = tw.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
 			}
 
 			if (tripResult == TripWorker.COMPLETED) {
@@ -58,34 +49,21 @@ public class TripMonitor extends Node implements Observer {
 				m.getCompletedTrips().add(t);
 				// remove it from the list of trips
 				m.getTrips().remove(0);
-			} else {
+			} else if (tripResult == TripWorker.FAILED){
 				t.setStatus(Trip.FAILED);
 				m.setStatus(Mission.FAILED);
 				missionThread.log(m, "Trip " + t.getName() + " is FAILED");
 			}
 
+			// let the drone to be free :)
 			t.getDrone().setStatus(Drone.FREE);
 			missionThread.log(m, "Drone " + t.getDrone().getId() + " is FREE");
 
+			// when all trips are completed we set the mission as COMPLETED
 			if (m.getTrips().isEmpty()) {
 				m.setStatus(Mission.COMPLETED);
 				missionThread
 						.log(m, "Mission " + m.getName() + " is COMPLETED");
-			}
-
-			// if the mission must be repeated and the tripsList is empty
-			if (m.getRepeat() == true && m.getTrips().isEmpty()) {
-				// the mission status is set to STANDBY
-				m.setStatus(Mission.STANDBY);
-				// all the trips are moved from completedTrips to trips
-				// and their status is set to WAITING
-				for (Trip z : m.getCompletedTrips()) {
-					z.setStatus(Trip.WAITING);
-					m.getTrips().add(z);
-				}
-				// the list of completedTrips is cleared
-				m.getCompletedTrips().clear();
-
 			}
 
 			return m;

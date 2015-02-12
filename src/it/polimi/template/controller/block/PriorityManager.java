@@ -23,7 +23,7 @@ public class PriorityManager extends Node implements Observer {
 			m.setStatus(Mission.STANDBY);
 			return m;
 		}
-		return null;
+		return m;
 	}
 
 	@Override
