@@ -1,5 +1,6 @@
 package it.polimi.template.model.interfaces;
 
+import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
 
 public interface IEvaluator {
@@ -9,5 +10,5 @@ public interface IEvaluator {
 	public boolean writeActionOutcome(Object outcome, Trip trip);
 	
 	// This method evaluate the actions results and give a string output
-	public String evaluate();
+	public String evaluate(Mission mission);
 }

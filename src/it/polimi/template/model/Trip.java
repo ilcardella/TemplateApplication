@@ -20,8 +20,8 @@ public class Trip {
 	private Item item;
 	private String startTime;
 	private Mission parentMission;
-//	private boolean used = false;
-	
+
+	// private boolean used = false;
 
 	public Trip() {
 		this.delay = 0;
@@ -109,13 +109,13 @@ public class Trip {
 		this.parentMission = mission;
 	}
 
-//	public boolean getUsed() {
-//		return used;
-//	}
-//
-//	public void setUsed(boolean used) {
-//		this.used = used;
-//	}
+	// public boolean getUsed() {
+	// return used;
+	// }
+	//
+	// public void setUsed(boolean used) {
+	// this.used = used;
+	// }
 
 	public Action getAction() {
 		return action;
@@ -146,11 +146,30 @@ public class Trip {
 	}
 
 	public boolean executeTrip() {
-		Object actionOutcome = this.drone.flyToAndDoAction(this.targetLocation, this.action);
+		Object actionOutcome = this.drone.flyToAndDoAction(this.targetLocation,
+				this.action);
 		if (actionOutcome != null) {
-			this.parentMission.getEvaluator().writeActionOutcome(actionOutcome, this);
+			this.parentMission.getEvaluator().writeActionOutcome(actionOutcome,
+					this);
 			return true;
 		}
 		return false;
+	}
+
+	// two trips are equals if they have the same name
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		} else if (!(obj instanceof Trip)) {
+			return false;
+		} else {
+			Trip t = (Trip) obj;
+			if (t.getName().equals(this.getName())) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 }
