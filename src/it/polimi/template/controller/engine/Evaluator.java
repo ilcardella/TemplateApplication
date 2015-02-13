@@ -25,7 +25,25 @@ public class Evaluator implements IEvaluator {
 		// Here the developer has to implement his own implementation
 		// <eval>
 
-		// Retrieve all entries of the map
+		// set the result of the evaluation
+		result = "Success";
+		return result;
+	}
+}
+
+
+
+
+
+
+/* ######################################################################################
+* 
+* Here are the implementation of the studied applications
+* 
+* 
+* ALFALFA Application
+* 
+  // Retrieve all entries of the map
 		for (Map.Entry<Trip, Object> entry : dataMap.entrySet()) {
 
 			// consider only the trips related to the mission to evaluate
@@ -57,9 +75,19 @@ public class Evaluator implements IEvaluator {
 				}
 			}
 		}
+* 
+* --------------------------------------------------------------------------------------------
+* 
+* PUTTI DANZANTI
+* 
+  CODE HERE
 
-		// set the result of the evaluation
-		result = "Success";
-		return result;
-	}
-}
+* --------------------------------------------------------------------------------------------
+* 
+* 
+* PURSUE
+* 
+  CODE HERE
+* 
+* ---------------------------------------------------------------------------------------------
+*/
