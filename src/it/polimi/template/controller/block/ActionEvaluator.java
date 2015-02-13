@@ -27,8 +27,7 @@ public class ActionEvaluator extends Node implements Observer {
 	@Override
 	public Mission run(Mission m) {
 		// we need to evaluate an action only if the mission is in standby or completed
-		if (m.getStatus() == Mission.COMPLETED
-				|| m.getStatus() == Mission.STANDBY) {
+		if (m.getStatus() == Mission.COMPLETED) {
 			// Start the evaluation process of the last Action
 			String result = m.getEvaluator().evaluate();
 			// If the result is NOT "Success"
