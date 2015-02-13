@@ -38,7 +38,7 @@ public class Evaluator implements IEvaluator {
 				if (photo.hasPest() || photo.hasDisease())
 					
 					return "WARNING: Pest/disease at location: "
-							+ dataMap.keySet().iterator().getTargetLocation();
+							+ entry.getKey().getTargetLocation();
 
 				// checking for some bloom
 				if (photo.hasBloom()) {
