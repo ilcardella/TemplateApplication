@@ -51,8 +51,8 @@ public class DroneAllocator extends Node implements Observer {
 						}
 
 					} // end of for loop
-					return m;
 				}
+				return m;
 			}
 		}
 		return null;
