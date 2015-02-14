@@ -25,6 +25,8 @@ public class Evaluator implements IEvaluator {
 		// Here the developer has to implement his own implementation
 		// <eval>
 
+		
+
 		// set the result of the evaluation
 		result = "Success";
 		return result;
@@ -41,7 +43,7 @@ public class Evaluator implements IEvaluator {
 * Here are the implementation of the studied applications
 * 
 * 
-* ALFALFA Application
+* ALFALFA 
 * 
   // Retrieve all entries of the map
 		for (Map.Entry<Trip, Object> entry : dataMap.entrySet()) {
@@ -80,11 +82,81 @@ public class Evaluator implements IEvaluator {
 * 
 * PUTTI DANZANTI
 * 
-  CODE HERE
+  // generate the final ortophoto
+		OrtoPhoto ortophoto = stitch(dataMap.values());
+		
+		// if the aberration is greater than a fixed threshold
+		if(ortophoto.getAberration() > ABERRATION_THRESHOLD){
+			
+			// for each photo that compose the ortophoto
+			for (Photo photo: ortophoto.getPhotoCollection()){
+				
+				// if the overlap of the photo is not enough
+				if (ortophoto.getOverlapOfGivenPhoto(photo) < OVERLAP_THRESHOLD){
+					
+					// Retrieve all entries of the map
+					for (Map.Entry<Trip, Object> entry : dataMap.entrySet()) {
+						
+						// take the Photo of the current iteration
+						Photo p = (Photo) entry.getValue();
+						
+						// if we found the photo in the map
+						if(photo.equals(p)){
+							
+							// create a new Trip
+							Trip trip = new Trip();
+							trip.setName("NewTrip");
+							trip.setTargetLocation(entry.getKey().getTargetLocation());
+							trip.setAction(Action.TAKE_PHOTO);
+							trip.setStatus(Trip.WAITING);
+
+							// add this new trip to the list of the mission
+							missionToEvaluate.getTrips().add(trip);
+							
+							// set the mission status to STANDBY
+							missionToEvaluate.setStatus(Mission.STANDBY);
+						}
+					}
+				}
+			}
+		}
 
 * --------------------------------------------------------------------------------------------
+* PM10
 * 
+	// building a new map with only the trip-measure couples of the mission
+		// to evaluate
+		Map<Trip, Integer> missionMap = new Map<Trip, Integer>();
+		for (Map.Entry<Trip, Object> entry : dataMap.entrySet()) {
+			if (missionToEvaluate.getCompletedTrips().contains(entry.getKey())) {
+				missionMap.put(entry.getKey(), (Integer) entry.getValue());
+			}
+		}
+
+		// this method use the Trip location and the pollution measure to
+		// calculate
+		// the gradients and then return a list of String that indicates
+		// the positions of these gradients
+		List<String> gradientsPositions = calculateGradients(missionMap);
+
+		for (String position : gradientsPositions) {
+
+			// create a new Trip to calculate pollution at the gradient position
+			Trip trip = new Trip();
+			trip.setName("GradientTrip");
+			trip.setTargetLocation(position);
+			trip.setAction(Action.MEASURE);
+			trip.setStatus(Trip.WAITING);
+
+			// add this new trip to the list of the mission
+			missionToEvaluate.getTrips().add(trip);
+			// set the mission status to STANDBY
+			missionToEvaluate.setStatus(Mission.STANDBY);
+
+		}
+
 * 
+* --------------------------------------------------------------------------------------------
 * PURSUE
 * 
   CODE HERE
