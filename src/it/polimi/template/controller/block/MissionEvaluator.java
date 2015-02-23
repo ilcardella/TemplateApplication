@@ -7,11 +7,11 @@ import it.polimi.template.model.Trip;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ActionEvaluator extends Node implements Observer {
+public class MissionEvaluator extends Node implements Observer {
 
 	MissionWorker mw;
 
-	public ActionEvaluator(MissionWorker mw) {
+	public MissionEvaluator(MissionWorker mw) {
 		this.mw = mw;
 	}
 
