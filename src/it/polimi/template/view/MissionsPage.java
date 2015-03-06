@@ -2,6 +2,7 @@ package it.polimi.template.view;
 
 import static javax.swing.GroupLayout.Alignment.LEADING;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -17,6 +18,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 public class MissionsPage extends JFrame {
@@ -62,31 +65,45 @@ public class MissionsPage extends JFrame {
 		GroupLayout gl = new GroupLayout(pane);
 		pane.setLayout(gl);
 
+		JTextArea instructions = new JTextArea(0,0);
+		instructions.append("Click on Add Mission to create a new missions");
+		instructions.append("\n");
+
+		instructions.append("Select a created Mission and click on Set Trips to add new trips in that mission");
+		instructions.setForeground(Color.RED);
+		instructions.setBackground(Color.LIGHT_GRAY);
+		instructions.setEditable(false);
+
 		gl.setAutoCreateContainerGaps(true);
 		gl.setAutoCreateGaps(true);
+		
 
 		gl.setHorizontalGroup(gl
 				.createSequentialGroup()
-				.addComponent(scrollpane)
+				.addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(scrollpane).addComponent(instructions))
 				.addGroup(
 						gl.createParallelGroup().addComponent(addbtn)
 								.addComponent(renbtn).addComponent(delbtn)
 								.addComponent(remallbtn).addComponent(tpsbtn)
 								.addComponent(okbtn)
 
-				));
+				)
+				);
+		
 
 		gl.setVerticalGroup(gl
-				.createParallelGroup(LEADING)
-				.addComponent(scrollpane)
-				.addGroup(
-						gl.createSequentialGroup().addComponent(addbtn)
+				.createSequentialGroup()
+				.addGroup(gl.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(scrollpane)
+				.addGroup(gl.createSequentialGroup()
+						.addComponent(addbtn)
 								.addComponent(renbtn).addComponent(delbtn)
 								.addComponent(remallbtn).addComponent(tpsbtn)
 								.addComponent(okbtn)
 
-				)
-
+				))
+				.addComponent(instructions)
+			
 		);
 
 		gl.linkSize(addbtn, renbtn, delbtn, remallbtn, tpsbtn, okbtn);
@@ -130,7 +147,7 @@ public class MissionsPage extends JFrame {
 		return false;
 
 	}
-	
+
 	public int showTimerPanel() {
 
 		String text3 = JOptionPane
@@ -143,7 +160,6 @@ public class MissionsPage extends JFrame {
 
 		else
 			return Integer.parseInt(delay);
-
 
 	}
 
@@ -211,9 +227,9 @@ public class MissionsPage extends JFrame {
 	}
 
 	// set trips button
-	
-	public void showNoMissionSelectedPanel(){
-		JOptionPane.showMessageDialog(null,"Please select a Mission");
+
+	public void showNoMissionSelectedPanel() {
+		JOptionPane.showMessageDialog(null, "Please select a Mission");
 	}
 
 	public void setTripsButtonListener(ActionListener listener) {
