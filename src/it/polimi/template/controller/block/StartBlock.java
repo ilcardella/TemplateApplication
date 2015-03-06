@@ -24,6 +24,6 @@ public class StartBlock extends Node implements Observer {
 
 	@Override
 	public Mission run(Mission m) {
-		return null;
+		return m;
 	}
 }

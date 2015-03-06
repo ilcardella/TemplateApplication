@@ -15,8 +15,8 @@ import java.util.List;
 
 public class TripsPageController {
 
-	private final boolean TRIP_DELAY_ENABLED = false;
-	private final boolean TRIP_PRIORITY_ENABLED = false;
+	private final boolean TRIP_DELAY_ENABLED = <tDelay>; //default: false
+	private final boolean TRIP_PRIORITY_ENABLED = <tPrt>; //default: false
 	
 	private TripsPage tripsPage;
 	private Mission mission;

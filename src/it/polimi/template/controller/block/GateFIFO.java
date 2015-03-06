@@ -9,7 +9,7 @@ public class GateFIFO extends Node implements Observer {
 
 	MissionWorker mw;
 	boolean firstPassed = false;		 // instance of passed mission
-	//int incomingConnections = <num>; // incoming connections of the block, 
+	int incomingConnections = <num>; // incoming connections of the block, 
 								 // this value is generated dinamically by Pluto Graphical Editor
 	int counter = 0; 
 	
@@ -36,15 +36,14 @@ public class GateFIFO extends Node implements Observer {
 			return m;
 		}
 		// else if not all parallel instances have been passed yet
-		else /*if(counter < incomingConnections)*/{
+		else if(counter < incomingConnections){
 			counter++;
 			// if this instance was the last one that had to be passed
-		/*	if(counter == incomingConnections){
+			if(counter == incomingConnections){
 				firstPassed = false; // set the flag to null
-			}*/
+			}
 			return null;
 		}
-//		return null;
 		
 	}
 
