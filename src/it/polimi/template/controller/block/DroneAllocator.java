@@ -22,7 +22,14 @@ public class DroneAllocator extends Node implements Observer {
 		if (m.getStatus() == Mission.UNEXECUTED
 				|| m.getStatus() == Mission.STANDBY) {
 
+			// The next Trip must be the one with the higher priority
+			// If all Trips have the same priority, then it will be the first in the list
 			Trip t = m.getTrips().get(0);
+			int maxPriority = t.getPriority();
+			for(Trip x: m.getTrips()){
+				if(x.getPriority() > t.getPriority())
+					t = x;
+			}
 
 			// if there is at least a trip to perform in the mission
 			if (!m.getTrips().isEmpty()) {

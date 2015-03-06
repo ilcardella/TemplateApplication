@@ -15,6 +15,9 @@ import java.util.List;
 
 public class TripsPageController {
 
+	private final boolean TRIP_DELAY_ENABLED = false;
+	private final boolean TRIP_PRIORITY_ENABLED = false;
+	
 	private TripsPage tripsPage;
 	private Mission mission;
 	private char tripCounter;
@@ -125,13 +128,17 @@ public class TripsPageController {
 			}
 		}
 
-		// set the priority to the trip
-		int priority = tripsPage.showPriorityPanel();
-		trip.setPriority(priority);
+		if (TRIP_PRIORITY_ENABLED) {
+			// set the priority to the trip
+			int priority = tripsPage.showPriorityPanel();
+			trip.setPriority(priority);
+		}
 
-		// set the delay
-		int delay = tripsPage.showDelayPanel();
-		trip.setDelay(delay);
+		if (TRIP_DELAY_ENABLED) {
+			// set the delay
+			int delay = tripsPage.showDelayPanel();
+			trip.setDelay(delay);
+		}
 
 		// setting the targetPosition coordinates
 		trip.setTargetLocation(tripsPage.getCoordinatesOfDroppedTrip());

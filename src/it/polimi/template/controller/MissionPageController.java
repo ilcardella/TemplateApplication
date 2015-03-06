@@ -18,6 +18,9 @@ import it.polimi.template.model.*;
 
 public class MissionPageController {
 
+	private final boolean MISSION_REPETITION_ENABLED = false;
+	private final boolean TRIP_SAFETIME_ENABLED = false;
+	
 	private MissionsPage missionPage;
 	List<Mission> missions;
 
@@ -45,14 +48,19 @@ public class MissionPageController {
 			Mission m = new Mission();
 			String name = missionPage.showNewNamePanel("Write mission name");
 			if (name != "") {
+				// update the model
 				m.setName(name);
 				if (missions == null)
 					missions = new ArrayList<Mission>();
 				missions.add(m);
 
+				// update the view
 				missionPage.addMissionToList(name);
-				m.setRepeat(missionPage.showRepeatPanel());
-				m.setSafeTimer(missionPage.showTimerPanel());
+				
+				if(MISSION_REPETITION_ENABLED)
+					m.setRepeat(missionPage.showRepeatPanel());
+				if(TRIP_SAFETIME_ENABLED)
+					m.setSafeTimer(missionPage.showTimerPanel());
 
 			}
 		}
