@@ -178,6 +178,9 @@ public class MissionPageController {
 				}
 			}
 		}
+		else{
+			missionPage.showNoMissionSelectedPanel();
+		}
 	}
 
 }

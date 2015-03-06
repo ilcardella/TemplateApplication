@@ -211,6 +211,10 @@ public class MissionsPage extends JFrame {
 	}
 
 	// set trips button
+	
+	public void showNoMissionSelectedPanel(){
+		JOptionPane.showMessageDialog(null,"Please select the Mission of which you want to set the trips");
+	}
 
 	public void setTripsButtonListener(ActionListener listener) {
 		tpsbtn.addActionListener(listener);

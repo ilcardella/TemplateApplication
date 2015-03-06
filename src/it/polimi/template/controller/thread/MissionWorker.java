@@ -14,21 +14,21 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 	private Mission m;
 	private TripWorker tripThread;
 	
-	<dec>
+	//<dec>
 //	MissionCreator missioncreator = new MissionCreator(this);
 //	DroneAllocator droneallocator = new DroneAllocator(this);
 //	TripLauncher triplauncher = new TripLauncher(this);
 //	TripMonitor tripmonitor = new TripMonitor(this);
 //	PriorityManager prioritymanager = new PriorityManager(this);
 
-	public MissionWorker(Mission mission, MonitorPageController controller) {
+	 public MissionWorker(Mission mission, MonitorPageController controller) {
 		this.m = mission;
 		this.controller = controller;
 	}
 
 	@Override
 	protected Integer doInBackground() throws Exception {
-		<exe>
+		//<exe>
 //		missioncreator.addObserver(droneallocator);
 //		droneallocator.addObserver(triplauncher);
 //		triplauncher.addObserver(tripmonitor);

@@ -2,7 +2,6 @@ package it.polimi.template.view;
 
 import it.polimi.template.model.*;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
@@ -137,6 +136,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		imagePane.add(label);
 		imagePane.setTransferHandler(new TransferHandler("text"));
 		new MyDropTargetListener(imagePane);
+
 		MouseListener listener = new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				JComponent c = (JComponent) e.getSource();
@@ -157,7 +157,6 @@ public class TripsPage extends JFrame implements DragSourceListener,
 
 		setTitle("Pluto-Trips Page (" + nameMission + ")");
 		setSize(700, 600);
-		setLocationRelativeTo(null);
 		setVisible(true);
 
 	}
@@ -186,18 +185,18 @@ public class TripsPage extends JFrame implements DragSourceListener,
 				if (event.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 
 					event.acceptDrop(DnDConstants.ACTION_COPY);
-					
+
 					// update the location of dnd
 					int locX = (int) event.getLocation().getX();
 					int locY = (int) event.getLocation().getY();
 					currentCoordinates = locX + "/" + locY;
 
 					// update the hashmap
-					//tripsMap.put(getSelectedTrip(), locX+"/"+locY);
-					
+					// tripsMap.put(getSelectedTrip(), locX+"/"+locY);
+
 					// notify the controller of the drag and drop
 					dndListener.actionPerformed();
-					
+
 					event.dropComplete(true);
 
 				}
@@ -211,19 +210,24 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	}
 
 	@Override
-	public void dragEnter(DragSourceDragEvent dsde) {}
+	public void dragEnter(DragSourceDragEvent dsde) {
+	}
 
 	@Override
-	public void dragOver(DragSourceDragEvent dsde) {}
+	public void dragOver(DragSourceDragEvent dsde) {
+	}
 
 	@Override
-	public void dropActionChanged(DragSourceDragEvent dsde) {}
+	public void dropActionChanged(DragSourceDragEvent dsde) {
+	}
 
 	@Override
-	public void dragExit(DragSourceEvent dse) {}
+	public void dragExit(DragSourceEvent dse) {
+	}
 
 	@Override
-	public void dragDropEnd(DragSourceDropEvent dsde) {}
+	public void dragDropEnd(DragSourceDropEvent dsde) {
+	}
 
 	// drag and drop listeners
 
@@ -290,19 +294,19 @@ public class TripsPage extends JFrame implements DragSourceListener,
 			return Integer.parseInt(delay);
 
 	}
-	
-	public void addTripToHashMap(String name, String coords){
+
+	public void addTripToHashMap(String name, String coords) {
 		// update the hashmap
-		if(!tripsMap.containsKey(name)){
+		if (!tripsMap.containsKey(name)) {
 			tripsMap.put(name, coords);
-		}else{
+		} else {
 			tripsMap.remove(name);
 			tripsMap.put(name, coords);
 		}
 	}
-	
-	public void removeTripFromHashMap(String name){
-		if(tripsMap.containsKey(name))
+
+	public void removeTripFromHashMap(String name) {
+		if (tripsMap.containsKey(name))
 			tripsMap.remove(name);
 	}
 
@@ -312,7 +316,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		String[] coords = tripsMap.get(name).split("/");
 		int locX = Integer.parseInt(coords[0]);
 		int locY = Integer.parseInt(coords[1]);
-		
+
 		// update the map
 		text = new JTextField(name.split("-")[1]);
 		text.setBounds(locX, locY, 15, 20);
@@ -320,7 +324,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		text.setBackground(Color.BLUE);
 		text.setForeground(Color.CYAN);
 		label.add(text);
-		
+
 		// add the trip to the tripList
 		tripListModel.addElement(name);
 	}
