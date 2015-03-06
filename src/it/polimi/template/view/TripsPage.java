@@ -39,6 +39,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.TransferHandler;
@@ -128,6 +129,10 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		JScrollPane tripsPane = new JScrollPane(tripList);
 		JPanel imagePane = new JPanel();
 		JPanel buttonsPane = new JPanel();
+		JTextField instructions = new JTextField("Drag and Drop the desired Action on the Map");
+		instructions.setForeground(Color.RED);
+		instructions.setBackground(Color.LIGHT_GRAY);
+		instructions.setEditable(false);
 
 		ok = new JButton("Ok");
 		delete = new JButton("Delete all");
@@ -153,6 +158,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		getContentPane().add(imagePane, BorderLayout.WEST);
 		getContentPane().add(actionsPane, BorderLayout.NORTH);
 		getContentPane().add(buttonsPane, BorderLayout.SOUTH);
+		getContentPane().add(instructions, BorderLayout.SOUTH);
 		getContentPane().add(tripsPane, BorderLayout.EAST);
 
 		setTitle("Pluto-Trips Page (" + nameMission + ")");
