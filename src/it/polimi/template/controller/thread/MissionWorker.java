@@ -14,12 +14,12 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 	private Mission m;
 	private TripWorker tripThread;
 	
-	//<dec>
-	MissionCreator missioncreator = new MissionCreator(this);
-	DroneAllocator droneallocator = new DroneAllocator(this);
-	TripLauncher triplauncher = new TripLauncher(this);
-	TripMonitor tripmonitor = new TripMonitor(this);
-	PriorityManager prioritymanager = new PriorityManager(this);
+	<dec>
+//	MissionCreator missioncreator = new MissionCreator(this);
+//	DroneAllocator droneallocator = new DroneAllocator(this);
+//	TripLauncher triplauncher = new TripLauncher(this);
+//	TripMonitor tripmonitor = new TripMonitor(this);
+//	PriorityManager prioritymanager = new PriorityManager(this);
 
 	public MissionWorker(Mission mission, MonitorPageController controller) {
 		this.m = mission;
@@ -28,14 +28,14 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 
 	@Override
 	protected Integer doInBackground() throws Exception {
-		//<exe>
-		missioncreator.addObserver(droneallocator);
-		droneallocator.addObserver(triplauncher);
-		triplauncher.addObserver(tripmonitor);
-		tripmonitor.addObserver(droneallocator);
-		tripmonitor.addObserver(prioritymanager);
-		prioritymanager.addObserver(droneallocator);
-		missioncreator.update(null, m);
+		<exe>
+//		missioncreator.addObserver(droneallocator);
+//		droneallocator.addObserver(triplauncher);
+//		triplauncher.addObserver(tripmonitor);
+//		tripmonitor.addObserver(droneallocator);
+//		tripmonitor.addObserver(prioritymanager);
+//		prioritymanager.addObserver(droneallocator);
+//		missioncreator.update(null, m);
 		
 		return 4;
 	}

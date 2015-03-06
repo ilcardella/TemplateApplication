@@ -9,7 +9,7 @@ public class GateFIFO extends Node implements Observer {
 
 	MissionWorker mw;
 	boolean firstPassed = false;		 // instance of passed mission
-	int incomingConnections = 2; // incoming connections of the block, 
+	int incomingConnections = <num>; // incoming connections of the block, 
 								 // this value is generated dinamically by Pluto Graphical Editor
 	int counter = 0; 
 	
