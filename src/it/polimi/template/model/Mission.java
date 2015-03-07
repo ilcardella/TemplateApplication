@@ -3,6 +3,7 @@ package it.polimi.template.model;
 import it.polimi.template.controller.engine.Evaluator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Random;
@@ -20,9 +21,9 @@ public class Mission {
 	private int status;
 	private List<Trip> trips;
 	private List<Trip> completedTrips;
-	private boolean used = false;
+	// private boolean used = false;
 	private boolean repeat = false;
-	private int safeTimer;
+	private int safeTimer = 480; // 480sec = 8 mins
 	private Evaluator evaluator;
 
 	public Mission() {
@@ -56,7 +57,7 @@ public class Mission {
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
 	}
-	
+
 	public List<Trip> getCompletedTrips() {
 		return completedTrips;
 	}
@@ -73,13 +74,13 @@ public class Mission {
 		this.name = name;
 	}
 
-	public boolean getUsed() {
-		return used;
-	}
-
-	public void setUsed(boolean used) {
-		this.used = used;
-	}
+	// public boolean getUsed() {
+	// return used;
+	// }
+	//
+	// public void setUsed(boolean used) {
+	// this.used = used;
+	// }
 
 	public static String getStatusNameFromValue(int value) {
 
@@ -102,7 +103,7 @@ public class Mission {
 	public int getSafeTimer() {
 		return this.safeTimer;
 	}
-	
+
 	public void setSafeTimer(int t) {
 		this.safeTimer = t;
 	}
@@ -121,6 +122,28 @@ public class Mission {
 
 	public void setEvaluator(Evaluator evaluator) {
 		this.evaluator = evaluator;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		} else if (!(obj instanceof Mission)) {
+			return false;
+		} else {
+			Mission m = (Mission) obj;
+			if (m.getName().equals(this.getName())) {
+				if (m.getTrips().size() == this.getTrips().size()) {
+					for (int i = 0; i < m.getTrips().size(); i++) {
+						if (!m.getTrips().get(i).equals(this.getTrips().get(i))) {
+							return false;
+						}
+					}
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

@@ -8,6 +8,8 @@ import java.util.Observer;
 
 public class GateFunnel extends Node implements Observer {
 	MissionWorker w;
+	int incomingConnections = <num>;
+	int counter = 0; 
 
 	public GateFunnel(MissionWorker worker) {
 		this.w = worker;
@@ -24,7 +26,9 @@ public class GateFunnel extends Node implements Observer {
 
 	@Override
 	public Mission run(Mission m) {
-		//TODO write algorithm
+		counter++;
+		if(counter == incomingConnections)
+			return m;
 		return null;
 	}
 }

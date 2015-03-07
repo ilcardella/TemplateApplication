@@ -166,10 +166,15 @@ public class Trip {
 		} else {
 			Trip t = (Trip) obj;
 			if (t.getName().equals(this.getName())) {
-				return true;
-			} else {
-				return false;
+				if(t.getAction().equals(this.getAction())){
+					if(t.getSourceLocation().equals(this.getSourceLocation())){
+						if(t.getTargetLocation().equals(this.getTargetLocation())){
+							return true;
+						}
+					}
+				}
 			}
 		}
+		return false;
 	}
 }
