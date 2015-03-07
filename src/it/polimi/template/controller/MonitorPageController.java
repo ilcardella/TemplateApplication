@@ -25,15 +25,12 @@ public class MonitorPageController {
 	private MissionsPage missionPage;
 	private Engine engine;
 
-//	private List<Mission> missions;
-//	private List<MissionWorker> threadList;
 
 	public MonitorPageController(MonitorPage monitorPage,
 			MissionsPage missionPage, List<Mission> missions) {
 		
 		this.monitorPage = monitorPage;
 		this.missionPage = missionPage;
-//		this.missions = missions;
 		this.engine = new Engine(this);
 		this.engine.setMissions(missions);
 
@@ -46,7 +43,6 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-//			launchExecution();
 			engine.startMissionsExecution();
 
 		}
@@ -69,65 +65,16 @@ public class MonitorPageController {
 		}
 	}
 
-//	protected void launchExecution() {
-//		threadList = new ArrayList<MissionWorker>();
-//		for (int i = 0; i < missions.size(); i++) {
-//			MissionWorker worker = new MissionWorker(missions.get(i), this);
-//			threadList.add(worker);
-//
-//			worker.execute();
-//
-//		}
-//	}
-
 	class StopButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// clear the view
-			// monitorPage.clearTable();
-			// monitorPage.clearConsole();
-			// kill all the threads to stop the execution of the missions
-
-			// TODO Bisogna usare un Thread per ogni drone ed eseguire l'azione.
-			for (MissionWorker t : engine.getMissionsThreadList()) {
-				if (!t.isCancelled())
-					// TODO non blocca i thread, risolvere
-					t.cancel(true);
-			}
+			
 			// prompt user what to do
 			String selection = monitorPage.showStopOptions();
-			// TODO al posto di iterare tutti i droni, iterare le missioni
-			// e prendere i droni associati al primo trip e usare quelli
-			// così è possibile mettere anche il log all'interno dello switch
-			// case
-			// for each drone that is flyng
-			for (Drone d : DronesManager.getDrones()) {
-				// if the drone is busy it means it is not at home location
-				if (d.getStatus() == Drone.BUSY) {
-					// depending on the user selection
-					switch (selection) {
-					case "RTL":
-						// do RTL
-						d.setStatus(Drone.BUSY);
-						d.flyTo(Drone.HOME_LOCATION);
-						d.setStatus(Drone.FREE);
-						break;
-					case "Land":
-						// do Land
-						d.setStatus(Drone.BUSY);
-						d.land();
-						d.setStatus(Drone.FREE);
-						break;
-					default:
-						// do RTL as default
-						d.setStatus(Drone.BUSY);
-						d.flyTo(Drone.HOME_LOCATION);
-						d.setStatus(Drone.FREE);
-						break;
-					}
-				}
-			}
+			// cancel all threads
+			engine.stopMissionsExecution(selection);
+			
 			// log the status of all not-completed missions after the stop
 			for (Mission m : engine.getMissions()) {
 				// if the mission is not completed yet

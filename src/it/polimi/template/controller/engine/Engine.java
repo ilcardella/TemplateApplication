@@ -2,6 +2,7 @@ package it.polimi.template.controller.engine;
 
 import it.polimi.template.controller.MonitorPageController;
 import it.polimi.template.controller.thread.MissionWorker;
+import it.polimi.template.model.Drone;
 import it.polimi.template.model.Mission;
 import it.polimi.template.model.Trip;
 
@@ -34,8 +35,41 @@ public class Engine {
 		}
 	}
 	
-	public void stopMissionsExecution(){
-		//TODO
+	public void stopMissionsExecution(String selection) {
+		for (MissionWorker t : getMissionsThreadList()) {
+			while (!t.isCancelled())
+				t.cancel(true);
+		}
+		
+		for(Mission m: getMissions()){
+			// TODO lanciare un nuovo Thread
+			
+			Trip next = m.getTrips().get(0);
+			Drone drone = next.getDrone();
+			if(drone != null){
+				switch (selection) {
+				case "RTL":
+					drone.setStatus(Drone.BUSY);
+					drone.flyTo(Drone.HOME_LOCATION);
+					drone.setStatus(Drone.FREE);
+					controller.log(m, "Drone "+drone.getId()+" received RTL Command");
+					break;
+				case "Land":
+					drone.setStatus(Drone.BUSY);
+					drone.land();
+					drone.setStatus(Drone.FREE);
+					controller.log(m, "Drone "+drone.getId()+" received Land Command");
+					break;
+				default:
+					// do RTL as default
+					drone.setStatus(Drone.BUSY);
+					drone.flyTo(Drone.HOME_LOCATION);
+					drone.setStatus(Drone.FREE);
+					controller.log(m, "Drone "+drone.getId()+" received RTL Command");
+					break;
+				}
+			}
+		}
 	}
 
 	public List<Mission> getMissions() {
