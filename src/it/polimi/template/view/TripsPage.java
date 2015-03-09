@@ -133,6 +133,8 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		instructions.setForeground(Color.RED);
 		instructions.setBackground(Color.LIGHT_GRAY);
 		instructions.setEditable(false);
+		
+		JPanel p = new JPanel(new BorderLayout());
 
 		ok = new JButton("Ok");
 		delete = new JButton("Delete all");
@@ -154,11 +156,14 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
 		buttonsPane.add(deleteOne);
+		
+		p.add(buttonsPane, BorderLayout.NORTH);
+		p.add(instructions, BorderLayout.SOUTH);
+
 
 		getContentPane().add(imagePane, BorderLayout.WEST);
 		getContentPane().add(actionsPane, BorderLayout.NORTH);
-		getContentPane().add(buttonsPane, BorderLayout.SOUTH);
-		getContentPane().add(instructions, BorderLayout.SOUTH);
+		getContentPane().add(p, BorderLayout.SOUTH);
 		getContentPane().add(tripsPane, BorderLayout.EAST);
 
 		setTitle("Pluto-Trips Page (" + nameMission + ")");
