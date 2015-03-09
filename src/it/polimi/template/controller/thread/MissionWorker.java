@@ -14,15 +14,15 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 	private Mission m;
 	private TripWorker tripThread;
 	
-	<dec>
-//  StartBlock startblock = new StartBlock(this);	
-//	MissionCreator missioncreator = new MissionCreator(this);
-//	DroneAllocator droneallocator = new DroneAllocator(this);
-//	TripLauncher triplauncher = new TripLauncher(this);
-//	TripMonitor tripmonitor = new TripMonitor(this);
-//  TimerMonitor timermonitor = new TimerMonitor(this);
-//	GateFIFO gatefifo = new GateFIFO(this);
-//  EndBlock endblock = new EndBlock(this);
+//	<dec>
+	StartBlock startblock = new StartBlock(this);	
+	MissionCreator missioncreator = new MissionCreator(this);
+	DroneAllocator droneallocator = new DroneAllocator(this);
+	TripLauncher triplauncher = new TripLauncher(this);
+	TripMonitor tripmonitor = new TripMonitor(this);
+	TimerMonitor timermonitor = new TimerMonitor(this);
+	GateFIFO gatefifo = new GateFIFO(this);
+	EndBlock endblock = new EndBlock(this);
 
 	 public MissionWorker(Mission mission, MonitorPageController controller) {
 		this.m = mission;
@@ -31,17 +31,17 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 
 	@Override
 	protected Integer doInBackground() throws Exception {
-		<exe>
-//      startblock.addObserver(missioncreator);
-//		missioncreator.addObserver(droneallocator);
-//		droneallocator.addObserver(triplauncher);
-//		triplauncher.addObserver(tripmonitor);
-//		triplauncher.addObserver(timermonitor);
-//		tripmonitor.addObserver(gatefifo);
-//		timermonitor.addObserver(gatefifo);
-//		gatefifo.addObserver(droneallocator);
-//		gatefifo.addObserver(endblock);
-//		missioncreator.update(null, m);
+//		<exe>
+		startblock.addObserver(missioncreator);
+		missioncreator.addObserver(droneallocator);
+		droneallocator.addObserver(triplauncher);
+		triplauncher.addObserver(tripmonitor);
+		triplauncher.addObserver(timermonitor);
+		tripmonitor.addObserver(gatefifo);
+		timermonitor.addObserver(gatefifo);
+		gatefifo.addObserver(droneallocator);
+		gatefifo.addObserver(endblock);
+		missioncreator.update(null, m);
 	
 		return 4;
 	}

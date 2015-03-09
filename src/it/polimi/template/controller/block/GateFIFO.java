@@ -13,7 +13,7 @@ import java.util.Set;
 public class GateFIFO extends Node implements Observer {
 
 	MissionWorker mw;		
-	int incomingConnections = <num>; 	
+	int incomingConnections = 2/*<num>*/; 	
 	int counter = 0;
 	Set<Mission> missionBuffer = new HashSet<Mission>();
 	

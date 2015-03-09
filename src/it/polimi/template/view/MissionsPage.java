@@ -66,10 +66,14 @@ public class MissionsPage extends JFrame {
 		pane.setLayout(gl);
 
 		JTextArea instructions = new JTextArea(0,0);
-		instructions.append("Click on Add Mission to create a new missions");
+		instructions.append("INSTRUCTIONS:");
+		instructions.append("\n");
+		instructions.append("1. Click on Add Mission to create new missions");
 		instructions.append("\n");
 
-		instructions.append("Select a created Mission and click on Set Trips to add new trips in that mission");
+		instructions.append("2. Select a created Mission and click on Set Trips to add new trips in that mission");
+		instructions.append("\n");
+		instructions.append("3. When done, click on Monitor Page");
 		instructions.setForeground(Color.RED);
 		instructions.setBackground(Color.LIGHT_GRAY);
 		instructions.setEditable(false);

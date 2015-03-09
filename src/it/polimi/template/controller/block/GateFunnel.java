@@ -8,7 +8,7 @@ import java.util.Observer;
 
 public class GateFunnel extends Node implements Observer {
 	MissionWorker w;
-	int incomingConnections = <num>;
+	int incomingConnections = 2/*<num>*/;
 	int counter = 0; 
 
 	public GateFunnel(MissionWorker worker) {
