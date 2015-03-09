@@ -42,9 +42,11 @@ public class TripLauncher extends Node implements Observer {
 				// the mission status is set to RUNNING
 				m.setStatus(Mission.RUNNING);
 				missionThread.log(m, "Mission " + m.getName() + " is RUNNING");
+				
+				return m;
 			}
 
-			return m;
+			return null;
 		}
 		return null;
 	}
