@@ -23,7 +23,7 @@ public class Mission {
 	private List<Trip> completedTrips;
 	// private boolean used = false;
 	private boolean repeat = false;
-	private int safeTimer = 480; // 480sec = 8 mins
+	private long safeTimer = 480; // 480sec = 8 mins
 	private Evaluator evaluator;
 
 	public Mission() {
@@ -100,11 +100,11 @@ public class Mission {
 		}
 	}
 
-	public int getSafeTimer() {
+	public long getSafeTimer() {
 		return this.safeTimer;
 	}
 
-	public void setSafeTimer(int t) {
+	public void setSafeTimer(long t) {
 		this.safeTimer = t;
 	}
 

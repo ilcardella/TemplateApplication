@@ -60,7 +60,7 @@ public class MissionPageController {
 				if(MISSION_REPETITION_ENABLED)
 					m.setRepeat(missionPage.showRepeatPanel());
 				if(TRIP_SAFETIME_ENABLED)
-					m.setSafeTimer(missionPage.showTimerPanel());
+					m.setSafeTimer(missionPage.showTimerPanel()*60*1000); // in millis
 
 			}
 		}

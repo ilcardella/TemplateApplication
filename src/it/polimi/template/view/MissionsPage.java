@@ -152,10 +152,10 @@ public class MissionsPage extends JFrame {
 
 	}
 
-	public int showTimerPanel() {
+	public long showTimerPanel() {
 
 		String text3 = JOptionPane
-				.showInputDialog("Indicate the Maximum safe time for a Trip");
+				.showInputDialog("Indicate the Maximum safe time for a Trip (in seconds)");
 
 		String delay = text3.trim();
 
@@ -163,7 +163,7 @@ public class MissionsPage extends JFrame {
 			return 0;
 
 		else
-			return Integer.parseInt(delay);
+			return Long.parseLong(delay);
 
 	}
 

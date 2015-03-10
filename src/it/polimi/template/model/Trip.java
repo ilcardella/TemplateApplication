@@ -18,7 +18,7 @@ public class Trip {
 	private int status;
 	private Drone drone;
 	private Item item;
-	private String startTime;
+	private long startTime;
 	private Mission parentMission;
 
 	// private boolean used = false;
@@ -77,11 +77,11 @@ public class Trip {
 		this.item = item;
 	}
 
-	public String getStartTime() {
+	public long getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(String startTime) {
+	public void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
 
@@ -146,6 +146,8 @@ public class Trip {
 	}
 
 	public boolean executeTrip() {
+		setStartTime(System.currentTimeMillis());
+		
 		Object actionOutcome = this.drone.flyToAndDoAction(this.targetLocation,
 				this.action);
 		if (actionOutcome != null) {
