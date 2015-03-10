@@ -29,8 +29,8 @@ public class TripLauncher extends Node implements Observer {
 
 			if (t.getDrone() != null) {
 
-				t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
-						.getTime()));
+//				t.setStartTime(new SimpleDateFormat("HH:mm:ss").format(cal
+//						.getTime()));
 
 				// launch the execution of the Trip
 				missionThread.executeTrip(t);
@@ -42,9 +42,11 @@ public class TripLauncher extends Node implements Observer {
 				// the mission status is set to RUNNING
 				m.setStatus(Mission.RUNNING);
 				missionThread.log(m, "Mission " + m.getName() + " is RUNNING");
+				
+				return m;
 			}
 
-			return m;
+			return null;
 		}
 		return null;
 	}
