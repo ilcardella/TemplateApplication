@@ -26,13 +26,13 @@ public class PriorityManager extends Node implements Observer {
 		return m;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		Mission m = this.run((Mission) arg);
-		if (m != null) {
-			setChanged();
-			notifyObservers(m);
-		}
-	}
+//	@Override
+//	public void update(Observable o, Object arg) {
+//		Mission m = this.run((Mission) arg);
+//		if (m != null) {
+//			setChanged();
+//			notifyObservers(m);
+//		}
+//	}
 
 }

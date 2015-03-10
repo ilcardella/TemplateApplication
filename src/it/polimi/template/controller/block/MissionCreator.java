@@ -2,11 +2,13 @@ package it.polimi.template.controller.block;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.ExecutionException;
 
 import it.polimi.template.controller.thread.MissionWorker;
+import it.polimi.template.controller.thread.NodeWorker;
 import it.polimi.template.model.*;
 
-public class MissionCreator extends Node implements Observer {
+public class MissionCreator extends Node {
 
 	MissionWorker w;
 
@@ -23,13 +25,23 @@ public class MissionCreator extends Node implements Observer {
 			return null;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		Mission m = this.run((Mission) arg);
-		if (m != null) {
-			setChanged();
-			notifyObservers(m);
-		}
-	}
+//	@Override
+//	public void update(Observable o, Object arg) {
+//		// TODO al posto di chiamare la run, lanciare il NodeWorker
+//		// il quale avvia la run
+//		NodeWorker blockThread = new NodeWorker(this, (Mission) arg);
+//		blockThread.execute();
+//		try {
+//			Mission m = blockThread.get();
+//			if (m != null) {
+//				setChanged();
+//				notifyObservers(m);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
+////		Mission m = this.run((Mission) arg);
+//		
+//	}
 
 }

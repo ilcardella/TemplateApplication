@@ -42,7 +42,6 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 		gatefifo.addObserver(droneallocator);
 		gatefifo.addObserver(endblock);
 		missioncreator.update(null, m);
-	
 		return 4;
 	}
 

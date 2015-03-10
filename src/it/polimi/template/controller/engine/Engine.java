@@ -33,6 +33,8 @@ public class Engine {
 			worker.execute();
 
 		}
+		
+		// TODO Here wait, check and print the result of all the thread launched
 	}
 	
 	public void stopMissionsExecution(String selection) {

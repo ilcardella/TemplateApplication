@@ -47,13 +47,13 @@ public class TimerMonitor extends Node implements Observer {
 		return null;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		Mission m = this.run((Mission) arg);
-		if (m != null) {
-			setChanged();
-			notifyObservers(m);
-		}
-	}
+//	@Override
+//	public void update(Observable o, Object arg) {
+//		Mission m = this.run((Mission) arg);
+//		if (m != null) {
+//			setChanged();
+//			notifyObservers(m);
+//		}
+//	}
 
 }
