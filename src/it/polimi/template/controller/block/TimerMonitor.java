@@ -31,7 +31,7 @@ public class TimerMonitor extends Node implements Observer {
 			while (System.currentTimeMillis()
 					- Integer.parseInt(t.getStartTime()) < m.getSafeTimer()) {
 				// if the Trip finishes, exit from the loop before the SafeTime is passed
-				if(tw.isDone())
+				if(tw.isDone() || m.getStatus() == Mission.COMPLETED || m.getStatus() == Mission.FAILED)
 					break;
 			}
 
