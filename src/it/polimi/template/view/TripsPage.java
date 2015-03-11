@@ -297,7 +297,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 	public int showDelayPanel() {
 
 		String text3 = JOptionPane
-				.showInputDialog("Indicate the delay for the trip (seconds)");
+				.showInputDialog("Indicate the delay for the trip (minutes)");
 
 		String delay = text3.trim();
 

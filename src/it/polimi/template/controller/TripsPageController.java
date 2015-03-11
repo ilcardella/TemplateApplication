@@ -136,7 +136,7 @@ public class TripsPageController {
 
 		if (TRIP_DELAY_ENABLED) {
 			// set the delay
-			int delay = tripsPage.showDelayPanel();
+			int delay = tripsPage.showDelayPanel()*60*1000; //in millis
 			trip.setDelay(delay);
 		}
 
