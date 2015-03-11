@@ -29,83 +29,83 @@ public class Trip {
 		this.status = WAITING;
 	}
 
-	public String getSourceLocation() {
+	public synchronized String getSourceLocation() {
 		return sourceLocation;
 	}
 
-	public void setSourceLocation(String sourceLocation) {
+	public synchronized void setSourceLocation(String sourceLocation) {
 		this.sourceLocation = sourceLocation;
 	}
 
-	public String getTargetLocation() {
+	public synchronized String getTargetLocation() {
 		return targetLocation;
 	}
 
-	public void setTargetLocation(String targetLocation) {
+	public synchronized void setTargetLocation(String targetLocation) {
 		this.targetLocation = targetLocation;
 	}
 
-	public int getDelay() {
+	public synchronized int getDelay() {
 		return delay;
 	}
 
-	public void setDelay(int delay) {
+	public synchronized void setDelay(int delay) {
 		this.delay = delay;
 	}
 
-	public int getPriority() {
+	public synchronized int getPriority() {
 		return priority;
 	}
 
-	public void setPriority(int priority) {
+	public synchronized void setPriority(int priority) {
 		this.priority = priority;
 	}
 
-	public Drone getDrone() {
+	public synchronized Drone getDrone() {
 		return drone;
 	}
 
-	public void setDrone(Drone drone) {
+	public synchronized void setDrone(Drone drone) {
 		this.drone = drone;
 	}
 
-	public Item getItem() {
+	public synchronized Item getItem() {
 		return item;
 	}
 
-	public void setItem(Item item) {
+	public synchronized void setItem(Item item) {
 		this.item = item;
 	}
 
-	public long getStartTime() {
+	public synchronized long getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(long startTime) {
+	public synchronized void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
 
-	public int getStatus() {
+	public synchronized int getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public synchronized void setStatus(int status) {
 		this.status = status;
 	}
 
-	public String getName() {
+	public synchronized String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public synchronized void setName(String name) {
 		this.name = name;
 	}
 
-	public Mission getParentMission() {
+	public synchronized Mission getParentMission() {
 		return parentMission;
 	}
 
-	public void setParentMission(Mission mission) {
+	public synchronized void setParentMission(Mission mission) {
 		this.parentMission = mission;
 	}
 
@@ -117,11 +117,11 @@ public class Trip {
 	// this.used = used;
 	// }
 
-	public Action getAction() {
+	public synchronized Action getAction() {
 		return action;
 	}
 
-	public void setAction(Action action) {
+	public synchronized void setAction(Action action) {
 		this.action = action;
 	}
 

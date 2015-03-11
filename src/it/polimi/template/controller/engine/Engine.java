@@ -35,13 +35,13 @@ public class Engine {
 			missionsThreadList.add(worker);
 			threadPool.submit(worker);
 			//worker.execute();
-
 		}
 		
 		// TODO Here wait, check and print the result of all the thread launched
 	}
 	
 	public void stopMissionsExecution(String selection) {
+		threadPool.shutdownNow();
 		for (MissionWorker t : getMissionsThreadList()) {
 			while (!t.isCancelled())
 				t.cancel(true);

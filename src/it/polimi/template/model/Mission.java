@@ -34,43 +34,43 @@ public class Mission {
 		this.completedTrips = new ArrayList<Trip>();
 	}
 
-	public int getId() {
+	public synchronized int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public synchronized void setId(int id) {
 		this.id = id;
 	}
 
-	public int getStatus() {
+	public synchronized int getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public synchronized void setStatus(int status) {
 		this.status = status;
 	}
 
-	public List<Trip> getTrips() {
+	public synchronized List<Trip> getTrips() {
 		return trips;
 	}
 
-	public void setTrips(List<Trip> trips) {
+	public synchronized void setTrips(List<Trip> trips) {
 		this.trips = trips;
 	}
 
-	public List<Trip> getCompletedTrips() {
+	public synchronized List<Trip> getCompletedTrips() {
 		return completedTrips;
 	}
 
-	public void setCompletedTrips(List<Trip> trips) {
+	public synchronized void setCompletedTrips(List<Trip> trips) {
 		this.completedTrips = trips;
 	}
 
-	public String getName() {
+	public synchronized String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public synchronized void setName(String name) {
 		this.name = name;
 	}
 
@@ -100,27 +100,27 @@ public class Mission {
 		}
 	}
 
-	public long getSafeTimer() {
+	public synchronized long getSafeTimer() {
 		return this.safeTimer;
 	}
 
-	public void setSafeTimer(long t) {
+	public synchronized void setSafeTimer(long t) {
 		this.safeTimer = t;
 	}
 
-	public boolean isRepeateable() {
+	public synchronized boolean isRepeateable() {
 		return repeat;
 	}
 
-	public void setRepeat(boolean repeat) {
+	public synchronized void setRepeat(boolean repeat) {
 		this.repeat = repeat;
 	}
 
-	public Evaluator getEvaluator() {
+	public synchronized Evaluator getEvaluator() {
 		return evaluator;
 	}
 
-	public void setEvaluator(Evaluator evaluator) {
+	public synchronized void setEvaluator(Evaluator evaluator) {
 		this.evaluator = evaluator;
 	}
 

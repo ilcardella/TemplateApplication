@@ -62,6 +62,7 @@ public class MonitorPageController {
 			}
 			monitorPage.dispose();
 			monitorPage.setVisible(false);
+			missionPage.setVisible(true);
 		}
 	}
 

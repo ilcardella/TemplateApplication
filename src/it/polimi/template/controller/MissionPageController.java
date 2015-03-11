@@ -47,7 +47,7 @@ public class MissionPageController {
 	}
 
 	private void createEvaluationModel() {
-		int mNum = 10;
+		int mNum = 150;
 		int tNum = 5;
 		for(int i = 0; i< mNum; i++){
 			Mission m = new Mission();
@@ -153,6 +153,7 @@ public class MissionPageController {
 					monitorPage.setVisible(true);
 				}
 			});
+			missionPage.setVisible(false);
 		}
 	}
 

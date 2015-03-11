@@ -31,39 +31,39 @@ public class Drone {
 		this.currentLocation = "0/0"; // homelocation
 	}
 
-	public int getId() {
+	public synchronized int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public synchronized void setId(int id) {
 		this.id = id;
 	}
 
-	public int getStatus() {
+	public synchronized int getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public synchronized void setStatus(int status) {
 		this.status = status;
 	}
 
-	public int getShapeCategory() {
+	public synchronized int getShapeCategory() {
 		return shapeCategory;
 	}
 
-	public void setShapeCategory(int shapeCategory) {
+	public synchronized void setShapeCategory(int shapeCategory) {
 		this.shapeCategory = shapeCategory;
 	}
 
-	public int getBatteryLevel() {
+	public synchronized int getBatteryLevel() {
 		return batteryLevel;
 	}
 
-	public void setBatteryLevel(int batteryLevel) {
+	public synchronized void setBatteryLevel(int batteryLevel) {
 		this.batteryLevel = batteryLevel;
 	}
 
-	public Object flyToAndDoAction(String target, final Action action) {
+	public synchronized Object flyToAndDoAction(String target, final Action action) {
 		try {
 			// fly to the target location
 			flyTo(target);
@@ -77,7 +77,7 @@ public class Drone {
 		}
 	}
 
-	public boolean flyTo(String target) {
+	public synchronized boolean flyTo(String target) {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -86,7 +86,7 @@ public class Drone {
 		return true;
 	}
 
-	public static String getStatusNameFromValue(int value) {
+	public synchronized static String getStatusNameFromValue(int value) {
 
 		switch (value) {
 		case FREE:
@@ -101,7 +101,7 @@ public class Drone {
 	}
 
 	// The drone lands at the current position
-	public boolean land() {
+	public synchronized boolean land() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -111,7 +111,7 @@ public class Drone {
 	}
 
 	// The drone takes off
-	public boolean takeOff() {
+	public synchronized boolean takeOff() {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -120,7 +120,7 @@ public class Drone {
 		return true;
 	}
 
-	public String getCurrentLocation() {
+	public synchronized String getCurrentLocation() {
 		return currentLocation;
 	}
 }
