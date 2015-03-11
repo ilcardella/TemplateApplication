@@ -22,7 +22,7 @@ public class MissionPageController {
 	private final boolean TRIP_SAFETIME_ENABLED = true/*<tSafe>*/; //default: false
 	
 	private MissionsPage missionPage;
-	List<Mission> missions;
+	List<Mission> missions = new ArrayList<Mission>();
 
 	public MissionPageController(MissionsPage view) {
 
@@ -38,7 +38,31 @@ public class MissionPageController {
 		this.missionPage
 				.setMissionsPageOkButtonListener(new MissionsPageOkButtonListener());
 		this.missionPage.setListMouseListener(new ListMouseListener());
+		
+		// --------------------- This is for evaluation -------------------------
+		//-----------------------------------------------------------------------
+		createEvaluationModel();
+		// ----------------------------------------------------------------------
 
+	}
+
+	private void createEvaluationModel() {
+		int mNum = 10;
+		int tNum = 5;
+		for(int i = 0; i< mNum; i++){
+			Mission m = new Mission();
+			m.setName("mission"+i);
+			for(int j=0; j<tNum; j++){
+				Trip t = new Trip();
+				t.setAction(Action.MEASURE);
+				t.setName(m.getName()+"-"+j);
+				t.setParentMission(m);
+				t.setTargetLocation(i*10+"/"+j*10);
+				m.getTrips().add(t);
+			}
+			missions.add(m);
+			missionPage.addMissionToList(m.getName());
+		}
 	}
 
 	class AddMissionButtonListener implements ActionListener {

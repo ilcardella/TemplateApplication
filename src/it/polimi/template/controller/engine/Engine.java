@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Engine {
 	
@@ -17,6 +19,7 @@ public class Engine {
 	private List<MissionWorker> missionsThreadList;
 	private List<Mission> missions;
 	private MonitorPageController controller;
+	ExecutorService threadPool;
 	
 	public Engine(MonitorPageController controller){
 		this.controller = controller;
@@ -25,12 +28,13 @@ public class Engine {
 	
 	public void startMissionsExecution(){
 		this.missionsThreadList = new ArrayList<MissionWorker>();
+		threadPool = Executors.newFixedThreadPool(missions.size());
 		for (int i = 0; i < missions.size(); i++) {
 			missions.get(i).setEvaluator(this.evaluator);
 			MissionWorker worker = new MissionWorker(missions.get(i), controller);
 			missionsThreadList.add(worker);
-
-			worker.execute();
+			threadPool.submit(worker);
+			//worker.execute();
 
 		}
 		

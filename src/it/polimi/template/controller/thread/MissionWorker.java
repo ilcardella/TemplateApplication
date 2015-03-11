@@ -45,11 +45,12 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 		//gatefifo.addObserver(droneallocator);
 		//gatefifo.addObserver(endblock);
 		missioncreator.update(null, m);
+		System.out.println("AIUDOOO: "+m.getName());
 		return 4;
 	}
 
 	// synchronized because in this way the ui is updated without problems
-	public void log(Mission m, String s) {
+	public synchronized void log(Mission m, String s) {
 		controller.log(m, s);
 	}
 
