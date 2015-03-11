@@ -54,7 +54,7 @@ public class MonitorPage extends JFrame {
 
 		text = new JTextArea();
 		text.setBackground(Color.LIGHT_GRAY);
-		text.setForeground(Color.RED);
+		text.setForeground(Color.BLUE);
 		JScrollPane textPane = new JScrollPane(text);
 
 		JPanel buttonsPane = new JPanel();

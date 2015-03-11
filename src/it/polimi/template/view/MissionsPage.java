@@ -4,6 +4,7 @@ import static javax.swing.GroupLayout.Alignment.LEADING;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
@@ -66,15 +67,22 @@ public class MissionsPage extends JFrame {
 		pane.setLayout(gl);
 
 		JTextArea instructions = new JTextArea(0,0);
+		Font font = new Font("Verdana", Font.BOLD, 14);
 		instructions.append("INSTRUCTIONS:");
 		instructions.append("\n");
+		instructions.append("\n");
 		instructions.append("1. Click on Add Mission to create new missions");
+		instructions.append("\n");
 		instructions.append("\n");
 
 		instructions.append("2. Select a created Mission and click on Set Trips to add new trips in that mission");
 		instructions.append("\n");
+		instructions.append("\n");
+
 		instructions.append("3. When done, click on Monitor Page");
-		instructions.setForeground(Color.RED);
+		
+		instructions.setFont(font);
+		instructions.setForeground(Color.BLUE);
 		instructions.setBackground(Color.LIGHT_GRAY);
 		instructions.setEditable(false);
 

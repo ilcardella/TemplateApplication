@@ -4,6 +4,7 @@ import it.polimi.template.model.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -129,11 +130,14 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		JScrollPane tripsPane = new JScrollPane(tripList);
 		JPanel imagePane = new JPanel();
 		JPanel buttonsPane = new JPanel();
-		JTextField instructions = new JTextField("Drag and Drop the desired Action on the Map");
-		instructions.setForeground(Color.RED);
+		JTextField instructions = new JTextField("INSTRUCTIONS:" 
+				+ "Drag and Drop the desired Action on the Map");
+		Font font = new Font("Verdana", Font.BOLD, 14);
+		instructions.setForeground(Color.BLUE);
 		instructions.setBackground(Color.LIGHT_GRAY);
+		instructions.setFont(font);
 		instructions.setEditable(false);
-		
+
 		JPanel p = new JPanel(new BorderLayout());
 
 		ok = new JButton("Ok");
@@ -156,10 +160,9 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		buttonsPane.add(ok);
 		buttonsPane.add(delete);
 		buttonsPane.add(deleteOne);
-		
+
 		p.add(buttonsPane, BorderLayout.NORTH);
 		p.add(instructions, BorderLayout.SOUTH);
-
 
 		getContentPane().add(imagePane, BorderLayout.WEST);
 		getContentPane().add(actionsPane, BorderLayout.NORTH);
