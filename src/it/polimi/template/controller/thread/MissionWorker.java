@@ -20,8 +20,8 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 	DroneAllocator droneallocator = new DroneAllocator(this);
 	TripLauncher triplauncher = new TripLauncher(this);
 	TripMonitor tripmonitor = new TripMonitor(this);
-	TimerMonitor timermonitor = new TimerMonitor(this);
-	GateFIFO gatefifo = new GateFIFO(this);
+	//TimerMonitor timermonitor = new TimerMonitor(this);
+	//GateFIFO gatefifo = new GateFIFO(this);
 	EndBlock endblock = new EndBlock(this);
 
 	 public MissionWorker(Mission mission, MonitorPageController controller) {
@@ -36,12 +36,14 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 		missioncreator.addObserver(droneallocator);
 		droneallocator.addObserver(triplauncher);
 		triplauncher.addObserver(tripmonitor);
-		triplauncher.addObserver(timermonitor);
-		timermonitor.addObserver(gatefifo);
-		tripmonitor.addObserver(gatefifo);
+		tripmonitor.addObserver(droneallocator);//delete
+		endblock.addObserver(tripmonitor);//delete
+		//triplauncher.addObserver(timermonitor);
+		//timermonitor.addObserver(gatefifo);
+		//tripmonitor.addObserver(gatefifo);
 		
-		gatefifo.addObserver(droneallocator);
-		gatefifo.addObserver(endblock);
+		//gatefifo.addObserver(droneallocator);
+		//gatefifo.addObserver(endblock);
 		missioncreator.update(null, m);
 		return 4;
 	}
