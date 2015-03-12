@@ -47,7 +47,7 @@ public class MissionPageController {
 	}
 
 	private void createEvaluationModel() {
-		int mNum = 150;
+		int mNum = 30;
 		int tNum = 5;
 		for(int i = 0; i< mNum; i++){
 			Mission m = new Mission();
@@ -57,7 +57,7 @@ public class MissionPageController {
 				t.setAction(Action.MEASURE);
 				t.setName(m.getName()+"-"+j);
 				t.setParentMission(m);
-				t.setTargetLocation(i*10+"/"+j*10);
+				t.setTargetLocation("4/4");
 				m.getTrips().add(t);
 			}
 			missions.add(m);

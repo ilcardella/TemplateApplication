@@ -8,7 +8,7 @@ public enum Action implements IAction {
 		@Override
 		public Object doAction() {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -31,7 +31,7 @@ public enum Action implements IAction {
 		@Override
 		public Object doAction() {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -54,7 +54,7 @@ public enum Action implements IAction {
 		@Override
 		public Object doAction() {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -77,7 +77,7 @@ public enum Action implements IAction {
 		@Override
 		public Object doAction() {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -101,7 +101,7 @@ public enum Action implements IAction {
 		@Override
 		public Object doAction() {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

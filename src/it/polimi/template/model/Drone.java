@@ -1,8 +1,5 @@
 package it.polimi.template.model;
 
-import it.polimi.template.controller.engine.Evaluator;
-
-import java.util.Observable;
 import java.util.Random;
 
 public class Drone {
@@ -18,6 +15,9 @@ public class Drone {
 
 	public static final String HOME_LOCATION = "0/0"; // coordinates of home
 														// location
+	private static final long FLY_TIME = 1000; // in millis
+	private static final long TAKE_OFF_TIME = 1000; // in millis
+	private static final long LAND_TIME = 1000; // in millis
 
 	private int id;
 	private int status;
@@ -63,14 +63,15 @@ public class Drone {
 		this.batteryLevel = batteryLevel;
 	}
 
-	public synchronized Object flyToAndDoAction(String target, final Action action) {
+	public synchronized Object flyToAndDoAction(String target,
+			final Action action) {
 		try {
 			// fly to the target location
 			flyTo(target);
 			// do the action
 			Object outcome = action.doAction();
 			// save the action result in the evaluator
-//			eval.writeActionOutcome(outcome);
+			// eval.writeActionOutcome(outcome);
 			return outcome;
 		} catch (Exception e) {
 			return null;
@@ -79,7 +80,7 @@ public class Drone {
 
 	public synchronized boolean flyTo(String target) {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(FLY_TIME);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -103,7 +104,7 @@ public class Drone {
 	// The drone lands at the current position
 	public synchronized boolean land() {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(LAND_TIME);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -113,7 +114,7 @@ public class Drone {
 	// The drone takes off
 	public synchronized boolean takeOff() {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(TAKE_OFF_TIME);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
