@@ -2,6 +2,7 @@ package it.polimi.template.controller.block;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.ExecutionException;
 
 import it.polimi.template.controller.thread.NodeWorker;
 import it.polimi.template.model.*;
@@ -15,15 +16,18 @@ public abstract class Node extends Observable implements Observer{
 		NodeWorker blockThread = new NodeWorker(this, (Mission) arg);
 		blockThread.execute();
 		try {
-			while(!blockThread.isDone()){} // wait for the end of the thread execution
+			//while(!blockThread.isDone()){} // wait for the end of the thread execution
+			
 			Mission m = blockThread.get();
+			
 			if (m != null) {
 				setChanged();
 				notifyObservers(m);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+			
+		} catch (InterruptedException | ExecutionException e) {
+			// do nothing
+		}
 	}
 
 }

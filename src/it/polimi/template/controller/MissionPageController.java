@@ -47,7 +47,7 @@ public class MissionPageController {
 	}
 
 	private void createEvaluationModel() {
-		int mNum = 30;
+		int mNum = 5;
 		int tNum = 5;
 		for(int i = 0; i< mNum; i++){
 			Mission m = new Mission();

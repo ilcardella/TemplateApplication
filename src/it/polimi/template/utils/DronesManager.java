@@ -8,7 +8,7 @@ import java.util.List;
 public class DronesManager {
 	
 	private static List<Drone> drones;
-	private final static int NUM_OF_DRONE = 30;
+	private final static int NUM_OF_DRONE = 10;
 	
 	public synchronized static List<Drone> getDrones() {
 		if (drones == null) {

@@ -17,7 +17,8 @@ public class MissionCreator extends Node {
 	}
 
 	public Mission run(Mission m) {
-		if (m.getTrips() != null && m.getStatus() == Mission.UNEXECUTED) {
+		int status = m.getStatus();
+		if (m.getTrips() != null && (status == Mission.UNEXECUTED || status == Mission.STOPPED) ) {
 			m.setStatus(Mission.UNEXECUTED);
 			w.log(m, "Mission " + m.getName() + " is UNEXECUTED");
 			return m;
