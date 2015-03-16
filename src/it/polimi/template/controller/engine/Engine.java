@@ -45,47 +45,50 @@ public class Engine {
 	public void stopMissionsExecution(String selection) {
 
 		threadPool.shutdownNow();
-//		for (MissionWorker t : getMissionsThreadList()) {
-//			while (!t.isCancelled())
-//				t.cancel(true);
-//		}
+		// for (MissionWorker t : getMissionsThreadList()) {
+		// while (!t.isCancelled())
+		// t.cancel(true);
+		// }
 
 		for (Mission m : getMissions()) {
-			
+
 			// log the status of all not-completed missions after the stop
 			if (!(m.getStatus() == Mission.COMPLETED)) {
 				m.setStatus(Mission.STOPPED);
 				controller.log(m, "Mission " + m.getName() + " STOPPED");
-			}
-			
-			// TODO lanciare un nuovo Thread
 
-			Trip next = m.getTrips().get(0);
-			Drone drone = next.getDrone();
-			if (drone != null) {
-				switch (selection) {
-				case "RTL":
-					drone.setStatus(Drone.BUSY);
-					drone.flyTo(Drone.HOME_LOCATION);
-					drone.setStatus(Drone.FREE);
-					controller.log(m, "Drone " + drone.getId()
-							+ " received RTL Command");
-					break;
-				case "Land":
-					drone.setStatus(Drone.BUSY);
-					drone.land();
-					drone.setStatus(Drone.FREE);
-					controller.log(m, "Drone " + drone.getId()
-							+ " received Land Command");
-					break;
-				default:
-					// do RTL as default
-					drone.setStatus(Drone.BUSY);
-					drone.flyTo(Drone.HOME_LOCATION);
-					drone.setStatus(Drone.FREE);
-					controller.log(m, "Drone " + drone.getId()
-							+ " received RTL Command");
-					break;
+				// TODO lanciare un nuovo Thread
+
+				Trip next = m.getTrips().get(0);
+				next.setStatus(Trip.WAITING);
+				Drone drone = next.getDrone();
+				next.setDrone(null);
+				
+				if (drone != null) {
+					switch (selection) {
+					case "RTL":
+						drone.setStatus(Drone.BUSY);
+						drone.flyTo(Drone.HOME_LOCATION);
+						drone.setStatus(Drone.FREE);
+						controller.log(m, "Drone " + drone.getId()
+								+ " received RTL Command");
+						break;
+					case "Land":
+						drone.setStatus(Drone.BUSY);
+						drone.land();
+						drone.setStatus(Drone.FREE);
+						controller.log(m, "Drone " + drone.getId()
+								+ " received Land Command");
+						break;
+					default:
+						// do RTL as default
+						drone.setStatus(Drone.BUSY);
+						drone.flyTo(Drone.HOME_LOCATION);
+						drone.setStatus(Drone.FREE);
+						controller.log(m, "Drone " + drone.getId()
+								+ " received RTL Command");
+						break;
+					}
 				}
 			}
 		}
