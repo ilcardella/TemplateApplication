@@ -59,7 +59,6 @@ public class Engine {
 			}
 			
 			// TODO lanciare un nuovo Thread
-			// TODO settare i droni come FREE
 
 			Trip next = m.getTrips().get(0);
 			Drone drone = next.getDrone();
