@@ -12,66 +12,72 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Engine {
-	
+
 	private Evaluator evaluator;
 	private List<MissionWorker> missionsThreadList;
 	private List<Mission> missions;
 	private MonitorPageController controller;
 	ExecutorService threadPool;
-	
-	public Engine(MonitorPageController controller){
+
+	public Engine(MonitorPageController controller) {
 		this.controller = controller;
 		this.evaluator = new Evaluator();
 	}
-	
-	public void startMissionsExecution(){
+
+	public void startMissionsExecution() {
 		this.missionsThreadList = new ArrayList<MissionWorker>();
 		threadPool = Executors.newFixedThreadPool(missions.size());
 		for (int i = 0; i < missions.size(); i++) {
 			missions.get(i).setEvaluator(this.evaluator);
-			MissionWorker worker = new MissionWorker(missions.get(i), controller);
+			MissionWorker worker = new MissionWorker(missions.get(i),
+					controller);
 			missionsThreadList.add(worker);
 			threadPool.submit(worker);
-			//worker.execute();
+			// worker.execute();
 		}
-		
+
 		// TODO Here wait, check and print the result of all the thread launched
 	}
-	
+
 	public void stopMissionsExecution(String selection) {
+
 		threadPool.shutdownNow();
 		for (MissionWorker t : getMissionsThreadList()) {
 			while (!t.isCancelled())
 				t.cancel(true);
 		}
-		
-		for(Mission m: getMissions()){
+
+		for (Mission m : getMissions()) {
 			// TODO lanciare un nuovo Thread
-			
+
 			Trip next = m.getTrips().get(0);
 			Drone drone = next.getDrone();
-			if(drone != null){
+			if (drone != null) {
 				switch (selection) {
 				case "RTL":
 					drone.setStatus(Drone.BUSY);
 					drone.flyTo(Drone.HOME_LOCATION);
 					drone.setStatus(Drone.FREE);
-					controller.log(m, "Drone "+drone.getId()+" received RTL Command");
+					controller.log(m, "Drone " + drone.getId()
+							+ " received RTL Command");
 					break;
 				case "Land":
 					drone.setStatus(Drone.BUSY);
 					drone.land();
 					drone.setStatus(Drone.FREE);
-					controller.log(m, "Drone "+drone.getId()+" received Land Command");
+					controller.log(m, "Drone " + drone.getId()
+							+ " received Land Command");
 					break;
 				default:
 					// do RTL as default
 					drone.setStatus(Drone.BUSY);
 					drone.flyTo(Drone.HOME_LOCATION);
 					drone.setStatus(Drone.FREE);
-					controller.log(m, "Drone "+drone.getId()+" received RTL Command");
+					controller.log(m, "Drone " + drone.getId()
+							+ " received RTL Command");
 					break;
 				}
 			}
@@ -93,5 +99,5 @@ public class Engine {
 	public void setMissionsThreadList(List<MissionWorker> missionsThreadList) {
 		this.missionsThreadList = missionsThreadList;
 	}
-	
+
 }

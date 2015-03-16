@@ -81,7 +81,7 @@ public class MonitorPageController {
 				// if the mission is not completed yet
 				if (!(m.getStatus() == Mission.COMPLETED)) {
 					// set it to stanby because it could be completed in future
-					m.setStatus(Mission.STANDBY);
+					m.setStatus(Mission.STOPPED);
 					log(m, "Mission " + m.getName() + " STOPPED");
 				}
 			}

@@ -15,6 +15,8 @@ public class Mission {
 	public static final int COMPLETED = 3;
 	public static final int FAILED = 4;
 	public static final int STANDBY = 5;
+	public static final int STOPPED = 6;
+
 
 	private int id;
 	private String name;
@@ -95,6 +97,8 @@ public class Mission {
 			return "FAILED";
 		case STANDBY:
 			return "STANDBY";
+		case STOPPED:
+			return "STOPPED";
 		default:
 			return "Unknown";
 		}
