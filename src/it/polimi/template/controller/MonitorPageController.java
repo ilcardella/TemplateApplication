@@ -75,16 +75,6 @@ public class MonitorPageController {
 			String selection = monitorPage.showStopOptions();
 			// cancel all threads
 			engine.stopMissionsExecution(selection);
-			
-			// log the status of all not-completed missions after the stop
-			for (Mission m : engine.getMissions()) {
-				// if the mission is not completed yet
-				if (!(m.getStatus() == Mission.COMPLETED)) {
-					// set it to stanby because it could be completed in future
-					m.setStatus(Mission.STOPPED);
-					log(m, "Mission " + m.getName() + " STOPPED");
-				}
-			}
 
 		}
 	}

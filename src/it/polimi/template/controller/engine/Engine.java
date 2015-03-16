@@ -45,13 +45,21 @@ public class Engine {
 	public void stopMissionsExecution(String selection) {
 
 		threadPool.shutdownNow();
-		for (MissionWorker t : getMissionsThreadList()) {
-			while (!t.isCancelled())
-				t.cancel(true);
-		}
+//		for (MissionWorker t : getMissionsThreadList()) {
+//			while (!t.isCancelled())
+//				t.cancel(true);
+//		}
 
 		for (Mission m : getMissions()) {
+			
+			// log the status of all not-completed missions after the stop
+			if (!(m.getStatus() == Mission.COMPLETED)) {
+				m.setStatus(Mission.STOPPED);
+				controller.log(m, "Mission " + m.getName() + " STOPPED");
+			}
+			
 			// TODO lanciare un nuovo Thread
+			// TODO settare i droni come FREE
 
 			Trip next = m.getTrips().get(0);
 			Drone drone = next.getDrone();
