@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultCaret;
 
 
 public class MonitorPage extends JFrame {
@@ -41,7 +42,10 @@ public class MonitorPage extends JFrame {
 		setLayout(new BorderLayout());
 
 		DefaultTableModel model = new DefaultTableModel(){
-		 @Override
+		
+			private static final long serialVersionUID = 1L;
+
+		@Override
 		    public boolean isCellEditable(int row, int column) {
 		       //all cells false
 		       return false;
@@ -59,6 +63,8 @@ public class MonitorPage extends JFrame {
 		table.setFillsViewportHeight(true);
 
 		text = new JTextArea();
+		DefaultCaret caret = (DefaultCaret)text.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		text.setBackground(Color.LIGHT_GRAY);
 		text.setForeground(Color.BLUE);
 		JScrollPane textPane = new JScrollPane(text);
