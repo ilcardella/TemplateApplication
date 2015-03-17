@@ -46,6 +46,9 @@ public class Engine {
 
 	public void stopMissionsExecution(String selection) {
 
+		if(threadPool==null)
+			return;
+		
 		isRunning = false;
 		
 		threadPool.shutdownNow();
