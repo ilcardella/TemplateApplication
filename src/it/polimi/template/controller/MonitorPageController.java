@@ -18,6 +18,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 public class MonitorPageController {
 
@@ -43,7 +44,18 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			engine.startMissionsExecution();
+			// We need to launche the engine start method in a new thread, because
+			// after the start of the missions, it will wait for the completion
+			// and it would block the user interface
+			SwingWorker<Integer, String> worker = new SwingWorker<Integer, String>() {
+				@Override
+				protected Integer doInBackground() throws Exception {
+					engine.startMissionsExecution();
+					return 4;
+				}
+			};
+			worker.execute();
+//			engine.startMissionsExecution();
 
 		}
 	}

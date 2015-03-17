@@ -33,15 +33,17 @@ public class Engine {
 		this.missionsThreadList = new ArrayList<MissionWorker>();
 		threadPool = Executors.newFixedThreadPool(missions.size());
 		for (int i = 0; i < missions.size(); i++) {
-			missions.get(i).setEvaluator(this.evaluator);
-			MissionWorker worker = new MissionWorker(missions.get(i),
-					controller);
+			Mission m = missions.get(i);
+			m.setEvaluator(this.evaluator);
+			MissionWorker worker = new MissionWorker(m, controller);
 			missionsThreadList.add(worker);
 			threadPool.submit(worker);
-			// worker.execute();
 		}
 
+		while(threadPool.isTerminated()){}
+		isRunning = false;
 		// TODO Here wait, check and print the result of all the thread launched
+		// be careful here we are on the main thread, don't pause the thread
 	}
 
 	public void stopMissionsExecution(String selection) {

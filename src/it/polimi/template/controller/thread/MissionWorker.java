@@ -14,14 +14,13 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 	private Mission m;
 	private TripWorker tripThread;
 	
+	// TODO Tag
 //	<dec>
 	StartBlock startblock = new StartBlock(this);	
 	MissionCreator missioncreator = new MissionCreator(this);
 	DroneAllocator droneallocator = new DroneAllocator(this);
 	TripLauncher triplauncher = new TripLauncher(this);
 	TripMonitor tripmonitor = new TripMonitor(this);
-	//TimerMonitor timermonitor = new TimerMonitor(this);
-	//GateFIFO gatefifo = new GateFIFO(this);
 	EndBlock endblock = new EndBlock(this);
 
 	 public MissionWorker(Mission mission, MonitorPageController controller) {
@@ -31,21 +30,16 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 
 	@Override
 	protected Integer doInBackground() throws Exception {
+
+		// TODO Tag
 //		<exe>
 		startblock.addObserver(missioncreator);
 		missioncreator.addObserver(droneallocator);
 		droneallocator.addObserver(triplauncher);
 		triplauncher.addObserver(tripmonitor);
-		tripmonitor.addObserver(droneallocator);//delete
-		tripmonitor.addObserver(endblock);//delete
-		//triplauncher.addObserver(timermonitor);
-		//timermonitor.addObserver(gatefifo);
-		//tripmonitor.addObserver(gatefifo);
-		
-		//gatefifo.addObserver(droneallocator);
-		//gatefifo.addObserver(endblock);
+		tripmonitor.addObserver(droneallocator);
+		tripmonitor.addObserver(endblock);
 		missioncreator.update(null, m);
-		System.out.println("AIUDOOO: "+m.getName());
 		return 4;
 	}
 
