@@ -37,7 +37,7 @@ public class MissionWorker extends SwingWorker<Integer, String> {
 		droneallocator.addObserver(triplauncher);
 		triplauncher.addObserver(tripmonitor);
 		tripmonitor.addObserver(droneallocator);//delete
-		endblock.addObserver(tripmonitor);//delete
+		tripmonitor.addObserver(endblock);//delete
 		//triplauncher.addObserver(timermonitor);
 		//timermonitor.addObserver(gatefifo);
 		//tripmonitor.addObserver(gatefifo);
