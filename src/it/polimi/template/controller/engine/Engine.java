@@ -41,7 +41,6 @@ public class Engine {
 		}
 		threadPool.shutdown();
 		while( !threadPool.isTerminated() ){}
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		isRunning = false;
 	}
 
