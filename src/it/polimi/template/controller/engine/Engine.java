@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class Engine {
 
 	private Evaluator evaluator;
-	private List<MissionWorker> missionsThreadList;
+//	private List<MissionWorker> missionsThreadList;
 	private List<Mission> missions;
 	private MonitorPageController controller;
 	ExecutorService threadPool;
@@ -30,20 +30,19 @@ public class Engine {
 
 	public void startMissionsExecution() {
 		isRunning = true;
-		this.missionsThreadList = new ArrayList<MissionWorker>();
+//		this.missionsThreadList = new ArrayList<MissionWorker>();
 		threadPool = Executors.newFixedThreadPool(missions.size());
 		for (int i = 0; i < missions.size(); i++) {
 			Mission m = missions.get(i);
 			m.setEvaluator(this.evaluator);
 			MissionWorker worker = new MissionWorker(m, controller);
-			missionsThreadList.add(worker);
+//			missionsThreadList.add(worker);
 			threadPool.submit(worker);
 		}
-
-		while(threadPool.isTerminated()){}
+		threadPool.shutdown();
+		while( !threadPool.isTerminated() ){}
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		isRunning = false;
-		// TODO Here wait, check and print the result of all the thread launched
-		// be careful here we are on the main thread, don't pause the thread
 	}
 
 	public void stopMissionsExecution(String selection) {
@@ -51,10 +50,6 @@ public class Engine {
 		isRunning = false;
 		
 		threadPool.shutdownNow();
-		// for (MissionWorker t : getMissionsThreadList()) {
-		// while (!t.isCancelled())
-		// t.cancel(true);
-		// }
 
 		for (Mission m : getMissions()) {
 
@@ -108,15 +103,15 @@ public class Engine {
 		this.missions = missions;
 	}
 
-	public List<MissionWorker> getMissionsThreadList() {
-		return missionsThreadList;
-	}
+//	public List<MissionWorker> getMissionsThreadList() {
+//		return missionsThreadList;
+//	}
+//
+//	public void setMissionsThreadList(List<MissionWorker> missionsThreadList) {
+//		this.missionsThreadList = missionsThreadList;
+//	}
 
-	public void setMissionsThreadList(List<MissionWorker> missionsThreadList) {
-		this.missionsThreadList = missionsThreadList;
-	}
-
-	public boolean isRunning() {
+	public synchronized boolean isRunning() {
 		return isRunning;
 	}
 
