@@ -26,10 +26,9 @@ public class MonitorPageController {
 	private MissionsPage missionPage;
 	private Engine engine;
 
-
 	public MonitorPageController(MonitorPage monitorPage,
 			MissionsPage missionPage, List<Mission> missions) {
-		
+
 		this.monitorPage = monitorPage;
 		this.missionPage = missionPage;
 		this.engine = new Engine(this);
@@ -44,7 +43,8 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// We need to launche the engine start method in a new thread, because
+			// We need to launche the engine start method in a new thread,
+			// because
 			// after the start of the missions, it will wait for the completion
 			// and it would block the user interface
 			SwingWorker<Integer, String> worker = new SwingWorker<Integer, String>() {
@@ -55,7 +55,7 @@ public class MonitorPageController {
 				}
 			};
 			worker.execute();
-//			engine.startMissionsExecution();
+			// engine.startMissionsExecution();
 
 		}
 	}
@@ -65,7 +65,8 @@ public class MonitorPageController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (engine.isRunning()) {
-				monitorPage.showDialog("Please wait for all missions completion!");
+				monitorPage
+						.showDialog("Please wait for all missions completion or stop the execution!");
 			} else {
 
 				for (Iterator<Mission> iter = engine.getMissions()
@@ -86,7 +87,7 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 			// prompt user what to do
 			String selection = monitorPage.showStopOptions();
 			// cancel all threads

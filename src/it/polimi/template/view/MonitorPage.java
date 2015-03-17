@@ -84,7 +84,7 @@ public class MonitorPage extends JFrame {
 		getContentPane().add(textPane);
 
 		setTitle("Pluto - Monitor Page");
-		setSize(1000, 800);
+		setSize(1000, 750);
 		setLocationRelativeTo(null);
 		
 	

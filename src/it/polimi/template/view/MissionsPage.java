@@ -122,7 +122,7 @@ public class MissionsPage extends JFrame {
 		pack();
 
 		setTitle("Pluto-Missions Page");
-		setSize(1000, 800);
+		setSize(1000, 750);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
