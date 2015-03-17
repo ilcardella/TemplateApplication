@@ -21,6 +21,7 @@ public class Engine {
 	private List<Mission> missions;
 	private MonitorPageController controller;
 	ExecutorService threadPool;
+	private boolean isRunning;
 
 	public Engine(MonitorPageController controller) {
 		this.controller = controller;
@@ -28,6 +29,7 @@ public class Engine {
 	}
 
 	public void startMissionsExecution() {
+		isRunning = true;
 		this.missionsThreadList = new ArrayList<MissionWorker>();
 		threadPool = Executors.newFixedThreadPool(missions.size());
 		for (int i = 0; i < missions.size(); i++) {
@@ -44,6 +46,8 @@ public class Engine {
 
 	public void stopMissionsExecution(String selection) {
 
+		isRunning = false;
+		
 		threadPool.shutdownNow();
 		// for (MissionWorker t : getMissionsThreadList()) {
 		// while (!t.isCancelled())
@@ -108,6 +112,10 @@ public class Engine {
 
 	public void setMissionsThreadList(List<MissionWorker> missionsThreadList) {
 		this.missionsThreadList = missionsThreadList;
+	}
+
+	public boolean isRunning() {
+		return isRunning;
 	}
 
 }

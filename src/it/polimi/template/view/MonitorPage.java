@@ -186,4 +186,8 @@ public class MonitorPage extends JFrame {
 
 	}
 
+	public void showDialog(String string) {
+		JOptionPane.showMessageDialog(null, string);
+	}
+
 }

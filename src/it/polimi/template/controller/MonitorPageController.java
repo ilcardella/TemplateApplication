@@ -52,16 +52,21 @@ public class MonitorPageController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (Iterator<Mission> iter = engine.getMissions().listIterator(); iter
-					.hasNext();) {
-				Mission m = iter.next();
-				if (m.getStatus() == Mission.COMPLETED) {
-					missionPage.removeMissionFromList(m.getName());
-					iter.remove();
+			if (engine.isRunning()) {
+				monitorPage.showDialog("Please wait for all missions completion!");
+			} else {
+
+				for (Iterator<Mission> iter = engine.getMissions()
+						.listIterator(); iter.hasNext();) {
+					Mission m = iter.next();
+					if (m.getStatus() == Mission.COMPLETED) {
+						missionPage.removeMissionFromList(m.getName());
+						iter.remove();
+					}
 				}
+				monitorPage.dispose();
+				missionPage.setVisible(true);
 			}
-			monitorPage.dispose();
-			missionPage.setVisible(true);
 		}
 	}
 
