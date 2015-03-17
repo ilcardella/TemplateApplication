@@ -40,7 +40,13 @@ public class MonitorPage extends JFrame {
 
 		setLayout(new BorderLayout());
 
-		DefaultTableModel model = new DefaultTableModel();
+		DefaultTableModel model = new DefaultTableModel(){
+		 @Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
 		table = new JTable(model);
 		model.addColumn("Mission");
 		model.addColumn("Mission status");

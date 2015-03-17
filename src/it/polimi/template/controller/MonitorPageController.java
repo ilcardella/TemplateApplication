@@ -60,8 +60,8 @@ public class MonitorPageController {
 					iter.remove();
 				}
 			}
-			monitorPage.dispose();
-			monitorPage.setVisible(false);
+			//monitorPage.dispose();
+			//monitorPage.setVisible(false);
 			missionPage.setVisible(true);
 		}
 	}
