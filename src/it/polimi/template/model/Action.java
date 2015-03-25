@@ -7,6 +7,7 @@ public enum Action implements IAction {
 	TAKE_PHOTO {
 		@Override
 		public Object doAction() {
+			//<act>
 			try {
 				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
@@ -30,6 +31,7 @@ public enum Action implements IAction {
 
 		@Override
 		public Object doAction() {
+			//<act>
 			try {
 				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
@@ -53,6 +55,7 @@ public enum Action implements IAction {
 
 		@Override
 		public Object doAction() {
+			//<act>
 			try {
 				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
@@ -76,6 +79,7 @@ public enum Action implements IAction {
 
 		@Override
 		public Object doAction() {
+			//<act>
 			try {
 				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
@@ -100,6 +104,7 @@ public enum Action implements IAction {
 
 		@Override
 		public Object doAction() {
+			//<act>
 			try {
 				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {
