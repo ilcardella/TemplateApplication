@@ -1,5 +1,6 @@
 package it.polimi.template.model;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Drone {
@@ -79,11 +80,26 @@ public class Drone {
 	}
 
 	public synchronized boolean flyTo(String target) {
+		// try {
+		// Thread.sleep(FLY_TIME);
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
+
+		ProcessBuilder pb = new ProcessBuilder("python2", "/home/alberto/Projects/Demo/crazyflie-clients-python-2014.12.3/examples/trip.py");
+		try {
+			Process p = pb.start();
+			p.waitFor();
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		try {
 			Thread.sleep(FLY_TIME);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
 		return true;
 	}
 
