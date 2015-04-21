@@ -114,6 +114,8 @@ public class Drone {
 			return "BUSY";
 		case CHARGING:
 			return "CHARGING";
+		case UNAVAILABLE:
+			return "UNAVAILABLE";
 		default:
 			return "Unknown";
 		}
