@@ -86,7 +86,8 @@ public class Drone {
 		// e.printStackTrace();
 		// }
 
-		ProcessBuilder pb = new ProcessBuilder("python2", "/home/alberto/Projects/Demo/crazyflie-clients-python-2014.12.3/examples/trip.py");
+		ProcessBuilder pb = new ProcessBuilder("/usr/bin/python2", 
+				"/home/alberto/Projects/Demo/crazyflie-clients-python-2014.12.3/examples/trip.py");
 		try {
 			Process p = pb.start();
 			p.waitFor();

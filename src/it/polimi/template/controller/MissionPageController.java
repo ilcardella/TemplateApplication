@@ -42,14 +42,14 @@ public class MissionPageController {
 		
 		// --------------------- This is for evaluation -------------------------
 		//-----------------------------------------------------------------------
-		createEvaluationModel();
+		//createEvaluationModel();
 		// ----------------------------------------------------------------------
 
 	}
 
 	private void createEvaluationModel() {
-		int mNum = 5;
-		int tNum = 5;
+		int mNum = 1;
+		int tNum = 2;
 		for(int i = 0; i< mNum; i++){
 			Mission m = new Mission();
 			m.setName("mission"+i);
