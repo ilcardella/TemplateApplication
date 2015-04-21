@@ -156,9 +156,11 @@ public class Trip {
 			this.parentMission.getEvaluator().writeActionOutcome(actionOutcome,
 					this);
 			
-			if(faith > 0){
-				faith--;
-				return false;
+			if (action.toString().equals(Action.TAKE_PHOTO.toString())) {
+				if (faith > 0) {
+					faith--;
+					return false;
+				}
 			}
 			
 			return true;
