@@ -172,7 +172,7 @@ public class TripsPage extends JFrame implements DragSourceListener,
 		setTitle("Pluto-Trips Page (" + nameMission + ")");
 		setSize(700, 600);
 		setVisible(true);
-
+		setLocationRelativeTo(null);
 	}
 
 	@Override
