@@ -14,7 +14,7 @@ public class GateFIFO extends Node implements Observer {
 
 	MissionWorker mw;		
 	// TODO Tag
-	int incomingConnections = 2/*<num>*/; 	
+	int incomingConnections = <num>; 	
 	int counter = 0;
 	Set<Mission> missionBuffer = new HashSet<Mission>();
 	

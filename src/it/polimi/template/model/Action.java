@@ -104,7 +104,7 @@ public enum Action implements IAction {
 
 		@Override
 		public Object doAction() {
-			//<act>
+			<act>
 			try {
 				Thread.sleep(ACTION_TIME);
 			} catch (InterruptedException e) {

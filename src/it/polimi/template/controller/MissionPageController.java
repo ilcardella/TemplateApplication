@@ -19,8 +19,8 @@ import it.polimi.template.model.*;
 public class MissionPageController {
 
 	//TODO Tag
-	private final boolean MISSION_REPETITION_ENABLED = false/*<mRep>*/; //default: false
-	private final boolean TRIP_SAFETIME_ENABLED = true/*<tSafe>*/; //default: true
+	private final boolean MISSION_REPETITION_ENABLED = <mRep>; //default: false
+	private final boolean TRIP_SAFETIME_ENABLED = <tSafe>; //default: true
 	
 	private MissionsPage missionPage;
 	List<Mission> missions = new ArrayList<Mission>();

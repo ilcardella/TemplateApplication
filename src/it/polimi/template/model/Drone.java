@@ -13,6 +13,7 @@ public class Drone {
 	public static final int FREE = 5;
 	public static final int BUSY = 6;
 	public static final int CHARGING = 7;
+	public static final int UNAVAILABLE = 8;
 
 	public static final String HOME_LOCATION = "0/0"; // coordinates of home
 														// location

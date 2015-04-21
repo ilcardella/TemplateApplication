@@ -23,7 +23,7 @@ public class Evaluator implements IEvaluator {
 	public String evaluate(Mission missionToEvaluate) {
 		String result = null;
 		// Here the developer has to implement his own implementation
-		// <eval>
+		<eval>
 
 		
 

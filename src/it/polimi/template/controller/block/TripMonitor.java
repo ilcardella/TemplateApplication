@@ -56,7 +56,9 @@ public class TripMonitor extends Node implements Observer {
 			} else if (tripResult == TripWorker.FAILED){
 				t.setStatus(Trip.FAILED);
 				m.setStatus(Mission.FAILED);
+				t.getDrone().setStatus(Drone.UNAVAILABLE);
 				missionThread.log(m, "Trip " + t.getName() + " is FAILED");
+				return m;
 			}
 
 			// let the drone to be free :)

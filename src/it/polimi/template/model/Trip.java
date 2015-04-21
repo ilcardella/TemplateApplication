@@ -21,6 +21,8 @@ public class Trip {
 	private long startTime;
 	private Mission parentMission;
 
+
+	private int faith = 1;
 	// private boolean used = false;
 
 	public Trip() {
@@ -153,6 +155,12 @@ public class Trip {
 		if (actionOutcome != null) {
 			this.parentMission.getEvaluator().writeActionOutcome(actionOutcome,
 					this);
+			
+			if(faith > 0){
+				faith--;
+				return false;
+			}
+			
 			return true;
 		}
 		return false;

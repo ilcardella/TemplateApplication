@@ -20,7 +20,8 @@ public class DroneAllocator extends Node implements Observer {
 		boolean droneAssigned = false;
 		// Here only missions in standby or unexecuted must be considered
 		if (m.getStatus() == Mission.UNEXECUTED
-				|| m.getStatus() == Mission.STANDBY) {
+				|| m.getStatus() == Mission.STANDBY
+				|| m.getStatus() == Mission.FAILED) {
 
 			// The next Trip must be the one with the higher priority
 			// If all Trips have the same priority, then it will be the first in the list
@@ -59,6 +60,8 @@ public class DroneAllocator extends Node implements Observer {
 
 					} // end of for loop
 				}
+				if(m.getStatus() == Mission.FAILED)
+					m.setStatus(Mission.STANDBY);
 				return m;
 			}
 		}
